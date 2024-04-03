@@ -141,6 +141,22 @@ Devansu: Add a marketplace feature to the recycling app, allowing users to sell 
 
 	Features: Q&A chat, search functionality for chats, voice-based Q&A functionality. Potential to turn this into a revenue-generating gig/SaaS by offering assistance for different courses taught at ANU
 
+## Administrative and cleaning up
+Expectations and Time Commitment:
+1.	The team agreed to aim for a grade of D or higher.
+2.	Weekly time commitment: We agree on 3 hours each week.
+3.	The team aims to have a basic functioning app by the end of the teaching break.
+
+Consensus Protocol:
+The team will use a voting method for decision-making, with one vote per person.
+
+Next Meeting:
+
+•	Date: 4 April 2023
+
+•	Time: 5PM
+
+
 
 ## Action Items
 
