@@ -23,30 +23,26 @@ Stand up Procedure:
 ## Agenda Items
 
 | Number | Item |
+| ------ | ------ |
+|   1     |   Discuss app ideas related to UN Sustainable Development Goals (SDGs) or Closing the Gap targets     |
+|     2   |   Agree on the expectation of the project     |
 
-|:---------|------------:|
 
-| 1 | Discuss app ideas related to UN Sustainable Development Goals (SDGs) or Closing the Gap targets |
-
-| 2 | Agree on expectations and time commitment for the project |
-
-  
 
 ## Meeting Minutes
 
 App Suggestions:
 
-  
 
 1. Nathan:
 
-		• App for ranking CS courses at ANU based on scores
+	• App for ranking CS courses at ANU based on scores
 
-		• Uses a tree structure for searching course scores
+	• Uses a tree structure for searching course scores
 
-		• Related to SDG 4: Quality Education
+	• Related to SDG 4: Quality Education
 
-		• Challenges: Collecting a valid dataset for course scores
+	• Challenges: Collecting a valid dataset for course scores
 
 2. Harisson:
 
@@ -145,17 +141,14 @@ Devansu: Add a marketplace feature to the recycling app, allowing users to sell 
 
 	Features: Q&A chat, search functionality for chats, voice-based Q&A functionality. Potential to turn this into a revenue-generating gig/SaaS by offering assistance for different courses taught at ANU
 
-  
-  
-  
 
 ## Action Items
 
-| Task | Assigned To | Due Date |
+| Task | Assigned to | Due Date |
+| ------ | ------ | ------ |
+|   Vote on the App     |Everyone  |4 April 5PM|
 
-|:---------------------------------------|:-----------:|:----------:|
 
-|  Vote on the App |  Everyone  |  4 April 5PM  |
 
   
   
@@ -163,16 +156,10 @@ Devansu: Add a marketplace feature to the recycling app, allowing users to sell 
 ## Scribe Rotation
 
 The following dictates who will scribe in this and the next meeting.
-
-| Name |
-
-| :---: |
-
-|  Julius |
-
-|  Devansu  |
-
-|  Harisson |
-
-|  Nathan |
-|  Adam |
+| Name|
+| ------ | 
+|    Julius    | 
+|    Devansu    |
+|    Harisson    | 
+|    Nathan    |
+|    Adam    |
