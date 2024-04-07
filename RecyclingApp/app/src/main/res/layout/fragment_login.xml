@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".login.ui.LoginFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -12,6 +12,7 @@
         android:padding="28dp">
 
         <LinearLayout
+            android:id="@+id/login_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

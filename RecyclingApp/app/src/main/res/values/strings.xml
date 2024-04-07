@@ -9,4 +9,5 @@
     <string name="login_details_pls">Please enter your login details.</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
+    <string name="username">username</string>
 </resources>
