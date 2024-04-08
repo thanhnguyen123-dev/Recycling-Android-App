@@ -2,7 +2,7 @@ package com.example.recycleme.login;
 
 import java.io.Serializable;
 
-public class LoginContext implements Serializable {
+public class LoginContext {
     private LoginState state;
     private static LoginContext instance;
 

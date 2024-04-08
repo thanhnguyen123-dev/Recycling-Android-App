@@ -47,7 +47,6 @@ public class LoginActivity extends BaseActivity {
         if (loginContext.isLoggedIn()) {
             // create  new fragment that will be displayed on screen
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-            intent.putExtra("loginStatus", this.loginContext);
             startActivity(intent);
         } else {
             Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
