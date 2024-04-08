@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">RecyclingApp</string>
+    <string name="login">Login</string>
+    <string name="home">Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_fragment">Login Fragment</string>
+    <string name="welcome">Welcome!</string>
+    <string name="login_details_pls">Please enter your login details.</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="username">username</string>
+    <string name="navigation_drawer_open">open nav drawer\n</string>
+    <string name="navigation_drawer_close">close nav drawer\n</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+</resources>
