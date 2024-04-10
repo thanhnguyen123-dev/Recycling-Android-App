@@ -13,6 +13,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.recycleme.login.LoginContext;
 import com.google.android.material.navigation.NavigationView;
 
+/**
+ * Base activity class that provides a navigation drawer menu. The menu contents and behavior are the same across
+ * multiple activities.
+ * <p>
+ * This code is based on an answer from Stack Overflow with modifications:
+ * https://stackoverflow.com/questions/19451715/same-navigation-drawer-in-different-activities
+ * <p>
+ * The original code is licensed under CC BY-SA 3.0:
+ * https://creativecommons.org/licenses/by-sa/3.0/
+ * <p>
+ * Modifications include:
+ * - Added login functionality to the navigation drawer
+ * - Integrated with a custom LoginContext class to handle login state
+ * - Updated the navigation item click handling to start specific activities based on the selected menu item
+ * - Removed the onPostCreate method as it is not needed in this implementation
+ * Written by: Julius Liem - u7724204
+ */
+
 public class BaseActivity extends AppCompatActivity {
     protected DrawerLayout drawerLayout;
     protected NavigationView navView;
@@ -36,6 +54,7 @@ public class BaseActivity extends AppCompatActivity {
         setupDrawerToggle();
         setupNavListener();
     }
+
 
     private void setupDrawerToggle() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -68,9 +87,4 @@ public class BaseActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onPostCreate(Bundle savedInstanceState) {
-//        super.onPostCreate(savedInstanceState);
-//        actionBarDrawerToggle.syncState();
-//    }
 }
