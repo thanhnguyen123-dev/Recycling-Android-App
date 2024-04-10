@@ -3,14 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="#FFFFFF">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="5dp"
         android:background="#BBDEFB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF">
+            android:background="#F3E5F5">
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -39,10 +37,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="TextView"
-                android:textSize="34sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/product_material_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="TextView"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/product_brand_text"
+                app:layout_constraintTop_toTopOf="@+id/product_brand_text" />
 
             <TextView
                 android:id="@+id/product_value_text"
@@ -50,8 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="TextView"
-                android:textSize="24sp"
-                app:layout_constraintStart_toEndOf="@+id/product_brand_text"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/product_material_text"
                 app:layout_constraintTop_toTopOf="@+id/product_brand_text" />
 
             <TextView
@@ -60,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
                 android:text="TextView"
-                android:textSize="24sp"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/product_name_text"
                 app:layout_constraintTop_toBottomOf="@+id/product_name_text" />
 
