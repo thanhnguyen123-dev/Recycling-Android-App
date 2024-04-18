@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.lifecycle.livedata.ktx)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.gson)
+    implementation(libs.swiperefreshlayout)
     implementation(files("libs/JUnit4/hamcrest-core-1.3.jar"))
     implementation(files("libs/JUnit4/junit-4.13.jar"))
     implementation(libs.swiperefreshlayout)

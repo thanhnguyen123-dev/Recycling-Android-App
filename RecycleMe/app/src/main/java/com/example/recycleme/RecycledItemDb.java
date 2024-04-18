@@ -9,6 +9,7 @@ import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RecycledItemDb implements Subject{
     private static RecycledItemDb instance;
@@ -52,10 +53,19 @@ public class RecycledItemDb implements Subject{
         recycledItemDAO.deleteRecycledItem(id);
     }
 
-
     private void addRecycledItemToStream(RecycledItem recycledItem) {
         this.currentData.add(0, recycledItem);
         this.notifyAllObservers(recycledItem.getBrandName() + " " + recycledItem.getItem() + " has been added to the stream!");
+    }
+
+    public void refreshStreamRandomly() {
+        List<RecycledItem> streamItems = recycledItemStream.getAllRecycledItems();
+        if (!streamItems.isEmpty()) {
+            int randomIndex = new Random().nextInt(streamItems.size());
+            RecycledItem randomItem = streamItems.get(randomIndex);
+
+            addRecycledItemToStream(randomItem);
+        }
     }
 
     public void startStream() {

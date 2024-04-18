@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
@@ -24,12 +25,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends BaseActivity implements Observer {
 
     private RecyclerView recyclerView;
     private RecycledViewAdapter adapter;
     private RecycledItemDb recycledItemDb;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +48,15 @@ public class MainActivity extends BaseActivity implements Observer {
 
         recyclerView.setAdapter(adapter);
 
-        recycledItemDb.startStream();
+        this.swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        this.swipeRefreshLayout.setOnRefreshListener(() -> {
+            recycledItemDb.refreshStreamRandomly();
+
+            adapter.setRecycledItems(recycledItemDb.getCurrentData());
+            adapter.notifyDataSetChanged();
+
+            swipeRefreshLayout.setRefreshing(false);
+        });
     }
 
     @Override
