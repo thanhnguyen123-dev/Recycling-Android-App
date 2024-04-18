@@ -49,6 +49,13 @@ public class MainActivity extends BaseActivity implements Observer {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        recycledItemDb.stopStream();
+    }
+
+    @Override
     public void update(String message) {
         runOnUiThread(new Runnable() {
             @Override

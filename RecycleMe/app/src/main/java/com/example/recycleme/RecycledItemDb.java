@@ -16,6 +16,8 @@ public class RecycledItemDb implements Subject{
     private RecycledItemDAO recycledItemStream;
     private ArrayList<Observer> observers;
     private ArrayList<RecycledItem> currentData;
+    private Thread streamThread;
+    private volatile boolean isStreamRunning;
 
     private RecycledItemDb(Context context){
         this.recycledItemDAO = new RecycledItemDAOJsonImp("mock_data_updated.json", context);
@@ -57,21 +59,33 @@ public class RecycledItemDb implements Subject{
     }
 
     public void startStream() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                List<RecycledItem> streamList = recycledItemStream.getAllRecycledItems();
 
-                for (RecycledItem item : streamList) {
-                    addRecycledItemToStream(item);
-                    try {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+        if (streamThread == null ||  !streamThread.isAlive()) {
+            isStreamRunning = true;
+            streamThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    List<RecycledItem> streamList = recycledItemStream.getAllRecycledItems();
+
+                    for (RecycledItem item : streamList) {
+                        addRecycledItemToStream(item);
+                        try {
+                            Thread.sleep(15000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
-            }
-        }).start();
+            });
+            streamThread.start();
+        }
+    }
+
+    public void stopStream() {
+        isStreamRunning = false;
+        if (streamThread != null && streamThread.isAlive()) {
+            streamThread.interrupt();
+        }
     }
 
     @Override
