@@ -39,7 +39,7 @@ The key area(s) of responsibilities for each member
 
 | UID   |  Name  |   Role |
 |:------|:------:|-------:|
-| [uid] | [name] | [role] |
+| u7724204 | Julius Liem | Project Manager, Programmer |
 | [uid] | [name] | [role] |
 | [uid] | [name] | [role] |
 | [uid] | [name] | [role] |
@@ -62,14 +62,16 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
 
-1. **UID1, Name1**  I have 30% contribution, as follows: <br>
+1. **u7724204, Julius**  I have xx% contribution, as follows: <br>
   - **Code Contribution in the final App**
-    - Feature A1, A2, A3 - class Dummy: [Dummy.java](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java)
-    - XYZ Design Pattern -  class AnotherClass: [functionOne()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43), [function2()](the-URL)
-    - ... (any other contribution in the code, including UI and data files) ... [Student class](../src/path/to/class/Student.java), ..., etc.*, [LanguageTranslator class](../src/path/to/class/LanguageTranslator.java): function1(), function2(), ... <br><br>
+    - Login Feature (State Design Pattern, Singleton Design Pattern) - class LoginState: [LoginState.java](link_to_file), class LoginContext, class LoggedInState, class LoggedOutState, class LoginActivity
+    - DAO design pattern -  class RecycledItemDAO: [RecycledItemDAO.java](link_to_file), class RecycledItemDAOJsonImp: [RecycledItemDAOJsonImp.java](link_to_file)
+    - RecycledItem model class - [RecycledItem.java](link_to_class)
+    - RecycledItemDb class (Observer design pattern) - [RecycledItemDb.java](link_to_class)
+    - Main app layout- MainActivity class: [MainActivity.java](link_to_file), MainActivity layout: [MainActivity.xml](link_to_file)
 
   - **Code and App Design** 
-    - [What design patterns, data structures, did the involved member propose?]*
+    - DAO design pattern, Observer design pattern, Singleton design pattern*
     - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
 
   - **Others**: (only if significant and significantly different from an "average contribution") 
