@@ -12,6 +12,14 @@ import java.util.List;
 
 public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapter.ViewHolder>{
 
+    public List<RecycledItem> getRecycledItems() {
+        return recycledItems;
+    }
+
+    public void setRecycledItems(List<RecycledItem> recycledItems) {
+        this.recycledItems = recycledItems;
+    }
+
     private List<RecycledItem> recycledItems;
 
     public RecycledViewAdapter(List<RecycledItem> recycledItems) {

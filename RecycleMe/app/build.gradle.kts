@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.gson)
     implementation(files("libs/JUnit4/hamcrest-core-1.3.jar"))
     implementation(files("libs/JUnit4/junit-4.13.jar"))
+    implementation(libs.swiperefreshlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
