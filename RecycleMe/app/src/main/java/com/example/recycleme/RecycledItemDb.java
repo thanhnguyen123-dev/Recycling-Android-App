@@ -9,6 +9,7 @@ import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class RecycledItemDb implements Subject{
     private static RecycledItemDb instance;
@@ -16,8 +17,6 @@ public class RecycledItemDb implements Subject{
     private RecycledItemDAO recycledItemStream;
     private ArrayList<Observer> observers;
     private ArrayList<RecycledItem> currentData;
-    private Thread streamThread;
-    private volatile boolean isStreamRunning;
 
     private RecycledItemDb(Context context){
         this.recycledItemDAO = new RecycledItemDAOJsonImp("mock_data_updated.json", context);
@@ -52,42 +51,20 @@ public class RecycledItemDb implements Subject{
         recycledItemDAO.deleteRecycledItem(id);
     }
 
-
     private void addRecycledItemToStream(RecycledItem recycledItem) {
         this.currentData.add(0, recycledItem);
         this.notifyAllObservers(recycledItem.getBrandName() + " " + recycledItem.getItem() + " has been added to the stream!");
     }
 
-    public void startStream() {
+    public void refreshStreamRandomly() {
+        List<RecycledItem> streamItems = recycledItemStream.getAllRecycledItems();
+        if (!streamItems.isEmpty()) {
+            int randomIndex = new Random().nextInt(streamItems.size());
+            RecycledItem randomItem = streamItems.get(randomIndex);
 
-        if (streamThread == null ||  !streamThread.isAlive()) {
-            isStreamRunning = true;
-            streamThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    List<RecycledItem> streamList = recycledItemStream.getAllRecycledItems();
-
-                    for (RecycledItem item : streamList) {
-                        addRecycledItemToStream(item);
-                        try {
-                            Thread.sleep(15000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
-            streamThread.start();
+            addRecycledItemToStream(randomItem);
         }
     }
-
-    public void stopStream() {
-        isStreamRunning = false;
-        if (streamThread != null && streamThread.isAlive()) {
-            streamThread.interrupt();
-        }
-    }
-
     @Override
     public void attach(Observer observer) {
         observers.add(observer);

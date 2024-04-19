@@ -4,6 +4,7 @@ import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -17,10 +18,12 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class MainActivity extends BaseActivity implements Observer {
     private RecyclerView recyclerView;
     private RecycledViewAdapter adapter;
     private RecycledItemDb recycledItemDb;
+    private SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,14 +49,15 @@ public class MainActivity extends BaseActivity implements Observer {
 
         recyclerView.setAdapter(adapter);
 
-        recycledItemDb.startStream();
-    }
+        this.swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        this.swipeRefreshLayout.setOnRefreshListener(() -> {
+            recycledItemDb.refreshStreamRandomly();
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
+            adapter.setRecycledItems(recycledItemDb.getCurrentData());
+            adapter.notifyDataSetChanged();
 
-        recycledItemDb.stopStream();
+            swipeRefreshLayout.setRefreshing(false);
+        });
     }
 
     @Override
@@ -60,7 +65,15 @@ public class MainActivity extends BaseActivity implements Observer {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                View view = findViewById(R.id.content_frame);
+                Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
+                snackbar.setAction("Close", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                    }
+                });
+                snackbar.show();
             }
         });
     }
