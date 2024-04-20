@@ -31,7 +31,6 @@ public class RecycledItemDAOJsonImp implements RecycledItemDAO{
 
     }
 
-
     @Override
     public void addRecycledItem(RecycledItem recycledItem) {
         List<RecycledItem> recycledItems = getAllRecycledItems();

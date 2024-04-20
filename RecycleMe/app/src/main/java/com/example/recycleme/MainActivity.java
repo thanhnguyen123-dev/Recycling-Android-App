@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -21,26 +22,46 @@ import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements Observer {
 
     private RecyclerView recyclerView;
     private RecycledViewAdapter adapter;
+    private RecycledItemDb recycledItemDb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_main, contentFrameLayout);
 
-        RecycledItemDAO recycledItemDAO = new RecycledItemDAOJsonImp("mock_data_updated.json", getApplicationContext());
+        this.recycledItemDb = RecycledItemDb.getInstance(getApplicationContext());
+        this.recycledItemDb.attach(this);
+        adapter = new RecycledViewAdapter(this.recycledItemDb.getCurrentData());
 
         this.recyclerView = findViewById(R.id.recyclerView);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<RecycledItem> recycledItems = recycledItemDAO.getAllRecycledItems();
-
-        adapter = new RecycledViewAdapter(recycledItems);
         recyclerView.setAdapter(adapter);
+
+        recycledItemDb.startStream();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        recycledItemDb.stopStream();
+    }
+
+    @Override
+    public void update(String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
