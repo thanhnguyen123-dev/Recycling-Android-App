@@ -1,227 +1,259 @@
 package com.example.recycleme.treedb;
 
+import androidx.annotation.NonNull;
 
-public class RedBlackTree<T extends Comparable<T>> {
+import java.time.LocalDateTime;
 
-    class Node<T> {
+public class RedBlackTree<T> {
+
+    public enum Color {
+        RED, BLACK
+    }
+
+    public class Node {
+        LocalDateTime key;
         T value;
-        Node<T> left, right, parent;
-        boolean isLeft;
-        boolean isBlack;
-        public Node(T value) {
+        Node left, right, parent;
+        Color color;
+
+        Node(LocalDateTime key, T value) {
+            this.key = key;
             this.value = value;
-            this.left = this.right = this.parent = null;
-            isBlack = false;
-            isLeft = false;
+            this.left = null;
+            this.right = null;
+            this.parent = null;
+            this.color = Color.RED; // New nodes are red by default
         }
 
-    }
-    int size = 0;
-    Node<T> root;
-    private boolean moreThan(T x, T y) {
-        return x.compareTo(y) > 0;
-    }
-
-    public Node<T> search(T value) {
-        return searchInternal(root, value);
-    }
-
-    private Node<T> searchInternal(Node<T> tree, T value) {
-        if (tree.value == value) {
-            return tree;
-        }
-        else if (moreThan(value, tree.value)) {
-            return searchInternal(tree.right, value);
-        }
-        else {
-            return searchInternal(tree.left, value);
+        @NonNull
+        @Override
+        public String toString() {
+            String leftValue = left == null ? "null" : left.value.toString();
+            String rightValue = right == null ? "null" : right.value.toString();
+            String nodeColor = color == Color.RED ? "Red" : "Black";
+            return "Node{value = " + value + " , color=" + nodeColor + ", leftValue=" + leftValue + ", rightValue=" + rightValue + "}";
         }
 
-    }
-
-
-    public void add(T value) {
-        Node<T> newNode = new Node<>(value);
-        if (root == null) {
-            root = newNode;
-            root.isBlack = true;
-            size++;
+        public LocalDateTime getKey() {
+            return key;
         }
-        addInternal(root, newNode);
-    }
 
-    private void addInternal(Node<T> parent, Node<T> newNode) {
-        if (parent.value.compareTo(newNode.value) == 0) {
-            return;
+        public T getValue() {
+            return value;
         }
-        else if (moreThan(newNode.value, parent.value)) {
-            if (parent.right == null) {
-                parent.right = newNode;
-                newNode.parent = parent;
-                newNode.isLeft = false;
-            }
-            else {
-                addInternal(parent.right, newNode);
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
+
+        public Node getParent() {
+            return parent;
+        }
+
+        public Color getColor() {
+            return color;
+        }
+
+        public void flipColor() {
+            if (this.color == Color.RED) {
+                this.color = Color.BLACK;
+            } else {
+                this.color = Color.RED;
             }
         }
-        else {
-            if (parent.left == null) {
-                parent.left = newNode;
-                newNode.parent = parent;
-                newNode.isLeft = true;
-            }
-            else {
-                addInternal(parent.left, newNode);
-            }
-        }
-        checkColor(newNode);
     }
 
-    private void checkColor(Node<T> node) {
-        if (node == root) {
-            return;
-        }
-        if (!node.isBlack && !node.parent.isBlack) {
-            correctTree(node);
-        }
-        checkColor(node.parent);
+    public Node root;
 
+    public RedBlackTree() {
+        root = null;
     }
 
-    private void correctTree(Node<T> node) {
-        if (node.parent.isLeft) {
-            // uncle is node.parent.parent.right
-            if (node.parent.parent.right == null || node.parent.parent.right.isBlack) {
-                rotate(node);
-            }
-            if (node.parent.parent.right != null) {
-                node.parent.parent.right.isBlack = true;
-            }
-        }
-        else {
-            if (node.parent.parent.left == null || node.parent.parent.left.isBlack) {
-                rotate(node);
-            }
-            if (node.parent.parent.left != null) {
-                node.parent.parent.left.isBlack = true;
-            }
-        }
-        node.parent.parent.isBlack = false;
-        node.parent.isBlack = true;
+    public void insert(LocalDateTime key, T value) {
+        Node nodeToInsert = new Node(key, value);
 
+        root = insert(root, nodeToInsert);
+        fixRecolorRotate(nodeToInsert);
     }
 
-    private void rotate(Node<T> node) {
+    public Node insert(Node node, Node nodeToInsert) {
+        // we go left and right based on the time
 
-        if (node.isLeft) {
-            // left-left
-            if (node.parent.isLeft) {
-                rightRotate(node.parent.parent);
-                node.isBlack = false;
-                node.parent.isBlack = true;
-                if (node.parent.right != null) {
-                    node.parent.right.isBlack = false;
-                }
-            }
-            else {
-                // left-right
-                rightLeftRotate(node.parent.parent);
-                node.isBlack = true;
-                node.left.isBlack = false;
-                node.right.isBlack = false;
-            }
+        if (node == null) {
+            return nodeToInsert;
         }
 
-        else {
-            // right-right
-            if (!node.parent.isLeft) {
-                leftRotate(node.parent.parent);
-                node.isBlack = false;
-                node.parent.isBlack = true;
-                if (node.parent.left != null) {
-                    node.parent.left.isBlack = false;
-                }
-            }
-            //right-left
-            else {
-                leftRightRotate(node.parent.parent);
-                node.isBlack = true;
-                node.left.isBlack = false;
-                node.right.isBlack = true;
-            }
-        }
-
-    }
-
-
-    private void leftRotate(Node<T> node) {
-        Node<T> tmp = node.right;
-        node.right = tmp.left;
-        if (node.right != null) {
-            node.right.parent = node;
-            node.right.isLeft = false;
-        }
-        if (node.parent == null) {
-            root = tmp;
-            tmp.parent = null;
-        }
-        else {
-            tmp.parent = node.parent;
-            if (node.isLeft) {
-                tmp.isLeft = true;
-                tmp.parent.left = tmp;
-            }
-            else {
-                tmp.isLeft = false;
-                tmp.parent.right = tmp;
-            }
-        }
-        tmp.left = node;
-        node.isLeft = true;
-        node.parent = tmp;
-    }
-
-    //
-    private void rightRotate(Node<T> node) {
-        Node<T> tmp = node.left;
-        node.left = tmp.right;
-        if (node.left != null) {
+        if (nodeToInsert.getKey().compareTo(node.getKey()) < 0) {
+            // if the node to insert is earlier than parent node, go left
+            node.left = insert(node.left, nodeToInsert);
             node.left.parent = node;
-            node.left.isLeft = true;
+        } else if (nodeToInsert.getKey().compareTo(node.getKey()) > 0) {
+            // go right
+            node.right = insert(node.right, nodeToInsert);
+            node.right.parent = node;
         }
-        if (node.parent == null) {
-            root = tmp;
-            tmp.parent = null;
+
+        return node;
+    }
+
+    private void rotateLeft(Node currentNode) {
+        Node rightNode = currentNode.getRight();
+        currentNode.right = rightNode.getLeft();
+
+        // we want to set the parent of the currentNode.right to point out current node
+        // but it can be null, so we check first
+
+        if (currentNode.right != null) {
+            currentNode.right.parent = currentNode;
         }
-        else {
-            tmp.parent = node.parent;
-            if (node.isLeft) {
-                tmp.isLeft = true;
-                tmp.parent.left = tmp;
+
+        rightNode.left = currentNode;
+        rightNode.parent = currentNode.parent;
+
+        // must update the kid of the currentnode parent
+        if (currentNode.parent == null) {
+            // this means the currentNode was a root, and now the root must be changed to rightNode
+            root = rightNode;
+        } else if (currentNode == currentNode.parent.left) {
+            // if node is leftChild, then we get the parent node and set the left child of it
+            // as the current node
+
+            currentNode.parent.left = rightNode;
+        } else {
+            // vice versa
+            currentNode.parent.right = rightNode;
+        }
+    }
+
+    private void rotateRight(Node currentNode) {
+        Node leftNode = currentNode.getLeft();
+        currentNode.left = leftNode.getRight();
+
+        // we want to set the parent of the currentNode.right to point out current node
+        // (we have just set it as kid of current node)
+        // but it can be null, so we check first
+
+        if (currentNode.left != null) {
+            currentNode.left.parent = currentNode;
+        }
+
+        leftNode.right = currentNode;
+        leftNode.parent = currentNode.parent;
+
+        // must update the kid of the currentnode parent
+        if (currentNode.parent == null) {
+            // this means the currentNode was a root, and now the root must be changed to rightNode
+            root = leftNode;
+        } else if (currentNode == currentNode.parent.left) {
+            // if node is leftChild, then we get the parent node and set the left child of it
+            // as the current node
+
+            currentNode.parent.left = leftNode;
+        } else {
+            // vice versa
+            currentNode.parent.right = leftNode;
+        }
+    }
+
+    private void fixRecolorRotate(Node newNode) {
+        // we can do this by two ways: using while loop or using recursion
+        Node currentNode = newNode;
+
+        while (currentNode != root && currentNode.getParent().getColor() == Color.RED) {
+            // we enter a while loop that continues as long as current Node is not the root and parent is red
+            // remember one of the chars of red black tree is that a parent should be red
+
+            Node grandparent = currentNode.getParent().getParent();
+
+            // check if the currentNode parent is the left child of its grandparent
+            if (currentNode.getParent() == grandparent.getLeft()) {
+                // if it is then the uncle is right child of grandparent
+                Node uncle = grandparent.getRight();
+                // now check if the uncle is not null and the color of the uncle is red
+                // if the color of the uncle is red then all we need to do is flip the color of the parent, uncle,
+                // and child
+
+                if (uncle != null && uncle.color == Color.RED) {
+                    currentNode.getParent().flipColor();
+                    uncle.flipColor();
+                    grandparent.flipColor();
+                    currentNode = currentNode.getParent().getParent();
+                } else {
+                    // we know that this needs a rotation, but first we need to check if it's a LR or LL
+                    // check if the currentNode is right
+
+                    if (currentNode == currentNode.getParent().getRight()) {
+                        // if currentNode is right, we need to rotate left
+                        currentNode = currentNode.parent;
+                        rotateLeft(currentNode);
+                    }
+
+                    currentNode.getParent().flipColor();
+                    grandparent.flipColor();
+                    rotateRight(grandparent);
+                }
+            } else {
+                // same, but change left and right
+                Node uncle = grandparent.getLeft();
+
+                if (uncle != null && uncle.color == Color.RED) {
+                    currentNode.getParent().flipColor();
+                    uncle.flipColor();
+                    grandparent.flipColor();
+                    currentNode = currentNode.getParent().getParent();
+                } else {
+                    // we know that this needs a rotation, but first we need to check if it's a LR or LL
+                    // check if the currentNode is right
+
+                    if (currentNode == currentNode.getParent().getLeft()) {
+                        // if currentNode is right, we need to rotate left
+                        currentNode = currentNode.parent;
+                        rotateRight(currentNode);
+                    }
+
+                    currentNode.getParent().flipColor();
+                    grandparent.flipColor();
+                    rotateLeft(grandparent);
+                }
             }
-            else {
-                tmp.isLeft = false;
-                tmp.parent.right = tmp;
-            }
         }
-        tmp.right = node;
-        node.isLeft = false;
-        node.parent = tmp;
-    }
 
-    private void leftRightRotate(Node<T> node) {
-        leftRotate(node.left);
-        rightRotate(node);
-    }
-
-    private void rightLeftRotate(Node<T> node) {
-        rightRotate(node.right);
-        leftRotate(node);
-
+        root.color = Color.BLACK;
     }
 
 
 
+    public void traverse() {
+        traversePreOrder(root);
+    }
 
+    public T search(LocalDateTime dateTime) {
+        Node node = search(root, dateTime);
+        return node == null? null: node.value;
+    }
+
+    private Node search(Node currentNode, LocalDateTime time) {
+        if (currentNode == null || currentNode.getKey().equals(time)) {
+            return currentNode;
+        }
+
+        int compare = time.compareTo(currentNode.getKey());
+        if (compare > 0) {
+            return search(currentNode.getRight(), time);
+        } else {
+            return search(currentNode.getLeft(), time);
+        }
+    }
+
+    private void traversePreOrder(Node node) {
+        if (node != null) {
+            System.out.println(node);
+            traversePreOrder(node.left);
+            traversePreOrder(node.right);
+        }
+    }
 }
-
