@@ -17,6 +17,9 @@ public class RecycledItemDb implements Subject{
     private RecycledItemDAO recycledItemStream;
     private ArrayList<Observer> observers;
     private ArrayList<RecycledItem> currentData;
+    private Thread streamThread;
+    private volatile boolean isStreamRunning;
+
 
     private RecycledItemDb(Context context){
         this.recycledItemDAO = new RecycledItemDAOJsonImp("mock_data_updated.json", context);
@@ -56,15 +59,35 @@ public class RecycledItemDb implements Subject{
         this.notifyAllObservers(recycledItem.getBrandName() + " " + recycledItem.getItem() + " has been added to the stream!");
     }
 
-    public void refreshStreamRandomly() {
-        List<RecycledItem> streamItems = recycledItemStream.getAllRecycledItems();
-        if (!streamItems.isEmpty()) {
-            int randomIndex = new Random().nextInt(streamItems.size());
-            RecycledItem randomItem = streamItems.get(randomIndex);
+    public void startStream() {
+        if (streamThread == null ||  !streamThread.isAlive()) {
+            isStreamRunning = true;
+            streamThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    List<RecycledItem> streamList = recycledItemStream.getAllRecycledItems();
 
-            addRecycledItemToStream(randomItem);
+                    for (RecycledItem item : streamList) {
+                        addRecycledItemToStream(item);
+                        try {
+                            Thread.sleep(10000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+            streamThread.start();
         }
     }
+
+    public void stopStream() {
+        isStreamRunning = false;
+        if (streamThread != null && streamThread.isAlive()) {
+            streamThread.interrupt();
+        }
+    }
+
     @Override
     public void attach(Observer observer) {
         observers.add(observer);

@@ -51,14 +51,21 @@ public class MainActivity extends BaseActivity implements Observer {
 
         this.swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         this.swipeRefreshLayout.setOnRefreshListener(() -> {
-            recycledItemDb.refreshStreamRandomly();
-
             adapter.setRecycledItems(recycledItemDb.getCurrentData());
             adapter.notifyDataSetChanged();
 
             swipeRefreshLayout.setRefreshing(false);
         });
+
+        recycledItemDb.startStream();
     }
+
+    protected void onDestroy() {
+        super.onDestroy();
+
+        recycledItemDb.stopStream();
+    }
+
 
     @Override
     public void update(String message) {
