@@ -42,6 +42,7 @@ public class CartActivity extends BaseActivity {
             UserTree tree = UserTree.getInstance();
             tree.addItems(LocalDateTime.now(), new ArrayList<>(itemsCart.getItems()));
             itemsCart.clear();
+            adapter.notifyDataSetChanged();
             tree.traverse();
         });
     }
