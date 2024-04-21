@@ -7,6 +7,9 @@
         <item android:title="@string/login"
             android:icon="@drawable/baseline_android_30"
             android:id="@+id/login"/>
+        <item android:title="@string/cart"
+            android:icon="@drawable/baseline_android_30"
+            android:id="@+id/cart"/>
     </group>
 
 </menu>
