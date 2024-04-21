@@ -1,10 +1,7 @@
 package com.example.recycleme.cart;
-
 import com.example.recycleme.RecycledItem;
-import com.example.recycleme.treedb.RedBlackTree;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserTree {
@@ -33,5 +30,9 @@ public class UserTree {
 
     public void traverse() {
         this.rbTree.traverse();
+    }
+
+    public List<NodeData<List<RecycledItem>>> traverseReturnItemAndDate() {
+        return this.rbTree.traverseAndReturnDataWithTime();
     }
 }

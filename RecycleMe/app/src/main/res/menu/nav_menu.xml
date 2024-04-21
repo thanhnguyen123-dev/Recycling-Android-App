@@ -10,6 +10,9 @@
         <item android:title="@string/cart"
             android:icon="@drawable/baseline_android_30"
             android:id="@+id/cart"/>
+        <item android:title="@string/history"
+            android:icon="@drawable/baseline_android_30"
+            android:id="@+id/record"/>
     </group>
 
 </menu>

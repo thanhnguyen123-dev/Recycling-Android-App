@@ -44,7 +44,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
     @Override
     public int getItemCount() {return this.cartItems.size();}
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView productNameTextView;
         private TextView brandNameTextView;
         private TextView materialTextView;
