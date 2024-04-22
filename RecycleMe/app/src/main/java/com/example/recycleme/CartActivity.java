@@ -3,6 +3,7 @@ package com.example.recycleme;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ public class CartActivity extends BaseActivity {
 
         Cart cart = retrieveCart();
         displayCartItems(cart);
+
+
     }
 
     private void displayCartItems(Cart cart) {
@@ -53,20 +56,6 @@ public class CartActivity extends BaseActivity {
 
 
     private Cart retrieveCart() {
-        // For demonstration purposes, I'll just create some dummy cart items here
-        ArrayList<RecycledItem> dummyItems = new ArrayList<>();
-        dummyItems.add(new RecycledItem("Product 1", "Brand 1", "Material 1", 10.0));
-        dummyItems.add(new RecycledItem("Product 2", "Brand 2", "Material 2", 20.0));
-        dummyItems.add(new RecycledItem("Product 3", "Brand 3", "Material 3", 30.0));
-        dummyItems.add(new RecycledItem("Product 4", "Brand 4", "Material 4", 40.0));
-        dummyItems.add(new RecycledItem("Product 5", "Brand 5", "Material 5", 50.0));
-        dummyItems.add(new RecycledItem("Product 6", "Brand 6", "Material 6", 60.0));
-        dummyItems.add(new RecycledItem("Product 7", "Brand 7", "Material 7", 70.0));
-        dummyItems.add(new RecycledItem("Product 8", "Brand 8", "Material 8", 80.0));
-        dummyItems.add(new RecycledItem("Product 9", "Brand 9", "Material 9", 90.0));
-        dummyItems.add(new RecycledItem("Product 10", "Brand 10", "Material 10", 100.0));
-        dummyItems.add(new RecycledItem("Product 11", "Brand 11", "Material 11", 110.0));
-        dummyItems.add(new RecycledItem("Product 12", "Brand 12", "Material 12", 120.0));
-        return new Cart(dummyItems);
+        return Cart.getInstance();
     }
 }

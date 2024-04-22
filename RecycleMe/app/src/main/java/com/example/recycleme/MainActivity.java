@@ -21,12 +21,15 @@ import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
     private RecycledViewAdapter adapter;
+
+    Cart cart = Cart.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,7 @@ public class MainActivity extends BaseActivity {
 
         List<RecycledItem> recycledItems = recycledItemDAO.getAllRecycledItems();
 
-        adapter = new RecycledViewAdapter(recycledItems);
+        adapter = new RecycledViewAdapter(recycledItems, cart);
         recyclerView.setAdapter(adapter);
     }
 }

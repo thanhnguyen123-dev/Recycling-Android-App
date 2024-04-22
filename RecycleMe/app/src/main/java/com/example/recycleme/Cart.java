@@ -2,24 +2,26 @@ package com.example.recycleme;
 
 import java.util.ArrayList;
 
-public class Cart{
+public class Cart {
+    private static Cart instance = null;
+    private ArrayList<RecycledItem> items;
 
-    public ArrayList<RecycledItem> cartItems;
+    private Cart(ArrayList<RecycledItem> items) {
+        this.items = items;
+    }
 
-    public Cart(ArrayList<RecycledItem> itemsToAdd){
-        this.cartItems = itemsToAdd;
+    public static Cart getInstance() {
+        if (instance == null) {
+            instance = new Cart(new ArrayList<>());
+        }
+        return instance;
+    }
+
+    public ArrayList<RecycledItem> getItems() {
+        return this.items;
     }
 
     //Adds an item to the cart
     public void addItem(RecycledItem item) {
-        if (cartItems == null) {
-            cartItems = new ArrayList<>();
-        }
-        cartItems.add(item);
-    }
-
-
-    public ArrayList<RecycledItem> getItems() {
-        return this.cartItems;
-    }
-}
+        this.items.add(item);
+}}
