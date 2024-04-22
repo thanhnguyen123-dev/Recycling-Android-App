@@ -34,6 +34,8 @@ public class MainActivity extends BaseActivity implements Observer {
     private RecycledViewAdapter adapter;
     private RecycledItemDb recycledItemDb;
     private SwipeRefreshLayout swipeRefreshLayout;
+
+    Cart cart = Cart.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,9 @@ public class MainActivity extends BaseActivity implements Observer {
         this.recyclerView = findViewById(R.id.recyclerView);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        List<RecycledItem> recycledItems = recycledItemDAO.getAllRecycledItems();
+
+        adapter = new RecycledViewAdapter(recycledItems, cart);
         recyclerView.setAdapter(adapter);
 
         this.swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);

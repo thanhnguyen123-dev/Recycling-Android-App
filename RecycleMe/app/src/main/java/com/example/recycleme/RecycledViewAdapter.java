@@ -3,7 +3,9 @@ package com.example.recycleme;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,9 +24,14 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
 
     private List<RecycledItem> recycledItems;
 
-    public RecycledViewAdapter(List<RecycledItem> recycledItems) {
+    public Cart cart;
+
+    public RecycledViewAdapter(List<RecycledItem> recycledItems, Cart cart) {
         this.recycledItems = recycledItems;
+        this.cart = cart;
     }
+
+
     @NonNull
     @Override
     public RecycledViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,12 +56,15 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
         private TextView materialTextView;
         private TextView valueTextView;
 
+        private Button addToCartButton;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.productNameTextView = itemView.findViewById(R.id.product_name_text);
             this.brandNameTextView = itemView.findViewById(R.id.product_brand_text);
             this.materialTextView = itemView.findViewById(R.id.product_material_text);
             this.valueTextView = itemView.findViewById(R.id.product_value_text);
+            this.addToCartButton = itemView.findViewById(R.id.add_cart);
         }
 
         public void bind(RecycledItem item) {
@@ -62,6 +72,10 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
             brandNameTextView.setText(item.getBrandName());
             materialTextView.setText(item.getMaterial());
             valueTextView.setText(String.valueOf(item.getValue()));
+            addToCartButton.setOnClickListener(v -> {
+                cart.addItem(item);
+                Toast.makeText(v.getContext(), "Item added to cart", Toast.LENGTH_SHORT).show();
+            });
         }
     }
 }

@@ -79,7 +79,10 @@ public class BaseActivity extends AppCompatActivity {
                         Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
-                }
+                } else if (menuItem.getItemId() == R.id.cart) {
+                    Intent intent = new Intent(BaseActivity.this, CartActivity.class);
+                    startActivity(intent);
+            }
                 // Close the navigation drawer
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
