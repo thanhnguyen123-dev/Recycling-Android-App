@@ -3,6 +3,7 @@ package com.example.recycleme.cart;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.*;
 import com.example.recycleme.RecycledItem;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
     }
 
     public CartViewAdapter(List<RecycledItem> cartItems) {
-        this.cartItems = ItemsCart.getInstance().getItems();
+        this.cartItems = Cart.getInstance().getItems();
     }
 
     @NonNull
@@ -49,6 +48,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
         private TextView brandNameTextView;
         private TextView materialTextView;
         private TextView valueTextView;
+        private Button delButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -56,6 +56,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
             this.brandNameTextView = itemView.findViewById(R.id.product_brand_text_cart);
             this.materialTextView = itemView.findViewById(R.id.product_material_text_cart);
             this.valueTextView = itemView.findViewById(R.id.value_text_cart);
+            this.delButton = itemView.findViewById(R.id.del_button);
         }
 
         public void bind(RecycledItem item) {
@@ -63,6 +64,11 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.ViewHo
             brandNameTextView.setText(item.getBrandName());
             materialTextView.setText(item.getMaterial());
             valueTextView.setText(String.valueOf(item.getValue()));
+
+            delButton.setOnClickListener(v -> {
+                Cart.getInstance().removeItem(item);
+                getBindingAdapter().notifyDataSetChanged();
+            });
         }
     }
 }

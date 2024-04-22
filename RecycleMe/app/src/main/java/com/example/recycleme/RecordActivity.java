@@ -2,21 +2,12 @@ package com.example.recycleme;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
-
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.ConcatAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.recycleme.cart.NodeData;
 import com.example.recycleme.cart.UserTree;
 import com.example.recycleme.record.RecordAdapter;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

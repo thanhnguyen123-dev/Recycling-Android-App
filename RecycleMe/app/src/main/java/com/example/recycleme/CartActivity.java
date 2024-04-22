@@ -8,8 +8,8 @@ import android.widget.FrameLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recycleme.cart.Cart;
 import com.example.recycleme.cart.CartViewAdapter;
-import com.example.recycleme.cart.ItemsCart;
 import com.example.recycleme.cart.UserTree;
 
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ public class CartActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
     private CartViewAdapter adapter;
-    private ItemsCart itemsCart;
+    private Cart itemsCart;
     private Button saveButton;
 
     @Override
@@ -28,7 +28,7 @@ public class CartActivity extends BaseActivity {
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_cart, contentFrameLayout);
 
-        this.itemsCart = ItemsCart.getInstance();
+        this.itemsCart = Cart.getInstance();
         adapter = new CartViewAdapter(this.itemsCart.getItems());
 
         this.recyclerView = findViewById(R.id.itemsCartRecyclerView);
@@ -43,7 +43,8 @@ public class CartActivity extends BaseActivity {
             tree.addItems(LocalDateTime.now(), new ArrayList<>(itemsCart.getItems()));
             itemsCart.clear();
             adapter.notifyDataSetChanged();
-            tree.traverse();
         });
+
+
     }
 }

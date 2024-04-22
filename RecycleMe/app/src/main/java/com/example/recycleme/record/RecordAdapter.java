@@ -1,6 +1,5 @@
 package com.example.recycleme.record;
 
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.R;
 import com.example.recycleme.RecycledItem;
-import com.example.recycleme.cart.CartViewAdapter;
-import com.example.recycleme.cart.NodeData;
-import com.example.recycleme.cart.UserTree;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,7 +40,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_date_cart, parent, false);
            return new HeaderViewHolder(view);
        } else {
-           View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_view_row, parent, false);
+           View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_view_row, parent, false);
            return new ItemViewHolder(view);
        }
     }
@@ -86,10 +82,10 @@ public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         private TextView valueTextView;
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.productNameTextView = itemView.findViewById(R.id.product_name_cart);
-            this.brandNameTextView = itemView.findViewById(R.id.product_brand_text_cart);
-            this.materialTextView = itemView.findViewById(R.id.product_material_text_cart);
-            this.valueTextView = itemView.findViewById(R.id.value_text_cart);
+            this.productNameTextView = itemView.findViewById(R.id.product_name_record);
+            this.brandNameTextView = itemView.findViewById(R.id.product_brand_text_record);
+            this.materialTextView = itemView.findViewById(R.id.product_material_text_record);
+            this.valueTextView = itemView.findViewById(R.id.value_text_record);
         }
 
         public void bind(RecycledItem item) {

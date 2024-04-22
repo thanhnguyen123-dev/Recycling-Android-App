@@ -20,31 +20,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/del_button"
-                android:layout_width="74dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="Delete"
-                android:textColorLink="#FF0000"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
             <ImageView
                 android:id="@+id/product_image_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@mipmap/ic_launcher" />
 
             <TextView
-                android:id="@+id/product_name_cart"
+                android:id="@+id/product_name_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -56,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/product_brand_text_cart"
+                android:id="@+id/product_brand_text_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -64,25 +48,25 @@
                 android:text="TextView"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/product_image_cart"
-                app:layout_constraintTop_toBottomOf="@+id/product_name_cart" />
+                app:layout_constraintTop_toBottomOf="@+id/product_name_record" />
 
             <TextView
-                android:id="@+id/value_text_cart"
+                android:id="@+id/value_text_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/product_material_text_cart"
-                app:layout_constraintStart_toEndOf="@+id/product_material_text_cart" />
+                app:layout_constraintBottom_toBottomOf="@+id/product_material_text_record"
+                app:layout_constraintStart_toEndOf="@+id/product_material_text_record" />
 
             <TextView
-                android:id="@+id/product_material_text_cart"
+                android:id="@+id/product_material_text_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="@+id/product_brand_text_cart"
-                app:layout_constraintStart_toEndOf="@+id/product_brand_text_cart" />
+                app:layout_constraintBottom_toBottomOf="@+id/product_brand_text_record"
+                app:layout_constraintStart_toEndOf="@+id/product_brand_text_record" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
