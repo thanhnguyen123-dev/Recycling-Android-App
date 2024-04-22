@@ -44,12 +44,12 @@ public class MainActivity extends BaseActivity implements Observer {
 
         this.recycledItemDb = RecycledItemDb.getInstance(getApplicationContext());
         this.recycledItemDb.attach(this);
-        adapter = new RecycledViewAdapter(this.recycledItemDb.getCurrentData());
+        adapter = new RecycledViewAdapter(this.recycledItemDb.getCurrentData(), cart);
 
         this.recyclerView = findViewById(R.id.recyclerView);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<RecycledItem> recycledItems = recycledItemDAO.getAllRecycledItems();
+        List<RecycledItem> recycledItems = recycledItemDb.getCurrentData();
 
         adapter = new RecycledViewAdapter(recycledItems, cart);
         recyclerView.setAdapter(adapter);
