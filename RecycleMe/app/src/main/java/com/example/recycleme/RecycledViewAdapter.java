@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recycleme.cart.ItemsCart;
+
 import java.util.List;
 
 public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapter.ViewHolder>{
@@ -30,8 +32,6 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
         this.recycledItems = recycledItems;
         this.cart = cart;
     }
-
-
     @NonNull
     @Override
     public RecycledViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

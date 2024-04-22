@@ -1,8 +1,10 @@
-package com.example.recycleme.treedb;
+package com.example.recycleme.cart;
 
 import androidx.annotation.NonNull;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RedBlackTree<T> {
 
@@ -230,6 +232,27 @@ public class RedBlackTree<T> {
     public void traverse() {
         traversePreOrder(root);
     }
+    private void traversePreOrder(Node node) {
+        if (node != null) {
+            System.out.println(node);
+            traversePreOrder(node.left);
+            traversePreOrder(node.right);
+        }
+    }
+    public List<NodeData<T>> traverseAndReturnDataWithTime() {
+        List<NodeData<T>> nodeDataList = new ArrayList<>();
+        traverseInOrderDescendingReturnData(root, nodeDataList);
+        return nodeDataList;
+    }
+
+    private void traverseInOrderDescendingReturnData(Node node, List<NodeData<T>> returnedData) {
+        if (node != null) {
+            traverseInOrderDescendingReturnData(node.right, returnedData);
+            NodeData<T> currentData = new NodeData<>(node.getKey(), node.getValue());
+            returnedData.add(currentData);
+            traverseInOrderDescendingReturnData(node.left, returnedData);
+        }
+    }
 
     public T search(LocalDateTime dateTime) {
         Node node = search(root, dateTime);
@@ -249,11 +272,5 @@ public class RedBlackTree<T> {
         }
     }
 
-    private void traversePreOrder(Node node) {
-        if (node != null) {
-            System.out.println(node);
-            traversePreOrder(node.left);
-            traversePreOrder(node.right);
-        }
-    }
+
 }

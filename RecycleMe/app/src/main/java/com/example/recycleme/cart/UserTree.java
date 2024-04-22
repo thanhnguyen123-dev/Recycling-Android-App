@@ -1,14 +1,12 @@
 package com.example.recycleme.cart;
-
 import com.example.recycleme.RecycledItem;
-import com.example.recycleme.treedb.RedBlackTree;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 public class UserTree {
     private static UserTree instance;
-    private RedBlackTree<ArrayList<RecycledItem>> rbTree;
+    private RedBlackTree<List<RecycledItem>> rbTree;
 
     public static UserTree getInstance() {
         if (instance == null) {
@@ -22,11 +20,19 @@ public class UserTree {
         this.rbTree = new RedBlackTree<>();
     }
 
-    public void addItems(LocalDateTime time, ArrayList<RecycledItem> itemsWantToBeAdded) {
+    public void addItems(LocalDateTime time, List<RecycledItem> itemsWantToBeAdded) {
         this.rbTree.insert(time, itemsWantToBeAdded);
     }
 
-    public ArrayList<RecycledItem> searchItem(LocalDateTime time) {
+    public List<RecycledItem> searchItem(LocalDateTime time) {
         return this.rbTree.search(time);
+    }
+
+    public void traverse() {
+        this.rbTree.traverse();
+    }
+
+    public List<NodeData<List<RecycledItem>>> traverseReturnItemAndDate() {
+        return this.rbTree.traverseAndReturnDataWithTime();
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item android:title="@string/home"
             android:icon="@drawable/baseline_android_30"
@@ -8,10 +7,12 @@
         <item android:title="@string/login"
             android:icon="@drawable/baseline_android_30"
             android:id="@+id/login"/>
-        <item
-            android:id="@+id/cart"
+        <item android:title="@string/cart"
             android:icon="@drawable/baseline_android_30"
-            android:title="@string/cart" />
+            android:id="@+id/cart"/>
+        <item android:title="@string/history"
+            android:icon="@drawable/baseline_android_30"
+            android:id="@+id/record"/>
     </group>
 
 </menu>
