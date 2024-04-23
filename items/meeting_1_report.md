@@ -31,6 +31,14 @@ Stand up Procedure:
 
 ## Meeting Minutes
 
+Conflict Resolution Protocol:
+
+Disagreement on project direction: scedhule meeting, discuss perspective, vote on best approach.
+
+If someone slowing down: reach out to them, empathise with their situation.  If unresponsive, give deadline.
+
+If there is fight/personality Disagreement: Uninvolved team members calm things down and help find solution.
+
 App Suggestions:
 
 
