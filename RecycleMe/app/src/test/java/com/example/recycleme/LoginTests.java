@@ -6,6 +6,7 @@ import org.junit.Test;
 import com.example.recycleme.login.LoggedInState;
 import com.example.recycleme.login.LoggedOutState;
 import com.example.recycleme.login.LoginContext;
+import com.example.recycleme.login.LoginState;
 
 import static org.junit.Assert.*;
 

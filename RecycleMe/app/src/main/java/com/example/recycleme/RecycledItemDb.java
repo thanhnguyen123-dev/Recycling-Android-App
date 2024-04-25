@@ -2,16 +2,15 @@ package com.example.recycleme;
 
 import android.content.Context;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
+import com.example.recycleme.interfaces.Observer;
+import com.example.recycleme.interfaces.Subject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class RecycledItemDb implements Subject{
+public class RecycledItemDb implements Subject {
     private static RecycledItemDb instance;
     private RecycledItemDAO recycledItemDAO;
     private RecycledItemDAO recycledItemStream;

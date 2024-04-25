@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.recycleme.cart.Cart;
+import com.example.recycleme.interfaces.Observer;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
