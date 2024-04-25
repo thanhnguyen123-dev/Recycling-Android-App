@@ -1,10 +1,12 @@
 package com.example.recycleme.cart;
 
 import com.example.recycleme.RecycledItem;
+import com.example.recycleme.interfaces.IterableCollection;
+import com.example.recycleme.interfaces.Iterator;
 
 import java.util.ArrayList;
 
-public class Cart {
+public class Cart implements IterableCollection {
     private static Cart instance = null;
     private ArrayList<RecycledItem> items;
 
@@ -34,5 +36,33 @@ public class Cart {
 
     public void removeItem(RecycledItem item) {
         items.remove(item);
+    }
+
+    @Override
+    public Iterator createIterator() {
+        return new CartIterator();
+    }
+
+    private class CartIterator implements Iterator {
+
+        int index;
+
+        @Override
+        public boolean hasNext() {
+            if (!items.isEmpty() && index < items.size()) {
+                return true;
+            }
+
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            if (this.hasNext()) {
+                return items.get(index++);
+            }
+
+            return null;
+        }
     }
 }
