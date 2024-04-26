@@ -105,4 +105,45 @@ public class RedBlackTreeTest {
         // should not change
         assertEquals(root.getValue(), Integer.valueOf(11));
     }
+
+    @Test
+    public void testKeyNotInTree() {
+        RedBlackTree<Integer> rbTree = new RedBlackTree<>();
+
+        rbTree.insert(LocalDateTime.of(2024, 1, 1, 1, 11), 11);
+
+        assertNull(rbTree.search(LocalDateTime.of(2024, 1, 1, 1, 10)));
+        assertNotNull(rbTree.search(LocalDateTime.of(2024, 1, 1, 1, 11)));
+    }
+
+    @Test
+    public void deleteKey() {
+        rbTree.delete(LocalDateTime.of(2024, 10, 2, 11, 0));
+
+        assertNull(rbTree.search(LocalDateTime.of(2024, 10, 2, 11, 0)));
+
+        RedBlackTree<Integer>.Node root = rbTree.root;
+        assertEquals(root.getValue(), Integer.valueOf(13));
+        assertEquals(root.getColor(), RedBlackTree.Color.BLACK);
+
+        RedBlackTree<Integer>.Node right = root.getRight();
+        assertEquals(right.getValue(), Integer.valueOf(14));
+        assertEquals(right.getColor(), RedBlackTree.Color.BLACK);
+        assertNull(right.getLeft());
+
+        RedBlackTree<Integer>.Node left = root.getLeft();
+        assertEquals(left.getColor(), RedBlackTree.Color.BLACK);
+        assertEquals(left.getValue(), Integer.valueOf(10));
+        assertNull(left.getLeft());
+
+        RedBlackTree<Integer>.Node rightRight = right.getRight();
+        assertEquals(rightRight.getValue(), Integer.valueOf(16));
+        assertEquals(rightRight.getColor(), RedBlackTree.Color.RED);
+        assertNull(rightRight.getRight());
+        assertNull(rightRight.getLeft());
+
+        RedBlackTree<Integer>.Node leftRight = left.getRight();
+        assertEquals(leftRight.getValue(), Integer.valueOf(12));
+        assertEquals(leftRight.getColor(), RedBlackTree.Color.RED);
+    }
 }

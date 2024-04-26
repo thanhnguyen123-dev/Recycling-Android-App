@@ -272,5 +272,8 @@ public class RedBlackTree<T> {
         }
     }
 
+    public void delete(LocalDateTime dateTime) {
+        //TODO
+    }
 
 }
