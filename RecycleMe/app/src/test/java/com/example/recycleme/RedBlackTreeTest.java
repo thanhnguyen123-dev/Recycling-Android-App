@@ -92,4 +92,17 @@ public class RedBlackTreeTest {
         assertEquals(leftChild.getColor(), RedBlackTree.Color.RED);
 
     }
+
+    @Test
+    public void testAddSameValue() {
+        RedBlackTree<Integer> rbTree = new RedBlackTree<>();
+
+        rbTree.insert(LocalDateTime.of(2024, 1, 1, 1, 11), 11);
+        rbTree.insert(LocalDateTime.of(2024, 1, 1, 1, 11), 12);
+
+        RedBlackTree<Integer>.Node root = rbTree.root;
+
+        // should not change
+        assertEquals(root.getValue(), Integer.valueOf(11));
+    }
 }
