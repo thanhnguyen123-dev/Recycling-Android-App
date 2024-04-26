@@ -13,6 +13,9 @@
         <item android:title="@string/history"
             android:icon="@drawable/baseline_android_30"
             android:id="@+id/record"/>
+        <item android:title="@string/statistic"
+            android:icon="@drawable/baseline_android_30"
+            android:id="@+id/statistic"/>
     </group>
 
 </menu>
