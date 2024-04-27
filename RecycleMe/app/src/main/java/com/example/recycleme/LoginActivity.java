@@ -31,11 +31,22 @@ import java.io.Serializable;
 public class LoginActivity extends BaseActivity {
 
     private LoginContext loginContext;
-    private FirebaseAuth firebaseAuth;
 
+
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        // Check if user is signed in (non-null) and update UI accordingly.
+//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//        if(currentUser != null){
+//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//            startActivity(intent);
+//            finish();
+//        }
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        firebaseAuth = FirebaseAuth.getInstance();
+
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_login, contentFrameLayout);
@@ -45,6 +56,7 @@ public class LoginActivity extends BaseActivity {
         this.loginContext = LoginContext.getInstance();
 
         loginButton.setOnClickListener(v -> {
+
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
@@ -54,11 +66,15 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
+
+
+
     private void updateUI(String email, String password) {
         if (loginContext.isLoggedIn()) {
             // create  new fragment that will be displayed on screen
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
+            Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
         } else {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(getApplicationContext(), "Email and password cannot be empty, please try again!", Toast.LENGTH_SHORT).show();
@@ -66,21 +82,6 @@ public class LoginActivity extends BaseActivity {
             else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
         }
 
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "Account created.",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(getApplicationContext(), "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
     }
 
 }

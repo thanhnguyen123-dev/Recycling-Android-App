@@ -51,5 +51,16 @@
                 android:src="@drawable/ic_launcher_background" />
         </androidx.cardview.widget.CardView>
 
+        <Button
+            android:id="@+id/logout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:layout_constraintVertical_bias="0.086" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

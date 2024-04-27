@@ -8,10 +8,11 @@ import java.io.Serializable;
 public class LoginContext {
     private LoginState state;
     private static LoginContext instance;
-    private static FirebaseAuth firebaseAuth;
+    private FirebaseAuth mAuth;
 
     private LoginContext() {
         state = new LoggedOutState();
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public static LoginContext getInstance() {
@@ -41,5 +42,9 @@ public class LoginContext {
 
     public boolean isLoggedIn() {
         return state instanceof LoggedInState;
+    }
+
+    public FirebaseAuth getFireBaseAuth() {
+        return mAuth;
     }
 }
