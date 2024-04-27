@@ -28,7 +28,8 @@ import com.google.android.material.navigation.NavigationView;
  * - Integrated with a custom LoginContext class to handle login state
  * - Updated the navigation item click handling to start specific activities based on the selected menu item
  * - Removed the onPostCreate method as it is not needed in this implementation
- * Written by: Julius Liem - u7724204
+ *
+ * @author Julius Liem - u7724204
  */
 
 public class BaseActivity extends AppCompatActivity {
