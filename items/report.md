@@ -87,6 +87,8 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 *[What is your application, what does it do? Include photos or diagrams if necessary]*
 
+This is a recycling logging application. By using this application, we can log what we have recycled in each day, and we can see the statistics and history of our recycling history. This app also allows the users to see the nearest recycling spot. By logging in, the user can add their log, add their own personal recycled items, as well as see their statistics. 
+
 *Here is a pet specific application example*
 
 *PetBook is a social media application specifically targetting pet owners... it provides... certified practitioners, such as veterians are indicated by a label next to their profile...*
@@ -135,8 +137,14 @@ This is an important section of your report and should include all technical dec
 - Details about the parser (describe the formal grammar and language used)
 
 - Decisions made (e.g., explain why you chose one or another data structure, why you used a specific data model, etc.)
+- We chose to use the Tree data structure to store the history of the user because it allows the application to search and filter for the history easily. For example, the user has recycled item on the 15th, 16th, 17th, 18th, and 19th of April. If the user wants to see what he has recycled after 18th April, it would take lesser time to traverse the tree compared to if the application is using a list.
+- We chose to use the List data structure to store all of the available recycled items. One of the main reason for not using Tree is because we think it'd take roughly same time to search things and it's hard to determine the key when the recycled item has many properties (id, brand, material, value, item name). We could pick one key (e.g. ID) but not all user will use the ID to search the recycled item. 
 
 - Details about the design patterns used (where in the code, justification of the choice, etc)
+- The State design pattern is used in the LoginContext class. Justification of this include:
+1. There are different actions that can be done depending on whether the user is logged in or logged out (e.g. when the user is logged out then the user can't add item to his cart history)
+- The DAO design pattern is used in reading the data instances. Justification of this are:
+1. DAO design pattern is extensible, allowing the application to read the data from multiple sources
 
 *Please give clear and concise descriptions for each subsections of this part. It would be better to list all the concrete items for each subsection and give no more than `5` concise, crucial reasons of your design.
 
