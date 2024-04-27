@@ -14,6 +14,18 @@ import com.example.recycleme.cart.Cart;
 
 import java.util.List;
 
+/**
+ * A RecyclerView adapter for displaying a list of recycled items.
+ * <p>
+ * This adapter binds the data from a list of RecycledItem objects to the corresponding
+ * views in the RecyclerView. It also handles the click event for adding items to the cart.
+ * </p>
+ * <p>
+ * Adapted from the YouTube video "RecyclerView | Everything You Need to Know"
+ * (https://www.youtube.com/watch?v=Mc0XT58A1Z4).
+ * </p>
+ * @author Julius Liem
+ */
 public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapter.ViewHolder>{
 
     public List<RecycledItem> getRecycledItems() {

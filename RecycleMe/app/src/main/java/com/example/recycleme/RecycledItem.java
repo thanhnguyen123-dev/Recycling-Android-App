@@ -11,6 +11,10 @@ public class RecycledItem {
     private Double value;
 
     public RecycledItem(String item, String brandName, String material, Double value) {
+        if (value < 0) {
+            throw new IllegalArgumentException("Value should not be less than 0!");
+        }
+
         this.item = item;
         this.brand = brandName;
         this.material = material;
