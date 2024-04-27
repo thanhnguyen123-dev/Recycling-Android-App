@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "605796976166",
+    "project_id": "recyclingapp-login-firebase",
+    "storage_bucket": "recyclingapp-login-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605796976166:android:6fc2b8c2ac39d1588588e7",
+        "android_client_info": {
+          "package_name": "com.example.recycleme"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0_CgvzhdrF2KYjMVLs_5sUHcr-UciESI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

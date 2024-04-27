@@ -39,16 +39,19 @@ public class LoginActivity extends BaseActivity {
 
             loginContext.login(email,password);
 
-            updateUI();
+            updateUI(email, password);
         });
     }
 
-    private void updateUI() {
+    private void updateUI(String email, String password) {
         if (loginContext.isLoggedIn()) {
             // create  new fragment that will be displayed on screen
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
         } else {
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(getApplicationContext(), "Email and password cannot be empty, please try again!", Toast.LENGTH_SHORT).show();
+            }
             Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
         }
     }
