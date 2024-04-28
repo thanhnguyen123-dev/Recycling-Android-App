@@ -24,16 +24,44 @@ public class LoginTests {
         assertFalse(loginContext.isLoggedIn());
 
         // Attempt to log in with invalid credentials
-        loginContext.login("invalid@example.com", "password");
-        assertFalse(loginContext.isLoggedIn());
+        loginContext.login("invalid@example.com", "password", new LoginState.LoginCallback() {
+            @Override
+            public void onLoginSuccess() {
+                fail();
+            }
+
+            @Override
+            public void onLoginFailure(String errorMessage) {
+                assertFalse(loginContext.isLoggedIn());
+            }
+        });
 
         // Log in with valid credentials
-        loginContext.login("comp2100@anu.edu.au", "comp2100");
-        assertTrue(loginContext.isLoggedIn());
+        loginContext.login("comp2100@anu.edu.au", "comp2100", new LoginState.LoginCallback() {
+            @Override
+            public void onLoginSuccess() {
+                assertTrue(loginContext.isLoggedIn());
+            }
+
+            @Override
+            public void onLoginFailure(String errorMessage) {
+                fail();
+            }
+        });
 
         // Attempt to log in while already logged in
-        loginContext.login("anotheruser@example.com", "password");
-        assertTrue(loginContext.isLoggedIn());
+        loginContext.login("anotheruser@example.com", "password", new LoginState.LoginCallback() {
+            @Override
+            public void onLoginSuccess() {
+                assertTrue(loginContext.isLoggedIn());
+            }
+
+            @Override
+            public void onLoginFailure(String errorMessage) {
+                fail();
+            }
+        });
+
 
         // Log out
         loginContext.logout();
@@ -57,8 +85,18 @@ public class LoginTests {
         assertTrue(context.isLoggedIn());
 
         // Attempt to log in while already logged in
-        context.login("comp2100@anu.edu.au", "comp2100");
-        assertTrue(context.isLoggedIn());
+        context.login("comp2100@anu.edu.au", "comp2100", new LoginState.LoginCallback() {
+            @Override
+            public void onLoginSuccess() {
+                assertTrue(context.isLoggedIn());
+            }
+
+            @Override
+            public void onLoginFailure(String errorMessage) {
+                fail();
+            }
+        });
+
 
         // Log out
         context.logout();
@@ -78,8 +116,17 @@ public class LoginTests {
         assertFalse(context.isLoggedIn());
 
         // Log in with valid credentials
-        context.login("comp2100@anu.edu.au", "comp2100");
-        assertTrue(context.isLoggedIn());
+        context.login("comp2100@anu.edu.au", "comp2100", new LoginState.LoginCallback() {
+            @Override
+            public void onLoginSuccess() {
+                assertTrue(context.isLoggedIn());
+            }
+
+            @Override
+            public void onLoginFailure(String errorMessage) {
+                fail();
+            }
+        });
 
         // Log out
         context.logout();
