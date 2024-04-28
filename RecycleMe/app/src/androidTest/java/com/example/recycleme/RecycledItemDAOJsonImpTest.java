@@ -1,19 +1,23 @@
-package com.example.recycleme.dao;
+package com.example.recycleme;
 
 import android.content.Context;
 
 import androidx.test.core.app.ApplicationProvider;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.recycleme.RecycledItem;
+import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+@RunWith(AndroidJUnit4.class)
 public class RecycledItemDAOJsonImpTest {
 
     private RecycledItemDAOJsonImp dao;
@@ -26,7 +30,7 @@ public class RecycledItemDAOJsonImpTest {
 
     @Test
     public void testAddRecycledItem() {
-        RecycledItem item = new RecycledItem(1, "Plastic Bottle", "ABC Company", "Plastic", 10);
+        RecycledItem item = new RecycledItem("Plastic Bottle", "ABC", "Plastic", 10.0);
         dao.addRecycledItem(item);
 
         List<RecycledItem> items = dao.getAllRecycledItems();
@@ -37,10 +41,10 @@ public class RecycledItemDAOJsonImpTest {
 
     @Test
     public void testUpdateRecycledItem() {
-        RecycledItem item = new RecycledItem(1, "Plastic Bottle", "ABC Company", "Plastic", 10);
+        RecycledItem item = new RecycledItem("Plastic Bottle", "ABC", "Plastic", 10.0);
         dao.addRecycledItem(item);
 
-        RecycledItem updatedItem = new RecycledItem(1, "Paper Bottle", "ADC Company", "Paper", 20);
+        RecycledItem updatedItem = new RecycledItem("Paper Bottle", "ADC",  "Paper", 20.0);
         dao.updateRecycledItem(updatedItem);
 
         List<RecycledItem> items = dao.getAllRecycledItems();
@@ -51,8 +55,8 @@ public class RecycledItemDAOJsonImpTest {
 
     @Test
     public void testDeleteRecycledItem() {
-        RecycledItem item1 = new RecycledItem(1, "Plastic Bottle", "ABC Company", "Plastic", 10);
-        RecycledItem item2 = new RecycledItem(2, "Paper Bottle", "ABCD Company", "Paper", 50);
+        RecycledItem item1 = new RecycledItem("1", "Plastic Bottle", "ABC Company", 10.0);
+        RecycledItem item2 = new RecycledItem("2", "Paper Bottle", "ABCD Company",  50.0);
         dao.addRecycledItem(item1);
         dao.addRecycledItem(item2);
 

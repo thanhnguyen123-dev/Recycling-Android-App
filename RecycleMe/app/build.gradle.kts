@@ -32,6 +32,11 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -44,14 +49,11 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.gson)
     implementation(libs.swiperefreshlayout)
-    implementation(files("libs/JUnit4/hamcrest-core-1.3.jar"))
-    implementation(files("libs/JUnit4/junit-4.13.jar"))
     implementation(libs.swiperefreshlayout)
     implementation(libs.recyclerview)
     implementation(libs.core)
     implementation(libs.mp.android.chart)
     implementation(libs.mockito.core)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
+    implementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
