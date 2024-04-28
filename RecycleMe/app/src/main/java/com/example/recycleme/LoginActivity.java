@@ -33,17 +33,6 @@ public class LoginActivity extends BaseActivity {
     private LoginContext loginContext;
 
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-//        if(currentUser != null){
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -60,7 +49,7 @@ public class LoginActivity extends BaseActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            loginContext.login(email,password);
+            loginContext.login(email, password);
 
             updateUI(email, password);
         });

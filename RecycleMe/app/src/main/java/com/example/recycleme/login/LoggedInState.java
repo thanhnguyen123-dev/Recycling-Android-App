@@ -8,7 +8,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoggedInState extends LoginState {
     @Override
-    public void login(LoginContext context, String email, String password) {
+    public void login(LoginContext context, String email, String password, LoginCallback loginCallback) {
         System.out.println("Already logged in.");
     }
 

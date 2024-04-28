@@ -13,18 +13,23 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoggedOutState extends LoginState {
 
     @Override
-    public void login(LoginContext context, String email, String password) {
+    public void login(LoginContext context, String email, String password, LoginCallback loginCallback) {
         FirebaseAuth firebaseAuth = context.getFireBaseAuth();
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+          firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             context.setState(new LoggedInState());
+                            loginCallback.onLoginSuccess();
+                        }
+                        else {
+                            loginCallback.onLoginFailure(task.getException().getMessage());
                         }
                     }
                 });
