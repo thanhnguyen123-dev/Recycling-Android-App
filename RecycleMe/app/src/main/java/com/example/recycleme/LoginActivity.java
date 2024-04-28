@@ -45,32 +45,39 @@ public class LoginActivity extends BaseActivity {
         this.loginContext = LoginContext.getInstance();
 
         loginButton.setOnClickListener(v -> {
-
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            loginContext.login(email, password);
+            loginContext.login(email, password, new LoginState.LoginCallback() {
+                @Override
+                public void onLoginSuccess() {
+                    // Authentication successful, update UI
+                    updateUI();
+                }
 
-            updateUI(email, password);
+                @Override
+                public void onLoginFailure(String errorMessage) {
+                    // Authentication failed, show error message
+                    if (email.isEmpty() || password.isEmpty()) {
+                        Toast.makeText(getApplicationContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
         });
     }
 
 
 
 
-    private void updateUI(String email, String password) {
+    private void updateUI() {
         if (loginContext.isLoggedIn()) {
             // create  new fragment that will be displayed on screen
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-        } else {
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(getApplicationContext(), "Email and password cannot be empty, please try again!", Toast.LENGTH_SHORT).show();
-            }
-            else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
-        }
-
+        } else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
     }
 
 }
