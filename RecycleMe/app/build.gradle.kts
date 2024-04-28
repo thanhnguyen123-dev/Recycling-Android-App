@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -51,6 +52,10 @@ dependencies {
     implementation(libs.swiperefreshlayout)
     implementation(libs.swiperefreshlayout)
     implementation(libs.recyclerview)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
     implementation(libs.core)
     implementation(libs.mp.android.chart)
     implementation(libs.mockito.core)

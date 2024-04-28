@@ -1,13 +1,18 @@
 package com.example.recycleme.login;
 
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.io.Serializable;
 
 public class LoginContext {
     private LoginState state;
     private static LoginContext instance;
+    private FirebaseAuth mAuth;
 
     private LoginContext() {
         state = new LoggedOutState();
+        mAuth = FirebaseAuth.getInstance();
     }
 
     public static LoginContext getInstance() {
@@ -22,12 +27,13 @@ public class LoginContext {
         return instance;
     }
 
+
     public void setState(LoginState state) {
         this.state = state;
     }
 
-    public void login(String email, String password) {
-        state.login(this, email, password);
+    public void login(String email, String password, LoginState.LoginCallback loginCallback) {
+        state.login(this, email, password, loginCallback);
     }
 
     public void logout() {
@@ -36,5 +42,9 @@ public class LoginContext {
 
     public boolean isLoggedIn() {
         return state instanceof LoggedInState;
+    }
+
+    public FirebaseAuth getFireBaseAuth() {
+        return mAuth;
     }
 }
