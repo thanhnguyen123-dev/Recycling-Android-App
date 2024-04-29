@@ -55,7 +55,6 @@ public class AVLTree<T> {
     }
 
     public void insert(LocalDateTime key, T value) {
-        // TODO: Implement the insert method
         Node newNode = new Node(key, value);
         root = insertInternal(root, newNode);
     }
@@ -87,8 +86,45 @@ public class AVLTree<T> {
         return -1;
     }
 
-    private Node applyRotation(Node tree) {
+    private Node applyRotation(Node node) {
+        int balanceFactor = getBalanceFactor(node);
+
+        // left heavy
+        if (balanceFactor > 1) {
+            // check for left-right situation
+            if (getBalanceFactor(node.left) < 0) {
+                Node newLeftNode = rotateLeft(node.left);
+                node.left = newLeftNode;
+            }
+            return rotateRight(node);
+        }
+
+        // right heavy
+        if (balanceFactor < -1) {
+            // check for right-left situation
+            if (getBalanceFactor(node.right) > 0) {
+                Node newRightNode = rotateRight(node.right);
+                node.right = newRightNode;
+            }
+            return rotateLeft(node);
+        }
+
         return null;
+    }
+
+    private Node rotateRight(Node right) {
+        return null;
+    }
+
+    private Node rotateLeft(Node node) {
+        return null;
+    }
+
+    private int getBalanceFactor(Node node) {
+        if (node != null) {
+            return node.left.getHeight() - node.right.getHeight();
+        }
+        return 0;
     }
 
 
