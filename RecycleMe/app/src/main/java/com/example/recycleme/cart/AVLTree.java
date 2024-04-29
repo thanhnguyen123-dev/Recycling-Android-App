@@ -2,17 +2,55 @@ package com.example.recycleme.cart;
 
 import com.example.recycleme.cart.NodeData;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class AVLTree<T> {
 
     private class Node {
-        // TODO: Add necessary fields (e.g., key, value, left, right, height)
+        private LocalDateTime key;
+        private T value;
+        private Node left, right;
 
-        // TODO: Implement the constructor
+        Node(LocalDateTime key, T value) {
+            this.key = key;
+            this.value = value;
+            this.left = null;
+            this.right = null;
+        }
 
-        // TODO: Implement the necessary methods (e.g., getters, setters)
+        public LocalDateTime getKey() {
+            return key;
+        }
+
+        public void setKey(LocalDateTime key) {
+            this.key = key;
+        }
+
+        public T getValue() {
+            return value;
+        }
+
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public Node getLeft() {
+            return left;
+        }
+
+        public void setLeft(Node left) {
+            this.left = left;
+        }
+
+        public Node getRight() {
+            return right;
+        }
+
+        public void setRight(Node right) {
+            this.right = right;
+        }
     }
 
     private Node root;
@@ -53,5 +91,9 @@ public class AVLTree<T> {
         // TODO: Implement the findBetween method
 
         return null;
+    }
+
+    public static void main(String[] args) {
+
     }
 }
