@@ -7,12 +7,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class AVLTree<T> {
-
     private class Node {
-        private LocalDateTime key;
-        private T value;
-        private Node left, right;
-        private int height;
+        LocalDateTime key;
+        T value;
+        Node left, right;
+        int height;
 
         Node(LocalDateTime key, T value) {
             this.key = key;
@@ -41,6 +40,10 @@ public class AVLTree<T> {
         public int getHeight() {
             return height;
         }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
     }
 
     private Node root;
@@ -53,6 +56,8 @@ public class AVLTree<T> {
 
     public void insert(LocalDateTime key, T value) {
         // TODO: Implement the insert method
+        Node newNode = new Node(key, value);
+        root = insertInternal(root, newNode);
     }
 
     private Node insertInternal(Node tree, Node node) {
@@ -66,15 +71,25 @@ public class AVLTree<T> {
             tree = insertInternal(tree.right, node);
         }
         else return tree;
-
+        updateHeight(node);
         return applyRotation(tree);
+    }
+
+    private void updateHeight(Node node) {
+        int maxHeight = Math.max(calculateHeight(node.left), calculateHeight(node.right));
+        node.setHeight(maxHeight + 1);
+    }
+
+    private int calculateHeight(Node node) {
+        if (node != null) {
+            return node.getHeight();
+        }
+        return -1;
     }
 
     private Node applyRotation(Node tree) {
         return null;
     }
-
-
 
 
 
