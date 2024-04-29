@@ -12,44 +12,34 @@ public class AVLTree<T> {
         private LocalDateTime key;
         private T value;
         private Node left, right;
+        private int height;
 
         Node(LocalDateTime key, T value) {
             this.key = key;
             this.value = value;
             this.left = null;
             this.right = null;
+            this.height = 0;
         }
 
         public LocalDateTime getKey() {
             return key;
         }
 
-        public void setKey(LocalDateTime key) {
-            this.key = key;
-        }
-
         public T getValue() {
             return value;
-        }
-
-        public void setValue(T value) {
-            this.value = value;
         }
 
         public Node getLeft() {
             return left;
         }
 
-        public void setLeft(Node left) {
-            this.left = left;
-        }
-
         public Node getRight() {
             return right;
         }
 
-        public void setRight(Node right) {
-            this.right = right;
+        public int getHeight() {
+            return height;
         }
     }
 
@@ -64,6 +54,30 @@ public class AVLTree<T> {
     public void insert(LocalDateTime key, T value) {
         // TODO: Implement the insert method
     }
+
+    private Node insertInternal(Node tree, Node node) {
+        if (tree == null) {
+            return node;
+        }
+        if (node.getKey().compareTo(tree.getKey()) < 0) {
+            tree = insertInternal(tree.left, node);
+        }
+        else if (node.getKey().compareTo(tree.getKey()) > 0) {
+            tree = insertInternal(tree.right, node);
+        }
+        else return tree;
+
+        return applyRotation(tree);
+    }
+
+    private Node applyRotation(Node tree) {
+        return null;
+    }
+
+
+
+
+
 
     public T search(LocalDateTime key) {
         // TODO: Implement the search method
