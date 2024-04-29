@@ -1,28 +1,25 @@
 package com.example.recycleme.cart;
 
-import com.example.recycleme.cart.NodeData;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class AVLTree<T> {
     private class Node {
-        LocalDateTime key;
+        LocalDateTime time;
         T value;
         Node left, right;
         int height;
 
-        Node(LocalDateTime key, T value) {
-            this.key = key;
+        Node(LocalDateTime time, T value) {
+            this.time = time;
             this.value = value;
             this.left = null;
             this.right = null;
             this.height = 0;
         }
 
-        public LocalDateTime getKey() {
-            return key;
+        public LocalDateTime getTime() {
+            return time;
         }
 
         public T getValue() {
@@ -54,8 +51,8 @@ public class AVLTree<T> {
         size = 0;
     }
 
-    public void insert(LocalDateTime key, T value) {
-        Node newNode = new Node(key, value);
+    public void insert(LocalDateTime time, T value) {
+        Node newNode = new Node(time, value);
         root = insertInternal(root, newNode);
         this.size++;
     }
@@ -65,10 +62,10 @@ public class AVLTree<T> {
             tree =  node;
             return tree;
         }
-        if (node.getKey().compareTo(tree.getKey()) < 0) {
+        if (node.getTime().compareTo(tree.getTime()) < 0) {
             tree.left = insertInternal(tree.left, node);
         }
-        else if (node.getKey().compareTo(tree.getKey()) > 0) {
+        else if (node.getTime().compareTo(tree.getTime()) > 0) {
             tree.right = insertInternal(tree.right, node);
         }
         else return tree;
@@ -142,21 +139,30 @@ public class AVLTree<T> {
     }
 
 
+    public T search(LocalDateTime time) {
+        Node node = search(root, time);
+        return (node == null) ? null : node.value;
+    }
 
-
-
-    public T search(LocalDateTime key) {
-        // TODO: Implement the search method
-        return null;
+    private Node search(Node tree, LocalDateTime time) {
+        if (tree == null || tree.getTime().equals(time)) {
+            return tree;
+        }
+        if (time.compareTo(tree.getTime()) < 0) {
+            return search(tree.left, time);
+        }
+        else {
+            return search(tree.right, time);
+        }
     }
 
     public List<NodeData<T>> traverseAndReturnDataWithTime() {
-        // TODO: Implement the traverseAndReturnDataWithTime method
+
         return null;
     }
 
     public void delete(LocalDateTime key) {
-        // TODO: Implement the delete method
+
     }
 
     public int size() {
@@ -168,7 +174,7 @@ public class AVLTree<T> {
     the start and end time range (inclusive) within which we want to find the nodes.
      */
     public List<NodeData<T>> findBetween(LocalDateTime startTime, LocalDateTime endTime) {
-        // TODO: Implement the findBetween method
+
 
         return null;
     }
