@@ -57,17 +57,19 @@ public class AVLTree<T> {
     public void insert(LocalDateTime key, T value) {
         Node newNode = new Node(key, value);
         root = insertInternal(root, newNode);
+        this.size++;
     }
 
     private Node insertInternal(Node tree, Node node) {
         if (tree == null) {
-            return node;
+            tree =  node;
+            return tree;
         }
         if (node.getKey().compareTo(tree.getKey()) < 0) {
-            tree = insertInternal(tree.left, node);
+            tree.left = insertInternal(tree.left, node);
         }
         else if (node.getKey().compareTo(tree.getKey()) > 0) {
-            tree = insertInternal(tree.right, node);
+            tree.right = insertInternal(tree.right, node);
         }
         else return tree;
         updateHeight(node);
@@ -80,10 +82,8 @@ public class AVLTree<T> {
     }
 
     private int calculateHeight(Node node) {
-        if (node != null) {
-            return node.getHeight();
-        }
-        return -1;
+        if (node == null) return -1;
+        else return node.getHeight();
     }
 
     private Node applyRotation(Node node) {
@@ -109,23 +109,38 @@ public class AVLTree<T> {
             return rotateLeft(node);
         }
 
-        return null;
+        return node;
     }
 
-    private Node rotateRight(Node right) {
-        return null;
+    private Node rotateRight(Node node) {
+        Node leftNode = node.getLeft();
+        Node extraNode = leftNode.getRight();
+        leftNode.right = node;
+        node.left = extraNode;
+        updateHeight(node);
+        updateHeight(leftNode);
+        return leftNode;
     }
 
     private Node rotateLeft(Node node) {
-        return null;
+        Node rightNode = node.getRight();
+        Node extraNode = rightNode.getLeft();
+        rightNode.left = node;
+        node.right = extraNode;
+        updateHeight(node);
+        updateHeight(rightNode);
+        return rightNode;
     }
 
     private int getBalanceFactor(Node node) {
-        if (node != null) {
-            return node.left.getHeight() - node.right.getHeight();
+        if (node == null) {
+            return 0;
         }
-        return 0;
+        int leftHeight = (node.left != null) ? node.left.getHeight() : -1;
+        int rightHeight = (node.right != null) ? node.right.getHeight() : -1;
+        return leftHeight - rightHeight;
     }
+
 
 
 
