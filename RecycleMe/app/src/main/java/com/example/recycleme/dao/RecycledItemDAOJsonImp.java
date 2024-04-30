@@ -16,6 +16,23 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * An implementation of the RecycledItemDAO interface that uses JSON files for data persistence.
+ * <p>
+ * This class provides methods to perform operations on RecycledItem objects.
+ * The data is stored in a JSON file specified by the FILE_NAME parameter.
+ * <p>
+ * In the getAllRecycledItemsHelper() method, generative AI assistance was utilized to convert the JSON file
+ * into a list of RecycledItem objects. The AI was asked, "How do I turn a JSON file into a list of items?"
+ * The AI provided guidance on using the Gson library to parse the JSON file and convert it into a list of objects.
+ * <p>
+ * The class uses the Gson library. It also utilizes the Android AssetManager
+ * to read the JSON file from the assets directory.
+ *
+ * @author YourName
+ * @version 1.0
+ * @since 2023-06-09
+ */
 public class RecycledItemDAOJsonImp implements RecycledItemDAO{
 
     private final String FILE_NAME;
