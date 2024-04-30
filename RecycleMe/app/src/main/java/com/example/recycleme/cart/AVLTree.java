@@ -1,8 +1,8 @@
 package com.example.recycleme.cart;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class AVLTree<T> {
@@ -43,6 +43,7 @@ public class AVLTree<T> {
         public void setHeight(int height) {
             this.height = height;
         }
+
     }
 
     private Node root;
@@ -55,6 +56,7 @@ public class AVLTree<T> {
 
     public void insert(LocalDateTime time, T value) {
         Node newNode = new Node(time, value);
+        if (containsTime(root, time)) return;
         root = insertInternal(root, newNode);
         this.size++;
     }
@@ -73,6 +75,16 @@ public class AVLTree<T> {
         else return tree;
         updateHeight(node);
         return applyRotation(tree);
+    }
+
+    private boolean containsTime(Node tree, LocalDateTime time) {
+        if (tree == null) return false;
+        int compare = time.compareTo(tree.getTime());
+        if (compare == 0) return true;
+        else if (compare < 0) {
+            return containsTime(tree.left, time);
+        }
+        else return containsTime(tree.right, time);
     }
 
     private void updateHeight(Node node) {
@@ -173,8 +185,53 @@ public class AVLTree<T> {
         }
     }
 
-    public void delete(LocalDateTime key) {
+    public void delete(LocalDateTime time) {
+        if (!containsTime(root, time)) return;
+        root = deleteInternal(root, time);
+        size--;
+    }
 
+    private Node deleteInternal(Node tree, LocalDateTime time) {
+        if (tree == null) return null;
+        if (time.compareTo(tree.getTime()) < 0) {
+            tree.left = deleteInternal(tree.left, time);
+        }
+        else if (time.compareTo(tree.getTime()) > 0) {
+            tree.right = deleteInternal(tree.right, time);
+        }
+        else {
+            if (tree.getLeft() == null) {
+                return tree.getRight();
+            }
+            else if (tree.getRight() == null) {
+                return tree.getLeft();
+            }
+            else {
+                tree.time = getEarliestTime(tree.right);
+                tree.right = deleteInternal(tree.right, tree.getTime());
+            }
+        }
+        updateHeight(tree);
+        return applyRotation(tree);
+    }
+
+    private LocalDateTime getLatestTime() {
+        if (root == null) return null;
+        return this.getLatestTime(root);
+    }
+
+    private LocalDateTime getLatestTime(Node tree) {
+        if (tree.getRight() != null) {
+            return getLatestTime(tree.right);
+        }
+        return tree.getTime();
+    }
+
+    private LocalDateTime getEarliestTime(Node tree) {
+        if (tree.getLeft() != null) {
+            return getEarliestTime(tree.left);
+        }
+        return tree.getTime();
     }
 
     public int size() {
