@@ -1,6 +1,8 @@
 package com.example.recycleme.cart;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AVLTree<T> {
@@ -157,8 +159,18 @@ public class AVLTree<T> {
     }
 
     public List<NodeData<T>> traverseAndReturnDataWithTime() {
+        List<NodeData<T>> list = new ArrayList<>();
+        flattenTree(root, list);
+        return list;
+    }
 
-        return null;
+    private void flattenTree(Node tree, List<NodeData<T>> list) {
+        if (tree != null) {
+            flattenTree(tree.left, list);
+            NodeData<T> data = new NodeData<>(tree.getTime(), tree.getValue());
+            list.add(data);
+            flattenTree(tree.right, list);
+        }
     }
 
     public void delete(LocalDateTime key) {
@@ -169,7 +181,7 @@ public class AVLTree<T> {
         return size;
     }
 
-    /*
+    /**
     The findBetween method takes two parameters: startTime and endTime, representing
     the start and end time range (inclusive) within which we want to find the nodes.
      */
