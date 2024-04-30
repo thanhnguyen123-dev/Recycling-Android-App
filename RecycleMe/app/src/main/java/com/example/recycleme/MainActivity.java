@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.SearchView;
 import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,8 @@ public class MainActivity extends BaseActivity implements Observer {
     private RecycledViewAdapter adapter;
     private RecycledItemDb recycledItemDb;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SearchView searchView;
+
     Cart cart = Cart.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,8 @@ public class MainActivity extends BaseActivity implements Observer {
         getLayoutInflater().inflate(R.layout.activity_main, contentFrameLayout);
         System.out.println("Test");
 
+
+        this.searchView = findViewById(R.id.search_view);
 
         this.recycledItemDb = RecycledItemDb.getInstance(getApplicationContext());
         this.recycledItemDb.attach(this);
