@@ -186,12 +186,16 @@ public class AVLTree<T> {
     the start and end time range (inclusive) within which we want to find the nodes.
      */
     public List<NodeData<T>> findBetween(LocalDateTime startTime, LocalDateTime endTime) {
-
-
-        return null;
+        List<NodeData<T>> list = traverseAndReturnDataWithTime();
+        List<NodeData<T>> betweenList = new ArrayList<>();
+        for (NodeData<T> nodeData : list) {
+            int compareToStart = nodeData.getDateTime().compareTo(startTime);
+            int compareToEnd = nodeData.getDateTime().compareTo(endTime);
+            if (compareToStart >= 0 && compareToEnd <= 0) {
+                betweenList.add(nodeData);
+            }
+        }
+        return betweenList;
     }
 
-    public static void main(String[] args) {
-
-    }
 }

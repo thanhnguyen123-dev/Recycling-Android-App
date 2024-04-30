@@ -165,7 +165,7 @@ public class AVLTreeTest {
                 LocalDateTime.of(2023, 5, 3, 1, 1));
 
         assertEquals(Integer.valueOf(12), betweenList.get(0).getValue());
-        assertEquals(Integer.valueOf(14), betweenList.get(0).getValue());
+        assertEquals(Integer.valueOf(14), betweenList.get(1).getValue());
     }
 
 }
