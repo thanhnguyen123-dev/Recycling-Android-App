@@ -3,6 +3,7 @@ package com.example.recycleme;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.SearchView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,7 @@ public class MainActivity extends BaseActivity implements Observer {
     private RecycledViewAdapter adapter;
     private RecycledItemDb recycledItemDb;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private SearchView searchView;
 
     Cart cart = Cart.getInstance();
     @Override
@@ -27,6 +29,8 @@ public class MainActivity extends BaseActivity implements Observer {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_main, contentFrameLayout);
+
+        this.searchView = findViewById(R.id.search_view);
 
         this.recycledItemDb = RecycledItemDb.getInstance(getApplicationContext());
         this.recycledItemDb.attach(this);

@@ -50,7 +50,6 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.gson)
     implementation(libs.swiperefreshlayout)
-    implementation(libs.swiperefreshlayout)
     implementation(libs.recyclerview)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.database)
