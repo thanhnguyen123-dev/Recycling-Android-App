@@ -39,6 +39,30 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+/**
+ * An activity class that displays statistics using pie and bar charts.
+ * <p>
+ * This activity retrieves recycled item data from the UserTree
+ * and visualizes the data using two charts:
+ * - A pie chart showing the distribution of materials among the recycled items.
+ * - A bar chart showing the count of recycled items over time.
+ * <p>
+ * The activity utilizes the MPAndroidChart library to create and customize the charts.
+ * <p>
+ * In the process of implementing this activity, I used generative AI to understand
+ * how the PieChart and BarChart components work. The AI provided explanations
+ * on configuring and customizing these charts.
+ * <p>
+ * Additionally, specific questions were asked to the AI regarding the bar chart:
+ * - "How do I set the start level to zero in the y-axis?"
+ * - "How do I set the x-axis labels to one label for each date?"
+ * - "How do I set the scale for the y-axis?"
+ * - "How does the Pie Chart works? How do I put the data inside the Pie Chart and Bar Chart?"
+ * <p>
+ * The AI's guidance and answers to these questions were incorporated into the implementation of the activity.
+ *
+ * @author Julius Liem
+ */
 public class StatisticActivity extends BaseActivity {
 
     private List<RecycledItem> recycledItems;

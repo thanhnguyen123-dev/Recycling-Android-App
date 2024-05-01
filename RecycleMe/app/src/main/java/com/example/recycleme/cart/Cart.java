@@ -5,13 +5,20 @@ import com.example.recycleme.interfaces.IterableCollection;
 import com.example.recycleme.interfaces.Iterator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class Cart implements IterableCollection {
+public class Cart{
     private static Cart instance = null;
-    private ArrayList<RecycledItem> items;
+    private Map<String, List<RecycledItem>> itemMaterialMap;
 
     private Cart() {
-        this.items = new ArrayList<>();
+        this.itemMaterialMap = new HashMap<>();
+    }
+
+    public Map<String, List<RecycledItem>> getItemMaterialMap() {
+        return itemMaterialMap;
     }
 
     public static Cart getInstance() {
@@ -22,47 +29,44 @@ public class Cart implements IterableCollection {
     }
 
     public ArrayList<RecycledItem> getItems() {
-        return this.items;
+        return flattenMap(this.itemMaterialMap);
     }
 
     //Adds an item to the cart
     public void addItem(RecycledItem item) {
-        this.items.add(item);
+        String material = item.getMaterial();
+
+        List<RecycledItem> itemsWithSameMaterial = this.itemMaterialMap.getOrDefault(material, new ArrayList<>());
+        itemsWithSameMaterial.add(item);
+
+        this.itemMaterialMap.put(material, itemsWithSameMaterial);
     }
 
     public void clear() {
-        items.clear();
+        this.itemMaterialMap.clear();
     }
 
     public void removeItem(RecycledItem item) {
-        items.remove(item);
-    }
+        String material = item.getMaterial();
 
-    @Override
-    public Iterator createIterator() {
-        return new CartIterator();
-    }
+        List<RecycledItem> itemsWithSameMaterial = this.itemMaterialMap.getOrDefault(material, new ArrayList<>());
+        if (itemsWithSameMaterial.contains(item)) {
+            itemsWithSameMaterial.remove(item);
 
-    private class CartIterator implements Iterator {
-
-        int index;
-
-        @Override
-        public boolean hasNext() {
-            if (!items.isEmpty() && index < items.size()) {
-                return true;
+            if (itemsWithSameMaterial.isEmpty()) {
+                this.itemMaterialMap.remove(material);
             }
-
-            return false;
-        }
-
-        @Override
-        public Object next() {
-            if (this.hasNext()) {
-                return items.get(index++);
-            }
-
-            return null;
         }
     }
+
+    private static ArrayList<RecycledItem> flattenMap(Map<String, List<RecycledItem>> map) {
+        ArrayList<RecycledItem> flattenedMap = new ArrayList<>();
+
+        for (Map.Entry<String, List<RecycledItem>> entry: map.entrySet()) {
+            flattenedMap.addAll(entry.getValue());
+        }
+
+        return flattenedMap;
+    }
+
 }

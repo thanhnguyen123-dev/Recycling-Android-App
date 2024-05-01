@@ -28,6 +28,8 @@ public class RecordActivity extends BaseActivity {
 
         List<RecyclerView.Adapter<RecyclerView.ViewHolder>> adapters = new ArrayList<>();
 
+        // Create a new adapter for each NodeData
+        // This way there are many adapters, each w/ date as the header
         for (NodeData<List<RecycledItem>> nodedata: nodeDataList) {
             LocalDateTime date = nodedata.getDateTime();
             List<RecycledItem> items = nodedata.getValue();

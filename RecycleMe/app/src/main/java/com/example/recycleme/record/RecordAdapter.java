@@ -15,6 +15,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/**
+ * RecyclerView adapter for displaying a list of recycled items with a header showing the date.
+ * <p>
+ * This adapter handles two view types: a header view for displaying the date and item views for displaying the recycled items.
+ * The adapter binds the data to the corresponding views in the onBindViewHolder(RecyclerView.ViewHolder, int) method.
+ * <p>
+ * The implementation of this adapter was created with the help of generative AI, specifically for the
+ * onCreateViewHolder(ViewGroup, int) and onBindViewHolder(RecyclerView.ViewHolder, int) methods.
+ * The generative AI assisted in generating the code for handling the different view types and binding the data to the views.
+ * <p>
+ * Additionally, this adapter implementation references and incorporates concepts from the following Stack Overflow answer:
+ * <a href="https://stackoverflow.com/questions/64216153/header-in-recycler-view-what-is-the-best-practice-in-2020">
+ * Header in RecyclerView - What is the best practice in 2020?</a>
+ * The answer provided guidance on using ConcatAdapter to implement header for adapter.
+ *
+ * @author Julius Liem
+ */
 public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;
@@ -59,6 +76,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
+        // Accounting for the header and the actual recycled items
         return items.size() + 1;
     }
 
