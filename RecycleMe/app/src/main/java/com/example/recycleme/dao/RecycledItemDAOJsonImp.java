@@ -29,9 +29,7 @@ import java.util.List;
  * The class uses the Gson library. It also utilizes the Android AssetManager
  * to read the JSON file from the assets directory.
  *
- * @author YourName
- * @version 1.0
- * @since 2023-06-09
+ * @author Julius Liem
  */
 public class RecycledItemDAOJsonImp implements RecycledItemDAO{
 
