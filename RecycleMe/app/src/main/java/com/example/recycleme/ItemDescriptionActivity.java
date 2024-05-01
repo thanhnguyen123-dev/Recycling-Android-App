@@ -23,10 +23,6 @@ import java.util.Set;
 
 public class ItemDescriptionActivity extends BaseActivity {
     private TextView productNameTextView;
-    private TextView brandNameTextView;
-    private TextView materialTextView;
-    private TextView valueTextView;
-    private ImageView productImage;
     private TextView descriptionView;
 
     @Override
@@ -39,8 +35,6 @@ public class ItemDescriptionActivity extends BaseActivity {
     }
 
     private void initView() {
-        productImage = findViewById(R.id.productImage);
-
         String productName = getIntent().getStringExtra("PRODUCT_NAME");
         productNameTextView = findViewById(R.id.des_product_name);
         productNameTextView.setText(productName);

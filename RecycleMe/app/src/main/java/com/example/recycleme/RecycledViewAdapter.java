@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,7 +72,7 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
         private TextView valueTextView;
 
         private Button addToCartButton;
-        private ImageView itemDescription;
+        private ImageButton itemDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
