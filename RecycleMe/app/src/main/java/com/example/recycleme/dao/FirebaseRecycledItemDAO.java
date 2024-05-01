@@ -1,17 +1,21 @@
 package com.example.recycleme.dao;
 
 import com.example.recycleme.RecycledItem;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FirebaseRecycledItemDAO implements RecycledItemDAO {
-    private DatabaseReference mDatabase;
 
-    public FirebaseRecycledItemDAO() {
-        mDatabase = FirebaseDatabase.getInstance().getReference("recycledItems");
-    }
+    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("recycledItems");
+
+
+
 
     @Override
     public void addRecycledItem(RecycledItem recycledItem) {
@@ -39,6 +43,24 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
 
     @Override
     public List<RecycledItem> getAllRecycledItems() {
-        return null;
+        List<RecycledItem> recycledItemList = new ArrayList<>();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                recycledItemList.clear();
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    RecycledItem recycledItem = postSnapshot.getValue(RecycledItem.class);
+                    recycledItemList.add(recycledItem);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //Oopsie
+            }
+        });
+        return recycledItemList;
     }
+
 }
+
