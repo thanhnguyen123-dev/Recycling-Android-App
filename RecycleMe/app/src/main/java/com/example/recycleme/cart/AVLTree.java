@@ -178,10 +178,10 @@ public class AVLTree<T> {
 
     private void flattenTree(Node tree, List<NodeData<T>> list) {
         if (tree != null) {
-            flattenTree(tree.left, list);
+            flattenTree(tree.right, list);
             NodeData<T> data = new NodeData<>(tree.getTime(), tree.getValue());
             list.add(data);
-            flattenTree(tree.right, list);
+            flattenTree(tree.left, list);
         }
     }
 

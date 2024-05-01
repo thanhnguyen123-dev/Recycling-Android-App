@@ -1,6 +1,5 @@
 package com.example.recycleme.cart;
 import com.example.recycleme.RecycledItem;
-import com.example.recycleme.RecycledItemDb;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,7 +8,7 @@ import java.util.List;
 
 public class UserTree {
     private static UserTree instance;
-    private RedBlackTree<List<RecycledItem>> rbTree;
+    private AVLTree<List<RecycledItem>> avlTree;
 
     public static UserTree getInstance() {
         if (instance == null) {
@@ -21,27 +20,24 @@ public class UserTree {
     }
 
     private UserTree() {
-        this.rbTree = new RedBlackTree<>();
+        this.avlTree = new AVLTree<>();
     }
 
     public void addItems(LocalDateTime time, List<RecycledItem> itemsWantToBeAdded) {
-        this.rbTree.insert(time, itemsWantToBeAdded);
+        this.avlTree.insert(time, itemsWantToBeAdded);
     }
 
     public List<RecycledItem> searchItem(LocalDateTime time) {
-        return this.rbTree.search(time);
+        return this.avlTree.search(time);
     }
 
-    public void traverse() {
-        this.rbTree.traverse();
-    }
 
     public List<NodeData<List<RecycledItem>>> traverseReturnItemAndDate() {
-        return this.rbTree.traverseAndReturnDataWithTime();
+        return this.avlTree.traverseAndReturnDataWithTime();
     }
 
     public List<RecycledItem> getAllRecycledItems() {
-        List<NodeData<List<RecycledItem>>> nodeDataList = this.rbTree.traverseAndReturnDataWithTime();
+        List<NodeData<List<RecycledItem>>> nodeDataList = this.avlTree.traverseAndReturnDataWithTime();
         List<RecycledItem> recycledItems = new ArrayList<>();
 
         for (NodeData<List<RecycledItem>> nodeData : nodeDataList) {
@@ -61,8 +57,8 @@ public class UserTree {
                 new RecycledItem("Paper Bag", "Whole Foods", "Paper", 0.3)
         );
 
-        this.rbTree.insert(LocalDateTime.of(2024, 4, 25,10,0), recycledItems);
-        this.rbTree.insert(LocalDateTime.of(2024, 4, 24,10,0), recycledItems);
-        this.rbTree.insert(LocalDateTime.of(2024, 4, 24,10,1), recycledItems);
+        this.avlTree.insert(LocalDateTime.of(2024, 4, 25,10,0), recycledItems);
+        this.avlTree.insert(LocalDateTime.of(2024, 4, 24,10,0), recycledItems);
+        this.avlTree.insert(LocalDateTime.of(2024, 4, 24,10,1), recycledItems);
     }
 }
