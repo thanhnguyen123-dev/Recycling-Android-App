@@ -1,8 +1,10 @@
 package com.example.recycleme;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import java.util.Set;
 public class ItemDescriptionActivity extends BaseActivity {
     private TextView productNameTextView;
     private TextView descriptionView;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,12 @@ public class ItemDescriptionActivity extends BaseActivity {
 
         descriptionView = findViewById(R.id.descriptionPara);
         descriptionView.setText(stringBuilder.toString());
+
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        });
 
     }
 
