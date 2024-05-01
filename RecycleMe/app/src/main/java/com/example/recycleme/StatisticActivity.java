@@ -105,7 +105,7 @@ public class StatisticActivity extends BaseActivity {
     private void setChartRecycledItemOverTime() {
         List<NodeData<List<RecycledItem>>> recycledItemsOverTime = UserTree.getInstance().traverseReturnItemAndDate();
 
-        Map<LocalDate, Integer> recyclableCount = new HashMap<>();
+        Map<LocalDate, Integer> recyclableCount = new TreeMap<>();
         for (NodeData<List<RecycledItem>> data: recycledItemsOverTime) {
             List<RecycledItem> recycledItemList = data.getValue();
             LocalDate date = data.getDateTime().toLocalDate();
