@@ -22,7 +22,6 @@ public class MainActivity extends BaseActivity implements Observer {
     private RecycledViewAdapter adapter;
     private RecycledItemDb recycledItemDb;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private ImageView itemDescription;
     Cart cart = Cart.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +48,6 @@ public class MainActivity extends BaseActivity implements Observer {
 
             swipeRefreshLayout.setRefreshing(false);
         });
-
-//        this.itemDescription = RecycledViewAdapter.ViewHolder
-//        this.itemDescription.setOnClickListener(v -> {
-//            Intent intent = new Intent(getApplicationContext(), ItemDescriptionActivity.class);
-//            startActivity(intent);
-//        });
 
         recycledItemDb.startStream();
     }

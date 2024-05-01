@@ -92,13 +92,15 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
                 cart.addItem(item);
                 Toast.makeText(v.getContext(), "Item added to cart", Toast.LENGTH_SHORT).show();
             });
-            addToCartButton.setOnClickListener(v -> {
-                Toast.makeText(v.getContext(), "Description", Toast.LENGTH_SHORT).show();
-            });
             itemDescription.setOnClickListener(v -> {
                 Intent intent = new Intent(v.getContext(), ItemDescriptionActivity.class);
+                intent.putExtra("PRODUCT_NAME", productNameTextView.getText().toString());
+                intent.putExtra("BRAND_NAME", brandNameTextView.getText().toString());
+                intent.putExtra("MATERIAL_TEXT", materialTextView.getText().toString());
+                intent.putExtra("VALUE", valueTextView.getText().toString());
                 v.getContext().startActivity(intent);
             });
+
         }
     }
 }
