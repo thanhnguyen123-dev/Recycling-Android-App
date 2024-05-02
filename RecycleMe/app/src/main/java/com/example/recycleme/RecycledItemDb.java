@@ -2,6 +2,7 @@ package com.example.recycleme;
 
 import android.content.Context;
 
+import com.example.recycleme.dao.FirebaseRecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.example.recycleme.interfaces.Observer;
@@ -21,7 +22,7 @@ public class RecycledItemDb implements Subject {
 
 
     private RecycledItemDb(Context context){
-        this.recycledItemDAO = new RecycledItemDAOJsonImp("mock_data_updated.json", context);
+        this.recycledItemDAO = new FirebaseRecycledItemDAO("mock_data.json", context, 1);
         this.recycledItemStream = new RecycledItemDAOJsonImp("mock_data_forstream.json", context);
         this.currentData = new ArrayList<>(recycledItemDAO.getAllRecycledItems());
         this.observers = new ArrayList<Observer>();

@@ -1,66 +1,132 @@
 package com.example.recycleme.dao;
 
-import com.example.recycleme.RecycledItem;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import android.content.Context;
+import android.content.res.AssetManager;
 
+import androidx.annotation.NonNull;
+
+import com.example.recycleme.RecycledItem;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class FirebaseRecycledItemDAO implements RecycledItemDAO {
 
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("recycledItems");
+    private final String FILE_NAME;
+    private Gson gson;
+    private List<RecycledItem> allRecycledItems;
+    private Context context;
+    private int f;
 
+    FirebaseStorage storage = FirebaseStorage.getInstance();
 
+    FileInputStream serviceAccount = new FileInputStream("service.json");
+
+    FirebaseOptions options = new FirebaseOptions.Builder()
+            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+            .setDatabaseUrl("https://recyclingapp-login-firebase-default-rtdb.firebaseio.com")
+            .build();
+
+    FirebaseApp.initializeApp(options);
+    public FirebaseRecycledItemDAO(String fileName, Context context, int f) {
+        FILE_NAME = fileName;
+        this.gson = new Gson();
+        this.context = context;
+        this.f = f;
+        this.getAllRecycledItemsHelper();
+    }
 
 
     @Override
     public void addRecycledItem(RecycledItem recycledItem) {
-        String id = mDatabase.push().getKey();
-        recycledItem.setId(id);
-        mDatabase.child(id).setValue(recycledItem);
+        List<RecycledItem> recycledItems = getAllRecycledItems();
+        recycledItems.add(recycledItem);
+        saveRecycledItems(recycledItems);
     }
 
     @Override
     public void updateRecycledItem(RecycledItem recycledItem) {
-        mDatabase.child(recycledItem.getId()).setValue(recycledItem);
+        List<RecycledItem> recycledItems = getAllRecycledItems();
+
+        for (int i = 0; i < recycledItems.size(); i++) {
+            if (recycledItems.get(i).getId() == recycledItem.getId()) {
+                recycledItems.set(i, recycledItem);
+            }
+        }
     }
 
     @Override
     public void deleteRecycledItem(int id) {
-        mDatabase.child(String.valueOf(id)).removeValue();
+        List<RecycledItem> recycledItems = getAllRecycledItems();
+        recycledItems.removeIf(item -> Integer.parseInt(item.getId()) == id);
     }
 
-
-    //need to finish
     @Override
     public RecycledItem getRecycledItemByID(int id) {
         return null;
     }
 
-    @Override
-    public List<RecycledItem> getAllRecycledItems() {
-        List<RecycledItem> recycledItemList = new ArrayList<>();
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                recycledItemList.clear();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    RecycledItem recycledItem = postSnapshot.getValue(RecycledItem.class);
-                    recycledItemList.add(recycledItem);
-                }
-            }
+    private void getAllRecycledItemsHelper() {
+        AtomicReference<List<RecycledItem>> recycledItems = new AtomicReference<>(new ArrayList<>());
+        try {
+            Type type = new TypeToken<List<RecycledItem>>() {
+            }.getType();
+            if (f == 0) {
+                AssetManager assetManager = this.context.getAssets();
+                InputStream inputStream = assetManager.open(this.FILE_NAME);
+                InputStreamReader reader = new InputStreamReader(inputStream);
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                //Oopsie
+                recycledItems.set(gson.fromJson(reader, type));
+            } else if (f == 1) {
+                StorageReference firebaseFile = storage.getReferenceFromUrl("gs://recyclingapp-login-firebase.appspot.com/" + FILE_NAME);
+
+                final long ONE_MEGABYTE = 1024 * 1024;
+                firebaseFile.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        String json = new String(bytes);
+                        List<RecycledItem> items = new Gson().fromJson(json, type);
+                        recycledItems.set(items);
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle any errors
+                    }
+                });
             }
-        });
-        return recycledItemList;
+        } catch (IOException e) {
+            System.out.println("IO Exception");
+        }
     }
 
+    @Override
+    public List<RecycledItem> getAllRecycledItems() {
+        return this.allRecycledItems;
+    }
+
+    private void saveRecycledItems(List<RecycledItem> recycledItems) {
+        try (FileWriter writer = new FileWriter(FILE_NAME)) {
+            gson.toJson(recycledItems, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
