@@ -84,15 +84,13 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
                     String jsonString = new String(bytes, StandardCharsets.UTF_8);
                     List<RecycledItem> itemsFromFirebase = gson.fromJson(jsonString, type);
                     recycledItems.set(itemsFromFirebase);
-                    System.out.println("Proof that this is working "+recycledItems);
-                }).addOnFailureListener(exception -> {
-                    // Handle failure
-                    System.out.println("Failed to retrieve data from Firebase storage: " + exception.getMessage());
+                    System.out.println("This returns full "+recycledItems.get()); //It runs this after return recycledItems.get(); somehow.
                 });
             }
         } catch (IOException e) {
             System.out.println("IO Exception");
         }
+        System.out.println("This is a null list?"+recycledItems.get());
         return recycledItems.get();
     }
 
