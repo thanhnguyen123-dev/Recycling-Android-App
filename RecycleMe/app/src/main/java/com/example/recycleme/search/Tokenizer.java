@@ -1,4 +1,4 @@
-package com.example.recycleme;
+package com.example.recycleme.search;
 
 import java.util.ArrayList;
 import java.util.List;
