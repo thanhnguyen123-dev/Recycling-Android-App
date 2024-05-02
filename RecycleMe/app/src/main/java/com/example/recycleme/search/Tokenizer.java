@@ -1,118 +1,77 @@
 package com.example.recycleme.search;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Tokenizer {
 
-    private String input;
-    private int position;
+    private String searchQuery;
+    private Token currentToken;
 
-    public Tokenizer(String input) {
-        this.input = input;
-        this.position = 0;
+    public Tokenizer(String query) {
+        this.searchQuery = query;
+        this.extractNextToken();
     }
 
-    public List<Token> tokenize() throws IllegalArgumentException {
-        List<Token> tokens = new ArrayList<>();
+    public void extractNextToken() {
+        searchQuery = searchQuery.trim(); // remove whitespace
 
-        while (position < input.length()) {
-            char currentChar = input.charAt(position);
-
-            if (Character.isWhitespace(currentChar)) {
-                position++;
-            } else if (currentChar == '#') {
-                tokens.add(scanTag(true));
-            } else if (currentChar == '@') {
-                tokens.add(scanTag(false));
-            } else if (currentChar == 'a' && checkAnd()) {
-                tokens.add(new Token(TokenType.AND, "and"));
-            } else if (currentChar == 'o' && checkOr()) {
-                tokens.add(new Token(TokenType.OR, "or"));
-            } else if (Character.isLetterOrDigit(currentChar)) {
-                tokens.add(scanString());
-            } else {
-                throw new IllegalArgumentException("Illegal token at position " + position);
-            }
+        if (searchQuery.isEmpty()) {
+            currentToken = null;
+            return;
         }
 
-        return tokens;
+        char currentChar = searchQuery.charAt(0);
+
+        if (currentChar == '#') {
+            currentToken = scanTag(Token.TokenType.BRAND);
+            searchQuery = searchQuery.substring(1);
+        } else if (currentChar == '@') {
+            currentToken = scanTag(Token.TokenType.MATERIAL);
+            searchQuery = searchQuery.substring(1);
+        } else if (checkAnd()) {
+            currentToken = new Token(Token.TokenType.AND, "and");
+        } else if (checkOr()) {
+            currentToken = new Token(Token.TokenType.OR, "or");
+        } else if (Character.isLetterOrDigit(currentChar)) {
+            currentToken = scanString();
+        } else {
+            throw new Token.IllegalTokenException("Invalid character in search query!");
+        }
+        searchQuery = searchQuery.substring(currentToken.getToken().length());
     }
 
     private boolean checkAnd() {
-        int remainingChars = input.length() - position;
-        if (remainingChars >= 3 && input.substring(position, position + 3).equals("and")) {
-            // Check if the next character after "and" is whitespace or if "and" is at the
-            // end of the string
-            if (remainingChars == 3 || Character.isWhitespace(input.charAt(position + 3))) {
-                position += 3; // Increment position to skip "and"
-                return true;
-            }
-        }
-        return false;
+        int remainingChars = searchQuery.length();
+        return remainingChars >= 3 && searchQuery.startsWith("and");
     }
 
     private boolean checkOr() {
-        int remainingChars = input.length() - position;
-        if (remainingChars >= 2 && input.substring(position, position + 2).equals("or")) {
-            // Check if the next character after "or" is whitespace or if "or" is at the end
-            // of the string
-            if (remainingChars == 2 || Character.isWhitespace(input.charAt(position + 2))) {
-                position += 2; // Increment position to skip "or"
-                return true;
-            }
-        }
-        return false;
+        int remainingChars = searchQuery.length();
+        return remainingChars >= 3 && searchQuery.startsWith("or");
     }
 
     private Token scanString() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        while (position < input.length()
-                && (Character.isLetterOrDigit(input.charAt(position)) || input.charAt(position) == '_')) {
-            stringBuilder.append(input.charAt(position));
-            position++;
+        for (int idx = 0; idx < searchQuery.length() && Character.isLetter(searchQuery.charAt(idx)); idx++) {
+            stringBuilder.append(searchQuery.charAt(idx));
         }
-
-        return new Token(TokenType.ITEM, stringBuilder.toString());
+        return new Token(Token.TokenType.ITEM, stringBuilder.toString());
     }
 
-    private Token scanTag(boolean isHashTag) {
-        position++; // Skip the '@' or '#'
+    private Token scanTag(Token.TokenType tokenType) {
         StringBuilder stringBuilder = new StringBuilder();
 
-        while (position < input.length()
-                && (Character.isLetterOrDigit(input.charAt(position)) || input.charAt(position) == '_')) {
-            stringBuilder.append(input.charAt(position));
-            position++;
+        // Skip the '@' or '#'
+        for (int idx = 1; idx < searchQuery.length() && Character.isLetterOrDigit(searchQuery.charAt(idx)); idx++) {
+            stringBuilder.append(searchQuery.charAt(idx));
         }
-
-        return new Token(isHashTag ? TokenType.HASH_TAG : TokenType.AT_TAG, stringBuilder.toString());
-    }
-}
-
-class Token {
-    private TokenType type;
-    private String value;
-
-    public Token(TokenType type, String value) {
-        this.type = type;
-        this.value = value;
+        return new Token(tokenType, stringBuilder.toString());
     }
 
-    public TokenType getType() {
-        return type;
+    public Token getCurrentToken() {
+        return currentToken;
     }
 
-    public String getValue() {
-        return value;
+    public boolean hasNext() {
+        return currentToken != null;
     }
-}
-
-enum TokenType {
-    ITEM,
-    HASH_TAG,
-    AT_TAG,
-    AND,
-    OR
 }
