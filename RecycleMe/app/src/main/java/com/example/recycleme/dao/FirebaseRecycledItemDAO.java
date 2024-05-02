@@ -2,13 +2,7 @@ package com.example.recycleme.dao;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-
-import androidx.annotation.NonNull;
-
 import com.example.recycleme.RecycledItem;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.FirebaseOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
@@ -22,6 +16,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -36,20 +31,12 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
-    FileInputStream serviceAccount = new FileInputStream("service.json");
-
-    FirebaseOptions options = new FirebaseOptions.Builder()
-            .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-            .setDatabaseUrl("https://recyclingapp-login-firebase-default-rtdb.firebaseio.com")
-            .build();
-
-    FirebaseApp.initializeApp(options);
     public FirebaseRecycledItemDAO(String fileName, Context context, int f) {
         FILE_NAME = fileName;
         this.gson = new Gson();
         this.context = context;
         this.f = f;
-        this.getAllRecycledItemsHelper();
+        this.allRecycledItems = this.getAllRecycledItemsHelper();
     }
 
 
@@ -82,38 +69,31 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
         return null;
     }
 
-    private void getAllRecycledItemsHelper() {
+    private List<RecycledItem> getAllRecycledItemsHelper() {
         AtomicReference<List<RecycledItem>> recycledItems = new AtomicReference<>(new ArrayList<>());
         try {
-            Type type = new TypeToken<List<RecycledItem>>() {
-            }.getType();
+            Type type = new TypeToken<List<RecycledItem>>() {}.getType();
             if (f == 0) {
                 AssetManager assetManager = this.context.getAssets();
                 InputStream inputStream = assetManager.open(this.FILE_NAME);
                 InputStreamReader reader = new InputStreamReader(inputStream);
-
                 recycledItems.set(gson.fromJson(reader, type));
             } else if (f == 1) {
                 StorageReference firebaseFile = storage.getReferenceFromUrl("gs://recyclingapp-login-firebase.appspot.com/" + FILE_NAME);
-
-                final long ONE_MEGABYTE = 1024 * 1024;
-                firebaseFile.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
-                    @Override
-                    public void onSuccess(byte[] bytes) {
-                        String json = new String(bytes);
-                        List<RecycledItem> items = new Gson().fromJson(json, type);
-                        recycledItems.set(items);
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle any errors
-                    }
+                firebaseFile.getBytes(15000000).addOnSuccessListener(bytes -> {
+                    String jsonString = new String(bytes, StandardCharsets.UTF_8);
+                    List<RecycledItem> itemsFromFirebase = gson.fromJson(jsonString, type);
+                    recycledItems.set(itemsFromFirebase);
+                    System.out.println("Proof that this is working "+recycledItems);
+                }).addOnFailureListener(exception -> {
+                    // Handle failure
+                    System.out.println("Failed to retrieve data from Firebase storage: " + exception.getMessage());
                 });
             }
         } catch (IOException e) {
             System.out.println("IO Exception");
         }
+        return recycledItems.get();
     }
 
     @Override
