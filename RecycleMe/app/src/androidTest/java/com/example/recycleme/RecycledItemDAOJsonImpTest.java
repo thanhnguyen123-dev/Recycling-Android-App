@@ -5,7 +5,6 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.example.recycleme.RecycledItem;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 
 import org.junit.Before;
@@ -30,7 +29,7 @@ public class RecycledItemDAOJsonImpTest {
 
     @Test
     public void testAddRecycledItem() {
-        RecycledItem item = new RecycledItem("Plastic Bottle", "ABC", "Plastic", 10.0);
+        RecycledItem item = new RecycledItem(1, "Plastic Bottle", "ABC", "Plastic", 10.0);
         dao.addRecycledItem(item);
 
         List<RecycledItem> items = dao.getAllRecycledItems();
@@ -41,10 +40,10 @@ public class RecycledItemDAOJsonImpTest {
 
     @Test
     public void testUpdateRecycledItem() {
-        RecycledItem item = new RecycledItem("Plastic Bottle", "ABC", "Plastic", 10.0);
+        RecycledItem item = new RecycledItem(1, "Plastic Bottle", "ABC", "Plastic", 10.0);
         dao.addRecycledItem(item);
 
-        RecycledItem updatedItem = new RecycledItem("Paper Bottle", "ADC",  "Paper", 20.0);
+        RecycledItem updatedItem = new RecycledItem(1, "Paper Bottle", "ADC",  "Paper", 20.0);
         dao.updateRecycledItem(updatedItem);
 
         List<RecycledItem> items = dao.getAllRecycledItems();
@@ -55,8 +54,8 @@ public class RecycledItemDAOJsonImpTest {
 
     @Test
     public void testDeleteRecycledItem() {
-        RecycledItem item1 = new RecycledItem("1", "Plastic Bottle", "ABC Company", 10.0);
-        RecycledItem item2 = new RecycledItem("2", "Paper Bottle", "ABCD Company",  50.0);
+        RecycledItem item1 = new RecycledItem(1, "1", "Plastic Bottle", "ABC Company", 10.0);
+        RecycledItem item2 = new RecycledItem(2, "2", "Paper Bottle", "ABCD Company",  50.0);
         dao.addRecycledItem(item1);
         dao.addRecycledItem(item2);
 
