@@ -16,39 +16,38 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AVLTreeTest {
-    private AVLTree<Integer> avlTree;
+    private AVLTree<NodeData<Integer>> avlTree;
 
-    @Before
+    private LocalDateTime time1;
+    private LocalDateTime time2;
+    private LocalDateTime time3;
+
+   @Before
     public void setUp() {
-        avlTree = new AVLTree<>();
-    }
+       avlTree = new AVLTree<>();
+       time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
+       time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
+       time3 = LocalDateTime.of(2023, 5, 3, 14, 0);
+
+       NodeData<Integer> first = new NodeData<>(time1, 10);
+       NodeData<Integer> second = new NodeData<>(time2, 12);
+       NodeData<Integer> third = new NodeData<>(time3, 14);
+
+       avlTree.insert(first);
+       avlTree.insert(second);
+       avlTree.insert(third);
+   }
 
     @Test
-    public void testInsert() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
-        LocalDateTime time3 = LocalDateTime.of(2023, 5, 3, 14, 0);
-
-        avlTree.insert(time1, 10);
-        avlTree.insert(time2, 12);
-        avlTree.insert(time3, 14);
-
+    public void testSize() {
         assertEquals(3, avlTree.size());
     }
 
     @Test
     public void testSearch() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
-        LocalDateTime time3 = LocalDateTime.of(2023, 5, 3, 14, 0);
-
-        avlTree.insert(time1, 10);
-        avlTree.insert(time2, 12);
-        avlTree.insert(time3, 14);
-
-        int value1 = avlTree.search(time1);
-        int value2 = avlTree.search(time2);
-        int value3 = avlTree.search(time3);
+        int value1 = avlTree.search(new NodeData<>(time1, 0)).getValue();
+        int value2 = avlTree.search(new NodeData<>(time2, 0)).getValue();
+        int value3 = avlTree.search(new NodeData<>(time3, 0)).getValue();
 
         assertEquals(10, value1);
         assertEquals(12, value2);
@@ -57,15 +56,7 @@ public class AVLTreeTest {
 
     @Test
     public void testTraverseAndReturnDataWithTime() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
-        LocalDateTime time3 = LocalDateTime.of(2023, 5, 3, 14, 0);
-
-        avlTree.insert(time2, 12);
-        avlTree.insert(time1, 10);
-        avlTree.insert(time3, 14);
-
-        List<NodeData<Integer>> nodeDataList = avlTree.traverseAndReturnDataWithTime();
+        List<NodeData<Integer>> nodeDataList = avlTree.traverse();
 
         assertEquals(3, nodeDataList.size());
         assertEquals(time1, nodeDataList.get(0).getDateTime());
@@ -78,94 +69,65 @@ public class AVLTreeTest {
 
     @Test
     public void testInsertWithSameDateTime() {
+        AVLTree<NodeData<Integer>> avlTree = new AVLTree<NodeData<Integer>>();
         LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
         LocalDateTime time2 = LocalDateTime.of(2023, 5, 1, 10, 0);
 
-        avlTree.insert(time1, 10);
-        avlTree.insert(time2, 20);
+        NodeData<Integer> first = new NodeData<>(time1, 10);
+        NodeData<Integer> second = new NodeData<>(time2, 12);
+        avlTree.insert(first);
+        avlTree.insert(second);
 
         assertEquals(1, avlTree.size());
-        assertEquals(Integer.valueOf(10), avlTree.search(time1));
+        assertEquals(Integer.valueOf(10), avlTree.search(new NodeData<>(time1, 0)).getValue());
     }
 
     @Test
     public void testSearchNonExistentNode() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
+        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 15, 0);
 
-        avlTree.insert(time1, 10);
-
-        Integer value = avlTree.search(time2);
-
-        assertNull(value);
+        assertNull(avlTree.search(new NodeData<>(time2, 0)));
     }
 
     @Test
     public void testTraverseEmptyTree() {
-        List<NodeData<Integer>> nodeDataList = avlTree.traverseAndReturnDataWithTime();
+       AVLTree<NodeData<Integer>> avlTree = new AVLTree<>();
+       List<NodeData<Integer>> nodeDataList = avlTree.traverse();
 
-        assertTrue(nodeDataList.isEmpty());
+       assertTrue(nodeDataList.isEmpty());
     }
 
     @Test
     public void testDelete() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
-        LocalDateTime time3 = LocalDateTime.of(2023, 5, 3, 14, 0);
-
-        avlTree.insert(time1, 10);
-        avlTree.insert(time2, 12);
-        avlTree.insert(time3, 14);
-
-        avlTree.delete(time2);
+        avlTree.delete(new NodeData<>(time2, 0));
 
         assertEquals(2, avlTree.size());
-        assertNull(avlTree.search(time2));
+        assertNull(avlTree.search(new NodeData<>(time2, 0)));
     }
 
     @Test
     public void testDeleteNonExistentNode() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
+        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 15, 0);
+        NodeData<Integer> second = new NodeData<>(time2, 12);
 
-        avlTree.insert(time1, 10);
+        avlTree.delete(second);
 
-        avlTree.delete(time2);
-
-        assertEquals(1, avlTree.size());
-        assertEquals(Integer.valueOf(10), avlTree.search(time1));
+        assertEquals(3, avlTree.size());
+        assertEquals(Integer.valueOf(10), avlTree.search(new NodeData<>(time1, 10)).getValue());
     }
 
     @Test
     public void testDeleteRootNode() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
+       AVLTree<NodeData<Integer>> avlTree = new AVLTree<>();
+       LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
 
-        avlTree.insert(time1, 10);
+       NodeData<Integer> first = new NodeData<>(time1, 10);
+       avlTree.insert(first);
 
-        avlTree.delete(time1);
+       avlTree.delete(first);
 
-        assertEquals(0, avlTree.size());
-        assertNull(avlTree.search(time1));
-    }
-
-    @Test
-    public void findBetween() {
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
-        LocalDateTime time3 = LocalDateTime.of(2023, 5, 2, 14, 0);
-        LocalDateTime time4 = LocalDateTime.of(2023, 5, 3, 15, 0);
-
-        avlTree.insert(time1, 10);
-        avlTree.insert(time2, 12);
-        avlTree.insert(time3, 14);
-        avlTree.insert(time4, 15);
-
-
-        List<NodeData<Integer>> betweenList = avlTree.findBetween(LocalDateTime.of(2023, 5, 2, 1, 1),
-                LocalDateTime.of(2023, 5, 3, 1, 1));
-
-        assertEquals(Integer.valueOf(12), betweenList.get(0).getValue());
-        assertEquals(Integer.valueOf(14), betweenList.get(1).getValue());
+       assertEquals(0, avlTree.size());
+       assertNull(avlTree.search(first));
     }
 
 }

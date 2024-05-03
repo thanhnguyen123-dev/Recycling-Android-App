@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserTree {
     private static UserTree instance;
-    private AVLTree<List<RecycledItem>> avlTree;
+    private AVLTreeTime avlTree;
 
     public static UserTree getInstance() {
         if (instance == null) {
@@ -19,8 +19,12 @@ public class UserTree {
         return instance;
     }
 
+    public void clear() {
+        this.avlTree = new AVLTreeTime();
+    }
+
     private UserTree() {
-        this.avlTree = new AVLTree<>();
+        this.avlTree = new AVLTreeTime();
     }
 
     public void addItems(LocalDateTime time, List<RecycledItem> itemsWantToBeAdded) {
@@ -28,7 +32,7 @@ public class UserTree {
     }
 
     public List<RecycledItem> searchItem(LocalDateTime time) {
-        return this.avlTree.search(time);
+        return this.avlTree.searchItem(time);
     }
 
 
@@ -50,11 +54,11 @@ public class UserTree {
 
     private void simulatePreviousAddition() {
         List<RecycledItem> recycledItems = Arrays.asList(
-                new RecycledItem("Plastic Bottle", "Coca-Cola", "PET", 0.2),
-                new RecycledItem("Aluminum Can", "Pepsi", "Aluminum", 0.1),
-                new RecycledItem("Glass Jar", "Heinz", "Glass", 0.4),
-                new RecycledItem("Cardboard Box", "Amazon", "Cardboard", 0.8),
-                new RecycledItem("Paper Bag", "Whole Foods", "Paper", 0.3)
+                new RecycledItem(3001, "Plastic Bottle", "Coca-Cola", "PET", 0.2),
+                new RecycledItem(4001, "Aluminum Can", "Pepsi", "Aluminum", 0.1),
+                new RecycledItem(5001, "Glass Jar", "Heinz", "Glass", 0.4),
+                new RecycledItem(6001, "Cardboard Box", "Amazon", "Cardboard", 0.8),
+                new RecycledItem(7001, "Paper Bag", "Whole Foods", "Paper", 0.3)
         );
 
         this.avlTree.insert(LocalDateTime.of(2024, 4, 25,10,0), recycledItems);
