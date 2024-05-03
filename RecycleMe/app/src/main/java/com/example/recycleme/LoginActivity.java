@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -29,9 +31,10 @@ import androidx.fragment.app.FragmentTransaction;
 import java.io.Serializable;
 
 public class LoginActivity extends BaseActivity {
-
     private LoginContext loginContext;
-
+    private EditText emailEditText;
+    private EditText passwordEditText;
+    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,10 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_login, contentFrameLayout);
-        EditText emailEditText = findViewById(R.id.editTextTextEmailAddress);
-        EditText passwordEditText = findViewById(R.id.editTextTextPassword);
-        Button loginButton = findViewById(R.id.login_button);
-        this.loginContext = LoginContext.getInstance();
+        emailEditText = findViewById(R.id.editTextTextEmailAddress);
+        passwordEditText = findViewById(R.id.editTextTextPassword);
+        loginButton = findViewById(R.id.login_button);
+        loginContext = LoginContext.getInstance();
 
         loginButton.setOnClickListener(v -> {
             String email = emailEditText.getText().toString();
@@ -68,9 +71,6 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-
-
-
     private void updateUI() {
         if (loginContext.isLoggedIn()) {
             // create  new fragment that will be displayed on screen
@@ -79,5 +79,7 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
         } else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
     }
+
+
 
 }

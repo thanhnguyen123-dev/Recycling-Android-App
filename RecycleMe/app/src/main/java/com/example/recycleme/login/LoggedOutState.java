@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LoggedOutState extends LoginState {
-
     @Override
     public void login(LoginContext context, String email, String password, LoginCallback loginCallback) {
         FirebaseAuth firebaseAuth = context.getFireBaseAuth();

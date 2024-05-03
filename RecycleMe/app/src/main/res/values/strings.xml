@@ -25,4 +25,6 @@
     <string name="statistic">Statistic</string>
     <string name="logout">Logout</string>
     <string name="back_btn">Back</string>
+    <string name="chats">Chats</string>
+    <string name="chats_text">Chats</string>
 </resources>
