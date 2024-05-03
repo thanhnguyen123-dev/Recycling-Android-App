@@ -7,7 +7,6 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import com.example.recycleme.cart.Cart;
-import com.example.recycleme.interfaces.Iterator;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,8 +29,8 @@ public class CartTest {
 
     @Test
     public void testAddItem() {
-        RecycledItem item1 = new RecycledItem("Item 1", "Brand 1", "Material 1", 10.0);
-        RecycledItem item2 = new RecycledItem("Item 2", "Brand 2", "Material 2", 20.0);
+        RecycledItem item1 = new RecycledItem(1, "Item 1", "Brand 1", "Material 1", 10.0);
+        RecycledItem item2 = new RecycledItem(2, "Item 2", "Brand 2", "Material 2", 20.0);
 
         cart.addItem(item1);
         cart.addItem(item2);
@@ -43,8 +42,8 @@ public class CartTest {
 
     @Test
     public void testRemoveItem() {
-        RecycledItem item1 = new RecycledItem("Item 1", "Brand 1", "Material 1", 10.0);
-        RecycledItem item2 = new RecycledItem("Item 2", "Brand 2", "Material 2", 20.0);
+        RecycledItem item1 = new RecycledItem(1, "Item 1", "Brand 1", "Material 1", 10.0);
+        RecycledItem item2 = new RecycledItem(2, "Item 2", "Brand 2", "Material 2", 20.0);
 
         cart.addItem(item1);
         cart.addItem(item2);
