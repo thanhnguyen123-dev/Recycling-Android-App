@@ -67,7 +67,7 @@ public class RecycledItemDAOJsonImp implements RecycledItemDAO{
     @Override
     public void deleteRecycledItem(int id) {
         List<RecycledItem> recycledItems = getAllRecycledItems();
-        recycledItems.removeIf(item -> item.getId() == id);
+        recycledItems.removeIf(item -> Integer.parseInt(item.getId()) == id);
     }
 
     @Override

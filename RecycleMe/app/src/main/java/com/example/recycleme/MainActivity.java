@@ -13,6 +13,7 @@ import com.example.recycleme.interfaces.Observer;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseActivity implements Observer {
 
@@ -27,6 +28,8 @@ public class MainActivity extends BaseActivity implements Observer {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_main, contentFrameLayout);
+        System.out.println("Test");
+
 
         this.recycledItemDb = RecycledItemDb.getInstance(getApplicationContext());
         this.recycledItemDb.attach(this);

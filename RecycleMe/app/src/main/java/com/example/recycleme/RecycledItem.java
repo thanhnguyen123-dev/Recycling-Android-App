@@ -5,7 +5,7 @@ import java.util.Objects;
 public class RecycledItem {
     private String item;
 
-    private int id;
+    private String id;
     private String brand;
     private String material;
     private Double value;
@@ -37,7 +37,7 @@ public class RecycledItem {
         return value;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -52,5 +52,10 @@ public class RecycledItem {
     @Override
     public int hashCode() {
         return Objects.hash(item, id, brand, material, value);
+    }
+
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
