@@ -5,24 +5,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AVLTree<T> {
-    private class Node {
-        LocalDateTime time;
+public class AVLTree<T extends Comparable<T>> {
+    class Node {
         T value;
         Node left, right;
         int height;
 
-        Node(LocalDateTime time, T value) {
-            this.time = time;
+        Node(T value) {
             this.value = value;
             this.left = null;
             this.right = null;
             this.height = 0;
         }
 
-        public LocalDateTime getTime() {
-            return time;
-        }
 
         public T getValue() {
             return value;
@@ -54,9 +49,9 @@ public class AVLTree<T> {
         size = 0;
     }
 
-    public void insert(LocalDateTime time, T value) {
-        Node newNode = new Node(time, value);
-        if (containsTime(root, time)) return;
+    public void insert(T value) {
+        Node newNode = new Node(value);
+        if (containsValue(root, value)) return;
         root = insertInternal(root, newNode);
         this.size++;
     }
@@ -66,10 +61,10 @@ public class AVLTree<T> {
             tree =  node;
             return tree;
         }
-        if (node.getTime().compareTo(tree.getTime()) < 0) {
+        if (node.getValue().compareTo(tree.getValue()) < 0) {
             tree.left = insertInternal(tree.left, node);
         }
-        else if (node.getTime().compareTo(tree.getTime()) > 0) {
+        else if (node.getValue().compareTo(tree.getValue()) > 0) {
             tree.right = insertInternal(tree.right, node);
         }
         else return tree;
@@ -77,14 +72,14 @@ public class AVLTree<T> {
         return applyRotation(tree);
     }
 
-    private boolean containsTime(Node tree, LocalDateTime time) {
+    private boolean containsValue(Node tree, T data) {
         if (tree == null) return false;
-        int compare = time.compareTo(tree.getTime());
+        int compare = data.compareTo(tree.getValue());
         if (compare == 0) return true;
         else if (compare < 0) {
-            return containsTime(tree.left, time);
+            return containsValue(tree.left, data);
         }
-        else return containsTime(tree.right, time);
+        else return containsValue(tree.right, data);
     }
 
     private void updateHeight(Node node) {
@@ -153,51 +148,51 @@ public class AVLTree<T> {
     }
 
 
-    public T search(LocalDateTime time) {
-        Node node = search(root, time);
+    public T search(T data) {
+        Node node = search(root, data);
         return (node == null) ? null : node.value;
     }
 
-    private Node search(Node tree, LocalDateTime time) {
-        if (tree == null || tree.getTime().equals(time)) {
+    private Node search(Node tree, T data) {
+        if (tree == null || tree.getValue().equals(data)) {
             return tree;
         }
-        if (time.compareTo(tree.getTime()) < 0) {
-            return search(tree.left, time);
+        if (data.compareTo(tree.getValue()) < 0) {
+            return search(tree.left, data);
         }
         else {
-            return search(tree.right, time);
+            return search(tree.right, data);
         }
     }
 
-    public List<NodeData<T>> traverseAndReturnDataWithTime() {
-        List<NodeData<T>> list = new ArrayList<>();
+    public List<T> traverse() {
+        List<T> list = new ArrayList<>();
         flattenTree(root, list);
         return list;
     }
 
-    private void flattenTree(Node tree, List<NodeData<T>> list) {
+    private void flattenTree(Node tree, List<T> list) {
         if (tree != null) {
-            flattenTree(tree.right, list);
-            NodeData<T> data = new NodeData<>(tree.getTime(), tree.getValue());
-            list.add(data);
             flattenTree(tree.left, list);
+            list.add(tree.getValue());
+            flattenTree(tree.right, list);
         }
     }
 
-    public void delete(LocalDateTime time) {
-        if (!containsTime(root, time)) return;
-        root = deleteInternal(root, time);
+
+    public void delete(T data) {
+        if (!containsValue(root, data)) return;
+        root = deleteInternal(root, data);
         size--;
     }
 
-    private Node deleteInternal(Node tree, LocalDateTime time) {
+    private Node deleteInternal(Node tree, T data) {
         if (tree == null) return null;
-        if (time.compareTo(tree.getTime()) < 0) {
-            tree.left = deleteInternal(tree.left, time);
+        if (data.compareTo(tree.getValue()) < 0) {
+            tree.left = deleteInternal(tree.left, data);
         }
-        else if (time.compareTo(tree.getTime()) > 0) {
-            tree.right = deleteInternal(tree.right, time);
+        else if (data.compareTo(tree.getValue()) > 0) {
+            tree.right = deleteInternal(tree.right, data);
         }
         else {
             if (tree.getLeft() == null) {
@@ -207,31 +202,31 @@ public class AVLTree<T> {
                 return tree.getLeft();
             }
             else {
-                tree.time = getEarliestTime(tree.right);
-                tree.right = deleteInternal(tree.right, tree.getTime());
+                tree.value = getSmallestValue(tree.right);
+                tree.right = deleteInternal(tree.right, tree.getValue());
             }
         }
         updateHeight(tree);
         return applyRotation(tree);
     }
 
-    private LocalDateTime getLatestTime() {
+    private T getLargestValue() {
         if (root == null) return null;
-        return this.getLatestTime(root);
+        return this.getLargestValue(root);
     }
 
-    private LocalDateTime getLatestTime(Node tree) {
+    private T getLargestValue(Node tree) {
         if (tree.getRight() != null) {
-            return getLatestTime(tree.right);
+            return getLargestValue(tree.right);
         }
-        return tree.getTime();
+        return tree.getValue();
     }
 
-    private LocalDateTime getEarliestTime(Node tree) {
+    private T getSmallestValue(Node tree) {
         if (tree.getLeft() != null) {
-            return getEarliestTime(tree.left);
+            return getSmallestValue(tree.left);
         }
-        return tree.getTime();
+        return tree.getValue();
     }
 
     public int size() {
@@ -243,16 +238,7 @@ public class AVLTree<T> {
     the start and end time range (inclusive) within which we want to find the nodes.
      */
     public List<NodeData<T>> findBetween(LocalDateTime startTime, LocalDateTime endTime) {
-        List<NodeData<T>> list = traverseAndReturnDataWithTime();
-        List<NodeData<T>> betweenList = new ArrayList<>();
-        for (NodeData<T> nodeData : list) {
-            int compareToStart = nodeData.getDateTime().compareTo(startTime);
-            int compareToEnd = nodeData.getDateTime().compareTo(endTime);
-            if (compareToStart >= 0 && compareToEnd <= 0) {
-                betweenList.add(nodeData);
-            }
-        }
-        return betweenList;
+        return null;
     }
 
 }
