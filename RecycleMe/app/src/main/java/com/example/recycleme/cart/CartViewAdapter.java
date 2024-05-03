@@ -1,9 +1,11 @@
 package com.example.recycleme.cart;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -108,6 +110,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private TextView materialTextView;
         private TextView valueTextView;
         private Button delButton;
+        private ImageButton descriptionButton;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);

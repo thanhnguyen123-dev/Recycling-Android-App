@@ -1,8 +1,10 @@
 package com.example.recycleme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +23,6 @@ public class MainActivity extends BaseActivity implements Observer {
     private RecycledViewAdapter adapter;
     private RecycledItemDb recycledItemDb;
     private SwipeRefreshLayout swipeRefreshLayout;
-
     Cart cart = Cart.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

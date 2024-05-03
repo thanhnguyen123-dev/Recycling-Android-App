@@ -1,9 +1,12 @@
 package com.example.recycleme;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +72,7 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
         private TextView valueTextView;
 
         private Button addToCartButton;
+        private ImageButton itemDescription;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +81,7 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
             this.materialTextView = itemView.findViewById(R.id.product_material_text);
             this.valueTextView = itemView.findViewById(R.id.product_value_text);
             this.addToCartButton = itemView.findViewById(R.id.add_cart_button);
+            this.itemDescription = itemView.findViewById(R.id.itemDescription);
         }
 
         public void bind(RecycledItem item) {
@@ -88,6 +93,15 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
                 cart.addItem(item);
                 Toast.makeText(v.getContext(), "Item added to cart", Toast.LENGTH_SHORT).show();
             });
+            itemDescription.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), ItemDescriptionActivity.class);
+                intent.putExtra("PRODUCT_NAME", productNameTextView.getText().toString());
+                intent.putExtra("BRAND_NAME", brandNameTextView.getText().toString());
+                intent.putExtra("MATERIAL_TEXT", materialTextView.getText().toString());
+                intent.putExtra("VALUE", valueTextView.getText().toString());
+                v.getContext().startActivity(intent);
+            });
+
         }
     }
 }
