@@ -25,7 +25,7 @@ public class RecycledItemDb implements Subject {
 
 
     private RecycledItemDb(Context context){
-        this.recycledItemDAO = new FirebaseRecycledItemDAO("stream_on_launch.json", context, Online); //This now pulls the json file from firebase!
+        this.recycledItemDAO = new FirebaseRecycledItemDAO("stream_on_launch.json", context, Online); //This now pulls the json file from firebase!!!
         this.recycledItemStream = new RecycledItemDAOJsonImp("mock_data_updated.json", context);
         this.currentData = new ArrayList<>(recycledItemDAO.getAllRecycledItems());
         this.observers = new ArrayList<Observer>();
