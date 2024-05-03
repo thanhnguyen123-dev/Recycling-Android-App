@@ -2,6 +2,7 @@ package com.example.recycleme;
 
 import android.content.Context;
 
+import com.example.recycleme.cart.AVLTree;
 import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.example.recycleme.interfaces.Observer;
@@ -16,6 +17,7 @@ public class RecycledItemDb implements Subject {
     private RecycledItemDAO recycledItemStream;
     private ArrayList<Observer> observers;
     private ArrayList<RecycledItem> currentData;
+    private AVLTree<RecycledItem> recycledItemAVLTree;
     private Thread streamThread;
     private volatile boolean isStreamRunning;
 
@@ -24,7 +26,12 @@ public class RecycledItemDb implements Subject {
         this.recycledItemDAO = new RecycledItemDAOJsonImp("mock_data_updated.json", context);
         this.recycledItemStream = new RecycledItemDAOJsonImp("mock_data_forstream.json", context);
         this.currentData = new ArrayList<>(recycledItemDAO.getAllRecycledItems());
+        this.recycledItemAVLTree = new AVLTree<>();
         this.observers = new ArrayList<Observer>();
+
+        for (RecycledItem item: currentData) {
+            this.recycledItemAVLTree.insert(item);
+        }
     }
 
 
@@ -37,7 +44,7 @@ public class RecycledItemDb implements Subject {
     }
 
     public ArrayList<RecycledItem> getCurrentData() {
-        return this.currentData;
+        return (ArrayList<RecycledItem>) this.recycledItemAVLTree.traverse();
     }
 
 
@@ -49,12 +56,13 @@ public class RecycledItemDb implements Subject {
         recycledItemDAO.updateRecycledItem(recycledItem);
     }
 
-    public void deleteRecycledItem(int id) {
-        recycledItemDAO.deleteRecycledItem(id);
+    public RecycledItem search(String name, String brand, String material) {
+        return this.recycledItemAVLTree.search(new RecycledItem(1, name, brand, material, 0.0));
     }
 
+
     private void addRecycledItemToStream(RecycledItem recycledItem) {
-        this.currentData.add(0, recycledItem);
+        this.recycledItemAVLTree.insert(recycledItem);
         this.notifyAllObservers(recycledItem.getBrandName() + " " + recycledItem.getItem() + " has been added to the stream!");
     }
 
