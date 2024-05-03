@@ -27,4 +27,6 @@
     <string name="back_btn">Back</string>
     <string name="chats">Chats</string>
     <string name="chats_text">Chats</string>
+    <string name="signup_btn">Create new account</string>
+    <string name="title_activity_login2">LoginActivity2</string>
 </resources>
