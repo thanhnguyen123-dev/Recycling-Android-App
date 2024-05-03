@@ -3,6 +3,8 @@ package com.example.recycleme.dao;
 import android.content.Context;
 import android.content.res.AssetManager;
 import com.example.recycleme.RecycledItem;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.gson.Gson;
@@ -19,15 +21,24 @@ import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class FirebaseRecycledItemDAO implements RecycledItemDAO {
 
     private final String FILE_NAME;
     private Gson gson;
-    private List<RecycledItem> allRecycledItems;
+    private Future <List<RecycledItem>> allRecycledItems;
+
+    private Future<List<RecycledItem>> future;
+
+    private List<RecycledItem> allItemsForReal;
     private Context context;
-    private int f;
+    private int f; //0 if you want to use a local file, 1 if you want to use a FirebaseFile
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
 
@@ -69,34 +80,58 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
         return null;
     }
 
-    private List<RecycledItem> getAllRecycledItemsHelper() {
-        AtomicReference<List<RecycledItem>> recycledItems = new AtomicReference<>(new ArrayList<>());
-        try {
-            Type type = new TypeToken<List<RecycledItem>>() {}.getType();
-            if (f == 0) {
-                AssetManager assetManager = this.context.getAssets();
-                InputStream inputStream = assetManager.open(this.FILE_NAME);
-                InputStreamReader reader = new InputStreamReader(inputStream);
-                recycledItems.set(gson.fromJson(reader, type));
-            } else if (f == 1) {
-                StorageReference firebaseFile = storage.getReferenceFromUrl("gs://recyclingapp-login-firebase.appspot.com/" + FILE_NAME);
-                firebaseFile.getBytes(15000000).addOnSuccessListener(bytes -> {
-                    String jsonString = new String(bytes, StandardCharsets.UTF_8);
-                    List<RecycledItem> itemsFromFirebase = gson.fromJson(jsonString, type);
-                    recycledItems.set(itemsFromFirebase);
-                    System.out.println("This returns full "+recycledItems.get()); //It runs this after return recycledItems.get(); somehow.
-                });
+    private Future<List<RecycledItem>> getAllRecycledItemsHelper() { //This is perhaps the worst code ive ever written in my life.
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        return executor.submit(() -> {
+            List<RecycledItem> recycledItems = new ArrayList<>();
+            try {
+                Type type = new TypeToken<List<RecycledItem>>() {}.getType();
+
+                if (f == 0) {
+                    AssetManager assetManager = this.context.getAssets();
+                    InputStream inputStream = assetManager.open(this.FILE_NAME);
+                    InputStreamReader reader = new InputStreamReader(inputStream);
+                    recycledItems.addAll(gson.fromJson(reader, type));
+                } else if (f == 1) { //All of this is the online stuff
+                    StorageReference firebaseFile = storage.getReferenceFromUrl("gs://recyclingapp-login-firebase.appspot.com/" + FILE_NAME);
+                    Task<byte[]> task = firebaseFile.getBytes(15000000);
+                    Tasks.await(task); // This will block the thread until the task is complete
+                    if (task.isSuccessful()) {
+                        String jsonString = new String(task.getResult(), StandardCharsets.UTF_8);
+                        List<RecycledItem> itemsFromFirebase = gson.fromJson(jsonString, type);
+                        recycledItems.addAll(itemsFromFirebase);
+                    }
+                }
+            } catch (IOException | InterruptedException | ExecutionException e) {
+                e.printStackTrace(); //Hopefully you never see this in the console.
             }
-        } catch (IOException e) {
-            System.out.println("IO Exception");
-        }
-        System.out.println("This is a null list?"+recycledItems.get());
-        return recycledItems.get();
+
+            return recycledItems; //Only returns this when the firebase file is done.
+        });
     }
 
-    @Override
+    public void updateRecycledItems() {
+        future = getAllRecycledItemsHelper();
+        // Use a separate thread to wait for the result and update allRecycledItems
+        new Thread(() -> {
+            try {
+                allItemsForReal = future.get(); // This will block until the result is ready
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
     public List<RecycledItem> getAllRecycledItems() {
-        return this.allRecycledItems;
+        updateRecycledItems();
+        while (future == null || !future.isDone()) { //Runs while the json file hasn't finished downloading
+            try {
+                Thread.sleep(100); // Wait for 100ms then try again
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return this.allItemsForReal;
     }
 
     private void saveRecycledItems(List<RecycledItem> recycledItems) {
@@ -106,5 +141,10 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
             e.printStackTrace();
         }
     }
+
 }
+
+
+
+
 
