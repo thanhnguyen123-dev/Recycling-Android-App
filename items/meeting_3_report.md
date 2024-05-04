@@ -42,8 +42,8 @@ Stand up Procedure:
 
 ## Scribe Rotation
 The following dictates who will scribe in this and the next meeting.
-| Name| 
-| Nathan |
-|   Adam    |
-|   Julius  |
-|   Harrison  |
+| Name          | 
+| Nathan        |
+|   Adam        |
+|   Julius      |
+|   Harrison    |
