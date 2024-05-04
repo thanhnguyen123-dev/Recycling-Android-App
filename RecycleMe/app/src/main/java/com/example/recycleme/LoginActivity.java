@@ -37,6 +37,7 @@ public class LoginActivity extends BaseActivity {
                 loginContext.login(email, password, AccountAction.LOGIN_ACTION, new LoginState.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
+                        loginContext.setUserEmail(email);
                         updateUI();
                     }
 
@@ -60,7 +61,6 @@ public class LoginActivity extends BaseActivity {
 
     private void updateUI() {
         if (loginContext.isLoggedIn()) {
-            // create  new fragment that will be displayed on screen
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();

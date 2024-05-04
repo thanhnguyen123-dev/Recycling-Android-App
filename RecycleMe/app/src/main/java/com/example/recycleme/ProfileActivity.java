@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -12,16 +13,23 @@ import com.example.recycleme.login.LoginContext;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileActivity extends BaseActivity {
-    private FirebaseAuth mAuth;
     private LoginContext loginContext;
+    private TextView userEmailTextView;
+    private Button logOutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_profile, contentFrameLayout);
 
-        this.loginContext = LoginContext.getInstance();
-        Button logOutButton = findViewById(R.id.logout_button);
+        loginContext = LoginContext.getInstance();
+        userEmailTextView = findViewById(R.id.user_email);
+        String emailText = loginContext.getUserEmail();
+        userEmailTextView.setText(emailText);
+
+
+        logOutButton = findViewById(R.id.logout_button);
+
 
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override

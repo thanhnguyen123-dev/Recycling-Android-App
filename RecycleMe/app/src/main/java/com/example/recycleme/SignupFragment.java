@@ -59,12 +59,13 @@ public class SignupFragment extends DialogFragment {
                 loginContext.login(email, password, AccountAction.SIGNUP_ACTION, new LoginState.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
+                        loginContext.setUserEmail(email);
                         updateUI();
                     }
 
                     @Override
                     public void onLoginFailure(String errorMessage) {
-                        Toast.makeText(getContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Cannot sign up", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -79,15 +80,11 @@ public class SignupFragment extends DialogFragment {
 
     private void updateUI() {
         if (loginContext.isLoggedIn()) {
-            // create  new fragment that will be displayed on screen
             Intent intent = new Intent(getContext(), ProfileActivity.class);
             startActivity(intent);
-            Toast.makeText(getContext(), "Created account successfully", Toast.LENGTH_SHORT).show();
-        } else Toast.makeText(getContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Signed up successfully", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(getContext(), "Cannot sign up", Toast.LENGTH_SHORT).show();
     }
-
-
-
 
 
 }

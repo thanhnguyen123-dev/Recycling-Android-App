@@ -56,7 +56,7 @@ public class LoggedOutState extends LoginState {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     String userId = task.getResult().getUser().getUid();
-                    User user = new User(email, password);
+                    User user = new User(userId, email, password);
                     setUserReference(context, userId, user, loginCallback);
                 }
             }
