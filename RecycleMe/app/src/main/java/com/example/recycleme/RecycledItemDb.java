@@ -28,7 +28,7 @@ public class RecycledItemDb implements Subject {
 
     private RecycledItemDb(Context context){
         this.recycledItemDAO = new FirebaseRecycledItemDAO("stream_on_launch.json", context, Online); //This now pulls the json file from firebase!!!
-        this.recycledItemStream = new RecycledItemDAOJsonImp("mock_data_updated.json", context);
+        this.recycledItemStream = new RecycledItemDAOJsonImp("mock_data_forstream.json", context);
         this.currentData = new ArrayList<>(recycledItemDAO.getAllRecycledItems());
         this.recycledItemAVLTree = new AVLTree<>();
         this.observers = new ArrayList<Observer>();
@@ -61,7 +61,7 @@ public class RecycledItemDb implements Subject {
     }
 
     public RecycledItem search(String name, String brand, String material) {
-        return this.recycledItemAVLTree.search(new RecycledItem(1, name, brand, material, 0.0));
+        return this.recycledItemAVLTree.ceiling(new RecycledItem(0, name, brand, material, 0.0));
     }
 
 
