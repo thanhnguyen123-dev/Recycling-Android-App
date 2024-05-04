@@ -68,7 +68,7 @@ public class AVLTree<T extends Comparable<T>> {
             tree.right = insertInternal(tree.right, node);
         }
         else return tree;
-        updateHeight(node);
+        updateHeight(tree);
         return applyRotation(tree);
     }
 
@@ -163,6 +163,45 @@ public class AVLTree<T extends Comparable<T>> {
         else {
             return search(tree.right, data);
         }
+    }
+
+    public T ceiling(T data) {
+        Node node = ceiling(root, data);
+
+        if (node == null) {
+            node = getMax(root);
+        }
+
+        return node.getValue();
+    }
+
+    private Node ceiling(Node tree, T data) {
+        if (tree == null) {
+            return null;
+        }
+
+        if (data.compareTo(tree.getValue()) == 0) {
+            return tree;
+        }
+
+        if (data.compareTo(tree.getValue()) > 0) {
+            return ceiling(tree.right, data);
+        } else {
+            Node leftCeiling = ceiling(tree.left, data);
+            if (leftCeiling != null) {
+                return leftCeiling;
+            }
+
+            return null;
+        }
+    }
+
+    private Node getMax(Node tree) {
+        if (tree.right == null) {
+            return tree;
+        }
+
+        return getMax(tree.right);
     }
 
     public List<T> traverse() {
