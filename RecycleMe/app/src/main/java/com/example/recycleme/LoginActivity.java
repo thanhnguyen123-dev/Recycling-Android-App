@@ -18,7 +18,6 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_login, contentFrameLayout);
@@ -64,6 +63,9 @@ public class LoginActivity extends BaseActivity {
             startActivity(intent);
             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
         } else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
+    }
+
+    private void notifyUnsuccessfulLogin(String email, String password) {
     }
 
 
