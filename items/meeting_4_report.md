@@ -1,6 +1,6 @@
 # FlyingSpaghettiMonster Team
 
-## Team Meeting 3 - Week 8 - 27th April 2024 (10AM-11AM)
+## Team Meeting 4 - Week 8 - 27th April 2024 (10AM-11AM)
 **Absent:**
 Adam
 **Lead/scribe:**
