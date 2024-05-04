@@ -7,7 +7,10 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.test.internal.util.LogUtil;
+
 import com.example.recycleme.login.*;
+import com.example.recycleme.util.LogToastUtil;
 
 public class LoginActivity extends BaseActivity {
     private LoginContext loginContext;
@@ -30,6 +33,19 @@ public class LoginActivity extends BaseActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
+            if (LogToastUtil.isEmpty(email, password)) {
+                Toast.makeText(getApplicationContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (LogToastUtil.isLessThanSixCharacter(password)) {
+                Toast.makeText(getApplicationContext(), "Password has to be at least 6 characters", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (LogToastUtil.invalidEmail(email)) {
+                Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             loginContext.login(email, password, AccountAction.LOGIN_ACTION, new LoginState.LoginCallback() {
                 @Override
                 public void onLoginSuccess() {
@@ -38,11 +54,8 @@ public class LoginActivity extends BaseActivity {
 
                 @Override
                 public void onLoginFailure(String errorMessage) {
-                    if (email.isEmpty() || password.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getApplicationContext(), "Email and password not recognized", Toast.LENGTH_SHORT).show();
+
                 }
             });
         });
@@ -62,13 +75,8 @@ public class LoginActivity extends BaseActivity {
             Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
             startActivity(intent);
             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
-        } else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(getApplicationContext(), "Email and password not recognized", Toast.LENGTH_SHORT).show();
     }
-
-    private void notifyUnsuccessfulLogin(String email, String password) {
-    }
-
-
 
 
 }
