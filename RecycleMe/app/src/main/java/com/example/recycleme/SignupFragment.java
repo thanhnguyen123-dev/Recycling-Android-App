@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.recycleme.login.LoggedInState;
+import com.example.recycleme.login.LoginContext;
+import com.example.recycleme.login.LoginState;
 import com.example.recycleme.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,7 +31,7 @@ public class SignupFragment extends DialogFragment {
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
     private Button registerButton;
-
+    private LoginContext loginContext;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -63,6 +66,7 @@ public class SignupFragment extends DialogFragment {
         return builder.create();
     }
 
+
     private void createUserFirebaseAuthorize(String email, String password) {
         firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -78,13 +82,13 @@ public class SignupFragment extends DialogFragment {
     }
 
     private void setUserReference(String userId, User user) {
-        databaseReference = firebaseDatabase.getReference().child("user").child(userId);
+        databaseReference = firebaseDatabase.getReference().child("users").child(userId);
         databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    startActivity(intent);
+                    String email = user.getEmail();
+                    String password = user.getPassword();
                 } else {
                     Toast.makeText(getContext(), "Cannot create account", Toast.LENGTH_SHORT).show();
                 }
@@ -108,6 +112,37 @@ public class SignupFragment extends DialogFragment {
         }
         else return true;
     }
+
+    private void setLoginContext(String email, String password) {
+        loginContext.login(email, password, new LoginState.LoginCallback() {
+            @Override
+            public void onLoginSuccess() {
+                // Authentication successful, update UI
+                updateUI();
+            }
+
+            @Override
+            public void onLoginFailure(String errorMessage) {
+                // Authentication failed, show error message
+                if (email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(getContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    private void updateUI() {
+        if (loginContext.isLoggedIn()) {
+            // create  new fragment that will be displayed on screen
+            Intent intent = new Intent(getContext(), ProfileActivity.class);
+            startActivity(intent);
+            Toast.makeText(getContext(), "Created account successfully", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(getContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
+    }
+
+
 
 
 
