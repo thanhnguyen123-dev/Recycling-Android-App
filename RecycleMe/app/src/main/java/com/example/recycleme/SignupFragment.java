@@ -35,6 +35,7 @@ public class SignupFragment extends DialogFragment {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private LoginContext loginContext;
 
     @NonNull
     @Override
@@ -51,14 +52,28 @@ public class SignupFragment extends DialogFragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-
+        loginContext = LoginContext.getInstance();
         registerButton = view.findViewById(R.id.register_button);
         registerButton.setOnClickListener(v -> {
             String email = emailAddressEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             String confirmPassword = confirmPasswordEditText.getText().toString();
             if (validateSignup(email, password, confirmPassword)) {
-                createUserFirebaseAuthorize(email, password);
+                loginContext.login(email, password, AccountAction.SIGNUP_ACTION, new LoginState.LoginCallback() {
+                    @Override
+                    public void onLoginSuccess() {
+                        updateUI();
+                    }
+
+                    @Override
+                    public void onLoginFailure(String errorMessage) {
+                        if (email.isEmpty() || password.isEmpty()) {
+                            Toast.makeText(getContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
@@ -67,34 +82,9 @@ public class SignupFragment extends DialogFragment {
     }
 
 
-    private void createUserFirebaseAuthorize(String email, String password) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    String userId = task.getResult().getUser().getUid();
-                    User user = new User(email, password);
-                    setUserReference(userId, user);
-                }
-            }
-        });
 
-    }
 
-    private void setUserReference(String userId, User user) {
-        databaseReference = firebaseDatabase.getReference().child("users").child(userId);
-        databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    String email = user.getEmail();
-                    String password = user.getPassword();
-                } else {
-                    Toast.makeText(getContext(), "Cannot create account", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
+
 
     private boolean validateSignup(String email, String password, String confirmPassword) {
         if (email.isEmpty() || password.isEmpty()) {
@@ -113,9 +103,6 @@ public class SignupFragment extends DialogFragment {
         else return true;
     }
 
-    private void setLoginContext(String email, String password) {
-
-    }
 
     private void updateUI() {
         if (loginContext.isLoggedIn()) {
