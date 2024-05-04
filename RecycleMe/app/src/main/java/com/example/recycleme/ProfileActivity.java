@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 
 import com.example.recycleme.login.LoginContext;
+import com.example.recycleme.util.LogToastUtil;
 
 public class ProfileActivity extends BaseActivity {
     private LoginContext loginContext;
@@ -24,7 +25,7 @@ public class ProfileActivity extends BaseActivity {
         loginContext = LoginContext.getInstance();
         usernameTextView = findViewById(R.id.profile_username);
         String emailText = loginContext.getUserEmail();
-        String username = emailText.split("@")[0];
+        String username = LogToastUtil.getUsernameFromEmail(emailText);
         usernameTextView.setText(username);
 
 

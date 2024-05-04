@@ -6,6 +6,9 @@ public class User {
     private String password;
     private String lastMessage;
 
+    public User() {
+
+    }
     public User(String id, String email, String password) {
         this.id = id;
         this.email = email;
@@ -34,5 +37,13 @@ public class User {
 
     public void setLastMessage(String lastMessage) {
         this.lastMessage = lastMessage;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

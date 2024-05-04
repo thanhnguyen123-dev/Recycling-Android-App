@@ -49,6 +49,13 @@ public class LogToastUtil {
         else return true;
     }
 
+    public static String getUsernameFromEmail(String email) {
+        if (email != null) {
+            return email.split("@")[0];
+        }
+        return "";
+    }
+
 
     private static void getToastForEmptyInput(Context context) {
         Toast.makeText(context, "Email or password cannot be empty", Toast.LENGTH_SHORT).show();
@@ -65,6 +72,8 @@ public class LogToastUtil {
     private static void getToastForNonMatchPassword(Context context) {
         Toast.makeText(context, "Password does not match", Toast.LENGTH_SHORT).show();
     }
+
+
 
 
 }
