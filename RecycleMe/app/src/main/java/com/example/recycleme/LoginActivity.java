@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.recycleme.login.*;
-import com.example.recycleme.ui.login.SignupFragment;
 
 public class LoginActivity extends BaseActivity {
     private LoginContext loginContext;
@@ -52,7 +51,12 @@ public class LoginActivity extends BaseActivity {
         });
 
         signupButton = findViewById(R.id.signup_button);
-        signupButton.setOnClickListener(v -> showSignupFragment());
+        signupButton.setOnClickListener(v -> {
+            SignupFragment fragment = new SignupFragment();
+            fragment.show(getSupportFragmentManager(), "SignupManager");
+
+
+        });
     }
 
     private void updateUI() {
@@ -64,10 +68,6 @@ public class LoginActivity extends BaseActivity {
         } else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
     }
 
-    private void showSignupFragment() {
-        SignupFragment fragment = new SignupFragment();
-        fragment.show(getSupportFragmentManager(), "CreateAccountManager");
-    }
 
 
 
