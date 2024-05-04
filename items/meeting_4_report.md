@@ -1,7 +1,6 @@
-# [Team Name]
-This following is a very simple team meeting template. You should expand it based on the scope and nature of your discussion.
+# FlyingSpaghettiMonster Team
 
-## Team Meeting 3 - Week 8 - 27th April 2024 (10AM-11AM)
+## Team Meeting 4 - Week 8 - 27th April 2024 (10AM-11AM)
 **Absent:**
 Adam
 **Lead/scribe:**
@@ -44,6 +43,7 @@ Stand up Procedure:
 ## Scribe Rotation
 The following dictates who will scribe in this and the next meeting.
 | Name |
+|------|
 | Julius |
 | Adam |
 | Devansu |

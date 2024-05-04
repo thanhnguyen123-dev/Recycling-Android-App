@@ -1,7 +1,6 @@
 # FlyingSpaghettiMonster team
 
-## Team Meeting 2 - Week 3 - 20 April 2024 (10AM-11AM)
-
+## Team Meeting 3- Week 3 - 20 April 2024 (10AM-11AM)
 **Absent:**
 Nathan
 Adam
@@ -42,8 +41,9 @@ Stand up Procedure:
 
 ## Scribe Rotation
 The following dictates who will scribe in this and the next meeting.
-| Name| 
-| Nathan |
-|   Adam    |
-|   Julius  |
-|   Harrison  |
+| Name          | 
+|---------------|
+| Nathan        |
+|   Adam        |
+|   Julius      |
+|   Harrison    |
