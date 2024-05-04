@@ -2,39 +2,20 @@ package com.example.recycleme;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.recycleme.login.*;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-import java.io.Serializable;
+import com.example.recycleme.ui.login.SignupFragment;
 
 public class LoginActivity extends BaseActivity {
     private LoginContext loginContext;
     private EditText emailEditText;
     private EditText passwordEditText;
     private Button loginButton;
+    private Button signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +50,9 @@ public class LoginActivity extends BaseActivity {
                 }
             });
         });
+
+        signupButton = findViewById(R.id.signup_button);
+        signupButton.setOnClickListener(v -> showSignupFragment());
     }
 
     private void updateUI() {
@@ -78,6 +62,11 @@ public class LoginActivity extends BaseActivity {
             startActivity(intent);
             Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
         } else Toast.makeText(getApplicationContext(), "Username and password not recognized", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showSignupFragment() {
+        SignupFragment fragment = new SignupFragment();
+        fragment.show(getSupportFragmentManager(), "CreateAccountManager");
     }
 
 
