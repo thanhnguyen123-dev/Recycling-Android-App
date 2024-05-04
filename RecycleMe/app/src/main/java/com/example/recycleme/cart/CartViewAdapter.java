@@ -1,6 +1,5 @@
 package com.example.recycleme.cart;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.*;
 import com.example.recycleme.RecycledItem;
-import com.example.recycleme.record.RecordAdapter;
 
 import java.util.List;
 

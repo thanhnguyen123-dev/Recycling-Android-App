@@ -7,12 +7,13 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.test.internal.util.LogUtil;
 
 import com.example.recycleme.login.*;
 import com.example.recycleme.util.LogToastUtil;
 
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends AppCompatActivity {
     private LoginContext loginContext;
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -22,8 +23,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
-        getLayoutInflater().inflate(R.layout.activity_login, contentFrameLayout);
+        setContentView(R.layout.activity_login);
         emailEditText = findViewById(R.id.editTextTextEmailAddress);
         passwordEditText = findViewById(R.id.editTextTextPassword);
         loginButton = findViewById(R.id.login_button);

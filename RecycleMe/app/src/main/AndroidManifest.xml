@@ -15,7 +15,10 @@
         android:theme="@style/Theme.RecycleMe"
         tools:targetApi="31">
         <activity
-            android:name=".ChatsActivity"
+            android:name=".ChatsMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DirectMessageActivity"
             android:exported="false" />
         <activity
             android:name=".ItemDescriptionActivity"

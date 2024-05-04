@@ -76,7 +76,7 @@ public class BaseActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } else if (menuItem.getItemId() == R.id.chats) {
-                    Intent intent = new Intent(BaseActivity.this, ChatsActivity.class);
+                    Intent intent = new Intent(BaseActivity.this, DirectMessageActivity.class);
                     startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.cart) {
                     Intent intent = new Intent(BaseActivity.this, CartActivity.class);
