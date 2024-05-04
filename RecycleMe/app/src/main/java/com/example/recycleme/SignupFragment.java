@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.time.ZoneId;
 
@@ -43,14 +44,27 @@ public class SignupFragment extends DialogFragment {
         });
 
 
-
-
-
-
-
-
-
         return builder.create();
     }
+
+    private boolean validateSignup(String email, String password, String confirmPassword) {
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(getContext(), "Email or password cannot be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (password.length() < 6) {
+            Toast.makeText(getContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
+            return false;
+
+        }
+        else if (!confirmPassword.equals(password)) {
+            Toast.makeText(getContext(), "Password does not match", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else return true;
+    }
+
+
+
 }
 
