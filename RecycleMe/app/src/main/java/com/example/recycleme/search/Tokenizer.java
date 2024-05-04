@@ -28,8 +28,6 @@ public class Tokenizer {
             searchQuery = searchQuery.substring(1);
         } else if (checkAnd()) {
             currentToken = new Token(Token.TokenType.AND, "and");
-        } else if (checkOr()) {
-            currentToken = new Token(Token.TokenType.OR, "or");
         } else if (Character.isLetterOrDigit(currentChar)) {
             currentToken = scanString();
         } else {
@@ -41,11 +39,6 @@ public class Tokenizer {
     private boolean checkAnd() {
         int remainingChars = searchQuery.length();
         return remainingChars >= 3 && searchQuery.startsWith("and");
-    }
-
-    private boolean checkOr() {
-        int remainingChars = searchQuery.length();
-        return remainingChars >= 3 && searchQuery.startsWith("or");
     }
 
     private Token scanString() {

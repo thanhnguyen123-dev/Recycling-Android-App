@@ -8,8 +8,7 @@ public class Token {
         ITEM,
         BRAND,
         MATERIAL,
-        AND,
-        OR
+        AND
     }
 
     private TokenType type;
