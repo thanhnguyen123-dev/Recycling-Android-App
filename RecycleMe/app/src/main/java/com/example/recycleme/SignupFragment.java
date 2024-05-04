@@ -77,10 +77,6 @@ public class SignupFragment extends DialogFragment {
     }
 
 
-
-
-
-
     private boolean validateSignup(String email, String password, String confirmPassword) {
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(getContext(), "Email or password cannot be empty", Toast.LENGTH_SHORT).show();
