@@ -10,11 +10,10 @@ import android.widget.Toast;
 
 
 import com.example.recycleme.login.LoginContext;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfileActivity extends BaseActivity {
     private LoginContext loginContext;
-    private TextView userEmailTextView;
+    private TextView usernameTextView;
     private Button logOutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +22,10 @@ public class ProfileActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_profile, contentFrameLayout);
 
         loginContext = LoginContext.getInstance();
-        userEmailTextView = findViewById(R.id.user_email);
+        usernameTextView = findViewById(R.id.profile_username);
         String emailText = loginContext.getUserEmail();
-        userEmailTextView.setText(emailText);
+        String username = emailText.split("@")[0];
+        usernameTextView.setText(username);
 
 
         logOutButton = findViewById(R.id.logout_button);
