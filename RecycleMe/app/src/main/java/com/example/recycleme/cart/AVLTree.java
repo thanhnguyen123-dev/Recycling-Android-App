@@ -192,7 +192,7 @@ public class AVLTree<T extends Comparable<T>> {
                 return leftCeiling;
             }
 
-            return null;
+            return tree;
         }
     }
 
