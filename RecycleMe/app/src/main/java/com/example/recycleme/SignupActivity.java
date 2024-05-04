@@ -32,6 +32,10 @@ public class SignupActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +69,18 @@ public class SignupActivity extends AppCompatActivity {
                             String userUid = task.getResult().getUser().getUid();
                             databaseReference = firebaseDatabase.getReference().child("user").child(userUid);
                             User user = new User(email, password);
-                            setUserForReference(user);
+                            databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(SignupActivity.this, "Cannot create account", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -92,19 +107,5 @@ public class SignupActivity extends AppCompatActivity {
         else return true;
     }
 
-    private void setUserForReference(User user) {
-        databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Toast.makeText(SignupActivity.this, "Cannot create account", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-    }
+    private void setUserForReference() {}
 }
