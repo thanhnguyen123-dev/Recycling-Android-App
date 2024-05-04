@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.recycleme.login.AccountAction;
 import com.example.recycleme.login.LoggedInState;
 import com.example.recycleme.login.LoginContext;
 import com.example.recycleme.login.LoginState;
@@ -31,7 +32,6 @@ public class SignupFragment extends DialogFragment {
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
     private Button registerButton;
-    private LoginContext loginContext;
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -114,23 +114,7 @@ public class SignupFragment extends DialogFragment {
     }
 
     private void setLoginContext(String email, String password) {
-        loginContext.login(email, password, new LoginState.LoginCallback() {
-            @Override
-            public void onLoginSuccess() {
-                // Authentication successful, update UI
-                updateUI();
-            }
 
-            @Override
-            public void onLoginFailure(String errorMessage) {
-                // Authentication failed, show error message
-                if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(getContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void updateUI() {

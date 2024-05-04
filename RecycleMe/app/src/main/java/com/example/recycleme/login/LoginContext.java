@@ -32,8 +32,8 @@ public class LoginContext {
         this.state = state;
     }
 
-    public void login(String email, String password, LoginState.LoginCallback loginCallback) {
-        state.login(this, email, password, loginCallback);
+    public void login(String email, String password, AccountAction accountAction, LoginState.LoginCallback loginCallback) {
+        state.login(this, email, password, accountAction, loginCallback);
     }
 
     public void logout() {

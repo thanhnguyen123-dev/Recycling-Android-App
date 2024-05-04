@@ -31,16 +31,14 @@ public class LoginActivity extends BaseActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            loginContext.login(email, password, new LoginState.LoginCallback() {
+            loginContext.login(email, password, AccountAction.LOGIN_ACTION, new LoginState.LoginCallback() {
                 @Override
                 public void onLoginSuccess() {
-                    // Authentication successful, update UI
                     updateUI();
                 }
 
                 @Override
                 public void onLoginFailure(String errorMessage) {
-                    // Authentication failed, show error message
                     if (email.isEmpty() || password.isEmpty()) {
                         Toast.makeText(getApplicationContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
                     } else {

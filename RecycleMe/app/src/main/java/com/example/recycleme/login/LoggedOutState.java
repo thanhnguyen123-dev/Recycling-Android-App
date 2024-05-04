@@ -17,21 +17,36 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoggedOutState extends LoginState {
     @Override
-    public void login(LoginContext context, String email, String password, LoginCallback loginCallback) {
+    public void login(LoginContext context, String email, String password,  AccountAction accountAction, LoginCallback loginCallback) {
         FirebaseAuth firebaseAuth = context.getFireBaseAuth();
-          firebaseAuth.signInWithEmailAndPassword(email, password)
+        if (accountAction == AccountAction.LOGIN_ACTION) {
+            firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             context.setState(new LoggedInState());
                             loginCallback.onLoginSuccess();
-                        }
-                        else {
+                        } else {
                             loginCallback.onLoginFailure(task.getException().getMessage());
                         }
                     }
                 });
+        }
+        else if (accountAction == AccountAction.SIGNUP_ACTION){
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                context.setState(new LoggedInState());
+                                loginCallback.onLoginSuccess();
+                            } else {
+                                loginCallback.onLoginFailure(task.getException().getMessage());
+                            }
+                        }
+                    });
+        }
     }
 
     @Override
