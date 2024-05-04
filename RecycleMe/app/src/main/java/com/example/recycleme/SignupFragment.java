@@ -32,9 +32,6 @@ public class SignupFragment extends DialogFragment {
     private EditText passwordEditText;
     private EditText confirmPasswordEditText;
     private Button registerButton;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
     private LoginContext loginContext;
 
     @NonNull
@@ -50,8 +47,6 @@ public class SignupFragment extends DialogFragment {
         passwordEditText = view.findViewById(R.id.pass_signup);
         confirmPasswordEditText = view.findViewById(R.id.cfm_pass_signup);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
         loginContext = LoginContext.getInstance();
         registerButton = view.findViewById(R.id.register_button);
         registerButton.setOnClickListener(v -> {
