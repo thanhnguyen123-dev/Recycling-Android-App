@@ -43,14 +43,14 @@ public class TokenizerTest {
 
     @Test
     public void testTokenizerValid2() {
-        Tokenizer tokenizer = new Tokenizer("tv and #Sony or #Samsung");
+        Tokenizer tokenizer = new Tokenizer("tv and #Sony and #Samsung");
         assertEquals(new Token(Token.TokenType.ITEM, "tv"), tokenizer.getCurrentToken());
         tokenizer.extractNextToken();
         assertEquals(new Token(Token.TokenType.AND, "and"), tokenizer.getCurrentToken());
         tokenizer.extractNextToken();
         assertEquals(new Token(Token.TokenType.BRAND, "Sony"), tokenizer.getCurrentToken());
         tokenizer.extractNextToken();
-        assertEquals(new Token(Token.TokenType.OR, "or"), tokenizer.getCurrentToken());
+        assertEquals(new Token(Token.TokenType.AND, "and"), tokenizer.getCurrentToken());
         tokenizer.extractNextToken();
         assertEquals(new Token(Token.TokenType.BRAND, "Samsung"), tokenizer.getCurrentToken());
     }
