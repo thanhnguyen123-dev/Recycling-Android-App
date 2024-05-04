@@ -33,31 +33,20 @@ public class LoginActivity extends BaseActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            if (LogToastUtil.isEmpty(email, password)) {
-                Toast.makeText(getApplicationContext(), "Email and password cannot be empty", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (LogToastUtil.isLessThanSixCharacter(password)) {
-                Toast.makeText(getApplicationContext(), "Password has to be at least 6 characters", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (LogToastUtil.invalidEmail(email)) {
-                Toast.makeText(getApplicationContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            if (LogToastUtil.validateLogin(getApplicationContext(), email, password)) {
+                loginContext.login(email, password, AccountAction.LOGIN_ACTION, new LoginState.LoginCallback() {
+                    @Override
+                    public void onLoginSuccess() {
+                        updateUI();
+                    }
 
-            loginContext.login(email, password, AccountAction.LOGIN_ACTION, new LoginState.LoginCallback() {
-                @Override
-                public void onLoginSuccess() {
-                    updateUI();
-                }
+                    @Override
+                    public void onLoginFailure(String errorMessage) {
+                        Toast.makeText(getApplicationContext(), "Email and password not recognized", Toast.LENGTH_SHORT).show();
 
-                @Override
-                public void onLoginFailure(String errorMessage) {
-                    Toast.makeText(getApplicationContext(), "Email and password not recognized", Toast.LENGTH_SHORT).show();
-
-                }
-            });
+                    }
+                });
+            }
         });
 
         signupButton = findViewById(R.id.signup_button);

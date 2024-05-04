@@ -55,7 +55,7 @@ public class SignupFragment extends DialogFragment {
             String email = emailAddressEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             String confirmPassword = confirmPasswordEditText.getText().toString();
-            if (validateSignup(email, password, confirmPassword)) {
+            if (LogToastUtil.validateSignup(getContext(), email, password, confirmPassword)) {
                 loginContext.login(email, password, AccountAction.SIGNUP_ACTION, new LoginState.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {
@@ -75,26 +75,6 @@ public class SignupFragment extends DialogFragment {
         return builder.create();
     }
 
-
-    private boolean validateSignup(String email, String password, String confirmPassword) {
-        if (LogToastUtil.isEmpty(email, password)) {
-            Toast.makeText(getContext(), "Email or password cannot be empty", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if (LogToastUtil.invalidEmail(email)) {
-            Toast.makeText(getContext(), "Invalid email address", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if (LogToastUtil.isLessThanSixCharacter(password)) {
-            Toast.makeText(getContext(), "Password must be at least 6 characters", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if (LogToastUtil.nonMatchPassword(password, confirmPassword)) {
-            Toast.makeText(getContext(), "Password does not match", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else return true;
-    }
 
 
     private void updateUI() {
