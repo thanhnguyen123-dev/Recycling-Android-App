@@ -33,8 +33,19 @@ public class ItemDescriptionActivity extends BaseActivity {
         String material = getIntent().getStringExtra("MATERIAL_TEXT");
         String value = getIntent().getStringExtra("VALUE");
 
+        String descriptionParagraph = generateDescription(productName, brandName, material, value);
+        descriptionView = findViewById(R.id.descriptionPara);
+        descriptionView.setText(descriptionParagraph);
 
+        backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        });
 
+    }
+
+    public String generateDescription(String productName, String brandName, String material, String value) {
         StringBuilder stringBuilder = new StringBuilder("");
         stringBuilder.append("This is ");
         stringBuilder.append(getArticleDeterminer(productName));
@@ -47,19 +58,10 @@ public class ItemDescriptionActivity extends BaseActivity {
         stringBuilder.append(" and has a value of ");
         stringBuilder.append(value);
         stringBuilder.append(".");
-
-        descriptionView = findViewById(R.id.descriptionPara);
-        descriptionView.setText(stringBuilder.toString());
-
-        backButton = findViewById(R.id.backButton);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-        });
-
+        return stringBuilder.toString();
     }
 
-    private String getArticleDeterminer(String noun) {
+    public String getArticleDeterminer(String noun) {
         Set<Character> vowels = new HashSet<>();
         vowels.add('u');
         vowels.add('e');
@@ -72,6 +74,8 @@ public class ItemDescriptionActivity extends BaseActivity {
         }
         return "a ";
     }
+
+
 
 
 }
