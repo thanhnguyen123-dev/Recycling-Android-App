@@ -14,6 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.recycleme.cart.Cart;
 import com.example.recycleme.interfaces.Observer;
+import com.example.recycleme.search.SearchQueryParser;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -50,12 +51,33 @@ public class MainActivity extends BaseActivity implements Observer {
         adapter = new RecycledViewAdapter(recycledItems);
         recyclerView.setAdapter(adapter);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                try {
+                    List<RecycledItem> searchResults = recycledItemDb.search(query);
+                    adapter.setRecycledItems(searchResults);
+                    adapter.notifyDataSetChanged();
+                } catch(SearchQueryParser.InvalidQueryException e) {
+                    Snackbar.make(searchView, e.getMessage(), Snackbar.LENGTH_SHORT).show();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    adapter.setRecycledItems(recycledItemDb.getCurrentData());
+                    adapter.notifyDataSetChanged();
+                }
+                return false;
+            }
+        });
+
         this.swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         this.swipeRefreshLayout.setOnRefreshListener(() -> {
-            adapter.setRecycledItems(recycledItemDb.getCurrentData());
-            adapter.notifyDataSetChanged();
             Log.d("ITEMNUM", String.valueOf(recycledItemDb.getCurrentData().size()));
-
+            searchView.setQuery("", false);
             swipeRefreshLayout.setRefreshing(false);
         });
 

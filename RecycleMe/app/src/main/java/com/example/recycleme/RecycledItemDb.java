@@ -9,6 +9,8 @@ import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.example.recycleme.interfaces.Observer;
 import com.example.recycleme.interfaces.Subject;
+import com.example.recycleme.search.SearchQueryParser;
+import com.example.recycleme.search.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,8 +63,10 @@ public class RecycledItemDb implements Subject {
         recycledItemDAO.updateRecycledItem(recycledItem);
     }
 
-    public List<RecycledItem> search(String name, String brand, String material) {
-        return this.recycledItemAVLTree.findItems(name, brand, material);
+    public List<RecycledItem> search(String searchQuery) throws SearchQueryParser.InvalidQueryException {
+        Tokenizer tokenizer = new Tokenizer(searchQuery);
+        SearchQueryParser parser = new SearchQueryParser(tokenizer);
+        return parser.parseSearchQuery().evaluateSearchExp(this.recycledItemAVLTree);
     }
 
 
