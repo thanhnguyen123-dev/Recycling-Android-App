@@ -54,4 +54,14 @@ public class TokenizerTest {
         tokenizer.extractNextToken();
         assertEquals(new Token(Token.TokenType.BRAND, "Samsung"), tokenizer.getCurrentToken());
     }
+
+    @Test
+    public void testTokenizerValid3() {
+        Tokenizer tokenizer = new Tokenizer("shoe rack and #rolfson");
+        assertEquals(new Token(Token.TokenType.ITEM, "shoe rack"), tokenizer.getCurrentToken());
+        tokenizer.extractNextToken();
+        assertEquals(new Token(Token.TokenType.AND, "and"), tokenizer.getCurrentToken());
+        tokenizer.extractNextToken();
+        assertEquals(new Token(Token.TokenType.BRAND, "rolfson"), tokenizer.getCurrentToken());
+    }
 }
