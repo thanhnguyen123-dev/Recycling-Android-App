@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.test.internal.util.LogUtil;
 
 import com.example.recycleme.login.*;
-import com.example.recycleme.util.LogToastUtil;
+import com.example.recycleme.util.LogUtil;
 
 public class LoginActivity extends AppCompatActivity {
     private LoginContext loginContext;
@@ -33,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            if (LogToastUtil.validateLogin(getApplicationContext(), email, password)) {
+            if (LogUtil.validateLogin(getApplicationContext(), email, password)) {
                 loginContext.login(email, password, AccountAction.LOGIN_ACTION, new LoginState.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {

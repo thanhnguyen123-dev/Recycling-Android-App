@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -14,19 +13,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.recycleme.login.AccountAction;
-import com.example.recycleme.login.LoggedInState;
 import com.example.recycleme.login.LoginContext;
 import com.example.recycleme.login.LoginState;
-import com.example.recycleme.model.User;
-import com.example.recycleme.util.LogToastUtil;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.time.ZoneId;
+import com.example.recycleme.util.LogUtil;
 
 
 public class SignupFragment extends DialogFragment {
@@ -55,7 +44,7 @@ public class SignupFragment extends DialogFragment {
             String email = emailAddressEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             String confirmPassword = confirmPasswordEditText.getText().toString();
-            if (LogToastUtil.validateSignup(getContext(), email, password, confirmPassword)) {
+            if (LogUtil.validateSignup(getContext(), email, password, confirmPassword)) {
                 loginContext.login(email, password, AccountAction.SIGNUP_ACTION, new LoginState.LoginCallback() {
                     @Override
                     public void onLoginSuccess() {

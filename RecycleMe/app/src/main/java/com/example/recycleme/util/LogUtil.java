@@ -1,15 +1,9 @@
 package com.example.recycleme.util;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.recycleme.LoginActivity;
-import com.example.recycleme.ProfileActivity;
-import com.example.recycleme.login.LoginContext;
-
-public class LogToastUtil {
+public class LogUtil {
     private static String emailPattern = "[a-zA-z0-9._]+@[a-z]+\\.+[a-z]+";
 
     public static boolean validateSignup(Context context, String email, String password, String confirmPassword) {

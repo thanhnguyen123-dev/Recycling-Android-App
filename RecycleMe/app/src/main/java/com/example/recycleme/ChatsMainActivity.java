@@ -2,6 +2,7 @@ package com.example.recycleme;
 
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,7 +39,7 @@ public class ChatsMainActivity extends BaseActivity {
         users = new ArrayList<>();
         userRecyclerView = findViewById(R.id.chats_recyclerview);
         userRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        userAdapter = new UserAdapter(ChatsMainActivity.this, users);
+        userAdapter = new UserAdapter(this, users);
         userRecyclerView.setAdapter(userAdapter);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -53,7 +54,6 @@ public class ChatsMainActivity extends BaseActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 

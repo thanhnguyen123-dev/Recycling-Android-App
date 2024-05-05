@@ -11,15 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.recycleme.ChatsMainActivity;
 import com.example.recycleme.DirectMessageActivity;
-import com.example.recycleme.MainActivity;
 import com.example.recycleme.R;
-import com.example.recycleme.RecycledViewAdapter;
 import com.example.recycleme.model.User;
-import com.example.recycleme.util.LogToastUtil;
+import com.example.recycleme.util.LogUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
@@ -43,15 +39,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         User user = users.get(position);
         holder.bind(user);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(chatsMainActivity, DirectMessageActivity.class);
-                intent.putExtra("USERNAME", LogToastUtil.getUsernameFromEmail(user.getEmail()));
-                intent.putExtra("LAST_MESSAGE", user.getLastMessage());
-                intent.putExtra("USER_ID", user.getId());
-                chatsMainActivity.startActivity(intent);
-            }
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(chatsMainActivity, DirectMessageActivity.class);
+            intent.putExtra("USERNAME", LogUtil.getUsernameFromEmail(user.getEmail()));
+            intent.putExtra("LAST_MESSAGE", user.getLastMessage());
+            intent.putExtra("USER_ID", user.getId());
+            chatsMainActivity.startActivity(intent);
         });
 
     }
@@ -72,7 +65,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             lastMessageTextView = itemView.findViewById(R.id.user_last_msg);
         }
         public void bind(User user) {
-            usernameTextView.setText(LogToastUtil.getUsernameFromEmail(user.getEmail()));
+            usernameTextView.setText(LogUtil.getUsernameFromEmail(user.getEmail()));
             lastMessageTextView.setText(user.getLastMessage());
         }
 
