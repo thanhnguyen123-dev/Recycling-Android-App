@@ -21,7 +21,12 @@ public class AVLTreeTime extends AVLTree<NodeData<List<RecycledItem>>> {
     }
 
     public List<RecycledItem> searchItem(LocalDateTime time) {
-        return this.search(new NodeData<>(time, null)).getValue();
+        try {
+            return this.search(new NodeData<>(time, null)).getValue();
+        } catch (NullPointerException e) {
+            return null;
+        }
+
     }
 
 }

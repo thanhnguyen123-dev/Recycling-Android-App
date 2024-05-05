@@ -130,4 +130,36 @@ public class AVLTreeTest {
        assertNull(avlTree.search(first));
     }
 
+    @Test
+    public void testCeilingRecycledItem() {
+       AVLTree<RecycledItem> recycledItemAVLTree = new AVLTree<>();
+
+       List<RecycledItem> recycledItems = Arrays.asList(
+               new RecycledItem(3001, "Plastic Bottle", "Coca-Cola", "PET", 0.2),
+               new RecycledItem(4001, "Aluminum Can", "Pepsi", "Aluminum", 0.1),
+               new RecycledItem(5001, "Glass Jar", "Heinz", "Glass", 0.4),
+               new RecycledItem(8001, "Glass Jar", "Beans", "Glass", 0.4),
+               new RecycledItem(6001, "Cardboard Box", "Amazon", "Cardboard", 0.8),
+               new RecycledItem(7001, "Paper Bag", "Whole Foods", "Paper", 0.3)
+       );
+
+        for (RecycledItem recycledItem: recycledItems) {
+            recycledItemAVLTree.insert(recycledItem);
+        }
+
+        RecycledItem ceiling = recycledItemAVLTree.ceiling(new RecycledItem(0, "glass jar", "heinz", "glass", 0.0));
+        assertEquals(ceiling, recycledItems.get(2));
+    }
+
+    @Test
+    public void testRotation() {
+       AVLTree<Integer> integerAVLTree = new AVLTree<>();
+
+        for (int i = 0; i < 5; i++) {
+            integerAVLTree.insert(i);
+        }
+
+        assertEquals(integerAVLTree.traverse(), Arrays.asList(0, 1, 2, 3, 4));
+    }
+
 }
