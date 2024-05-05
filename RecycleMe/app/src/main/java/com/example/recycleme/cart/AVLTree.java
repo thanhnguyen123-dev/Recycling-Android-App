@@ -1,7 +1,4 @@
 package com.example.recycleme.cart;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +8,7 @@ public class AVLTree<T extends Comparable<T>> {
         Node left, right;
         int height;
 
-        Node(T value) {
+        protected Node(T value) {
             this.value = value;
             this.left = null;
             this.right = null;
@@ -41,7 +38,7 @@ public class AVLTree<T extends Comparable<T>> {
 
     }
 
-    private Node root;
+    Node root;
     private int size;
 
     public AVLTree() {
@@ -169,13 +166,14 @@ public class AVLTree<T extends Comparable<T>> {
         Node node = ceiling(root, data);
 
         if (node == null) {
-            node = getMax(root);
+            return getLargestValue();
         }
 
         return node.getValue();
     }
 
-    private Node ceiling(Node tree, T data) {
+
+    Node ceiling(Node tree, T data) {
         if (tree == null) {
             return null;
         }
@@ -196,12 +194,34 @@ public class AVLTree<T extends Comparable<T>> {
         }
     }
 
-    private Node getMax(Node tree) {
-        if (tree.right == null) {
+    public T floor(T data) {
+        Node node = floor(root, data);
+        if (node == null) {
+            return getSmallestValue(root);
+        }
+
+        return node.getValue();
+    }
+
+    Node floor(Node tree, T data) {
+        if (tree == null) {
+            return null;
+        }
+
+        if (data.compareTo(tree.getValue()) == 0) {
             return tree;
         }
 
-        return getMax(tree.right);
+        if (data.compareTo(tree.getValue()) < 0) {
+            return floor(tree.left, data);
+        } else {
+            Node rightFloor = floor(tree.right, data);
+            if (rightFloor != null) {
+                return rightFloor;
+            }
+
+            return tree;
+        }
     }
 
     public List<T> traverse() {
@@ -272,12 +292,29 @@ public class AVLTree<T extends Comparable<T>> {
         return size;
     }
 
-    /**
-    The findBetween method takes two parameters: startTime and endTime, representing
-    the start and end time range (inclusive) within which we want to find the nodes.
-     */
-    public List<NodeData<T>> findBetween(LocalDateTime startTime, LocalDateTime endTime) {
-        return null;
+    public List<T> findBetween(T floor, T ceiling) {
+        List<T> result = new ArrayList<>();
+        findBetweenInternal(root, floor, ceiling, result);
+        return result;
     }
+
+    private void findBetweenInternal(Node node, T floor, T ceiling, List<T> result) {
+        if (node == null) {
+            return;
+        }
+
+        if (floor.compareTo(node.getValue()) < 0) {
+            findBetweenInternal(node.left, floor, ceiling, result);
+        }
+
+        if (floor.compareTo(node.getValue()) <= 0 && ceiling.compareTo(node.getValue()) >= 0) {
+            result.add(node.getValue());
+        }
+
+        if (ceiling.compareTo(node.getValue()) > 0) {
+            findBetweenInternal(node.right, floor, ceiling, result);
+        }
+    }
+
 
 }
