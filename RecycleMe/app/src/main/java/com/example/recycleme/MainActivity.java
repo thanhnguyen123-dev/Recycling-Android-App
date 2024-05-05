@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import androidx.appcompat.widget.SearchView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,8 @@ public class MainActivity extends BaseActivity implements Observer {
     private RecycledItemDb recycledItemDb;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SearchView searchView;
+    private ImageView noResultsImage;
+    private TextView noResultsText;
 
     Cart cart = Cart.getInstance();
     @Override
@@ -34,10 +37,10 @@ public class MainActivity extends BaseActivity implements Observer {
         super.onCreate(savedInstanceState);
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_main, contentFrameLayout);
-        System.out.println("Test");
-
 
         this.searchView = findViewById(R.id.search_view);
+        this.noResultsImage = findViewById(R.id.no_results_image);
+        this.noResultsText = findViewById(R.id.no_results_text);
 
         this.recycledItemDb = RecycledItemDb.getInstance(getApplicationContext());
         this.recycledItemDb.attach(this);
@@ -56,6 +59,13 @@ public class MainActivity extends BaseActivity implements Observer {
             public boolean onQueryTextSubmit(String query) {
                 try {
                     List<RecycledItem> searchResults = recycledItemDb.search(query);
+                    if (searchResults.isEmpty()) {
+                        noResultsImage.setVisibility(View.VISIBLE);
+                        noResultsText.setVisibility(View.VISIBLE);
+                    } else {
+                        noResultsImage.setVisibility(View.GONE);
+                        noResultsText.setVisibility(View.GONE);
+                    }
                     adapter.setRecycledItems(searchResults);
                     adapter.notifyDataSetChanged();
                 } catch(SearchQueryParser.InvalidQueryException e) {
@@ -67,6 +77,8 @@ public class MainActivity extends BaseActivity implements Observer {
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
+                    noResultsImage.setVisibility(View.GONE);
+                    noResultsText.setVisibility(View.GONE);
                     adapter.setRecycledItems(recycledItemDb.getCurrentData());
                     adapter.notifyDataSetChanged();
                 }
