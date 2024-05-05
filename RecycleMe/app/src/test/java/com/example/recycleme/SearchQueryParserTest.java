@@ -1,7 +1,11 @@
-package com.example.recycleme.search;
+package com.example.recycleme;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
+
+import com.example.recycleme.search.SearchExp;
+import com.example.recycleme.search.SearchQueryParser;
+import com.example.recycleme.search.Tokenizer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,7 +48,7 @@ public class SearchQueryParserTest {
 
         for(int i = 0; i < queries.length; i++) {
             String query = queries[i];
-            parser.tokenizer = new Tokenizer(query);
+            parser = new SearchQueryParser(new Tokenizer(query));
             try {
                 SearchExp result = parser.parseSearchQuery();
                 assertNotNull(result);
@@ -67,7 +71,7 @@ public class SearchQueryParserTest {
         };
 
         for(String query : queries) {
-            parser.tokenizer = new Tokenizer(query);
+            parser = new SearchQueryParser(new Tokenizer(query));
             try {
                 parser.parseSearchQuery();
                 fail("InvalidQueryException should have been thrown");
