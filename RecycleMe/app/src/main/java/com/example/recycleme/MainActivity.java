@@ -2,6 +2,7 @@ package com.example.recycleme;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -48,6 +49,7 @@ public class MainActivity extends BaseActivity implements Observer {
         this.swipeRefreshLayout.setOnRefreshListener(() -> {
             adapter.setRecycledItems(recycledItemDb.getCurrentData());
             adapter.notifyDataSetChanged();
+            Log.d("ITEMNUM", String.valueOf(recycledItemDb.getCurrentData().size()));
 
             swipeRefreshLayout.setRefreshing(false);
         });
