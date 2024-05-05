@@ -2,7 +2,6 @@ package com.example.recycleme;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
 
 import com.example.recycleme.cart.NodeData;
 import com.example.recycleme.cart.UserTree;
