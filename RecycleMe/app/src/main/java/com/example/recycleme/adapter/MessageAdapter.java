@@ -52,7 +52,11 @@ public class MessageAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_SEND) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sending_view_row, parent, false);
-            return new
+            return new SendingMessageViewHolder(view);
+        }
+        else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.receiving_view_row, parent, false);
+            return new ReceivingMessageViewHolder(view);
         }
     }
 
