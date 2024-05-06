@@ -81,7 +81,12 @@ public class DirectMessageActivity extends BaseActivity {
         chatsReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                messages
+                messages.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Message message = dataSnapshot.getValue(Message.class);
+                    messages.add(message);
+                }
+                messageAdapter.notifyDataSetChanged();
             }
 
             @Override
