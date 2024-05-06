@@ -38,3 +38,4 @@ public class DirectMessageActivity extends BaseActivity {
 
     }
 }
+
