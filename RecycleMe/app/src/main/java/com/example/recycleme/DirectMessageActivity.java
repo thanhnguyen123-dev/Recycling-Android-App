@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.adapter.MessageAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -110,14 +113,27 @@ public class DirectMessageActivity extends BaseActivity {
                     Date currentDate = new Date();
                     long currentTime = currentDate.getTime();
                     Message message = new Message(senderUid, currentTime, toSendMessage);
-
-
+                    updateMessagesFirebaseReference(firebaseDatabase, message, receivingId, sendingId);
                 }
             }
         });
+    }
 
+    private void updateMessagesFirebaseReference(FirebaseDatabase firebaseDatabase, Message message, String receivingId, String sendingId) {
+        firebaseDatabase.getReference().child("chats")
+                        .child(sendingId)
+                        .child("messages")
+                        .push().setValue(message).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        firebaseDatabase.getReference()
+                                        .child("chats")
+                                        .child(receivingId)
+                                        .child("messages")
+                                        .push().setValue(message);
 
-
+                    }
+                });
     }
 }
 
