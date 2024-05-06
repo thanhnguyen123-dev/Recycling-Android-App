@@ -9,12 +9,21 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class DirectMessageActivity extends BaseActivity {
     private ImageView userImage;
     private CardView sendButton;
     private ImageButton backButton;
     private TextView receiverNameEditText;
     private EditText messageEditText;
+    private FirebaseDatabase firebaseDatabase;
+    private FirebaseAuth firebaseAuth;
+    private DatabaseReference usersReference;
+    private DatabaseReference chatsReference;
+    private String sendingId, receivingId;
 
 
 
@@ -30,9 +39,15 @@ public class DirectMessageActivity extends BaseActivity {
         receiverNameEditText = findViewById(R.id.receiver_user);
         messageEditText = findViewById(R.id.input_message);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
         String receiverUsername = getIntent().getStringExtra("USERNAME");
         String receiverUid = getIntent().getStringExtra("USER_ID");
+        String senderUid = firebaseAuth.getUid();
 
+        String sendingId = (new StringBuffer("")).append(senderUid).append(receiverUid).toString();
+        String receivingId = (new StringBuffer("")).append(receiverUid).append(senderUid).toString();
 
 
 
