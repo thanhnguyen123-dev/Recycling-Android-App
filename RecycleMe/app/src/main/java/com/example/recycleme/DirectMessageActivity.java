@@ -1,13 +1,13 @@
 package com.example.recycleme;
 
 import android.os.Bundle;
-import android.os.Message;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -22,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.example.recycleme.model.Message;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DirectMessageActivity extends BaseActivity {
@@ -92,6 +94,25 @@ public class DirectMessageActivity extends BaseActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String toSendMessage = messageEditText.getText().toString();
+                if (toSendMessage.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Message cannot be empty", Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    messageEditText.setText("");
+                    Date currentDate = new Date();
+                    long currentTime = currentDate.getTime();
+                    Message message = new Message(senderUid, currentTime, toSendMessage);
+
+
+                }
             }
         });
 
