@@ -5,6 +5,8 @@ public class Message {
     private long sendTime;
     private String sendMessage;
 
+    public Message() {
+    }
     public Message(String senderId, long sendTime, String sendMessage) {
         this.senderId = senderId;
         this.sendTime = sendTime;

@@ -62,7 +62,7 @@ public class DirectMessageActivity extends BaseActivity {
         messages = new ArrayList<>();
         messagesRecyclerView = findViewById(R.id.message_recylerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
+//        linearLayoutManager.setStackFr(true);
         messagesRecyclerView.setLayoutManager(linearLayoutManager);
 
         messageAdapter = new MessageAdapter(DirectMessageActivity.this, messages);
@@ -77,10 +77,12 @@ public class DirectMessageActivity extends BaseActivity {
         String receiverUid = getIntent().getStringExtra("USER_ID");
         String senderUid = firebaseAuth.getUid();
 
-        String sendingId = (new StringBuffer("")).append(senderUid).append(receiverUid).toString();
-        String receivingId = (new StringBuffer("")).append(receiverUid).append(senderUid).toString();
+        receiverNameEditText.setText(receiverUsername);
 
-        usersReference = firebaseDatabase.getReference().child("users").child(firebaseAuth.getUid());
+        String sendingId = senderUid + receiverUid;
+        String receivingId = receiverUid + senderUid;
+
+        usersReference = firebaseDatabase.getReference().child("users").child(senderUid);
         chatsReference = firebaseDatabase.getReference().child("chats").child(sendingId).child("messages");
 
         chatsReference.addValueEventListener(new ValueEventListener() {
@@ -130,7 +132,12 @@ public class DirectMessageActivity extends BaseActivity {
                                         .child("chats")
                                         .child(receivingId)
                                         .child("messages")
-                                        .push().setValue(message);
+                                        .push().setValue(message).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                    }
+                                });
 
                     }
                 });
