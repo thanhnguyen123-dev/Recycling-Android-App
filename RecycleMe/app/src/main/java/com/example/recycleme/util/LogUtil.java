@@ -4,7 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 public class LogUtil {
-    private static String emailPattern = "[a-zA-z0-9._]+@[a-z]+\\.+[a-z]+";
+    private static String emailPattern = "[a-zA-Z0-9._]+@[a-zA-Z]+(\\.[a-zA-Z]+)+";
 
     public static boolean validateSignup(Context context, String email, String password, String confirmPassword) {
         if (email.isEmpty() || password.isEmpty()) {

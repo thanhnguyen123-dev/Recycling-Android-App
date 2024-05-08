@@ -24,23 +24,21 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/message_recylerview"
         android:layout_width="match_parent"
-        android:layout_height="493dp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="118dp" />
+        android:layout_height="493dp" />
 
     <LinearLayout
         android:id="@+id/chat_input_area"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="13dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
-            android:layout_width="wrap_content"
+            android:layout_width="290dp"
             android:layout_height="31dp"
             android:layout_marginStart="6.5dp"
             android:layout_marginEnd="9.10dp"
@@ -50,11 +48,11 @@
 
             <EditText
                 android:id="@+id/input_message"
-                android:layout_width="250dp"
+                android:layout_width="260dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:background="@null"
                 android:layout_marginLeft="15dp"
+                android:background="@null"
                 android:ems="10"
                 android:hint="Aa"
                 android:inputType="text" />

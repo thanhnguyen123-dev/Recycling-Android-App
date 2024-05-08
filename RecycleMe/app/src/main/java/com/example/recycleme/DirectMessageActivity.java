@@ -44,6 +44,7 @@ public class DirectMessageActivity extends BaseActivity {
     private MessageAdapter messageAdapter;
     private List<Message> messages;
     private String chatId;
+    private static final int STACK_FROM_END_THRESHOLD = 4;
 
 
 
@@ -60,8 +61,10 @@ public class DirectMessageActivity extends BaseActivity {
 
         messages = new ArrayList<>();
         messagesRecyclerView = findViewById(R.id.message_recylerview);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setStackFromEnd(true);
+        updateLayoutManager(linearLayoutManager);
+
         messagesRecyclerView.setLayoutManager(linearLayoutManager);
 
         messageAdapter = new MessageAdapter(DirectMessageActivity.this, messages);
@@ -145,6 +148,12 @@ public class DirectMessageActivity extends BaseActivity {
             return senderId + receiverId;
         }
         else return receiverId + senderId;
+    }
+
+    private void updateLayoutManager(LinearLayoutManager linearLayoutManager) {
+        if (linearLayoutManager != null) {
+            linearLayoutManager.setStackFromEnd(messages.size() > STACK_FROM_END_THRESHOLD);
+        }
     }
 }
 
