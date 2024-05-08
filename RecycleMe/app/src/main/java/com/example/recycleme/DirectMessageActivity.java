@@ -118,14 +118,14 @@ public class DirectMessageActivity extends BaseActivity {
                     messageEditText.setText("");
                     Date currentDate = new Date();
                     long currentTime = currentDate.getTime();
-                    Message message = new Message(senderUid, currentTime, toSendMessage);
-                    updateMessagesFirebaseReference(firebaseDatabase, message);
+                    updateMessagesFirebaseReference(firebaseDatabase, senderUid, currentTime, toSendMessage);
                 }
             }
         });
     }
 
-    private void updateMessagesFirebaseReference(FirebaseDatabase firebaseDatabase, Message message) {
+    private void updateMessagesFirebaseReference(FirebaseDatabase firebaseDatabase, String senderId, long sendTime, String toSendMessage) {
+        Message message = new Message(senderId, sendTime, toSendMessage);
         firebaseDatabase.getReference().child("chats")
                         .child(chatId)
                         .child("messages")
