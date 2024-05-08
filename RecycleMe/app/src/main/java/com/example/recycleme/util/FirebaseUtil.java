@@ -8,7 +8,12 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FirebaseUtil {
-    private static DatabaseReference databaseReference;
+    private static DatabaseReference getChatsReference() {
+        return FirebaseDatabase.getInstance().getReference().child("chats");
+    }
+    private static FirebaseUser getFirebaseUser() {
+        return FirebaseAuth.getInstance().getCurrentUser();
+    }
 
 
 
