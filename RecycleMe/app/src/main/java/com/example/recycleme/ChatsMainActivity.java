@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recycleme.adapter.UserAdapter;
 import com.example.recycleme.model.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,7 @@ public class ChatsMainActivity extends BaseActivity {
     private UserAdapter userAdapter;
     private DatabaseReference databaseReference;
     private List<User> users;
+    private FirebaseUser firebaseUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +43,16 @@ public class ChatsMainActivity extends BaseActivity {
         userRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         userAdapter = new UserAdapter(this, users);
         userRecyclerView.setAdapter(userAdapter);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
-                    users.add(user);
+                    if (!user.getId().equals(firebaseUser.getUid())) {
+                        users.add(user);
+                    }
                 }
                 userAdapter.notifyDataSetChanged();
             }

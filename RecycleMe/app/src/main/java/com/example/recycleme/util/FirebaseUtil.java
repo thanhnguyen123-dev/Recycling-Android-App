@@ -8,9 +8,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FirebaseUtil {
-    private static FirebaseAuth firebaseAuth;
-    private static FirebaseDatabase firebaseDatabase;
     private static DatabaseReference databaseReference;
+
 
 
 }
