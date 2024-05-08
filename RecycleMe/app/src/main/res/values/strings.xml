@@ -27,4 +27,6 @@
     <string name="back_btn">Back</string>
     <string name="search_query_hint">eg. shoe and #Nike and @leather</string>
     <string name="no_search_results">No items found for this search!</string>
+    <string name="map_api">AIzaSyBvu-hQWw85OHTl-UfU2j4a4AwXbp5V8aw</string>
+    <string name="map">Map</string>
 </resources>

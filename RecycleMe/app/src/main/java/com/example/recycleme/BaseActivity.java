@@ -84,6 +84,9 @@ public class BaseActivity extends AppCompatActivity {
                 } else if (menuItem.getItemId() == R.id.statistic) {
                     Intent intent = new Intent(BaseActivity.this, StatisticActivity.class);
                     startActivity(intent);
+                } else if (menuItem.getItemId() == R.id.map) {
+                    Intent intent = new Intent(BaseActivity.this, MapActivity.class);
+                    startActivity(intent);
                 }
                 // Close the navigation drawer
                 drawerLayout.closeDrawer(GravityCompat.START);
