@@ -1,10 +1,15 @@
 package com.example.recycleme;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,6 +18,7 @@ public class ItemDescriptionActivity extends BaseActivity {
     private TextView productNameTextView;
     private TextView descriptionView;
     private Button backButton;
+    private ImageView productImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +33,14 @@ public class ItemDescriptionActivity extends BaseActivity {
         String productName = getIntent().getStringExtra("PRODUCT_NAME");
         productNameTextView = findViewById(R.id.des_product_name);
         productNameTextView.setText(productName);
-
+        try {
+            productImageView = findViewById(R.id.productImageView);
+            InputStream imageStream = getAssets().open("item_image.png");
+            Drawable drawable = Drawable.createFromStream(imageStream, null);
+            productImageView.setImageDrawable(drawable);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         String brandName = getIntent().getStringExtra("BRAND_NAME");
         String material = getIntent().getStringExtra("MATERIAL_TEXT");
