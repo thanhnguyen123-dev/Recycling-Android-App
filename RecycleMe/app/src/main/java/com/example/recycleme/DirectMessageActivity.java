@@ -27,23 +27,23 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.example.recycleme.model.Message;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 public class DirectMessageActivity extends BaseActivity {
-    private ImageView userImage;
+
     private CardView sendButton;
-    private ImageButton backButton;
+    private ImageView sendImageView;
     private TextView receiverNameEditText;
     private EditText messageEditText;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference usersReference;
     private DatabaseReference chatsReference;
-    private String sendingId, receivingId;
     private RecyclerView messagesRecyclerView;
     private MessageAdapter messageAdapter;
     private List<Message> messages;
+    private String chatId;
 
 
 
@@ -53,21 +53,19 @@ public class DirectMessageActivity extends BaseActivity {
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_direct_message, contentFrameLayout);
 
-        userImage = findViewById(R.id.user_img);
         sendButton = findViewById(R.id.send_button);
-        backButton = findViewById(R.id.msg_back_button);
         receiverNameEditText = findViewById(R.id.receiver_user);
         messageEditText = findViewById(R.id.input_message);
+        sendImageView = findViewById(R.id.send_img);
 
         messages = new ArrayList<>();
         messagesRecyclerView = findViewById(R.id.message_recylerview);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-//        linearLayoutManager.setStackFr(true);
+        linearLayoutManager.setStackFromEnd(true);
         messagesRecyclerView.setLayoutManager(linearLayoutManager);
 
         messageAdapter = new MessageAdapter(DirectMessageActivity.this, messages);
         messagesRecyclerView.setAdapter(messageAdapter);
-
 
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -79,13 +77,11 @@ public class DirectMessageActivity extends BaseActivity {
 
         receiverNameEditText.setText(receiverUsername);
 
-        String sendingId = senderUid + receiverUid;
-        String receivingId = receiverUid + senderUid;
+        chatId = getChatId(senderUid, receiverUid);
 
-        usersReference = firebaseDatabase.getReference().child("users").child(senderUid);
-        chatsReference = firebaseDatabase.getReference().child("chats").child(sendingId).child("messages");
+        chatsReference = firebaseDatabase.getReference().child("chats").child(chatId).child("messages");
 
-        chatsReference.addValueEventListener(new ValueEventListener() {
+        chatsReference.orderByChild("sendTime").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 messages.clear();
@@ -94,6 +90,14 @@ public class DirectMessageActivity extends BaseActivity {
                     messages.add(message);
                 }
                 messageAdapter.notifyDataSetChanged();
+                if (!messages.isEmpty()) {
+                    messagesRecyclerView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            messagesRecyclerView.smoothScrollToPosition(messages.size() - 1);
+                        }
+                    });
+                }
             }
 
             @Override
@@ -115,32 +119,32 @@ public class DirectMessageActivity extends BaseActivity {
                     Date currentDate = new Date();
                     long currentTime = currentDate.getTime();
                     Message message = new Message(senderUid, currentTime, toSendMessage);
-                    updateMessagesFirebaseReference(firebaseDatabase, message, receivingId, sendingId);
+                    updateMessagesFirebaseReference(firebaseDatabase, message);
                 }
             }
         });
     }
 
-    private void updateMessagesFirebaseReference(FirebaseDatabase firebaseDatabase, Message message, String receivingId, String sendingId) {
+    private void updateMessagesFirebaseReference(FirebaseDatabase firebaseDatabase, Message message) {
         firebaseDatabase.getReference().child("chats")
-                        .child(sendingId)
+                        .child(chatId)
                         .child("messages")
                         .push().setValue(message).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        firebaseDatabase.getReference()
-                                        .child("chats")
-                                        .child(receivingId)
-                                        .child("messages")
-                                        .push().setValue(message).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-
-                                    }
-                                });
-
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Failed to send message", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
+    }
+
+    private String getChatId(String senderId, String receiverId) {
+        if (senderId == null || receiverId == null) return "";
+        if (senderId.hashCode() < receiverId.hashCode()) {
+            return senderId + receiverId;
+        }
+        else return receiverId + senderId;
     }
 }
 

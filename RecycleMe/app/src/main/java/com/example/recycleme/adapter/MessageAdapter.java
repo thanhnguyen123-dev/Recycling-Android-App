@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -79,28 +81,34 @@ public class MessageAdapter extends RecyclerView.Adapter {
 
     public class SendingMessageViewHolder extends RecyclerView.ViewHolder {
         private TextView messageTextView;
+        private RelativeLayout relativeLayout;
 
         public SendingMessageViewHolder(@NonNull View itemView) {
             super(itemView);
             messageTextView = itemView.findViewById(R.id.sendingMessageTextView);
+            relativeLayout = itemView.findViewById(R.id.sendingMessageLayout);
         }
 
         public void bind(Message message) {
             messageTextView.setText(message.getSendMessage());
+            relativeLayout.setVisibility(View.VISIBLE);
         }
 
     }
 
     public class ReceivingMessageViewHolder extends RecyclerView.ViewHolder {
         private TextView messageTextView;
+        private RelativeLayout relativeLayout;
 
         public ReceivingMessageViewHolder(@NonNull View itemView) {
             super(itemView);
             messageTextView = itemView.findViewById(R.id.receivingMessageTextView);
+            relativeLayout = itemView.findViewById(R.id.receiveMessageLayout);
         }
 
         public void bind(Message message) {
             messageTextView.setText(message.getSendMessage());
+            relativeLayout.setVisibility(View.VISIBLE);
         }
     }
 
