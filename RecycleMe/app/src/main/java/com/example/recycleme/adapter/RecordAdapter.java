@@ -1,4 +1,4 @@
-package com.example.recycleme.record;
+package com.example.recycleme.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;

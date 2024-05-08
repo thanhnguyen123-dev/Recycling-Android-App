@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,12 +75,12 @@ public class RecycledViewAdapter extends RecyclerView.Adapter<RecycledViewAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.productNameTextView = itemView.findViewById(R.id.product_name_text);
-            this.brandNameTextView = itemView.findViewById(R.id.product_brand_text);
+            this.productNameTextView = itemView.findViewById(R.id.username);
+            this.brandNameTextView = itemView.findViewById(R.id.user_last_msg);
             this.materialTextView = itemView.findViewById(R.id.product_material_text);
             this.valueTextView = itemView.findViewById(R.id.product_value_text);
             this.addToCartButton = itemView.findViewById(R.id.add_cart_button);
-            this.itemDescription = itemView.findViewById(R.id.itemDescription);
+            this.itemDescription = itemView.findViewById(R.id.user_profile_img);
         }
 
         public void bind(RecycledItem item) {

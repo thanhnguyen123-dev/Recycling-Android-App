@@ -67,7 +67,7 @@ public class BaseActivity extends AppCompatActivity {
                 if (menuItem.getItemId() == R.id.home) {
                     Intent intent = new Intent(BaseActivity.this, MainActivity.class);
                     startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.login) {
+                } else if (menuItem.getItemId() == R.id.register_button) {
                     if (LoginContext.getInstance().isLoggedIn()) {
                         Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
                         startActivity(intent);
@@ -75,6 +75,9 @@ public class BaseActivity extends AppCompatActivity {
                         Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }
+                } else if (menuItem.getItemId() == R.id.chats) {
+                    Intent intent = new Intent(BaseActivity.this, ChatsMainActivity.class);
+                    startActivity(intent);
                 } else if (menuItem.getItemId() == R.id.cart) {
                     Intent intent = new Intent(BaseActivity.this, CartActivity.class);
                     startActivity(intent);

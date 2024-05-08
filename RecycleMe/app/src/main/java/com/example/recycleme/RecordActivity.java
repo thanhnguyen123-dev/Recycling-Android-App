@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.recycleme.cart.NodeData;
 import com.example.recycleme.cart.UserTree;
-import com.example.recycleme.record.RecordAdapter;
+import com.example.recycleme.adapter.RecordAdapter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
