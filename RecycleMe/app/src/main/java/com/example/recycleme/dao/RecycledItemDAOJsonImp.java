@@ -3,11 +3,10 @@ package com.example.recycleme.dao;
 import android.content.Context;
 import android.content.res.AssetManager;
 
-import com.example.recycleme.RecycledItem;
+import com.example.recycleme.model.RecycledItem;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;

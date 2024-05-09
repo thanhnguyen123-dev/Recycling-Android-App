@@ -7,6 +7,7 @@ import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import com.example.recycleme.cart.Cart;
+import com.example.recycleme.model.RecycledItem;
 
 import org.junit.Before;
 import org.junit.Test;

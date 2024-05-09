@@ -3,13 +3,14 @@ package com.example.recycleme.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.R;
-import com.example.recycleme.RecycledItem;
+import com.example.recycleme.model.RecycledItem;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,15 +34,21 @@ import java.util.List;
  * @author Julius Liem
  */
 public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    public interface OnDeleteClickListener {
+        void onDeleteClick(LocalDateTime date);
+    }
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
     private LocalDateTime date;
     private List<RecycledItem> items;
-    public RecordAdapter(LocalDateTime date, List<RecycledItem> items) {
+    private OnDeleteClickListener deleteClickListener;
+
+    public RecordAdapter(LocalDateTime date, List<RecycledItem> items, OnDeleteClickListener deleteClickListener) {
         this.date = date;
         this.items = items;
+        this.deleteClickListener = deleteClickListener;
     }
 
     @Override
@@ -54,7 +61,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        if (viewType == TYPE_HEADER) {
-           View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_date_cart, parent, false);
+           View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_date_history, parent, false);
            return new HeaderViewHolder(view);
        } else {
            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_view_row, parent, false);
@@ -66,7 +73,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof HeaderViewHolder) {
             HeaderViewHolder headerViewHolder = (HeaderViewHolder) holder;
-            headerViewHolder.bind(date);
+            headerViewHolder.bind(date, this.deleteClickListener);
         } else {
             ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
             RecycledItem item = items.get(position - 1);
@@ -77,19 +84,34 @@ public class RecordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public int getItemCount() {
         // Accounting for the header and the actual recycled items
+        if (items.isEmpty()) {
+            return 0;
+        }
+
         return items.size() + 1;
+    }
+
+    public void clearItems() {
+        this.items.clear();
     }
 
     public static class HeaderViewHolder extends RecyclerView.ViewHolder {
 
         private TextView dateTextView;
+        private Button deleteButton;
+
         public HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
             this.dateTextView = itemView.findViewById(R.id.date_header);
+            this.deleteButton = itemView.findViewById(R.id.date_history_delete);
         }
 
-        public void bind(LocalDateTime date) {
+        public void bind(LocalDateTime date, OnDeleteClickListener deleteClickListener) {
             dateTextView.setText(date.format(DateTimeFormatter.ISO_DATE));
+
+            deleteButton.setOnClickListener(v -> {
+                deleteClickListener.onDeleteClick(date);
+            });
         }
     }
 

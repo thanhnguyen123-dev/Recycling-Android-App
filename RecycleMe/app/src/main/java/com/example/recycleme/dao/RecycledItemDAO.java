@@ -1,6 +1,6 @@
 package com.example.recycleme.dao;
 
-import com.example.recycleme.RecycledItem;
+import com.example.recycleme.model.RecycledItem;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.recycleme.cart;
+package com.example.recycleme.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.*;
-import com.example.recycleme.RecycledItem;
+import com.example.recycleme.model.RecycledItem;
+import com.example.recycleme.cart.Cart;
 
 import java.util.List;
 
@@ -64,7 +65,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_HEADER) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_date_cart, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.header_cart, parent, false);
             return new HeaderViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_view_row, parent, false);
@@ -94,7 +95,7 @@ public class CartViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         private TextView materialTextView;
         public HeaderViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.materialTextView = itemView.findViewById(R.id.date_header);
+            this.materialTextView = itemView.findViewById(R.id.item_type_header);
         }
 
         public void bind(String material) {

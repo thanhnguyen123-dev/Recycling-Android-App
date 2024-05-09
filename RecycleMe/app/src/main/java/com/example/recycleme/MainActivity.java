@@ -1,6 +1,5 @@
 package com.example.recycleme;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,13 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.recycleme.adapter.RecycledViewAdapter;
 import com.example.recycleme.cart.Cart;
 import com.example.recycleme.interfaces.Observer;
+import com.example.recycleme.model.RecycledItem;
 import com.example.recycleme.search.SearchQueryParser;
+import com.example.recycleme.util.RecycledItemDb;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseActivity implements Observer {
 

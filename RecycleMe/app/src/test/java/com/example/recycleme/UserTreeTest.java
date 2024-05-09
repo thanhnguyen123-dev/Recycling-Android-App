@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNull;
 
 import com.example.recycleme.cart.NodeData;
 import com.example.recycleme.cart.UserTree;
+import com.example.recycleme.model.RecycledItem;
 
 import org.junit.After;
 import org.junit.Before;

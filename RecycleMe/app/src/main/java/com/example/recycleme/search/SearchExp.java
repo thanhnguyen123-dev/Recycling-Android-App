@@ -1,7 +1,7 @@
 package com.example.recycleme.search;
 
-import com.example.recycleme.RecycledItem;
-import com.example.recycleme.cart.AVLTreeItem;
+import com.example.recycleme.model.RecycledItem;
+import com.example.recycleme.util.tree.AVLTreeItem;
 
 import java.util.ArrayList;
 import java.util.HashSet;

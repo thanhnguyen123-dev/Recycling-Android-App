@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import com.example.recycleme.cart.AVLTree;
+import com.example.recycleme.model.RecycledItem;
+import com.example.recycleme.util.tree.AVLTree;
 import com.example.recycleme.cart.NodeData;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
