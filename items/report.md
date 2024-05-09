@@ -78,7 +78,7 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
-**u7650334, Harrison**  I have xx% contribution, as follows: <br>
+2. **u7650334, Harrison**  I have xx% contribution, as follows: <br>
 - **Code Contribution in the final App**
     - Cart feature (Singleton Design Pattern) - class Cart: [Cart.java](link_to_file),
     - Cart Layout - CartActivity class = [CartActivity.java](link_to_file), CartActivity layout: [CartActivity.xml](link_to_file)
@@ -90,14 +90,14 @@ Note that the core criteria of contribution is based on `code contribution` (the
     - Singleton design pattern, DAO design pattern
 
 3. **u7761531, Devansu**  I have xx% contronalityias follows: <br>
-- **Code Contribution in the final App**
-- Data Stream - `startStream()` and `stopStream()` methods in [RecycledItemDb.java](link_to_file), `onCreate()`, `update()` and `onDestroy()` methods in [MainActivity.java](link_to_file)
-- Search functionality (Tokenizer, Search Query Parser, Search Query evaluation) - class [Token.java](link_to_file), class [Tokenizer.java](link_to_file), class [SearchQueryParser.java](link_to_file), class [`SearchExp.java`](link_to_file), `onCreate()` method in [`MainActivity.java`](link_to_file), `search()` method in [`RecycledItemDB.java`](link_to_file)
-- Main app layout - MainActivity class: [MainActivity.java](link_to_file), MainActivity layout: [MainActivity.xml](link_to_file)
-- Unit Tests - class [TokenizerTest.java](link_to_file), class [SearchQueryParserTest.java](link_to_file)
+    - **Code Contribution in the final App**
+        - Data Stream - `startStream()` and `stopStream()` methods in [RecycledItemDb.java](link_to_file), `onCreate()`, `update()` and `onDestroy()` methods in [MainActivity.java](link_to_file)
+        - Search functionality (Tokenizer, Search Query Parser, Search Query evaluation) - class [Token.java](link_to_file), class [Tokenizer.java](link_to_file), class [SearchQueryParser.java](link_to_file), class [`SearchExp.java`](link_to_file), `onCreate()` method in [`MainActivity.java`](link_to_file), `search()` method in [`RecycledItemDB.java`](link_to_file)
+        - Main app layout - MainActivity class: [MainActivity.java](link_to_file), MainActivity layout: [MainActivity.xml](link_to_file)
+        - Unit Tests - class [TokenizerTest.java](link_to_file), class [SearchQueryParserTest.java](link_to_file)
 
 - **Code and App Design**
-- [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
 
 - **Others**: (only if significant and significantly different from an "average contribution")
     - [Report Writing?] [Slides preparation?]*
@@ -123,8 +123,6 @@ Note that the core criteria of contribution is based on `code contribution` (the
 
 ## Application Description
 
-*[What is your application, what does it do? Include photos or diagrams if necessary]*
-
 This is a recycling logging application. By using this application, we can log what we have recycled in each day, and we can see the statistics and history of our recycling history. This app also allows the users to see the nearest recycling spot. By logging in, the user can add their log, add their own personal recycled items, as well as see their statistics. They can also see the nearest location of recycling points.
 
 ### Application Use Cases and or Examples
@@ -134,9 +132,34 @@ Target users: people who want to log their recycling activities.
 Molly wants to log her recycling activities.
 1. Molly decides that she will embrace green lifestyle.
 2. Molly downloads the RecycleMe app.
-3. Now, Molly can: log her recycling activities everyday
-4. By the end of the month, Molly can see how many items she has recycled.
-5. Molly can also use it to find the nearest recycling points.
+3. Now, Molly can see the list of common recycled items
+
+<div style="text-align: center;">
+    <img src="media/_examples/screenshot/screenshot_mainactivity.png" alt="Description of the image" width="20%">
+</div>
+
+4. She can search for items that she wants to recycle, and add it to her cart
+<div style="text-align: center;">
+    <img src="media/_examples/screenshot/screenshot_search.png" alt="Description of the image" width="20%">
+</div>
+
+5. Molly then can check out her cart to signify that she has finished recycling items
+<div style="text-align: center;">
+    <img src="media/_examples/screenshot/screenshot_cart.png" alt="Description of the image" width="20%">
+</div>
+
+5. Molly then can check her recycling history and statistics
+<div style="text-align: center;">
+    <img src="media/_examples/screenshot/screenshot_history.png" alt="Description of the image" width="20%">
+    <img src="media/_examples/screenshot/screenshot_statistic.png" alt="Description of the image" width="20%">
+</div>
+
+Target users: people who want to find friends in their recycling journey
+1. Molly decides that she wants to find some friends who have the same green lifestyle
+2. Molly downloads the app
+3. Molly sees that there is a chat function which she can use to find new friends
+4. Molly chat with her new friends
+
 
 Target users: people who recycle large amounts of recycling, or do not have access to recycling bins at home.
 
@@ -178,27 +201,6 @@ This is an important section of your report and should include all technical dec
 - Decisions made (e.g., explain why you chose one or another data structure, why you used a specific data model, etc.)
 
 - Details about the design patterns used (where in the code, justification of the choice, etc)
-- The State design pattern is used in the LoginContext class. Justification of this include:
-1. There are different actions that can be done depending on whether the user is logged in or logged out (e.g. when the user is logged out then the user can't add item to his cart history)
-- The DAO design pattern is used in reading the data instances. Justification of this are:
-1. DAO design pattern is extensible, allowing the application to read the data from multiple sources
-
-*Please give clear
-* Used for storing all of the Recycled Items in the MainActivity.class
-* Storing log data using a NodeData class
-* Code Locations: defined in [Class AVLTree](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/AVLTree.java), used in [SearchExp.class, method evaluateSearchExp()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/search/SearchExp.java?ref_type=heads#L25-L46), [AVLTreeItem.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/AVLTreeItem.java?ref_type=heads), and [UserTree.class]()
-* Reasons:
-    * We use AVLTree for storing the items because searching items in an AVLTree is faster compared to searching it in an ArrayList.
-
-
-3. *ArrayList*
-    * Objective:
-        * Used for storing Message entity objects in MessageAdapter.class
-        * Used for storing User entity objects in UserAdapter.class
-        *
-    * Code Locations: [AVLTree.class, flattenTree() method](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/AVLTree.java?ref_type=heads#L227-L239), [AVLTreeItem.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/AVLTreeItem.java?ref_type=heads), [FirebaseRecycledItemDAO.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java?ref_type=heads), [ All of the adapter
-    * Reasons:
-        * We use ArrayList to store entity objects in an Adapter that binds the data to the ViewHolder. All of our adapter use ArrayList because it is the most convenient data structure for RecyclerView. If we use other kind of data structure, we would have to implement an iterator for it (and it’s not necessarily faster because in the end we would have to traverse the whole data).
 
 ### <u>Grammar(s)</u>
 *[How do you design the grammar? What are the advantages of your designs?]*
@@ -208,12 +210,11 @@ We designed the grammar by first identifying what relevant information the user 
 
 Advantages of the design
 
-Expressiveness: The grammar allows for a wide range of valid search queries, including single-item queries, compound queries with conjunctions, and queries combining different search criteria (e.g., item name and brand).
-
-Flexibility: Users can input various types of queries, such as searching for specific items, filtering by brand or material, or combining multiple criteria in a single query.
-Clarity: The grammar provides clear rules for constructing valid search queries, making it easy for us to understand and implement search functionality.
-Scalability: The grammar can be extended to accommodate additional search criteria or features as the application evolves. For example, new types of recyclable items or search filters can be added without significant changes to the grammar.
-User-Friendly: By allowing users to input flexible and intuitive search queries, the grammar enhances the usability of the search bar, leading to a better overall user experience.
+* Expressiveness: The grammar allows for a wide range of valid search queries, including single-item queries, compound queries with conjunctions, and queries combining different search criteria (e.g., item name and brand).
+* Flexibility: Users can input various types of queries, such as searching for specific items, filtering by brand or material, or combining multiple criteria in a single query.
+* Clarity: The grammar provides clear rules for constructing valid search queries, making it easy for us to understand and implement search functionality.
+* Scalability: The grammar can be extended to accommodate additional search criteria or features as the application evolves. For example, new types of recyclable items or search filters can be added without significant changes to the grammar.
+* User-Friendly: By allowing users to input flexible and intuitive search queries, the grammar enhances the usability of the search bar, leading to a better overall user experience.
 
 Production Rules:
 
@@ -228,7 +229,7 @@ Production Rules:
 
 ### <u>Tokenizers and Parsers</u>
 
-*[Where do you use tokenizers and parsers? How are they built? What are the advantages of the designs?]*
+
 
 We used tokenizers and parser in a search bar that allows the user filter out and find the specific recycled item they need.
 
@@ -252,6 +253,7 @@ before parsing the query. This allows for a fast, and efficient way of processin
 - Invalid query filtering even before query parsing.
 
 <u>Parser</u>
+
 Our Parser has been implemented in the [SearchQueryParser](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/search/SearchQueryParser.java?ref_type=heads) class. 
 By design, it has implemented as a Recursive Descent Parser, breaking down into each production rule of our grammar, parsing tokens from a user's search query 
 in a left-to-right fashion. 
@@ -270,46 +272,72 @@ a lot of flexibility to users.
 - Effectively reports invalid search queries based on grammar violations.
 - Easily scalable to handle more complex grammars allowing for even more powerful search queries.
 
+### <u>Data structure(s)</u>
+
 1. *HashMap*
     * Objective: used for storing the items in a cart
     * Code Locations: defined in [Class CartActivity, methods CartActivity(), addItem(), removeItem()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java) processed using [setChartMaterials() and setChartRecycledItemOverTime() in class StatisticActivity](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/StatisticActivity.java)
     * *Reasons:*
         * We use HashMap because we need to categorize the RecycleItem based on their material. In order to do that, we need to have some sort of a Key-Value Pair
         * We don't need to access the item by index for the [Data-Graphical] feature because all of the data will be traversed
-        * For the (part), the data ... (characteristics) ...
 
 2. *AVLTree*
     * Objective: used for storing previously recycled items.
     * Code Locations: defined in [Class AVLTree](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/AVLTree.java), used in [SearchExp.class, method evaluateSearchExp()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/search/SearchExp.java?ref_type=heads#L25-L46), [AVLTreeItem.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/AVLTreeItem.java?ref_type=heads), and [UserTree.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/UserTree.java?ref_type=heads)
-    * Explanations: For
     * Reasons:
         * Using AVLTree guarantees a faster searching for recycled items. It has a theta(n) time complexity
-        * We use AVLTree to
-
-3. *ArrayList*
-    * *Objective:*
-        * *used for storing the items in the HashMap that's used in the Cart*
-        * *used for showing the data in a RecyclerView*
+        * We chose not to use RBTree because the amount of data is not that much. Using RBTree might have its benefits when the data is around 10,000, but when the data is only 2500, AVLTree is simpler to implement.
+        * We chose not to use BST because AVLTree is similar to BST in terms of its complexity, but BST can lead to a big o of n in worst case.
+    * We have AVLTreeItem and AVLTreeTime that inherits from AVLTree, both are used for different purposes.
+        1. AVLTreeItem are used for storing the RecycledItem, here is the structure:
+            * Structure: ![AVLTreeItem](media/_examples/DataStructureMedia/AVLTreeItem.png)
+            * Reasons:  
+                * We inherit AVLTree because this class has an extension that allows searching for item
+                * The extra method is used to search for recycled items based on their name, brand, and materials
+                * This is also why the keys used are name, brand, and materials
+        2. AVLTreeTime
+            * Objective: This class is used to save the user history
+            * Structure: ![AVLTreeTime](media/_examples/DataStructureMedia/AVLTreeTime.png)
+            * Reasons:
+                * To make it easier using AVLTree directly with LocalDateTime
+                * This class saves the item the user logged using a key pair because it will be further used in the statistic activity (to see the user's most common recycled items material)
+        
+3. ArrayList
+    * Objective:
+        * used for storing the items in the HashMap that's used in the Cart
+        * used for showing the data in a RecyclerView
     * Reasons:
-        * We use ArrayList to store Entity objects in the Adapter that binds data to the ViewHolder. The Adapter then create a RecyclerView to reuse old instances of Views to display a responsive and dynamic list in the UI
+        * All of our adapter use ArrayList because it is the most convenient data structure for RecyclerView. If we use other kind of data structure, we would have to implement an iterator for it (and it’s not necessarily faster because in the end we would have to traverse the whole data).
 
 <hr>
 
 ### Design Patterns
-*[What design patterns did your team utilise? Where and why?]*
 
 1. *Singleton Pattern*
-    * *Objective: used for storing the cart for the ability to view the cart*
-    * *Code Locations: defined in [Cart, getInstance()](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
+    * Objective: To easily find the class instance when the users are going back and forth between activities
+    * Code Locations: defined in [Cart.class, getInstance()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java), [UserTree.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/UserTree.java), [LoginContext.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [RecycledItemDb.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/RecycledItemDb.java)
     * *Reasons:*
-        * ...
+        * It is hard to pass Objects between activities, thus we decided to just create a singleton for Objects that are necessary to be kept in memory
+        * All of these items are also logically should only be created once in the app:
+            * Each users only have one cart
+            * Each users have one history (stored in the UserTree.class)
+            * LoginContext can only be invoked once per user
+            * There is only one RecycledItemDb per user.
 2. Observer Pattern
-   Objective: used for storing and notifying observers about changes in the list of recycled items in the RecycledItemDb feature.
-    * *Code Locations: defined in [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and [class AnotherClass, lines l1-l2](url); processed using [dataStructureHandlerMethod](url) and ...
-      Reasons:
-      -The Observer pattern allows for a design where the RecycledItemDb class can notify multiple observers (such as UI components or logging systems) about changes in the list of recycled items without those observers needing to know the details of the RecycledItemDb implementation.
-      -It allows new observers to be added without modifying the subject (RecycledItemDb) class.
-      -This pattern promotes reusability by separating concerns, making it easier to maintain and understand the codebase.
+    * Objective: used for storing and notifying observers about changes in the list of recycled items in the RecycledItemDb feature.
+    * Code Locations: 
+    * Reasons:
+        1. The Observer pattern allows for a design where the RecycledItemDb class can notify multiple observers (such as UI components or logging systems) about changes in the list of recycled items without those observers needing to know the details of the RecycledItemDb implementation.
+        2. It allows new observers to be added without modifying the subject (RecycledItemDb) class.
+        3. This pattern promotes reusability by separating concerns, making it easier to maintain and understand the codebase.
+3. The State design pattern is used in the LoginContext class.
+    * Objective: 
+    * Reason: 
+        * There are different actions that can be done depending on whether the user is logged in or logged out (e.g. when the user is logged out then the user can't add item to his cart history)
+4. The DAO design pattern is used in reading the data instances. 
+    * Objective: To read data instances from different locations
+    * Reason: 
+        * DAO design pattern is extensible, allowing the application to read the data both locally and from Firebase
 
 
 <hr>
