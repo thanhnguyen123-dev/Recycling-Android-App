@@ -2,8 +2,8 @@ package com.example.recycleme;
 
 import static org.junit.Assert.assertEquals;
 
-import com.example.recycleme.cart.AVLTree;
-import com.example.recycleme.cart.AVLTreeItem;
+import com.example.recycleme.model.RecycledItem;
+import com.example.recycleme.util.tree.AVLTreeItem;
 
 import org.junit.Test;
 

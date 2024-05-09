@@ -1,9 +1,9 @@
-package com.example.recycleme;
+package com.example.recycleme.util;
 
 import android.content.Context;
 
-import com.example.recycleme.cart.AVLTree;
-import com.example.recycleme.cart.AVLTreeItem;
+import com.example.recycleme.model.RecycledItem;
+import com.example.recycleme.util.tree.AVLTreeItem;
 import com.example.recycleme.dao.FirebaseRecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAOJsonImp;

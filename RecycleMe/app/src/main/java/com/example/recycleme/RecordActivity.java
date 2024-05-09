@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.recycleme.cart.NodeData;
 import com.example.recycleme.cart.UserTree;
 import com.example.recycleme.adapter.RecordAdapter;
+import com.example.recycleme.model.RecycledItem;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +28,12 @@ public class RecordActivity extends BaseActivity {
 
         this.nodeDataList = UserTree.getInstance().traverseReturnItemAndDate();
 
+        recyclerView = findViewById(R.id.record_history_recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        updateAdapter();
+    }
+
+    private void updateAdapter() {
         List<RecyclerView.Adapter<RecyclerView.ViewHolder>> adapters = new ArrayList<>();
 
         // Create a new adapter for each NodeData
@@ -34,7 +42,14 @@ public class RecordActivity extends BaseActivity {
             LocalDateTime date = nodedata.getDateTime();
             List<RecycledItem> items = nodedata.getValue();
 
-            RecordAdapter recordAdapter = new RecordAdapter(date, items);
+            RecordAdapter recordAdapter = new RecordAdapter(date, items, new RecordAdapter.OnDeleteClickListener() {
+                @Override
+                public void onDeleteClick(LocalDateTime date) {
+                    UserTree.getInstance().deleteItem(date);
+                    nodeDataList = UserTree.getInstance().traverseReturnItemAndDate();
+                    updateAdapter();
+                }
+            });
             adapters.add(recordAdapter);
         }
 

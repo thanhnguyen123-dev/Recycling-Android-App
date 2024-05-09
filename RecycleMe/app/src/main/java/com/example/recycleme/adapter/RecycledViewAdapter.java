@@ -1,4 +1,4 @@
-package com.example.recycleme;
+package com.example.recycleme.adapter;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recycleme.ItemDescriptionActivity;
+import com.example.recycleme.R;
+import com.example.recycleme.model.RecycledItem;
 import com.example.recycleme.cart.Cart;
 
 import java.util.List;

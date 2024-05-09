@@ -1,4 +1,4 @@
-package com.example.recycleme;
+package com.example.recycleme.model;
 
 import java.util.Objects;
 

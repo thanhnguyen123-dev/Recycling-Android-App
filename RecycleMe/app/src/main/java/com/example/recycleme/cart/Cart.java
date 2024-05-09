@@ -1,8 +1,6 @@
 package com.example.recycleme.cart;
 
-import com.example.recycleme.RecycledItem;
-import com.example.recycleme.interfaces.IterableCollection;
-import com.example.recycleme.interfaces.Iterator;
+import com.example.recycleme.model.RecycledItem;
 
 import java.util.ArrayList;
 import java.util.HashMap;

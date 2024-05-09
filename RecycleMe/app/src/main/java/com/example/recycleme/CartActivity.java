@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.cart.Cart;
-import com.example.recycleme.cart.CartViewAdapter;
+import com.example.recycleme.adapter.CartViewAdapter;
 import com.example.recycleme.cart.UserTree;
-import com.example.recycleme.interfaces.Observer;
+import com.example.recycleme.model.RecycledItem;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

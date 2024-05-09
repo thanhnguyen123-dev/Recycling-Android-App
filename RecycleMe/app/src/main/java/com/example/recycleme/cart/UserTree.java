@@ -1,5 +1,6 @@
 package com.example.recycleme.cart;
-import com.example.recycleme.RecycledItem;
+import com.example.recycleme.model.RecycledItem;
+import com.example.recycleme.util.tree.AVLTreeTime;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -33,6 +34,11 @@ public class UserTree {
 
     public List<RecycledItem> searchItem(LocalDateTime time) {
         return this.avlTree.searchItem(time);
+    }
+
+    public void deleteItem(LocalDateTime time) {
+        this.avlTree.delete(new NodeData<>(time, new ArrayList<>()));
+        return;
     }
 
 
