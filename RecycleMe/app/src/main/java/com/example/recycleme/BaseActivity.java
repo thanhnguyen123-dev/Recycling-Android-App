@@ -3,6 +3,8 @@ package com.example.recycleme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -62,17 +64,12 @@ public class BaseActivity extends AppCompatActivity {
         toggle.syncState();
     }
 
-    private void setupNavListener() {
+    private void setupNavListener() { //Julius Liem
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem menuItem) {
-                Map<Integer, Class<?>> activityMap = new HashMap<>();
-                activityMap.put(R.id.home, MainActivity.class);
-                activityMap.put(R.id.login, LoginContext.getInstance().isLoggedIn() ? ProfileActivity.class : LoginActivity.class);
-                activityMap.put(R.id.cart, CartActivity.class);
-                activityMap.put(R.id.record, RecordActivity.class);
-                activityMap.put(R.id.statistic, StatisticActivity.class);
-                activityMap.put(R.id.map, MapActivity.class);
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) { //Harrison Black
+
+                Map<Integer, Class<?>> activityMap = getIntegerClassMap();
 
                 Class<?> activityClass = activityMap.get(menuItem.getItemId());
 
@@ -86,6 +83,19 @@ public class BaseActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+
+    @NonNull
+    private static Map<Integer, Class<?>> getIntegerClassMap() {  //Harrison Black
+        Map<Integer, Class<?>> activityMap = new HashMap<>();
+        activityMap.put(R.id.home, MainActivity.class);
+        activityMap.put(R.id.login, LoginContext.getInstance().isLoggedIn() ? ProfileActivity.class : LoginActivity.class);
+        activityMap.put(R.id.cart, CartActivity.class);
+        activityMap.put(R.id.record, RecordActivity.class);
+        activityMap.put(R.id.statistic, StatisticActivity.class);
+        activityMap.put(R.id.map, MapActivity.class);
+        return activityMap;
     }
 
 }
