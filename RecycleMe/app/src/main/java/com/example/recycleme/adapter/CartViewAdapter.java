@@ -30,7 +30,7 @@ import java.util.List;
  * Header in RecyclerView - What is the best practice in 2020?</a>
  * The answer provided guidance on using ConcatAdapter to implement header for adapter.
  *
- * @author Julius Liem
+ * @author Julius Liem - u7724204
  */
 public class CartViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

@@ -16,7 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * An implementation of the RecycledItemDAO interface that uses JSON files for data persistence.
+ * An unused implementation of the RecycledItemDAO interface that uses JSON files for data persistence.
+ * Previously this class was used before the data was migrated to Firebase.
  * <p>
  * This class provides methods to perform operations on RecycledItem objects.
  * The data is stored in a JSON file specified by the FILE_NAME parameter.

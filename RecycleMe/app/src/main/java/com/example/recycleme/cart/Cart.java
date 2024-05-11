@@ -7,6 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Cart model for storing items.
+ * This model is used when the user inputted items to add into their cart.
+ * When inputting, the items are sorted based on material and put in a HashMap
+ *
+ * @author Julius Liem - u7724204
+ */
 public class Cart{
     private static Cart instance = null;
     private Map<String, List<RecycledItem>> itemMaterialMap;
