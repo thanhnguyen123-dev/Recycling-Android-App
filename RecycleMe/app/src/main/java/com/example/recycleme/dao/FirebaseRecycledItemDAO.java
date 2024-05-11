@@ -36,7 +36,7 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
 
     private Future<List<RecycledItem>> future;
 
-    private List<RecycledItem> allItemsForReal;
+    private List<RecycledItem> allItems;
     private Context context;
     private int f; //0 if you want to use a local file, 1 if you want to use a FirebaseFile
 
@@ -115,7 +115,7 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
         // Use a separate thread to wait for the result and update allRecycledItems
         new Thread(() -> {
             try {
-                allItemsForReal = future.get(); // This will block until the result is ready
+                allItems = future.get(); // This will block until the result is ready
             } catch (InterruptedException | ExecutionException e) {
                 e.printStackTrace();
             }
@@ -131,7 +131,7 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
                 e.printStackTrace();
             }
         }
-        return this.allItemsForReal;
+        return this.allItems;
     }
 
     private void saveRecycledItems(List<RecycledItem> recycledItems) {
