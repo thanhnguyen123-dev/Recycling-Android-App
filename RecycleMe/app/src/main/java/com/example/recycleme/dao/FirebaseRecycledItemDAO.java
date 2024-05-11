@@ -32,7 +32,7 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
 
     private final String FILE_NAME;
     private Gson gson;
-    private Future <List<RecycledItem>> allRecycledItems;
+    private Future <List<RecycledItem>> allRecycledItemsFuture;
 
     private Future<List<RecycledItem>> future;
 
@@ -47,7 +47,7 @@ public class FirebaseRecycledItemDAO implements RecycledItemDAO {
         this.gson = new Gson();
         this.context = context;
         this.f = f;
-        this.allRecycledItems = this.getAllRecycledItemsHelper();
+        this.allRecycledItemsFuture = this.getAllRecycledItemsHelper();
     }
 
 
