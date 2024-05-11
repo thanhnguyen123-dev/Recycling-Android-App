@@ -1,41 +1,83 @@
 package com.example.recycleme;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.example.recycleme.model.RecycledItem;
 import com.example.recycleme.util.tree.AVLTreeItem;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class AVLTreeItemTest {
-    @Test
-    public void testCeilingRecycledItem() {
-        AVLTreeItem recycledItemAVLTree = new AVLTreeItem();
 
-        List<RecycledItem> recycledItems = Arrays.asList(
-                new RecycledItem(5001, "Glass Jar", "Beans", "A", 0.4),
-                new RecycledItem(8001, "Glass Jar", "Beans", "B", 0.4),
-                new RecycledItem(8001, "Glass Jar", "Beans", "C", 0.4),
-                new RecycledItem(5001, "Glass Jar", "Beans", "D", 0.4),
-                new RecycledItem(8001, "Glass Jar", "Beans", "E", 0.4),
-                new RecycledItem(8001, "Glass Jar", "Beans", "F", 0.4),
-                new RecycledItem(5001, "Broksz", "Ceans", "Aa", 0.4),
-                new RecycledItem(5001, "Broksz", "Ceans", "Ab", 0.4),
-                new RecycledItem(8001, "Ausa", "Beans", "B", 0.4),
-                new RecycledItem(8001, "Ausa", "Ceans", "C", 0.4),
-                new RecycledItem(5001, "Thing", "Deans", "D", 0.4),
-                new RecycledItem(8001, "What", "Feans", "E", 0.4),
-                new RecycledItem(8001, "This", "Geans", "F", 0.4)
+    private AVLTreeItem avlTreeItem;
+    private List<RecycledItem> recycledItemList;
+
+    @Before
+    public void setUp() {
+        this.avlTreeItem = new AVLTreeItem();
+        this.recycledItemList = Arrays.asList(
+                new RecycledItem(1, "Glass Jar", "Beans", "A", 0.4),
+                new RecycledItem(2, "Glass Jar", "Beans", "B", 0.4),
+                new RecycledItem(3, "Glass Jar", "Beans", "C", 0.4),
+                new RecycledItem(4, "Glass Jar", "Beans", "D", 0.4),
+                new RecycledItem(5, "Glass Jar", "Beans", "E", 0.4)
         );
+    }
 
-        for (RecycledItem recycledItem: recycledItems) {
-            recycledItemAVLTree.insert(recycledItem);
+    @Test
+    public void testFindItems_emptyTree() {
+        List<RecycledItem> recycledItems = this.avlTreeItem.findItems("","","");
+        assertEquals(recycledItems.size(), 0);
+    }
+
+    @Test
+    public void testFindItems_singleItem() {
+        this.avlTreeItem.insert(recycledItemList.get(0));
+
+        List<RecycledItem> result = avlTreeItem.findItems("", "", "");
+        assertEquals(1, result.size());
+        assertEquals(recycledItemList.get(0), result.get(0));
+    }
+
+    @Test
+    public void testFindItems_multipleItems() {
+        for (RecycledItem item: this.recycledItemList) {
+            this.avlTreeItem.insert(item);
         }
 
-        assertEquals(Arrays.asList(recycledItems.get(6), recycledItems.get(7)), recycledItemAVLTree.findItems("broksz", "ceans", "a"));
-        assertEquals(Arrays.asList(recycledItems.get(8), recycledItems.get(9)), recycledItemAVLTree.findItems("Ausa", "", ""));
+        List<RecycledItem> result = avlTreeItem.findItems("Glass Jar", "", "");
+        assertEquals(5, result.size());
+
+        for (RecycledItem item: recycledItemList) {
+            assertTrue(result.contains(item));
+        }
     }
+
+    @Test
+    public void testFindItems_partialMatch() {
+        for (RecycledItem item: this.recycledItemList) {
+            this.avlTreeItem.insert(item);
+        }
+
+        List<RecycledItem> result = avlTreeItem.findItems("glass", "", "");
+        assertEquals(5, result.size());
+    }
+
+    @Test
+    public void testFindItems_caseInsensitive() {
+        for (RecycledItem item: this.recycledItemList) {
+            this.avlTreeItem.insert(item);
+        }
+
+        List<RecycledItem> result = avlTreeItem.findItems("", "", "a");
+
+        assertEquals(1,result.size());
+        assertEquals(this.recycledItemList.get(0), result.get(0));
+    }
+
 }

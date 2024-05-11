@@ -2,6 +2,7 @@ package com.example.recycleme.util.tree;
 
 import com.example.recycleme.model.RecycledItem;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class AVLTreeItem extends AVLTree<RecycledItem> {
     // everything that is prefixed with "ap"
     private String END = String.valueOf(Character.MAX_VALUE);
     public List<RecycledItem> findItems(String item, String brand, String material) {
+
+        if (this.size() == 0) {
+            return new ArrayList<>();
+        }
         RecycledItem recycledItem = new RecycledItem(0, item, brand, material, 0.0);
 
         RecycledItem floor = ceiling(recycledItem);
