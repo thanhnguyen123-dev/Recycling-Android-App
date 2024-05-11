@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+//Julius Liem + Harrison Black
 public class CartActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
