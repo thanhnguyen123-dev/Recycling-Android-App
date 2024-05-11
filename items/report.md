@@ -495,51 +495,96 @@ a purpose within your application. (medium)
     ```
     - The class uses generics to let the user insert anything as the value of the AVLTree
     - The relevant git commit: [a87e0154](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/commit/a87e0154d4aa8d97b67a47552779c31f1a1be8e6), and fixed in [e989af6d](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/commit/e989af6d11a69c559020ae3e173348cdd649ae9f)
-- Code Smell 2: **Multiple Responsibilities**
-    - The [RecycledItemDb.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java) class has multiple responsibilities:
-        - Handling DB operation
-        - Managing streaming thread
-        - Notifying observers
-    - This class should be splitted into separate classes, each handling different aspects
-    - However, we decided not to fix this as it takes time to split the class, and doing it with one week time can break the app.
-- Code smell 3: **Duplicated code**
-    - The BaseActivity.java class has a duplicated code where when starting new Activity, a new Intent is created in every if branch
-    ```
-    public boolean onNavigationItemSelected(MenuItem menuItem) {
-        // Handle navigation item clicks
-        if (menuItem.getItemId() == R.id.home) {
-            Intent intent = new Intent(BaseActivity.this, MainActivity.class);
-            startActivity(intent);
-        } else if (menuItem.getItemId() == R.id.register_button) {
-            if (LoginContext.getInstance().isLoggedIn()) {
-                Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        } else if (menuItem.getItemId() == R.id.chats) {
-            Intent intent = new Intent(BaseActivity.this, ChatsMainActivity.class);
-            startActivity(intent);
-        } else if (menuItem.getItemId() == R.id.cart) {
-            Intent intent = new Intent(BaseActivity.this, CartActivity.class);
-            startActivity(intent);
-        } else if (menuItem.getItemId() == R.id.record) {
-            Intent intent = new Intent(BaseActivity.this, RecordActivity.class);
-            startActivity(intent);
-        } else if (menuItem.getItemId() == R.id.statistic) {
-            Intent intent = new Intent(BaseActivity.this, StatisticActivity.class);
-            startActivity(intent);
-        }
-        // Close the navigation drawer
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
-    }
-    ```
-    - This code violates the principle of DRY.
-    - The relevant git commit is xxx, and we have 
 
-<br> <hr>
+- Code Smell 2: **Complex if-else statements**
+    - In the `BaseActivity.java` class, the `onNavigationItemSelected()` method previously had complex nested if-else statements.
+    ```
+        public boolean onNavigationItemSelected(MenuItem menuItem) {
+                // Handle navigation item clicks
+                if (menuItem.getItemId() == R.id.home) {
+                    Intent intent = new Intent(BaseActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else if (menuItem.getItemId() == R.id.register_button) {
+                    if (LoginContext.getInstance().isLoggedIn()) {
+                        Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }
+                } else if (menuItem.getItemId() == R.id.chats) {
+                    Intent intent = new Intent(BaseActivity.this, ChatsMainActivity.class);
+                    startActivity(intent);
+                } else if (menuItem.getItemId() == R.id.cart) {
+                    Intent intent = new Intent(BaseActivity.this, CartActivity.class);
+                    startActivity(intent);
+                } else if (menuItem.getItemId() == R.id.record) {
+                    Intent intent = new Intent(BaseActivity.this, RecordActivity.class);
+                    startActivity(intent);
+                } else if (menuItem.getItemId() == R.id.statistic) {
+                    Intent intent = new Intent(BaseActivity.this, StatisticActivity.class);
+                    startActivity(intent);
+                }
+                // Close the navigation drawer
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+    ```
+    - The nested if-else statements makes the code slightly unreadable. The code also repeatedly uses the `startActivity()` method in every branch.
+    - We fixed this by creating a new enum `MenuItemId` along with using switch-case statements to make the code more readable and less repetitive.
+    - The relevant git commit: [80d52f29](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/80d52f29d41a1fc032a64763e058576aa31b0b6f/RecycleMe/app/src/main/java/com/example/recycleme/BaseActivity.java), and fixed in [5ac522f9](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/commit/5ac522f9599f23b9da05b52ae86ff772a76d50b5)
+
+- Code Smell 3: **Complex method implementation**
+    - In the class `StatisticActivity.java`, the `setChartRecycledItemOverTime()` method has a complex and long implementation.
+    ```
+        private void setChartRecycledItemOverTime() {
+        List<NodeData<List<RecycledItem>>> recycledItemsOverTime = UserTree.getInstance().traverseReturnItemAndDate();
+
+        Map<LocalDate, Integer> recyclableCount = new TreeMap<>();
+        for (NodeData<List<RecycledItem>> data: recycledItemsOverTime) {
+            List<RecycledItem> recycledItemList = data.getValue();
+            LocalDate date = data.getDateTime().toLocalDate();
+
+            int count = recycledItemList.size();
+            recyclableCount.put(date, recyclableCount.getOrDefault(date, 0) + count);
+        }
+
+        List<BarEntry> entries = new ArrayList<>();
+        List<String> xAxisLabels = new ArrayList<>();
+        int index = 0;
+        for (Map.Entry<LocalDate, Integer> entry: recyclableCount.entrySet()) {
+            int count = entry.getValue();
+            LocalDate date = entry.getKey();
+
+            entries.add(new BarEntry(index++, count));
+            xAxisLabels.add(date.toString());
+        }
+
+        BarDataSet dataSet = new BarDataSet(entries, "Recycled Items Over Time");
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+
+        ...more code below
+       }
+    ```
+    - The above code does too many things and is not quite readable.
+    - We could potentially fix this code by breaking this method down into smaller methods following the Single Responsibility principle.
+    - We didn't fix the above code to avoid breaking the Statistics Activity feature.
+    - The relevant git commit introducing this code: [80d52f29](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/80d52f29d41a1fc032a64763e058576aa31b0b6f/RecycleMe/app/src/main/java/com/example/recycleme/StatisticActivity.java)
+
+- Code Smell 4: **Code redundancy**
+    - In the class `RecycledItemDb`, we have some redundant code like unused variables (like `isStreamRunning`) and methods like the following:
+    ```
+        public void addRecycledItemPersistent(RecycledItem recycledItem) {
+            recycledItemDAO.addRecycledItem(recycledItem);
+        }
+
+        public void updateRecycledItem(RecycledItem recycledItem) {
+            recycledItemDAO.updateRecycledItem(recycledItem);
+        }
+    ```
+   - We could fix this code by deleting these unused variables and methods. 
+   - There's similar code redundancy across other files like `CartViewAdapater.java`.
+   - The relevant git commit introducing this code: [1d538853](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/1d5388530f88b95b6f736d8a1f8322c81fd2653a/RecycleMe/app/src/main/java/com/example/recycleme/RecycledItemDb.java)
 
 ## Summary of Known Errors and Bugs
 

@@ -1,3 +1,8 @@
+package com.example.recycleme;
+
+import com.example.recycleme.SearchQueryParserTest;
+import com.example.recycleme.TokenizerTest;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
