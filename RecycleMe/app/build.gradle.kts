@@ -62,4 +62,9 @@ dependencies {
     implementation(libs.mockito.core)
     implementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.github.dhaval2404:imagepicker:2.1")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+
+
+
 }
