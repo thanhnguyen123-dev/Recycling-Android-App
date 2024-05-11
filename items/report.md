@@ -1,18 +1,6 @@
 # GP-24s1 Report
 
-The following is a report template to help your team successfully provide all the details necessary for your report in a structured and organised manner. Please give a straightforward and concise report that best demonstrates your project. Note that a good report will give a better impression of your project to the reviewers.
-
-Note that you should have removed ALL TEMPLATE/INSTRUCTION texts in your submission (like the current sentence), otherwise it hampers the professionality in your documentation.
-
-*Here are some tips to write a good report:*
-
-* `Bullet points` are allowed and strongly encouraged for this report. Try to summarise and list the highlights of your project (rather than give long paragraphs).*
-
-* *Try to create `diagrams` for parts that could greatly benefit from it.*
-
-* *Try to make your report `well structured`, which is easier for the reviewers to capture the necessary information.*
-
-*We give instructions enclosed in square brackets [...] and examples for each sections to demonstrate what are expected for your project report. Note that they only provide part of the skeleton and your description should be more content-rich. Quick references about markdown by [CommonMark](https://commonmark.org/help/)*
+This is a report made by the FlyingSpaghettiGod team. This report explains the app that we wrote as well as our process in writing the app.
 
 ## Table of Contents
 
@@ -47,7 +35,7 @@ The key area(s) of responsibilities for each member
 
 ## Summary of Individual Contributions
 
-1. **u7724204, Julius**  I have xx% contribution, as follows: <br>
+1. **u7724204, Julius**  I have 20% contribution, as follows: <br>
 
 * **Code Contribution in the final App**
     - Login Feature (State Design Pattern, Singleton Design Pattern) - class LoginState: [LoginState.java](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginState.java), [LoginContext.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [LoggedInState.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java), [LoginActivity.class](/RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
@@ -130,7 +118,13 @@ The key area(s) of responsibilities for each member
 
 ## Application Description
 
-This is a recycling logging application. By using this application, we can log what we have recycled in each day, and we can see the statistics and history of our recycling history. This app also allows the users to see the nearest recycling spot. By logging in, the user can add their log, add their own personal recycled items, as well as see their statistics. They can also see the nearest location of recycling points.
+* This is a recycling logging application. 
+* By using this application, we can log what we have recycled in each day, and we can see the statistics and history of our recycling history
+* This app also allows the users to see the nearest recycling spot. 
+* By logging in, the user can:
+    * log their own personal recycled items 
+    * see their recycling statistics. 
+    * They can also see the nearest location of recycling points.
 
 ### Application Use Cases and or Examples
 
@@ -170,32 +164,17 @@ Target users: people who want to find friends in their recycling journey
 
 Target users: people who recycle large amounts of recycling, or do not have access to recycling bins at home.
 
-Steve wants to recycle some stuff. (Will be possible soon)
+Steve wants to recycle some stuff.
 1. Steve wants to recycle some items at a recycling plant.
 2. Steve opens the app.
 3. The app tells him where nearby recycling facilities are.
 
-*Here is a map navigation application example*
-
-*Targets Users: Drivers*
-
-* *Users can use it to navigate in order to reach the destinations.*
-* *Users can learn the traffic conditions*
-* ...
-
-*Target Users: Those who want to find some good restaurants*
-
-* *Users can find nearby restaurants and the application can give recommendations*
-* ...
-
-*List all the use cases in text descriptions or create use case diagrams. Please refer to https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-use-case-diagram/ for use case diagram.*
 
 <hr> 
 
 ### Application UML
 
 ![ClassDiagramExample](media/_examples/ClassDiagramExample.png) <br>
-*[Replace the above with a class diagram. You can look at how we have linked an image here as an example of how you can do it too.]*
 
 <hr>
 
@@ -335,19 +314,25 @@ a lot of flexibility to users.
             * There is only one RecycledItemDb per user.
 2. Observer Pattern
     * Objective: used for storing and notifying observers about changes in the list of recycled items in the RecycledItemDb feature.
-    * Code Locations: https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java
+    * Code Locations: 
+        * [MainActivity.java - update() method](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java?ref_type=heads#L107-123), 
+        *  [RecycledItemDb.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java#L107-121), 
+        * [Subject.java](RecycleMe/app/src/main/java/com/example/recycleme/interfaces/Subject.java), 
+        * [Observer.java](RecycleMe/app/src/main/java/com/example/recycleme/interfaces/Subject.java)
     * Reasons:
         1. The Observer pattern allows for a design where the RecycledItemDb class can notify multiple observers (such as UI components or logging systems) about changes in the list of recycled items without those observers needing to know the details of the RecycledItemDb implementation.
         2. It allows new observers to be added without modifying the subject (RecycledItemDb) class.
         3. This pattern promotes reusability by separating concerns, making it easier to maintain and understand the codebase.
 3. The State design pattern is used in the LoginContext class.
-    * Objective: Used have different states for when the user is logged in or logged out, which facilitates the management of user authentication in the application. By utilizing different states, the system can behave differently based on the user's authentication status.
-    * Code Locations: https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java
+    * Objective: User have different states for when the user is logged in or logged out, which facilitates the management of user authentication in the application. By utilizing different states, the system can behave differently based on the user's authentication status.
+    * Code Locations: [LoginContext.java](RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java)
     * Reason: 
         * There are different actions that can be done depending on whether the user is logged in or logged out (e.g. when the user is logged out then the user can't add item to his cart history)
 4. The DAO design pattern is used in reading the data instances. 
     * Objective: To read data instances from different locations
-    * Code Locations: https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/tree/main/RecycleMe/app/src/main/java/com/example/recycleme/dao
+    * Code Locations: 
+        * [FirebaseRecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java)
+        * [RecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAO.java)
     * Reason: 
         * DAO design pattern is extensible, allowing the application to read the data both locally and from Firebase
 
@@ -392,7 +377,7 @@ a lot of flexibility to users.
         * Every time RecycledItemDb adds a new item, it will inform the Observer.
 5. [Search] Users must be able to search for information on your app. (medium) Given the user's input based on pre-defined grammar(s), a query processor "understands" and retrieves the information that meets the user's query. The usag is dependent on your app theme.
 a. must make use of a tokeniser and parser with a formal grammar of your own creation.
-    * Code: [SearchExp.java](), [SearchQueryParser.java](), [Token.java](), [Tokenizer.java](), [MainActivity.java, line 58-88]()
+    * Code: [SearchExp.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchExp.java), [SearchQueryParser.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchQueryParser.java), [Token.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Token.java), [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java), [MainActivity.java, line 58-88](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java#L58-88)
     * Description of Implementation: 
         * The string will be read from the text input in the MainActivity.java. 
         * When the text string is read, it will use the SearchQueryParser class to parse the string. 
@@ -400,7 +385,7 @@ a. must make use of a tokeniser and parser with a formal grammar of your own cre
    <br>
 
 ### Custom Features
-Firebase Integration
+**Firebase Integration**
 1. [FB-Auth]. Use Firebase to implement User Authentication/Authorisation. (easy)
     * Code: [Class LoggedOutState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedOutState.java) and [Class LoggedInState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java)
     * Description of your implementation: 
@@ -414,6 +399,9 @@ Firebase Integration
     * Notes:
         * The stream data is not put into firebase, pursuant to the Ed answer given [here](https://edstem.org/au/courses/15738/discussion/1839054?comment=4335119)
         * The history data is not persisted in the Firebase, it is stored in memory.
+
+**Greater Data Usage, Handling and Sophistication**
+
 3. [Data-Graphical] Create a Graphical report viewer to see a report of some useful data from your
 app. No marks will be awarded if the report is non-graphical. (medium)
     * Code: [Class StatisticsActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/StatisticActivity.java)
@@ -426,7 +414,14 @@ app. No marks will be awarded if the report is non-graphical. (medium)
 
 4. [Data-Deletion] Implement Deletion for your chosen tree data structure, and the deletion must serve
 a purpose within your application. (medium)
-    * Code: [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L242-270)
+    * Code: [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L242-270), 
+    * Description of the feature: In the history tab, we can delete the history of the user. The history of the user is stored on an AVLTree.
+    * Description of implementation: 
+        * Data deletion is implemented by recursive method.
+        * If the method finds the exact value, then the data will be deleted (and the value will be replaced by the predecessor).
+        * The tree delete the Node with the exact LocalDateTime.
+
+**Peer to Peer Messaging**
 
 5. [P2P-DM] Provide users with the ability to message each other directly in private. (hard)
     * Code: [DirectMessageActivity.java](/RecycleMe/app/src/main/java/com/example/recycleme/DirectMessageActivity.java), [ChatsMainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ChatsMainActivity.java)
@@ -441,6 +436,8 @@ a purpose within your application. (medium)
     <div style="text-align: center;">
         <img src="media/_examples/screenshot/screenshot_chat.png" alt="Description of the image" width="20%">
     </div>
+
+**User Interactivity**
 
 6. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
     * Code: [CartActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/CartActivity.java), [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
@@ -543,13 +540,8 @@ a purpose within your application. (medium)
 
 ## Summary of Known Errors and Bugs
 
-*[Where are the known errors and bugs? What consequences might they lead to?]*
-*List all the known errors and bugs here. If we find bugs/errors that your team does not know of, it shows that your testing is not thorough.*
-
-
 1.  Initial Loading time
-- Opening the Main Page for the first time causes a delay of around 5 seconds as firebase downloads the required data.
-2. ...
+    - Opening the Main Page for the first time causes a delay of around 5 seconds as firebase downloads the required data.
 
 <br> <hr>
 
@@ -562,7 +554,8 @@ a purpose within your application. (medium)
 *Here is an example:*
 
 1. Tests for Search
-    - Code: [TokenizerTest Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java) for the [Tokenizer Class, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43)
+    - Code: 
+        * [TokenizerTest Class](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java) 
     - *Number of test cases: ...*
     - *Code coverage: ...*
     - *Types of tests created and descriptions: ...*
