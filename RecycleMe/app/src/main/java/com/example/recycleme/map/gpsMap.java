@@ -21,7 +21,6 @@ import java.util.Random;
 public class gpsMap {
 
 //All Written By Harrison Black (ExrosZ)
-public class gpsMap {
     public static final int FINE_PERMISSION_CODE = 1;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
@@ -42,7 +41,7 @@ public class gpsMap {
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(location -> {
-            if (location != null){
+            if (location != null) {
                 currentLocation = location;
                 onMapReady(map);
             }

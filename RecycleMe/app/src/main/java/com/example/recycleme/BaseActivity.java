@@ -42,6 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         CART(R.id.cart),
         RECORD(R.id.record),
         STATISTIC(R.id.statistic),
+        MAP(R.id.map),
         UNKNOWN(-1);
 
         private final int id;
@@ -118,6 +119,9 @@ public class BaseActivity extends AppCompatActivity {
                         break;
                     case STATISTIC:
                         intent = new Intent(BaseActivity.this, StatisticActivity.class);
+                        break;
+                    case MAP:
+                        intent = new Intent(BaseActivity.this, MapActivity.class);
                         break;
                     default:
                         return false;
