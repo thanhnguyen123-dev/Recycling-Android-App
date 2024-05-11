@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Random;
 
+public class gpsMap {
 
 //All Written By Harrison Black (ExrosZ)
 public class gpsMap {
