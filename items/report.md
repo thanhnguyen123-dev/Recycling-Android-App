@@ -47,32 +47,39 @@ The key area(s) of responsibilities for each member
 
 ## Summary of Individual Contributions
 
-Specific details of individual contribution of each member to the project.
-
-Each team member is responsible for writing **their own subsection**.
-
-A generic summary will not be acceptable and may result in a significant lose of marks.
-
-*[Summarise the contributions made by each member to the project, e.g. code implementation, code design, UI design, report writing, etc.]*
-
-*[Code Implementation. Which features did you implement? Which classes or methods was each member involved in? Provide an approximate proportion in pecentage of the contribution of each member to the whole code implementation, e.g. 30%.]*
-
-*you should ALSO provide links to the specified classes and/or functions*
-Note that the core criteria of contribution is based on `code contribution` (the technical developing of the App).
-
-*Here is an example: (Note that you should remove the entire section (e.g. "others") if it is not applicable)*
-
 1. **u7724204, Julius**  I have xx% contribution, as follows: <br>
-- **Code Contribution in the final App**
-    - Login Feature (State Design Pattern, Singleton Design Pattern) - class LoginState: [LoginState.java](link_to_file), class LoginContext, class LoggedInState, class LoggedOutState, class LoginActivity
-    - DAO design pattern -  class RecycledItemDAO: [RecycledItemDAO.java](link_to_file), class RecycledItemDAOJsonImp: [RecycledItemDAOJsonImp.java](link_to_file)
-    - RecycledItem model class - [RecycledItem.java](link_to_class)
-    - RecycledItemDb class (Observer design pattern) - [RecycledItemDb.java](link_to_class)
-    - Main app layout- MainActivity class: [MainActivity.java](link_to_file), MainActivity layout: [MainActivity.xml](link_to_file)
+
+* **Code Contribution in the final App**
+    - Login Feature (State Design Pattern, Singleton Design Pattern) - class LoginState: [LoginState.java](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginState.java), [LoginContext.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [LoggedInState.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java), [LoginActivity.class](/RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
+    - DAO design pattern - [RecycledItemDAO.class](/RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAO.java), [RecycledItemDAOJsonImp.class](/RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAOJsonImp.java)
+    - RecycledItem model class - [RecycledItem.java](/RecycleMe/app/src/main/java/com/example/recycleme/model/RecycledItem.java)
+    - RecycledItemDb class (Observer design pattern) - [RecycledItemDb.java](/RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java)
+    - Activity:
+        - MainActivity class: [MainActivity.java](/RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java), 
+        - BaseActivity class (adapted from StackOverflow, see code for full source): [BaseActivity.class](RecycleMe/app/src/main/java/com/example/recycleme/BaseActivity.java)
+        - RecordActivity class: [RecordActivity.class](/RecycleMe/app/src/main/java/com/example/recycleme/RecordActivity.java)
+    - Cart class (created by Harrison, modified by me): [Cart.class](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
+    - NodeData class: [NodeData.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/NodeData.java)
+    - UserTree class: [UserTree.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/UserTree.java)
+    - AVLTree:
+        - method `ceiling()`, `floor()`, and `findBetween()` on AVLTree class: [ceiling() and floor()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L165-225), [findBetween()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L295-317)
+        - [AVLTreeItem.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTreeItem.java)
+        - [AVLTreeTime.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTreeTime.java)
+    - Adapter:
+        - [CartViewAdapter.java](/RecycleMe/app/src/main/java/com/example/recycleme/adapter/CartViewAdapter.java)
+        - [RecordAdapter.java](/RecycleMe/app/src/main/java/com/example/recycleme/adapter/RecordAdapter.java)
+        - [RecycledViewAdapter.java](RecycleMe/app/src/main/java/com/example/recycleme/adapter/RecycledViewAdapter.java)
 
 - **Code and App Design**
     - DAO design pattern, Observer design pattern, Singleton design pattern*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+    - UI Design:
+        - MainActivity layout: [activity_main.xml](/RecycleMe/app/src/main/res/layout/activity_main.xml)
+        - BaseActivity layout: [activity_base.xml](/RecycleMe/app/src/main/res/layout/activity_base.xml)
+        - LoginActivity layout: [activity_login.xml](RecycleMe/app/src/main/res/layout/activity_login.xml)
+        - RecordActivity layout: [activity_record.xml](RecycleMe/app/src/main/res/layout/activity_record.xml)
+        - RecyclerView row:
+            - [cart_header.xml](RecycleMe/app/src/main/res/layout/cart_header.xml)
+            - []
 
 - **Others**: (only if significant and significantly different from an "average contribution")
     - [Report Writing?] [Slides preparation?]*
@@ -395,8 +402,46 @@ Feature Category: Firebase Integration <br>
 
 ### Surprise Features
 
-- If implemented, explain how your solution addresses the task (any detailed requirements will be released with the surprise feature specifications).
-- State that "Surprised feature is not implemented" otherwise.
+- Code Smell 1: **Couplers**
+    - In the AVLTree class, previously the class was tightly coupled with the LocalDateTime class
+    ```
+        private class Node {
+        LocalDateTime time;
+        T value;
+        Node left, right;
+        int height;
+
+        Node(LocalDateTime time, T value) {
+            this.time = time;
+            this.value = value;
+            this.left = null;
+            this.right = null;
+            this.height = 0;
+        }
+
+        public LocalDateTime getTime() {
+            return time;
+        }
+    ```
+    - The node (and the class in whole) uses the LocalDateTime. This prevents other classes to use AVLTree
+    - We fixed this by decoupling the LocalDateTime class and extends a new class that inherits AVLTree (AVLTreeTime)
+    - So our Node class currently looks like this
+    ```
+        class Node {
+        T value;
+        Node left, right;
+        int height;
+
+        protected Node(T value) {
+            this.value = value;
+            this.left = null;
+            this.right = null;
+            this.height = 0;
+        }
+    ```
+    - The class uses generics to let the user insert anything as the value of the AVLTree
+    - The relevant git commit: [a87e0154](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/commit/a87e0154d4aa8d97b67a47552779c31f1a1be8e6), and fixed in [e989af6d](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/commit/e989af6d11a69c559020ae3e173348cdd649ae9f)
+- Code Smell 2: **
 
 <br> <hr>
 
