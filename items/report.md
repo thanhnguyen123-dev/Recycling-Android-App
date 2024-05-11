@@ -320,6 +320,9 @@ a lot of flexibility to users.
 
 ### Design Patterns
 
+
+### Design Patterns
+
 1. *Singleton Pattern*
     * Objective: To easily find the class instance when the users are going back and forth between activities
     * Code Locations: defined in [Cart.class, getInstance()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java), [UserTree.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/UserTree.java), [LoginContext.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [RecycledItemDb.class](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/RecycledItemDb.java)
@@ -332,17 +335,19 @@ a lot of flexibility to users.
             * There is only one RecycledItemDb per user.
 2. Observer Pattern
     * Objective: used for storing and notifying observers about changes in the list of recycled items in the RecycledItemDb feature.
-    * Code Locations: 
+    * Code Locations: RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java
     * Reasons:
         1. The Observer pattern allows for a design where the RecycledItemDb class can notify multiple observers (such as UI components or logging systems) about changes in the list of recycled items without those observers needing to know the details of the RecycledItemDb implementation.
         2. It allows new observers to be added without modifying the subject (RecycledItemDb) class.
         3. This pattern promotes reusability by separating concerns, making it easier to maintain and understand the codebase.
 3. The State design pattern is used in the LoginContext class.
-    * Objective: 
+    * Objective: Used have different states for when the user is logged in or logged out, which facilitates the management of user authentication in the application. By utilizing different states, the system can behave differently based on the user's authentication status.
+    *Code Locations: RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java
     * Reason: 
         * There are different actions that can be done depending on whether the user is logged in or logged out (e.g. when the user is logged out then the user can't add item to his cart history)
 4. The DAO design pattern is used in reading the data instances. 
     * Objective: To read data instances from different locations
+    * Code Locations: RecycleMe/app/src/main/java/com/example/recycleme/dao
     * Reason: 
         * DAO design pattern is extensible, allowing the application to read the data both locally and from Firebase
 
