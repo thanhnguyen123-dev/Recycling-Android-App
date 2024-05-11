@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -15,19 +14,18 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.Random;
 
-public class Map {
+public class gpsMap {
     public static final int FINE_PERMISSION_CODE = 1;
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private GoogleMap map;
     private Context context;
 
-    public Map(Context context, GoogleMap map) {
+    public gpsMap(Context context, GoogleMap map) {
         this.context = context;
         this.map = map;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context);
@@ -40,13 +38,10 @@ public class Map {
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null){
-                    currentLocation = location;
-                    onMapReady(map);
-                }
+        task.addOnSuccessListener(location -> {
+            if (location != null){
+                currentLocation = location;
+                onMapReady(map);
             }
         });
     }

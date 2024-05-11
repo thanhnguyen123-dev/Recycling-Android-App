@@ -13,6 +13,9 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.example.recycleme.login.LoginContext;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Base activity class that provides a navigation drawer menu. The menu contents and behavior are the same across
  * multiple activities.
@@ -63,31 +66,21 @@ public class BaseActivity extends AppCompatActivity {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
-                // Handle navigation item clicks
-                if (menuItem.getItemId() == R.id.home) {
-                    Intent intent = new Intent(BaseActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.login) {
-                    if (LoginContext.getInstance().isLoggedIn()) {
-                        Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                } else if (menuItem.getItemId() == R.id.cart) {
-                    Intent intent = new Intent(BaseActivity.this, CartActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.record) {
-                    Intent intent = new Intent(BaseActivity.this, RecordActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.statistic) {
-                    Intent intent = new Intent(BaseActivity.this, StatisticActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.map) {
-                    Intent intent = new Intent(BaseActivity.this, MapActivity.class);
+                Map<Integer, Class<?>> activityMap = new HashMap<>();
+                activityMap.put(R.id.home, MainActivity.class);
+                activityMap.put(R.id.login, LoginContext.getInstance().isLoggedIn() ? ProfileActivity.class : LoginActivity.class);
+                activityMap.put(R.id.cart, CartActivity.class);
+                activityMap.put(R.id.record, RecordActivity.class);
+                activityMap.put(R.id.statistic, StatisticActivity.class);
+                activityMap.put(R.id.map, MapActivity.class);
+
+                Class<?> activityClass = activityMap.get(menuItem.getItemId());
+
+                if (activityClass != null) {
+                    Intent intent = new Intent(BaseActivity.this, activityClass);
                     startActivity(intent);
                 }
+
                 // Close the navigation drawer
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
