@@ -2,11 +2,11 @@ package com.example.recycleme.util;
 
 import android.content.Context;
 
+import com.example.recycleme.cart.AVLTreeItem;
 import com.example.recycleme.model.RecycledItem;
 import com.example.recycleme.util.tree.AVLTreeItem;
 import com.example.recycleme.dao.FirebaseRecycledItemDAO;
 import com.example.recycleme.dao.RecycledItemDAO;
-import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.example.recycleme.interfaces.Observer;
 import com.example.recycleme.interfaces.Subject;
 import com.example.recycleme.search.SearchQueryParser;
@@ -31,7 +31,7 @@ public class RecycledItemDb implements Subject {
 
     private RecycledItemDb(Context context){
         this.recycledItemDAO = new FirebaseRecycledItemDAO("mock_data_updated.json", context, Online); //This now pulls the json file from firebase!!!
-        this.recycledItemStream = new RecycledItemDAOJsonImp("mock_data_forstream.json", context);
+        this.recycledItemStream = new FirebaseRecycledItemDAO("mock_data_forstream.json", context, Local);
         this.currentData = new ArrayList<>(recycledItemDAO.getAllRecycledItems());
         this.recycledItemAVLTree = new AVLTreeItem();
         this.observers = new ArrayList<Observer>();
