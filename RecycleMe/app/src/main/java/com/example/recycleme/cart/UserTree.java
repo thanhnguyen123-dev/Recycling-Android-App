@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Singleton class that manages an AVLTree of user history (stored in NodeData)
+ * Provides method to add, search, clear, and retrieve items from tree.
+ * When it is started, it simulates the addition of user items (so the History of the users looks populated)
+ * The tree is sorted based on LocalDateTime.
+ *
+ * @author Julius Liem - u7724204
+ */
 public class UserTree {
     private static UserTree instance;
     private AVLTreeTime avlTree;
