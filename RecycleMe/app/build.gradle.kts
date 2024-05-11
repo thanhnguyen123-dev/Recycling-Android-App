@@ -62,4 +62,10 @@ dependencies {
     implementation(libs.mockito.core)
     implementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.play.services.maps)
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation(libs.play.services.location)
+    implementation("com.google.android.gms:play-services-location:21.2.0")
+
 }

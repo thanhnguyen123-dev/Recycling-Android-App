@@ -3,6 +3,8 @@ package com.example.recycleme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -32,6 +34,36 @@ public class BaseActivity extends AppCompatActivity {
     protected NavigationView navView;
     protected Toolbar toolbar;
     protected ActionBarDrawerToggle actionBarDrawerToggle;
+
+    private enum MenuItemId {
+        HOME(R.id.home),
+        REGISTER_BUTTON(R.id.register_button),
+        CHATS(R.id.chats),
+        CART(R.id.cart),
+        RECORD(R.id.record),
+        STATISTIC(R.id.statistic),
+        MAP(R.id.map),
+        UNKNOWN(-1);
+
+        private final int id;
+
+        MenuItemId(int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public static MenuItemId fromId(int id) {
+            for (MenuItemId menuItemId : values()) {
+                if (menuItemId.getId() == id) {
+                    return menuItemId;
+                }
+            }
+            return UNKNOWN;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,30 +96,37 @@ public class BaseActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 // Handle navigation item clicks
-                if (menuItem.getItemId() == R.id.home) {
-                    Intent intent = new Intent(BaseActivity.this, MainActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.register_button) {
-                    if (LoginContext.getInstance().isLoggedIn()) {
-                        Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    }
-                } else if (menuItem.getItemId() == R.id.chats) {
-                    Intent intent = new Intent(BaseActivity.this, ChatsMainActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.cart) {
-                    Intent intent = new Intent(BaseActivity.this, CartActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.record) {
-                    Intent intent = new Intent(BaseActivity.this, RecordActivity.class);
-                    startActivity(intent);
-                } else if (menuItem.getItemId() == R.id.statistic) {
-                    Intent intent = new Intent(BaseActivity.this, StatisticActivity.class);
-                    startActivity(intent);
+                Intent intent;
+                switch (MenuItemId.fromId(menuItem.getItemId())) {
+                    case HOME:
+                        intent = new Intent(BaseActivity.this, MainActivity.class);
+                        break;
+                    case REGISTER_BUTTON:
+                        if (LoginContext.getInstance().isLoggedIn()) {
+                            intent = new Intent(BaseActivity.this, ProfileActivity.class);
+                        } else {
+                            intent = new Intent(BaseActivity.this, LoginActivity.class);
+                        }
+                        break;
+                    case CHATS:
+                        intent = new Intent(BaseActivity.this, ChatsMainActivity.class);
+                        break;
+                    case CART:
+                        intent = new Intent(BaseActivity.this, CartActivity.class);
+                        break;
+                    case RECORD:
+                        intent = new Intent(BaseActivity.this, RecordActivity.class);
+                        break;
+                    case STATISTIC:
+                        intent = new Intent(BaseActivity.this, StatisticActivity.class);
+                        break;
+                    case MAP:
+                        intent = new Intent(BaseActivity.this, MapActivity.class);
+                        break;
+                    default:
+                        return false;
                 }
+                startActivity(intent);
                 // Close the navigation drawer
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;

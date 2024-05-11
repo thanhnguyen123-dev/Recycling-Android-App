@@ -2,6 +2,7 @@ package com.example.recycleme.dao;
 
 import com.example.recycleme.model.RecycledItem;
 
+
 import java.util.List;
 
 public interface RecycledItemDAO {

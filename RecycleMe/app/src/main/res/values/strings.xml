@@ -33,4 +33,6 @@
     <string name="title_activity_login2">LoginActivity2</string>
     <string name="register_btn">Register</string>
     <string name="account">Account</string>
+    <string name="map_api">AIzaSyBvu-hQWw85OHTl-UfU2j4a4AwXbp5V8aw</string>
+    <string name="map">Map</string>
 </resources>
