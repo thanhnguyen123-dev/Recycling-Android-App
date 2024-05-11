@@ -103,7 +103,7 @@ public class ProfileActivity extends BaseActivity {
                 storageReference.putFile(selectedImageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-
+                        Toast.makeText(getApplicationContext(), "Updated profile image", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
