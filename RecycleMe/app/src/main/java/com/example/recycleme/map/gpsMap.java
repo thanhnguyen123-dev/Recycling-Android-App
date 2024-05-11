@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Random;
 
+
+//All Written By Harrison Black (ExrosZ)
 public class gpsMap {
     public static final int FINE_PERMISSION_CODE = 1;
     Location currentLocation;
@@ -52,7 +54,6 @@ public class gpsMap {
         // Check if we have the necessary permissions to show user location
         if (ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // Enable showing user location
             map.setMyLocationEnabled(true);
         }
 
