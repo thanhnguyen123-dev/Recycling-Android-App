@@ -24,7 +24,7 @@ import java.util.List;
  * <p>
  * The implementation of this adapter was created with the help of generative AI, specifically for the
  * onCreateViewHolder(ViewGroup, int) and onBindViewHolder(RecyclerView.ViewHolder, int) methods.
- * The generative AI assisted in generating the code for handling the different view types and binding the data to the views.
+ * The generative AI assisted in writing the code for handling the different view types and binding the data to the views.
  * <p>
  * Additionally, this adapter implementation references and incorporates concepts from the following Stack Overflow answer:
  * <a href="https://stackoverflow.com/questions/64216153/header-in-recycler-view-what-is-the-best-practice-in-2020">

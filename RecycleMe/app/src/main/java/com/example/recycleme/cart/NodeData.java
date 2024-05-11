@@ -3,6 +3,13 @@ package com.example.recycleme.cart;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * NodeData model data to store item and LocalDateTime
+ * This model data is used for storing user history in the UserTree.java class.
+ * This is why the compareTo method compares the time between one Node and another Node.
+ *
+ * @author Julius Liem - u7724204
+ */
 public class NodeData<T> implements Comparable<NodeData<T>> {
     private LocalDateTime dateTime;
     private T value;
