@@ -5,7 +5,7 @@ import android.content.Context;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.example.recycleme.dao.RecycledItemDAOJsonImp;
+import com.example.recycleme.dao.FirebaseRecycledItemDAO;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +17,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 @RunWith(AndroidJUnit4.class)
-public class RecycledItemDAOJsonImpTest {
+public class RecycledItemDAOJsonImpTest { //Now uses FirebaseRecycledItemDAO instead of RecycledItemDAOJsonImpTest
 
-    private RecycledItemDAOJsonImp dao;
+    private FirebaseRecycledItemDAO dao;
 
     @Before
     public void setUp() {
         Context context = ApplicationProvider.getApplicationContext();
-        dao = new RecycledItemDAOJsonImp("test.json", context);
+        dao = new FirebaseRecycledItemDAO("test.json", context, 0);
     }
 
     @Test
