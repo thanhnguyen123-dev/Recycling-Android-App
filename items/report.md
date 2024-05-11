@@ -423,17 +423,34 @@ app. No marks will be awarded if the report is non-graphical. (medium)
     * Description of implementation: 
         * This statistics activity is implemented by using MPAndroidChart library. The Activity reads data from the UserTree (which contains the user's history)
         * The Activity then will process the data and show it as a graphical chart.
-4. [P2P-DM] Provide users with the ability to message each other directly in private. (hard)
-    * Code: []
+
+4. [Data-Deletion] Implement Deletion for your chosen tree data structure, and the deletion must serve
+a purpose within your application. (medium)
+    * Code: [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L242-270)
+
+5. [P2P-DM] Provide users with the ability to message each other directly in private. (hard)
+    * Code: [DirectMessageActivity.java](/RecycleMe/app/src/main/java/com/example/recycleme/DirectMessageActivity.java), [ChatsMainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ChatsMainActivity.java)
     * Description of feature:
         * This allows a certain user to send direct message to other people.
     * Description of implementation:
-        * 
-5. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
+        * We use a ChatsMainActivity class to display UI for user to select who to chat with, which leads to DirectMessageActivity
+        * In DirectMessageActivity, we use FirebaseReference to create a reference node for "chats" storing in Realtime Database
+        * When we click on the send button, a Message entity will be instantiated and pushed to a "messages" node under "chats"
+    * Image: 
+    
+    <div style="text-align: center;">
+        <img src="media/_examples/screenshot/screenshot_chat.png" alt="Description of the image" width="20%">
+    </div>
+
+6. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
     * Code: [CartActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/CartActivity.java), [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
     * Description of feature: The user can add things to their cart, and when they switch to the Cart activity, they can see that the items are being ordered according to the materials.
     * Image: 
-    ![screenshot_cart](/items/media/_examples/screenshot/screenshot_cart.png)
+    <div style="text-align: center;">
+        <img src="media/_examples/screenshot/screenshot_cart.png" alt="Description of the image" width="20%">
+    </div>
+
+
 
 <hr>
 
