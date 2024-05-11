@@ -360,43 +360,75 @@ a lot of flexibility to users.
 <hr>
 
 ## Implemented Features
-*[What features have you implemented? where, how, and why?]* <br>
-*List all features you have completed in their separate categories with their featureId. THe features must be one of the basic/custom features, or an approved feature from Voice Four Feature.*
 
 ### Basic Features
-1. [LogIn]. Description of the feature ... (easy)
-    * Code: [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
-    * Description of feature: ... <br>
-    * Description of your implementation: ... <br>
+1. [LogIn] Users must be able to log in(easy)
+    * Code: [Class LoggedOutState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java), [Class LoginContext](RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [class LoginState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoginState.java), [class LoginActivity](RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
+    * Description of feature: Users can login through LoginActivity and then it would be authenticated by Firebase
+    * Description of your implementation: We implement this by using a LoginActivity alongside with LoginContext. The LoginContext, LoggedInState, and LoggedOutState class acts as a State design pattern.
 
-2. [DataFiles]. Description  ... ... (...)
-    * Code to the Data File [users_interaction.json](link-to-file), [search-queries.xml](link-to-file), ...
-    * Link to the Firebase repo: ...
+2. [DataFiles]. Create a dataset with at least 2,500 valid data instances, each representing a meaningful piece of information in your app. The data should be represented and stored in a structured format taught in the course. (easy)
+    * Code to the Data File [mock_data_updated.json](https://firebasestorage.googleapis.com/v0/b/recyclingapp-login-firebase.appspot.com/o/mock_data_updated.json?alt=media&token=0c0f46ad-1358-4949-9b9e-d1230e2b9ace)
+    * Link to the Firebase repo: [repo](https://console.firebase.google.com/u/0/project/recyclingapp-login-firebase/overview)
+    * Description of feature: 
+        * We have a dataset of 2500 recycled items, each with its own ID, brand name, material, and value.
+        * The data is uploaded into Firebase.
 
-3. ...
+3. [LoadShowData] Load and display data instances from your dataset. Choose an appropriate format to present the different types of data. (easy)
+    * Code: [MainActivity.java](), [RecycledViewAdapter.java](RecycleMe/app/src/main/java/com/example/recycleme/adapter/RecycledViewAdapter.java), [FirebaseRecycledItemDAO](RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java)
+    * Description of feature: The MainActivity shows the list of recycled items and putting it as a list in the RecycledViewAdapter
+    * Description of implementation: The MainActivity reads the data from RecycledItemDb.java (which uses Firebase as storage), and then load the data and put it inside RecycledViewAdapter.
+4. [DataStream] Create data instances to simulate users’ actions and interactions, which are then used to feed the app so that when a user is logged in, these data are loaded at regular time intervals and visualised on the app. (medium)
+    * Code: [RecycledItemDb.java, startStream(), stopStream(), and addRecycledItemToStream()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java?ref_type=heads#L73-105)
+    * Description of the feature: This feature will add a new item to the item list on MainActivity every 10 second. A toast message will be shown when new item is added.
+    * Description of implementation: 
+        * We used an Observer design pattern in order to implement this
+        * First the RecycledItemDb will create a new thread, and then will add the item to the AVLTreeItem (which contains the list of items). 
+        * Every time RecycledItemDb adds a new item, it will inform the Observer.
+5. [Search] Users must be able to search for information on your app. (medium) Given the user's input based on pre-defined grammar(s), a query processor "understands" and retrieves the information that meets the user's query. The usag is dependent on your app theme.
+a. must make use of a tokeniser and parser with a formal grammar of your own creation.
+    * Code: [SearchExp.java](), [SearchQueryParser.java](), [Token.java](), [Tokenizer.java](), [MainActivity.java, line 58-88]()
+    * Description of Implementation: 
+        * The string will be read from the text input in the MainActivity.java. 
+        * When the text string is read, it will use the SearchQueryParser class to parse the string. 
+        * The SearchQueryParser class uses the Tokenizer class to tokenize the string, and then it uses the SearchExp.java to evaluate the expression
    <br>
 
 ### Custom Features
-Feature Category: Privacy <br>
-1. [Privacy-Request]. Description of the feature  (easy)
-    * Code: [Class X, methods Z, Y](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
-    * Description of your implementation: ... <br>
-      <br>
-
-2. [Privacy-Block]. Description ... ... (medium)
-   ... ...
-   <br><br>
-
-Feature Category: Firebase Integration <br>
-3. [FB-Auth] Description of the feature (easy)
-    * Code: [Class X, entire file](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java#L22-43) and Class Y, ...
-    * [Class B](../src/path/to/class/file.java#L30-85): methods A, B, C, lines of code: 30 to 85
-    * Description of your implementation: ... <br>
-
-Feature Category: Firebase Integration <br>
-4. [FB-Persist] Persists data within app (medium)
-    * Code: [Class FirebaseRecycledItemDAO, method getAllRecycledItemsHelper()](link_to_file)
-    * Pulls data for the data stream from firebase storage as a json file and processes it as normal. <br>
+Firebase Integration
+1. [FB-Auth]. Use Firebase to implement User Authentication/Authorisation. (easy)
+    * Code: [Class LoggedOutState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedOutState.java) and [Class LoggedInState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java)
+    * Description of your implementation: 
+        * We used FirebaseAuth to validate user Login information stored in the Firebase Realtime databases
+        * An AccountAction enum is used to differentiate between Login and Signup action
+        * If logging in or signing up is successful, LoginContext will be set to LoggedInState, otherwise a Toast message will be displayed
+2. [FB-Persist] Use Firebase to persist all data used in your app       (medium) 
+    * Code: [Class FirebaseRecycledItemDAO](RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java)
+    * Description of feature: We read data from Firebase for our List of Recycled Items
+    * Description of implementation: The JSON file is uploaded to the Firebase, and then the FirebaseRecycledItemDAO parsed the json files and turns it into list of RecycledItem
+    * Notes:
+        * The stream data is not put into firebase, pursuant to the Ed answer given [here](https://edstem.org/au/courses/15738/discussion/1839054?comment=4335119)
+        * The history data is not persisted in the Firebase, it is stored in memory.
+3. [Data-Graphical] Create a Graphical report viewer to see a report of some useful data from your
+app. No marks will be awarded if the report is non-graphical. (medium)
+    * Code: [Class StatisticsActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/StatisticActivity.java)
+    * Description of feature: This feature will show the statistics:
+        * Materials that the users have recycled (in pie chart)
+        * The amount of items that the user has recycled per day (in bar chart)
+    * Description of implementation: 
+        * This statistics activity is implemented by using MPAndroidChart library. The Activity reads data from the UserTree (which contains the user's history)
+        * The Activity then will process the data and show it as a graphical chart.
+4. [P2P-DM] Provide users with the ability to message each other directly in private. (hard)
+    * Code: []
+    * Description of feature:
+        * This allows a certain user to send direct message to other people.
+    * Description of implementation:
+        * 
+5. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
+    * Code: [CartActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/CartActivity.java), [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
+    * Description of feature: The user can add things to their cart, and when they switch to the Cart activity, they can see that the items are being ordered according to the materials.
+    * Image: 
+    ![screenshot_cart](/items/media/_examples/screenshot/screenshot_cart.png)
 
 <hr>
 
@@ -441,7 +473,49 @@ Feature Category: Firebase Integration <br>
     ```
     - The class uses generics to let the user insert anything as the value of the AVLTree
     - The relevant git commit: [a87e0154](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/commit/a87e0154d4aa8d97b67a47552779c31f1a1be8e6), and fixed in [e989af6d](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/commit/e989af6d11a69c559020ae3e173348cdd649ae9f)
-- Code Smell 2: **
+- Code Smell 2: **Multiple Responsibilities**
+    - The [RecycledItemDb.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java) class has multiple responsibilities:
+        - Handling DB operation
+        - Managing streaming thread
+        - Notifying observers
+    - This class should be splitted into separate classes, each handling different aspects
+    - However, we decided not to fix this as it takes time to split the class, and doing it with one week time can break the app.
+- Code smell 3: **Duplicated code**
+    - The BaseActivity.java class has a duplicated code where when starting new Activity, a new Intent is created in every if branch
+    ```
+    public boolean onNavigationItemSelected(MenuItem menuItem) {
+        // Handle navigation item clicks
+        if (menuItem.getItemId() == R.id.home) {
+            Intent intent = new Intent(BaseActivity.this, MainActivity.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.register_button) {
+            if (LoginContext.getInstance().isLoggedIn()) {
+                Intent intent = new Intent(BaseActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        } else if (menuItem.getItemId() == R.id.chats) {
+            Intent intent = new Intent(BaseActivity.this, ChatsMainActivity.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.cart) {
+            Intent intent = new Intent(BaseActivity.this, CartActivity.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.record) {
+            Intent intent = new Intent(BaseActivity.this, RecordActivity.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.statistic) {
+            Intent intent = new Intent(BaseActivity.this, StatisticActivity.class);
+            startActivity(intent);
+        }
+        // Close the navigation drawer
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+    ```
+    - This code violates the principle of DRY.
+    - The relevant git commit is xxx, and we have 
 
 <br> <hr>
 
