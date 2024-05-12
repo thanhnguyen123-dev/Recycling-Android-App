@@ -76,7 +76,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public void bind(User user) {
             usernameTextView.setText(LogUtil.getUsernameFromEmail(user.getEmail()));
             lastMessageTextView.setText(user.getLastMessage());
-            UserProfileUtil.retrieveUserImage(user, itemView.getContext(), userProfileImageView);
+            UserProfileUtil.retrieveUserImage(user.getId(), itemView.getContext(), userProfileImageView);
         }
 
     }

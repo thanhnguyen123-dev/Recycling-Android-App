@@ -19,8 +19,8 @@ import com.google.firebase.storage.StorageReference;
 public class UserProfileUtil {
     private static StorageReference storageReference;
 
-    public static void retrieveUserImage(User user, Context context, ImageView imageView) {
-        getProfilePicStorageReference(user.getId());
+    public static void retrieveUserImage(String id, Context context, ImageView imageView) {
+        getProfilePicStorageReference(id);
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
@@ -32,18 +32,7 @@ public class UserProfileUtil {
         });
     }
 
-    public static void retrieveUserImage(FirebaseUser user, Context context, ImageView imageView) {
-        getProfilePicStorageReference(user.getUid());
-        storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    Uri uri = task.getResult();
-                    setProfilePic(context, uri, imageView);
-                }
-            }
-        });
-    }
+
 
 
 

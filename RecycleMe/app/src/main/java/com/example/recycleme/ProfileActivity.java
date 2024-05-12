@@ -65,7 +65,7 @@ public class ProfileActivity extends BaseActivity {
         firebaseStorage = FirebaseStorage.getInstance();
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        UserProfileUtil.retrieveUserImage(firebaseUser, getApplicationContext(), profilePicImageView);
+        UserProfileUtil.retrieveUserImage(firebaseUser.getUid(), getApplicationContext(), profilePicImageView);
 
         logOutButton = findViewById(R.id.logout_button);
         logOutButton.setOnClickListener(new View.OnClickListener() {

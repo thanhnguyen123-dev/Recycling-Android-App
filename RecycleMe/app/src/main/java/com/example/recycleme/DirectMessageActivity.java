@@ -1,6 +1,7 @@
 package com.example.recycleme;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.recycleme.adapter.MessageAdapter;
+import com.example.recycleme.util.UserProfileUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Firebase;
@@ -33,9 +35,8 @@ import java.util.Date;
 import java.util.List;
 
 public class DirectMessageActivity extends BaseActivity {
-
+    private ImageView receiverProfilePic;
     private CardView sendButton;
-    private ImageView sendImageView;
     private TextView receiverNameEditText;
     private EditText messageEditText;
     private FirebaseDatabase firebaseDatabase;
@@ -58,7 +59,6 @@ public class DirectMessageActivity extends BaseActivity {
         sendButton = findViewById(R.id.send_button);
         receiverNameEditText = findViewById(R.id.receiver_user);
         messageEditText = findViewById(R.id.input_message);
-        sendImageView = findViewById(R.id.send_img);
 
         messages = new ArrayList<>();
         messagesRecyclerView = findViewById(R.id.message_recylerview);
@@ -74,10 +74,11 @@ public class DirectMessageActivity extends BaseActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-
         String receiverUsername = getIntent().getStringExtra("USERNAME");
         String receiverUid = getIntent().getStringExtra("USER_ID");
         String senderUid = firebaseAuth.getUid();
+        receiverProfilePic = findViewById(R.id.receiver_profile_pic);
+        UserProfileUtil.retrieveUserImage(receiverUid, getApplicationContext(), receiverProfilePic);
 
         receiverNameEditText.setText(receiverUsername);
 
