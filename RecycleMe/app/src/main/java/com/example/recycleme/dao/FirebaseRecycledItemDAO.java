@@ -24,6 +24,12 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * One of the state for State design pattern, the other one is LoggedOutState
+ * @author Harrison Black
+ * @author Julius Liem - u7724204 (saveRecycledItem() method and read from offline data)
+ */
+
 public class FirebaseRecycledItemDAO implements RecycledItemDAO {
 
     private final String FILE_NAME;
