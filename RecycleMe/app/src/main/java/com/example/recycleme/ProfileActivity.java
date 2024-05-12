@@ -57,7 +57,6 @@ public class ProfileActivity extends BaseActivity {
 
         initView();
         getUserImage();
-
         loginContext = LoginContext.getInstance();
         String emailText = loginContext.getUserEmail();
         String username = LogUtil.getUsernameFromEmail(emailText);
@@ -72,18 +71,7 @@ public class ProfileActivity extends BaseActivity {
             }
         });
 
-        imageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                res -> {
-                    if (res.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = res.getData();
-                        if (data != null && data.getData() != null) {
-                            selectedImageUri = data.getData();
-                            UserProfileUtil.setProfilePic(getApplicationContext(), selectedImageUri, profilePicImageView);
-
-                        }
-                    }
-                }
-                );
+        setImageLauncher();
 
         selectButton.setOnClickListener(v -> {
             ImagePicker.with(this).cropSquare().compress(512).maxResultSize(512, 512)
@@ -133,6 +121,21 @@ public class ProfileActivity extends BaseActivity {
                 .child(firebaseUser.getUid());
         UserProfileUtil.retrieveUserImage(firebaseUser.getUid(), getApplicationContext(), profilePicImageView);
 
+    }
+
+    private void setImageLauncher() {
+        imageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                res -> {
+                    if (res.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = res.getData();
+                        if (data != null && data.getData() != null) {
+                            selectedImageUri = data.getData();
+                            UserProfileUtil.setProfilePic(getApplicationContext(), selectedImageUri, profilePicImageView);
+
+                        }
+                    }
+                }
+        );
     }
 
 
