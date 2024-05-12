@@ -39,7 +39,7 @@ The key area(s) of responsibilities for each member
 
 * **Code Contribution in the final App**
     - Login Feature (State Design Pattern, Singleton Design Pattern) - class LoginState: [LoginState.java](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginState.java), [LoginContext.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [LoggedInState.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java), [LoginActivity.class](/RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
-    - DAO design pattern - [RecycledItemDAO.class](/RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAO.java), [RecycledItemDAOJsonImp.class](/RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAOJsonImp.java)
+    - DAO design pattern - [RecycledItemDAO.class](/RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAO.java), [FirebaseRecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java)
     - RecycledItem model class - [RecycledItem.java](/RecycleMe/app/src/main/java/com/example/recycleme/model/RecycledItem.java)
     - RecycledItemDb class (Observer design pattern) - [RecycledItemDb.java](/RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java)
     - Activity:
@@ -67,13 +67,23 @@ The key area(s) of responsibilities for each member
         - RecordActivity layout: [activity_record.xml](RecycleMe/app/src/main/res/layout/activity_record.xml)
         - RecyclerView row:
             - [cart_header.xml](RecycleMe/app/src/main/res/layout/cart_header.xml)
-            - []
+            - [activity_cart.xml](RecycleMe/app/src/main/res/layout/activity_cart.xml)
+            - [activity_login.xml](RecycleMe/app/src/main/res/layout/activity_login.xml)
+            - [activity_record.xml](RecycleMe/app/src/main/res/layout/activity_record.xml)
+            - [activity_statistic.xml](RecycleMe/app/src/main/res/layout/activity_statistic.xml)
+            - [record_view_row.xml](RecycleMe/app/src/main/res/layout/record_view_row.xml)
+            - [recycler_view_row.xml](RecycleMe/app/src/main/res/layout/record_view_row.xml)
+            - [cart_view_row.xml](RecycleMe/app/src/main/res/layout/cart_view_row.xml)
+            - [header_cart.xml](RecycleMe/app/src/main/res/layout/header_cart.xml)
+            - [header_date_history.xml](RecycleMe/app/src/main/res/layout/header_date_history.xml)
 
 - **Others**: (only if significant and significantly different from an "average contribution")
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
+    * Report Writing
+    * UML diagram preparation
+    * Data generation
+     <br><br>
 
-2. **u7650334, Harrison**  I have xx% contribution, as follows: <br>
+2. **u7650334, Harrison**  I have 20% contribution, as follows: <br>
 - **Code Contribution in the final App**
     - Cart feature (Singleton Design Pattern) - class Cart: [Cart.java](link_to_file),
     - Cart Layout - CartActivity class = [CartActivity.java](link_to_file), CartActivity layout: [CartActivity.xml](link_to_file)
@@ -84,7 +94,7 @@ The key area(s) of responsibilities for each member
 - **Code and App Design**
     - Singleton design pattern, DAO design pattern
 
-3. **u7761531, Devansu**  I have xx% contronalityias follows: <br>
+3. **u7761531, Devansu**  I have 20% contribution as follows: <br>
     - **Code Contribution in the final App**
         - Data Stream - `startStream()` and `stopStream()` methods in [RecycledItemDb.java](link_to_file), `onCreate()`, `update()` and `onDestroy()` methods in [MainActivity.java](link_to_file)
         - Search functionality (Tokenizer, Search Query Parser, Search Query evaluation) - class [Token.java](link_to_file), class [Tokenizer.java](link_to_file), class [SearchQueryParser.java](link_to_file), class [`SearchExp.java`](link_to_file), `onCreate()` method in [`MainActivity.java`](link_to_file), `search()` method in [`RecycledItemDB.java`](link_to_file)
@@ -99,7 +109,7 @@ The key area(s) of responsibilities for each member
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
   
 
-4. **u7594144,Thanh** I have xx% contribution, as follows: <br>
+4. **u7594144,Thanh** I have 20% contribution, as follows: <br>
 - **Code Contribution in the final App**
     - Login Feature (Firebase Authentication) - class LoginState: [LoginState.java](link_to_file), class LoginContext, class LoggedInState, class LoggedOutState, class LoginActivity, class LogUtil
     - Signup Feature (Firebase Authentication) - class SignupFragment: [SignupFragment.java](link_to_file)
@@ -189,8 +199,6 @@ This is an important section of your report and should include all technical dec
 - Details about the design patterns used (where in the code, justification of the choice, etc)
 
 ### <u>Grammar(s)</u>
-*[How do you design the grammar? What are the advantages of your designs?]*
-*If there are several grammars, list them all under this section and what they relate to.*
 
 We designed the grammar by first identifying what relevant information the user will want to search on the search bar. We ended up on item name, item brand and item material. We also thought there should be an "and" token to allow complex search queries.
 
@@ -292,13 +300,29 @@ a lot of flexibility to users.
     * Objective:
         * used for storing the items in the HashMap that's used in the Cart
         * used for showing the data in a RecyclerView
+        * Code locations:
+            * All of the com.example.recycleme.adapter package
+            * [UserTree.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/UserTree.java) - because it interacts with recycler view adapter
+            * [FirebaseRecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java)
+            * [AVLTree.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java)
+            * [AVLTreeItem.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTreeItem.java)
+            * [AVLTreeTime.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTreeTime.java)
     * Reasons:
         * All of our adapter use ArrayList because it is the most convenient data structure for RecyclerView. If we use other kind of data structure, we would have to implement an iterator for it (and it’s not necessarily faster because in the end we would have to traverse the whole data).
+        * For UserTree, because the UserTree interacts directly with recyclerview (and the most convenient data structure for recyclerview is a List)
+        * For FirebaseRecycledItemDAO, because we need to put all of the read items into a recyclerview.
+        * For AVLTree, AVLTreeItem, and AVLTreeTime, it's because sometimes there is a need to traverse all of the nodes in order to show it to the user. We decided that ArrayList is the best data structure to store all of it.
+
+4. HashSet
+    * Objective:
+        * Used for storing brand name and item name in the SearchQueryParser
+    * Code location:
+        * [parseBrandAndMaterial() in SearchQueryParser.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/search/SearchQueryParser.java?ref_type=heads#L96-131)
+    * Reasons:
+        * We used HashSet in order to filter double strings that might enter the search query. 
+
 
 <hr>
-
-### Design Patterns
-
 
 ### Design Patterns
 
@@ -332,9 +356,13 @@ a lot of flexibility to users.
     * Objective: To read data instances from different locations
     * Code Locations: 
         * [FirebaseRecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java)
-        * [RecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAO.java)
     * Reason: 
-        * DAO design pattern is extensible, allowing the application to read the data both locally and from Firebase
+        * DAO design pattern is extensible, allowing the application to read the data both locally and from Firebase.
+        * Previously, we have a class called [RecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/RecycledItemDAO.java). However, the class is now deleted. By using the DAO design pattern, it allows the app to either read directly from firebase or to read locally
+5. The Facade design pattern
+    * Objective: The facade design pattern is used to simplify the user interaction between the activities and the AVLTree.
+    * Code location: [AVLTreeTime.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTreeItem.java)
+    * Reason: We implemented the facade because it would simplify the interaction between AVLTree and NodeData. If we use AVLTree directly, we would have to create a new NodeData every time we want to put things inside the Tree. 
 
 
 <hr>
@@ -593,10 +621,19 @@ a purpose within your application. (medium)
 
 ## Testing Summary
 
-*[What features have you tested? What is your testing coverage?]*
-*Please provide some screenshots of your testing summary, showing the achieved testing coverage. Feel free to provide further details on your tests.*
-
-*Here is an example:*
+In our testing, we found out that we cannot tests most of the classes that interacts directly with the Android system. This leaves us with only several classes that can be tested, including:
+* [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
+* [NodeData.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/NodeData.java)
+* [UserTree.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/UserTree.java)
+* [Message.java](RecycleMe/app/src/main/java/com/example/recycleme/model/Message.java)
+* [RecycledItem.java](RecycleMe/app/src/main/java/com/example/recycleme/model/RecycledItem.java)
+* [User.java](RecycleMe/app/src/main/java/com/example/recycleme/model/User.java)
+* [SearchExp.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchExp.java)
+* [SearchQueryParser.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchQueryParser.java)
+* [Token.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Token.java)
+* [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java)
+* [AVLTree.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java)
+* [AVLTreeItem.java]()
 
 1. Tests for Search
     - Code: 
