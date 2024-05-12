@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * https://developer.android.com/develop/ui/views/layout/recyclerview
  * https://dev.to/theplebdev/implementing-a-recyclerview-in-android-with-java-1jf5
+ * @author Le Thanh Nguyen
  * */
-
 public class MessageAdapter extends RecyclerView.Adapter {
     Context context;
     private List<Message> messages;
