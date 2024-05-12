@@ -15,6 +15,7 @@ import com.example.recycleme.DirectMessageActivity;
 import com.example.recycleme.R;
 import com.example.recycleme.model.User;
 import com.example.recycleme.util.LogUtil;
+import com.example.recycleme.util.UserProfileUtil;
 
 import java.util.List;
 

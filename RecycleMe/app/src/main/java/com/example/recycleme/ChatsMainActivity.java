@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatsMainActivity extends BaseActivity {
-    private FirebaseAuth firebaseAuth;
+
     private FirebaseDatabase firebaseDatabase;
     private RecyclerView userRecyclerView;
     private UserAdapter userAdapter;
@@ -35,7 +35,6 @@ public class ChatsMainActivity extends BaseActivity {
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_chats_main, contentFrameLayout);
 
-        firebaseAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("users");
         users = new ArrayList<>();
@@ -61,8 +60,6 @@ public class ChatsMainActivity extends BaseActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
-
 
     }
 
