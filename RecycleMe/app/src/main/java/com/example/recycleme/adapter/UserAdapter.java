@@ -49,7 +49,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(chatsMainActivity, DirectMessageActivity.class);
             intent.putExtra("USERNAME", LogUtil.getUsernameFromEmail(user.getEmail()));
-            intent.putExtra("LAST_MESSAGE", user.getLastMessage());
             intent.putExtra("USER_ID", user.getId());
             chatsMainActivity.startActivity(intent);
         });
@@ -75,7 +74,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         }
         public void bind(User user) {
             usernameTextView.setText(LogUtil.getUsernameFromEmail(user.getEmail()));
-            lastMessageTextView.setText(user.getLastMessage());
             UserProfileUtil.retrieveUserImage(user.getId(), itemView.getContext(), userProfileImageView);
         }
 
