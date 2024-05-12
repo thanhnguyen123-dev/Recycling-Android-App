@@ -39,6 +39,35 @@ public class MainActivity extends BaseActivity implements Observer {
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_main, contentFrameLayout);
 
+        initElements();
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+
+        recycledItemDb.stopStream();
+    }
+
+
+    @Override
+    public void update(String message) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                View view = findViewById(R.id.content_frame);
+                Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
+                snackbar.setAction("Close", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        snackbar.dismiss();
+                    }
+                });
+                snackbar.show();
+            }
+        });
+    }
+
+    private void initElements() {
         this.searchView = findViewById(R.id.search_view);
         this.noResultsImage = findViewById(R.id.no_results_image);
         this.noResultsText = findViewById(R.id.no_results_text);
@@ -55,6 +84,13 @@ public class MainActivity extends BaseActivity implements Observer {
         adapter = new RecycledViewAdapter(recycledItems);
         recyclerView.setAdapter(adapter);
 
+        initSearchView();
+        initSwipeRefresh();
+
+        recycledItemDb.startStream();
+    }
+
+    private void initSearchView() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -86,39 +122,14 @@ public class MainActivity extends BaseActivity implements Observer {
                 return false;
             }
         });
+    }
 
+    private void initSwipeRefresh() {
         this.swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         this.swipeRefreshLayout.setOnRefreshListener(() -> {
             Log.d("ITEMNUM", String.valueOf(recycledItemDb.getCurrentData().size()));
             searchView.setQuery("", false);
             swipeRefreshLayout.setRefreshing(false);
-        });
-
-        recycledItemDb.startStream();
-    }
-
-    protected void onDestroy() {
-        super.onDestroy();
-
-        recycledItemDb.stopStream();
-    }
-
-
-    @Override
-    public void update(String message) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                View view = findViewById(R.id.content_frame);
-                Snackbar snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT);
-                snackbar.setAction("Close", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        snackbar.dismiss();
-                    }
-                });
-                snackbar.show();
-            }
         });
     }
 }

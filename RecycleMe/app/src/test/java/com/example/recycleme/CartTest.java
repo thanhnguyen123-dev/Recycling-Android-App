@@ -1,3 +1,5 @@
+package com.example.recycleme;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -33,7 +35,6 @@ public class CartTest {
              new RecycledItem(2, "Item 2", "Brand 2", "Material 2", 20.0)},
             {new RecycledItem(3, "Item 3", "Brand 3", "Material 3", 30.0),
              new RecycledItem(4, "Item 4", "Brand 4", "Material 4", 40.0)}
-            // Add more test cases as needed
         });
     }
 
