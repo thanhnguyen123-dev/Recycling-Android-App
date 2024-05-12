@@ -13,6 +13,7 @@ import java.util.Map;
  * When inputting, the items are sorted based on material and put in a HashMap
  *
  * @author Julius Liem - u7724204
+ * @author Harrison Black (for the Singleton pattern)
  */
 public class Cart{
     private static Cart instance = null;

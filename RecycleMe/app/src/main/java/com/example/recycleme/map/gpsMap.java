@@ -18,6 +18,10 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.Random;
 
+
+/**
+ * @author Harrison Black
+ */
 public class gpsMap {
 
 //All Written By Harrison Black (ExrosZ)
@@ -61,6 +65,7 @@ public class gpsMap {
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(test, 15));
         map.getUiSettings().setZoomControlsEnabled(true);
 
+        // adding random location markers to the map with the name "recycling plant"
         Random random = new Random();
         int numMarkers = random.nextInt(6) + 10;
         for (int i = 0; i < numMarkers; i++) {

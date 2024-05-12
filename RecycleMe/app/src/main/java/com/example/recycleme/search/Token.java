@@ -2,6 +2,9 @@ package com.example.recycleme.search;
 
 import java.util.Objects;
 
+/**
+ * @author Devansu Yadav
+ */
 public class Token {
 
     public enum TokenType {

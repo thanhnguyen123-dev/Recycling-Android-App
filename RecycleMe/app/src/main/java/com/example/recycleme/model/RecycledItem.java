@@ -2,6 +2,11 @@ package com.example.recycleme.model;
 
 import java.util.Objects;
 
+
+/**
+ * Model class for recycled item.
+ * @author Julius Liem
+ */
 public class RecycledItem implements Comparable<RecycledItem>{
     private String item;
     private int id;
@@ -56,6 +61,10 @@ public class RecycledItem implements Comparable<RecycledItem>{
                 '}';
     }
 
+    /*
+    Note here that the equals method only comapres the item, brand, and material
+    This is a deliberate design decision to ease searching in the AvlTreeItem
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,6 +78,15 @@ public class RecycledItem implements Comparable<RecycledItem>{
         return Objects.hash(item, brand, material);
     }
 
+
+    /*
+    compareTo method in order to put the item inside an AVLTree
+    The recycled item will first be compared to the other item's item name
+    If the item name is the same, it will be compared with brand, and then material
+
+    This is also why searching on AVLTreeItem takes O(n) time when there's no item name.
+    When there's no item name we're forced to traverse the whole tree.
+    */
     @Override
     public int compareTo(RecycledItem o) {
         int itemComparison = this.getItem().toLowerCase().compareTo(o.getItem().toLowerCase());

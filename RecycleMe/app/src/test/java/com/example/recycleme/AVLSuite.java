@@ -6,6 +6,9 @@ import com.example.recycleme.AVLTreeTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+/**
+ * @author Adam Basheer
+ */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         AVLTreeItemTest.class,

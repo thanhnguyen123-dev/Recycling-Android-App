@@ -20,7 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//Julius Liem + Harrison Black
+/**
+ * @author Julius Liem
+ * @author Harrison Black
+ * (Harrison was the person who created the Activity, but it is revamped wholly by Julius)
+ */
 public class CartActivity extends BaseActivity {
 
     private RecyclerView recyclerView;

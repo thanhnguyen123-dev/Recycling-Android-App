@@ -8,6 +8,12 @@ import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/**
+ * One of the state for State design pattern, the other one is LoggedOutState
+ * @author Julius Liem - u7724204
+ * @author Le Thanh Nguyen (for the Firebase part)
+ */
+
 public class LoggedInState extends LoginState {
     @Override
     public void login(LoginContext context, String email, String password, AccountAction accountAction, LoginCallback loginCallback) {
@@ -16,8 +22,13 @@ public class LoggedInState extends LoginState {
 
     @Override
     public void logout(LoginContext context) {
+        /**
+         * Written by Le Thanh Nguyen
+         */
         FirebaseAuth firebaseAuth = context.getFireBaseAuth();
         firebaseAuth.signOut();
+
+        // written by Julius Liem
         UserTree.getInstance().clear();
         Cart.getInstance().clear();
         context.setState(new LoggedOutState());

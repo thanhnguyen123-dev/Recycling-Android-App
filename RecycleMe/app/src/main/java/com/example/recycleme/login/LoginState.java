@@ -1,5 +1,8 @@
 package com.example.recycleme.login;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public abstract class LoginState {
     public interface LoginCallback {
         void onLoginSuccess();

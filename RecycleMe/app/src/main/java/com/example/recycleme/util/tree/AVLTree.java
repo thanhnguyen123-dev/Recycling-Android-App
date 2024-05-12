@@ -2,6 +2,10 @@ package com.example.recycleme.util.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Le Thanh Nguyen
+ * @author Julius Liem (for ceiling(), floor(), and findBetween())
+ */
 public class AVLTree<T extends Comparable<T>> {
     class Node {
         T value;
@@ -162,6 +166,12 @@ public class AVLTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * This method find the ceiling of a specific data
+     * It is used in the search operation
+     *
+     * @author Julius Liem
+     */
     public T ceiling(T data) {
         Node node = ceiling(root, data);
 
@@ -172,7 +182,11 @@ public class AVLTree<T extends Comparable<T>> {
         return node.getValue();
     }
 
-
+    /**
+     * Helper method for finding ceiling
+     *
+     * @author Julius Liem
+     */
     Node ceiling(Node tree, T data) {
         if (tree == null) {
             return null;
@@ -194,6 +208,11 @@ public class AVLTree<T extends Comparable<T>> {
         }
     }
 
+    /**
+     * Finding floor of a certain data
+     *
+     * @author Julius Liem
+     */
     public T floor(T data) {
         Node node = floor(root, data);
         if (node == null) {
@@ -203,6 +222,11 @@ public class AVLTree<T extends Comparable<T>> {
         return node.getValue();
     }
 
+    /**
+     * Helper method for finding floor
+     *
+     * @author Julius Liem
+     */
     Node floor(Node tree, T data) {
         if (tree == null) {
             return null;
@@ -292,6 +316,13 @@ public class AVLTree<T extends Comparable<T>> {
         return size;
     }
 
+    /**
+     * Finding a list of data between two items
+     * i.e. if you have a tree which contains [1, 2, 3, 4, 5] and you use findBetween(2, 4)
+     * It will return a new list that contains 2, 3, and 4
+     *
+     * @author Julius Liem
+     */
     public List<T> findBetween(T floor, T ceiling) {
         List<T> result = new ArrayList<>();
         findBetweenInternal(root, floor, ceiling, result);

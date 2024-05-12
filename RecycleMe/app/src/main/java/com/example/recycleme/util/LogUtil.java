@@ -3,6 +3,9 @@ package com.example.recycleme.util;
 import android.content.Context;
 import android.widget.Toast;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public class LogUtil {
     private static String emailPattern = "[a-zA-Z0-9._]+@[a-zA-Z]+(\\.[a-zA-Z]+)+";
 

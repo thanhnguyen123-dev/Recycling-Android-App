@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.example.recycleme.login.LoginContext;
 import com.example.recycleme.util.LogUtil;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public class ProfileActivity extends BaseActivity {
     private LoginContext loginContext;
     private TextView usernameTextView;

@@ -31,6 +31,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public class DirectMessageActivity extends BaseActivity {
 
     private CardView sendButton;

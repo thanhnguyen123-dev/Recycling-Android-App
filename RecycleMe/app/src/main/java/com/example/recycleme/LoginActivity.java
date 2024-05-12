@@ -11,6 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.recycleme.login.*;
 import com.example.recycleme.util.LogUtil;
 
+/**
+ * This is a class for the Login Activity. The class shows a login page as well as a signup fragment.
+ *
+ * @author Le Thanh Nguyen
+ * @author Julius Liem
+ */
 public class LoginActivity extends AppCompatActivity {
     private LoginContext loginContext;
     private EditText emailEditText;
@@ -18,6 +24,13 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginButton;
     private Button signupButton;
 
+    /**
+     * This class was written by Julius and Thanh, Julius wrote the Activity first, and then
+     * Thanh edited the Activity to accommodate the use of Firebase Auth
+     *
+     * @author Le Thanh Nguyen
+     * @author Julius Liem
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -15,6 +15,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Unit test to see how UserTree works
+ * This unit test tests edge cases that can happen to the UserTree class (e.g. non existent time, etc.)
+ * @author Julius Liem
+ */
 public class UserTreeTest {
     private UserTree userTree;
 
@@ -62,7 +67,6 @@ public class UserTreeTest {
         List<NodeData<List<RecycledItem>>> nodeDataList = userTree.traverseReturnItemAndDate();
         assertEquals(3, nodeDataList.size());
 
-        //
         assertEquals(time2, nodeDataList.get(0).getDateTime());
         assertEquals(time3, nodeDataList.get(1).getDateTime());
         assertEquals(time1, nodeDataList.get(2).getDateTime());

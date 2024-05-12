@@ -22,6 +22,13 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
+/**
+ * This is a class for Main Activity. The class shows a list of recycled items that can be added
+ * to the cart.
+ *
+ * @author Devansu Yadav (initSwipeRefresh() and startStream())
+ * @author Julius Liem
+ */
 public class MainActivity extends BaseActivity implements Observer {
 
     private RecyclerView recyclerView;
@@ -89,6 +96,7 @@ public class MainActivity extends BaseActivity implements Observer {
 
         recycledItemDb.startStream();
     }
+
 
     private void initSearchView() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

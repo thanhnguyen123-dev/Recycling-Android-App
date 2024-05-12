@@ -27,6 +27,7 @@ import com.google.android.material.navigation.NavigationView;
  * <p>
  *
  * @author Julius Liem - u7724204
+ * @author Devansu Yadav
  */
 
 public class BaseActivity extends AppCompatActivity {
@@ -35,6 +36,10 @@ public class BaseActivity extends AppCompatActivity {
     protected Toolbar toolbar;
     protected ActionBarDrawerToggle actionBarDrawerToggle;
 
+
+    /**
+     * @author Devansu Yadav
+     */
     private enum MenuItemId {
         HOME(R.id.home),
         REGISTER_BUTTON(R.id.register_button),
@@ -65,6 +70,9 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * @author Julius Liem
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +81,9 @@ public class BaseActivity extends AppCompatActivity {
         initViews();
     }
 
+    /**
+     * @author Julius Liem
+     */
     protected void initViews() {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navView = (NavigationView) findViewById(R.id.navigation);
@@ -83,7 +94,9 @@ public class BaseActivity extends AppCompatActivity {
         setupNavListener();
     }
 
-
+    /**
+     * @author Julius Liem
+     */
     private void setupDrawerToggle() {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -91,6 +104,9 @@ public class BaseActivity extends AppCompatActivity {
         toggle.syncState();
     }
 
+    /**
+     * @author Devansu Yadav
+     */
     private void setupNavListener() {
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

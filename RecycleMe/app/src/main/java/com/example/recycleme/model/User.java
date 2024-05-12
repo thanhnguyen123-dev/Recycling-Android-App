@@ -1,5 +1,8 @@
 package com.example.recycleme.model;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public class User {
     private String id;
     private String email;

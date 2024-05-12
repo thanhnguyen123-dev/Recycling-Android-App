@@ -12,6 +12,10 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Unit test to see how AVLTreeItem works with edge cases
+ * @author Julius Liem
+ */
 public class AVLTreeItemTest {
 
     private AVLTreeItem avlTreeItem;

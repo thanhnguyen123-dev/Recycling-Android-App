@@ -14,6 +14,10 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Integration test to see how Cart interacts with UserTree
+ * @author Julius Liem
+ */
 public class Cart_UserTreeIntegrationTest {
     private Cart cart;
     private UserTree userTree;

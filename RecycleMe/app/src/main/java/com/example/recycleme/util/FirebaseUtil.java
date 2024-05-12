@@ -7,6 +7,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public class FirebaseUtil {
     private static DatabaseReference getChatsReference() {
         return FirebaseDatabase.getInstance().getReference().child("chats");

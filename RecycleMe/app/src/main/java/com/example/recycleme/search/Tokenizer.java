@@ -1,5 +1,10 @@
 package com.example.recycleme.search;
 
+
+/**
+ * @author Devansu Yadav
+ * @author Adam Basheer
+ */
 public class Tokenizer {
 
     private String searchQuery;

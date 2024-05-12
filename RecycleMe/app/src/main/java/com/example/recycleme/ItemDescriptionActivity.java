@@ -13,7 +13,9 @@ import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * @author Le Thanh Nguyen
+ */
 public class ItemDescriptionActivity extends BaseActivity {
     private TextView productNameTextView;
     private TextView descriptionView;

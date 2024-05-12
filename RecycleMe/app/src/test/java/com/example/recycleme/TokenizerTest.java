@@ -5,6 +5,9 @@ import static org.junit.Assert.*;
 import com.example.recycleme.search.Token;
 import com.example.recycleme.search.Tokenizer;
 
+/**
+ * @author Devansu Yadav
+ */
 public class TokenizerTest {
     @Test
     public void testTokenizerWithEmptyString() {

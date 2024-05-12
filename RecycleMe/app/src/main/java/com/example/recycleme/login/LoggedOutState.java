@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public class LoggedOutState extends LoginState {
     @Override
     public void login(LoginContext context, String email, String password,  AccountAction accountAction, LoginCallback loginCallback) {

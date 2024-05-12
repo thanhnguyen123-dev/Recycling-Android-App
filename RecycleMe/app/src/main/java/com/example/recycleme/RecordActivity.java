@@ -14,6 +14,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is an activity that shows the user's recycling history.
+ * @author Julius Liem
+ */
 public class RecordActivity extends BaseActivity {
 
     private List<NodeData<List<RecycledItem>>> nodeDataList;

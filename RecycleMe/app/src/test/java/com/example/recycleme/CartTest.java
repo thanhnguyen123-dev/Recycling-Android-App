@@ -16,6 +16,9 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * @author Adam Basheer
+ */
 @RunWith(Parameterized.class)
 public class CartTest {
     private Cart cart;

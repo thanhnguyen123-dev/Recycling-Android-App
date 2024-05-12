@@ -1,5 +1,8 @@
 package com.example.recycleme.model;
 
+/**
+ * @author Le Thanh Nguyen
+ */
 public class Message {
     private String senderId;
     private long sendTime;

@@ -15,6 +15,10 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Unit test to see how AVLTree is working with NodeData
+ * @author Julius Liem
+ */
 public class AVLTreeTest {
     private AVLTree<NodeData<Integer>> avlTree;
 

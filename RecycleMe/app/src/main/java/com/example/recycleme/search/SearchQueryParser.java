@@ -2,6 +2,9 @@ package com.example.recycleme.search;
 
 import java.util.HashSet;
 
+/**
+ * @author Devansu Yadav
+ */
 public class SearchQueryParser {
     public static class InvalidQueryException extends IllegalArgumentException {
         public InvalidQueryException(String errorMessage) {

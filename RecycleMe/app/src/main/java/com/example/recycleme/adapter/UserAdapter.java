@@ -19,10 +19,11 @@ import com.example.recycleme.util.LogUtil;
 import java.util.List;
 
 /**
+ * References for this Adapter:
  * https://developer.android.com/develop/ui/views/layout/recyclerview
  * https://dev.to/theplebdev/implementing-a-recyclerview-in-android-with-java-1jf5
- * */
-
+ * @author Le Thanh Nguyen
+ */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     Context chatsMainActivity;
     List<User> users;

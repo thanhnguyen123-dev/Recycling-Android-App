@@ -13,8 +13,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
-
-//Harrison Black
+/**
+ * @author Harrison Black
+ */
 public class MapActivity extends BaseActivity implements OnMapReadyCallback {
     private gpsMap gpsMap;
 

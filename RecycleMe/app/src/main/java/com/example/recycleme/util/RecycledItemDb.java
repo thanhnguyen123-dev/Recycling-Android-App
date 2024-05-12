@@ -14,6 +14,14 @@ import com.example.recycleme.search.Tokenizer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is a class that reads the data from the DAO.
+ * After the data is read, then the data is put into the AVLTreeItem.
+ * This class also stream the extra data to the current app.
+ *
+ * @author Julius Liem
+ * @author Devansu Yadav
+ */
 public class RecycledItemDb implements Subject {
     private static RecycledItemDb instance;
     private RecycledItemDAO recycledItemDAO;
@@ -26,7 +34,6 @@ public class RecycledItemDb implements Subject {
     private int Local = 0;
     private int Online = 1;
     private volatile boolean isStreamRunning;
-
 
     private RecycledItemDb(Context context){
         this.recycledItemDAO = new FirebaseRecycledItemDAO("mock_data_updated.json", context, Online); //This now pulls the json file from firebase!!!
@@ -62,6 +69,9 @@ public class RecycledItemDb implements Subject {
         recycledItemDAO.updateRecycledItem(recycledItem);
     }
 
+    /**
+     * @author Devansu Yadav
+     */
     public List<RecycledItem> search(String searchQuery) throws SearchQueryParser.InvalidQueryException {
         Tokenizer tokenizer = new Tokenizer(searchQuery);
         SearchQueryParser parser = new SearchQueryParser(tokenizer);
@@ -74,6 +84,9 @@ public class RecycledItemDb implements Subject {
         this.notifyAllObservers(recycledItem.getBrandName() + " " + recycledItem.getItem() + " has been added to the stream!");
     }
 
+    /**
+     * @author Devansu Yadav
+     */
     public void startStream() {
         if (streamThread == null ||  !streamThread.isAlive()) {
             isStreamRunning = true;
@@ -96,6 +109,9 @@ public class RecycledItemDb implements Subject {
         }
     }
 
+    /**
+     * @author Devansu Yadav
+     */
     public void stopStream() {
         isStreamRunning = false;
         if (streamThread != null && streamThread.isAlive()) {
@@ -113,6 +129,10 @@ public class RecycledItemDb implements Subject {
         observers.remove(observer);
     }
 
+    /**
+     * Method that informs the observers as part of the Observer pattern
+     * @author Julius Liem
+     */
     @Override
     public void notifyAllObservers(String message) {
         for (Observer obs: this.observers) {

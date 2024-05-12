@@ -17,7 +17,9 @@ import com.example.recycleme.login.LoginContext;
 import com.example.recycleme.login.LoginState;
 import com.example.recycleme.util.LogUtil;
 
-
+/**
+ * @author Le Thanh Nguyen
+ */
 public class SignupFragment extends DialogFragment {
     private EditText emailAddressEditText;
     private EditText passwordEditText;
