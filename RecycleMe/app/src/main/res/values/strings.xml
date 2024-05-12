@@ -35,4 +35,5 @@
     <string name="account">Account</string>
     <string name="upload_btn">Upload Image</string>
     <string name="select_btn">Select Image</string>
+    <string name="viewing_txt">You are viewing user profile</string>
 </resources>

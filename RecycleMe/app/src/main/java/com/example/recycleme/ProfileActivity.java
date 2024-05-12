@@ -16,18 +16,14 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.recycleme.login.LoginContext;
 import com.example.recycleme.util.LogUtil;
 import com.example.recycleme.util.UserProfileUtil;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -62,7 +58,6 @@ public class ProfileActivity extends BaseActivity {
         String username = LogUtil.getUsernameFromEmail(emailText);
         usernameTextView.setText(username);
 
-
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +79,6 @@ public class ProfileActivity extends BaseActivity {
                     });
         });
 
-        uploadButton = findViewById(R.id.uploadButton);
         uploadButton.setOnClickListener(v -> {
             if (selectedImageUri != null) {
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -108,10 +102,11 @@ public class ProfileActivity extends BaseActivity {
     }
 
     private void initView() {
-        usernameTextView = findViewById(R.id.profile_username);
-        profilePicImageView = findViewById(R.id.profilePicImageView);
+        usernameTextView = findViewById(R.id.otherProfileUsername);
+        profilePicImageView = findViewById(R.id.otherUserImageView);
         logOutButton = findViewById(R.id.logout_button);
         selectButton = findViewById(R.id.selectButton);
+        uploadButton = findViewById(R.id.uploadButton);
     }
 
     private void getUserImage() {
@@ -137,11 +132,4 @@ public class ProfileActivity extends BaseActivity {
                 }
         );
     }
-
-
-
-
-
-
-
 }
