@@ -46,7 +46,6 @@ public class ProfileActivity extends BaseActivity {
     private Uri selectedImageUri;
     private ImageView profilePicImageView;
     private StorageReference storageReference;
-    private FirebaseStorage firebaseStorage;
     private FirebaseUser firebaseUser;
 
 
@@ -56,18 +55,21 @@ public class ProfileActivity extends BaseActivity {
         FrameLayout contentFrameLayout = findViewById(R.id.content_frame);
         getLayoutInflater().inflate(R.layout.activity_profile, contentFrameLayout);
 
+        initView();
+
         loginContext = LoginContext.getInstance();
-        usernameTextView = findViewById(R.id.profile_username);
+
         String emailText = loginContext.getUserEmail();
         String username = LogUtil.getUsernameFromEmail(emailText);
         usernameTextView.setText(username);
-        profilePicImageView = findViewById(R.id.profilePicImageView);
-        firebaseStorage = FirebaseStorage.getInstance();
+
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference()
+                .child("profile_image")
+                .child(firebaseUser.getUid());
         UserProfileUtil.retrieveUserImage(firebaseUser.getUid(), getApplicationContext(), profilePicImageView);
 
-        logOutButton = findViewById(R.id.logout_button);
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,7 +91,6 @@ public class ProfileActivity extends BaseActivity {
                 }
                 );
 
-        selectButton = findViewById(R.id.selectButton);
         selectButton.setOnClickListener(v -> {
             ImagePicker.with(this).cropSquare().compress(512).maxResultSize(512, 512)
                     .createIntent(new Function1<Intent, Unit>() {
@@ -114,8 +115,6 @@ public class ProfileActivity extends BaseActivity {
                 });
             }
         });
-
-
     }
 
     private void updateUI() {
@@ -124,6 +123,13 @@ public class ProfileActivity extends BaseActivity {
             startActivity(intent);
             Toast.makeText(getApplicationContext(), "Successfully logout", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void initView() {
+        usernameTextView = findViewById(R.id.profile_username);
+        profilePicImageView = findViewById(R.id.profilePicImageView);
+        logOutButton = findViewById(R.id.logout_button);
+        selectButton = findViewById(R.id.selectButton);
     }
 
 

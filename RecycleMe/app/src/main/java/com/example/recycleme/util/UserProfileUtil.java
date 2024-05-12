@@ -32,10 +32,6 @@ public class UserProfileUtil {
         });
     }
 
-
-
-
-
     public static void getProfilePicStorageReference(String id) {
         storageReference = FirebaseStorage.getInstance().getReference()
                 .child("profile_image")
