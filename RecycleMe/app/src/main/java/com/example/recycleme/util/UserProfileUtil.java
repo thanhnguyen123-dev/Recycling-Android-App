@@ -32,6 +32,21 @@ public class UserProfileUtil {
         });
     }
 
+    public static void retrieveUserImage(FirebaseUser user, Context context, ImageView imageView) {
+        getProfilePicStorageReference(user.getUid());
+        storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    Uri uri = task.getResult();
+                    setProfilePic(context, uri, imageView);
+                }
+            }
+        });
+    }
+
+
+
     public static void getProfilePicStorageReference(String id) {
         storageReference = FirebaseStorage.getInstance().getReference()
                 .child("profile_image")
