@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.recycleme.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,8 +19,8 @@ import com.google.firebase.storage.StorageReference;
 public class UserProfileUtil {
     private static StorageReference storageReference;
 
-    public static void retrieveUserImage(Context context, ImageView imageView) {
-        getProfilePicStorageReference();
+    public static void retrieveUserImage(User user, Context context, ImageView imageView) {
+        getProfilePicStorageReference(user.getId());
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
@@ -31,11 +32,10 @@ public class UserProfileUtil {
         });
     }
 
-    public static void getProfilePicStorageReference() {
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    public static void getProfilePicStorageReference(String id) {
         storageReference = FirebaseStorage.getInstance().getReference()
                 .child("profile_image")
-                .child(firebaseUser.getUid());
+                .child(id);
     }
 
     public static void setProfilePic(Context context, Uri imageUri, ImageView imageView) {

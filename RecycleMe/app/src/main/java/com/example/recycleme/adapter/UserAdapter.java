@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -65,14 +66,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView usernameTextView;
         private TextView lastMessageTextView;
+        private ImageView userProfileImageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameTextView = itemView.findViewById(R.id.username);
             lastMessageTextView = itemView.findViewById(R.id.user_last_msg);
+            userProfileImageView = itemView.findViewById(R.id.user_profile_img);
         }
         public void bind(User user) {
             usernameTextView.setText(LogUtil.getUsernameFromEmail(user.getEmail()));
             lastMessageTextView.setText(user.getLastMessage());
+            UserProfileUtil.retrieveUserImage(user, itemView.getContext(), userProfileImageView);
         }
 
     }
