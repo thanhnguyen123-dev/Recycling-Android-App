@@ -35,4 +35,7 @@
     <string name="account">Account</string>
     <string name="map_api">AIzaSyBvu-hQWw85OHTl-UfU2j4a4AwXbp5V8aw</string>
     <string name="map">Map</string>
+    <string name="upload_btn">Upload Image</string>
+    <string name="select_btn">Select Image</string>
+    <string name="viewing_txt">You are viewing user profile</string>
 </resources>

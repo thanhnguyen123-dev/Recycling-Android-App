@@ -3,6 +3,9 @@ package com.example.recycleme;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+
 
 import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
@@ -13,7 +16,10 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.recycleme.login.LoginContext;
+import com.example.recycleme.util.UserProfileUtil;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Base activity class that provides a navigation drawer menu. The menu contents and behavior are the same across
@@ -34,6 +40,7 @@ public class BaseActivity extends AppCompatActivity {
     protected DrawerLayout drawerLayout;
     protected NavigationView navView;
     protected Toolbar toolbar;
+    protected ImageView profileImage;
     protected ActionBarDrawerToggle actionBarDrawerToggle;
 
 
@@ -88,8 +95,14 @@ public class BaseActivity extends AppCompatActivity {
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navView = (NavigationView) findViewById(R.id.navigation);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        View headerView = navView.getHeaderView(0);
+        profileImage = headerView.findViewById(R.id.profile_image_nav);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        UserProfileUtil.retrieveUserImage(user.getUid(), getApplicationContext(), profileImage);
+
+        setSupportActionBar(toolbar);
         setupDrawerToggle();
         setupNavListener();
     }

@@ -7,7 +7,6 @@ public class User {
     private String id;
     private String email;
     private String password;
-    private String lastMessage;
 
     public User() {
 
@@ -22,24 +21,12 @@ public class User {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getLastMessage() {
-        return lastMessage;
-    }
-
-    public void setLastMessage(String lastMessage) {
-        this.lastMessage = lastMessage;
     }
 
     public String getId() {

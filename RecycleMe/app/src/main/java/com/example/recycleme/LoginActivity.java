@@ -65,8 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         signupButton.setOnClickListener(v -> {
             SignupFragment fragment = new SignupFragment();
             fragment.show(getSupportFragmentManager(), "SignupManager");
-
-
         });
     }
 

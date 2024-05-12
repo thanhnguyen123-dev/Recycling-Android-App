@@ -6,15 +6,19 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.recycleme.ChatProfileViewActivity;
 import com.example.recycleme.DirectMessageActivity;
 import com.example.recycleme.R;
 import com.example.recycleme.model.User;
 import com.example.recycleme.util.LogUtil;
+import com.example.recycleme.util.UserProfileUtil;
 
 import java.util.List;
 
@@ -25,8 +29,8 @@ import java.util.List;
  * @author Le Thanh Nguyen
  */
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-    Context chatsMainActivity;
-    List<User> users;
+    private Context chatsMainActivity;
+    private List<User> users;
 
     public UserAdapter(Activity chatsMainActivity, List<User> users) {
         this.chatsMainActivity = chatsMainActivity;
@@ -48,13 +52,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(chatsMainActivity, DirectMessageActivity.class);
             intent.putExtra("USERNAME", LogUtil.getUsernameFromEmail(user.getEmail()));
-            intent.putExtra("LAST_MESSAGE", user.getLastMessage());
             intent.putExtra("USER_ID", user.getId());
             chatsMainActivity.startActivity(intent);
         });
 
     }
-
 
 
     @Override
@@ -64,15 +66,21 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView usernameTextView;
-        private TextView lastMessageTextView;
+        private ImageView userProfileImageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             usernameTextView = itemView.findViewById(R.id.username);
-            lastMessageTextView = itemView.findViewById(R.id.user_last_msg);
+            userProfileImageView = itemView.findViewById(R.id.user_profile_img);
         }
         public void bind(User user) {
             usernameTextView.setText(LogUtil.getUsernameFromEmail(user.getEmail()));
-            lastMessageTextView.setText(user.getLastMessage());
+            UserProfileUtil.retrieveUserImage(user.getId(), itemView.getContext(), userProfileImageView);
+            userProfileImageView.setOnClickListener(v -> {
+                Intent intent = new Intent(chatsMainActivity, ChatProfileViewActivity.class);
+                intent.putExtra("USER_NAME", LogUtil.getUsernameFromEmail(user.getEmail()));
+                intent.putExtra("USER_ID", user.getId());
+                chatsMainActivity.startActivity(intent);
+            });
         }
 
     }
