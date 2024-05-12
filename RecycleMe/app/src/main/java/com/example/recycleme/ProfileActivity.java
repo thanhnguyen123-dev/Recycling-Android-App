@@ -56,19 +56,13 @@ public class ProfileActivity extends BaseActivity {
         getLayoutInflater().inflate(R.layout.activity_profile, contentFrameLayout);
 
         initView();
+        getUserImage();
 
         loginContext = LoginContext.getInstance();
-
         String emailText = loginContext.getUserEmail();
         String username = LogUtil.getUsernameFromEmail(emailText);
         usernameTextView.setText(username);
 
-
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        storageReference = FirebaseStorage.getInstance().getReference()
-                .child("profile_image")
-                .child(firebaseUser.getUid());
-        UserProfileUtil.retrieveUserImage(firebaseUser.getUid(), getApplicationContext(), profilePicImageView);
 
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,6 +124,15 @@ public class ProfileActivity extends BaseActivity {
         profilePicImageView = findViewById(R.id.profilePicImageView);
         logOutButton = findViewById(R.id.logout_button);
         selectButton = findViewById(R.id.selectButton);
+    }
+
+    private void getUserImage() {
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference()
+                .child("profile_image")
+                .child(firebaseUser.getUid());
+        UserProfileUtil.retrieveUserImage(firebaseUser.getUid(), getApplicationContext(), profilePicImageView);
+
     }
 
 
