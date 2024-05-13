@@ -60,6 +60,12 @@ The key area(s) of responsibilities for each member
         - [CartViewAdapter.java](/RecycleMe/app/src/main/java/com/example/recycleme/adapter/CartViewAdapter.java)
         - [RecordAdapter.java](/RecycleMe/app/src/main/java/com/example/recycleme/adapter/RecordAdapter.java)
         - [RecycledViewAdapter.java](RecycleMe/app/src/main/java/com/example/recycleme/adapter/RecycledViewAdapter.java)
+    - Test:
+        * [AVLTreeItemSearchIntegrationTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeItemSearchIntegrationTest.java)
+        * [AVLTreeItemTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeItemTest.java)
+        * [AVLTreeTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeTest.java)
+        * [CartUserTreeIntegrationTest.java](RecycleMe/app/src/test/java/com/example/recycleme/CartUserTreeIntegrationTest.java)
+        * [UserTreeTest.java](RecycleMe/app/src/test/java/com/example/recycleme/UserTreeTest.java)
 
 - **Code and App Design**
     - DAO design pattern, Observer design pattern, Singleton design pattern*
@@ -164,7 +170,7 @@ Molly wants to log her recycling activities.
 
 5. Molly then can check her recycling history and statistics
 <div style="text-align: center;">
-    <img src="media/_examples/screenshot/screenshot_history.png" alt="Description of the image" width="20%">
+    <img src="media/_examples/screenshot/screenshot_history.jpeg" alt="Description of the image" width="20%">
     <img src="media/_examples/screenshot/screenshot_statistic.png" alt="Description of the image" width="20%">
 </div>
 
@@ -173,6 +179,9 @@ Target users: people who want to find friends in their recycling journey
 2. Molly downloads the app
 3. Molly sees that there is a chat function which she can use to find new friends
 4. Molly chat with her new friends
+<div style="text-align: center;">
+    <img src="media/_examples/screenshot/screenshot_profile_chat.png" alt="Description of the image" width="20%">
+</div>
 
 
 Target users: people who recycle large amounts of recycling, or do not have access to recycling bins at home.
@@ -181,6 +190,10 @@ Steve wants to recycle some stuff.
 1. Steve wants to recycle some items at a recycling plant.
 2. Steve opens the app.
 3. The app tells him where nearby recycling facilities are.
+<div style="text-align: center;">
+    <img src="media/_examples/screenshot/screenshot_map.png" alt="Description of the image" width="20%">
+</div>
+
 
 
 <hr> 
@@ -373,9 +386,6 @@ a lot of flexibility to users.
 
 ### Others
 
-*[What other design decisions have you made which you feel are relevant? Feel free to separate these into their own subheadings.]*
-*FirebaseUtil*
-*
 
 <br>
 <hr>
@@ -435,8 +445,30 @@ a. must make use of a tokeniser and parser with a formal grammar of your own cre
 
 3. [Data-Profile] Create a Profile Page for Users or any Entities, which contains a media file (image,
 animation (e.g., gif), video). (easy)
+    * Code: 
+        * [ChatsProfileViewActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ChatProfileViewActivity.java)
+        * [ProfileActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ProfileActivity.java)
+        * [UserProfileUtil.java](RecycleMe/app/src/main/java/com/example/recycleme/util/UserProfileUtil.java)
+    * Description of feature:
+        * This feature allows the user to change their profile, and see other user's profile
+    * Picture: 
+        <img src="media/_examples/screenshot/screenshot_profile_pic.png" alt="Description of the image" width="20%">
+
+    * Description of implementation:
+        * We store the profile picture on the FirebaseStorage, using each user ID.
+        * When the ChatsMainActivity is loaded, the profile picture will be put on top of each user ImageView using the UserProfileUtil.
+        * This applies the same to every UI part that contains some sort of user profile image.
 
 4. [Data-GPS] Use GPS information based on location data in your App. (easy)
+    * Code:
+        * [gpsMap.java](RecycleMe/app/src/main/java/com/example/recycleme/map/gpsMap.java)
+        * [MapActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MapActivity.java)
+    * Description of feature:
+        * This feature allows the user to find the nearest recycling plant near their location.
+    * Picture: <img src="media/_examples/screenshot/screenshot_map.png" alt="Description of the image" width="20%">
+    * Description of implementation:
+        * This feature uses Google's map library. 
+        * It requests the user location, and then generate random pointer between 1-50 km for the recycling location marker.
 
 5. [Data-Graphical] Create a Graphical report viewer to see a report of some useful data from your
 app. No marks will be awarded if the report is non-graphical. (medium)
@@ -447,11 +479,19 @@ app. No marks will be awarded if the report is non-graphical. (medium)
     * Description of implementation: 
         * This statistics activity is implemented by using MPAndroidChart library. The Activity reads data from the UserTree (which contains the user's history)
         * The Activity then will process the data and show it as a graphical chart.
+    * Image:
+    <div style="text-align: center;">
+        <img src="media/_examples/screenshot/screenshot_statistic.png" alt="Description of the image" width="20%">
+    </div>
 
 6. [Data-Deletion] Implement Deletion for your chosen tree data structure, and the deletion must serve
 a purpose within your application. (medium)
     * Code: [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L242-270), 
     * Description of the feature: In the history tab, we can delete the history of the user. The history of the user is stored on an AVLTree.
+    * Image: 
+        <div style="text-align: center;">
+        <img src="media/_examples/screenshot/screenshot_history.jpeg" alt="Description of the image" width="20%">
+    </div>
     * Description of implementation: 
         * Data deletion is implemented by recursive method.
         * If the method finds the exact value, then the data will be deleted (and the value will be replaced by the predecessor).
@@ -478,10 +518,11 @@ a purpose within your application. (medium)
 8. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
     * Code: [CartActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/CartActivity.java), [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
     * Description of feature: The user can add things to their cart, and when they switch to the Cart activity, they can see that the items are being ordered according to the materials.
-    * Image: 
-    <div style="text-align: center;">
-        <img src="media/_examples/screenshot/screenshot_cart.png" alt="Description of the image" width="20%">
-    </div>
+    * Image: <img src="media/_examples/screenshot/screenshot_cart.png" alt="Description of the image" width="20%">
+    * Description of implementation:
+        * There is a onClick method set for every add button in the MainActivity.
+        * If the item is added into the cart, it will be grouped in a HashMap according to their material
+        * The CartAdapter will then show the item based on their material.
 
 
 
