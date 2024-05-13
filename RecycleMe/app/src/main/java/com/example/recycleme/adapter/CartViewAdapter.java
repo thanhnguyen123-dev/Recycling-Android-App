@@ -28,6 +28,7 @@ import java.util.List;
  * Additionally, this adapter implementation references and incorporates concepts from the following Stack Overflow answer:
  * <a href="https://stackoverflow.com/questions/64216153/header-in-recycler-view-what-is-the-best-practice-in-2020">
  * Header in RecyclerView - What is the best practice in 2020?</a>
+ * We didn't take any code from that StackOverflow link, it only gave us idea about how to create recycled items with header.
  * The answer provided guidance on using ConcatAdapter to implement header for adapter.
  *
  * @author Julius Liem - u7724204
