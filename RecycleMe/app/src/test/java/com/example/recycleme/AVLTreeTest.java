@@ -156,7 +156,7 @@ public class AVLTreeTest {
     }
 
     @Test
-    public void testRotation() {
+    public void testTraverse() {
        AVLTree<Integer> integerAVLTree = new AVLTree<>();
 
         for (int i = 0; i < 5; i++) {

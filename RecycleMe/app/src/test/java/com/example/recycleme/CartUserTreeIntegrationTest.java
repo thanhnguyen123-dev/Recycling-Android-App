@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import com.example.recycleme.cart.Cart;
 import com.example.recycleme.cart.UserTree;
 import com.example.recycleme.model.RecycledItem;
-import com.example.recycleme.model.User;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +17,7 @@ import java.util.List;
  * Integration test to see how Cart interacts with UserTree
  * @author Julius Liem
  */
-public class Cart_UserTreeIntegrationTest {
+public class CartUserTreeIntegrationTest {
     private Cart cart;
     private UserTree userTree;
 

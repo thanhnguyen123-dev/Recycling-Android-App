@@ -34,13 +34,13 @@ public class AVLTreeItemTest {
     }
 
     @Test
-    public void testFindItems_emptyTree() {
+    public void testFindItemsEmptyTree() {
         List<RecycledItem> recycledItems = this.avlTreeItem.findItems("","","");
         assertEquals(recycledItems.size(), 0);
     }
 
     @Test
-    public void testFindItems_singleItem() {
+    public void testFindItemsSingleItem() {
         this.avlTreeItem.insert(recycledItemList.get(0));
 
         List<RecycledItem> result = avlTreeItem.findItems("", "", "");
@@ -49,7 +49,7 @@ public class AVLTreeItemTest {
     }
 
     @Test
-    public void testFindItems_multipleItems() {
+    public void testFindItemsMultipleItems() {
         for (RecycledItem item: this.recycledItemList) {
             this.avlTreeItem.insert(item);
         }
@@ -63,7 +63,7 @@ public class AVLTreeItemTest {
     }
 
     @Test
-    public void testFindItems_partialMatch() {
+    public void testFindItemsPartialMatch() {
         for (RecycledItem item: this.recycledItemList) {
             this.avlTreeItem.insert(item);
         }
@@ -73,7 +73,7 @@ public class AVLTreeItemTest {
     }
 
     @Test
-    public void testFindItems_caseInsensitive() {
+    public void testFindItemsCaseInsensitive() {
         for (RecycledItem item: this.recycledItemList) {
             this.avlTreeItem.insert(item);
         }
