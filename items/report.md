@@ -16,11 +16,14 @@ This is a report made by the FlyingSpaghettiGod team. This report explains the a
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 
 ## Administrative
-- Firebase Repository Link: <insert-link-to-firebase-repository>
+* APK Location: 
+- Firebase Repository Link: 
+    - Link: [repo](https://console.firebase.google.com/u/0/project/recyclingapp-login-firebase/overview)
     - Confirm: I have already added comp21006442@gmail.com as a Developer to the Firebase project prior to the due date.
 - Two user accounts for markers' access are usable on the app's APK (do not change the username and password unless there are exceptional circumstances. Note that they are not real e-mail addresses in use):
     - Username: comp2100@anu.edu.au  Password: comp2100
     - Username: comp6442@anu.edu.au  Password: comp6442
+* Harrison has several github accounts in his computer so sometimes it gets weird and IntelliJ changes his accounts without him knowing. He committed by the name of Harrison and ExyroZ.
 
 ## Team Members and Roles
 The key area(s) of responsibilities for each member
@@ -77,7 +80,7 @@ The key area(s) of responsibilities for each member
             - [header_cart.xml](RecycleMe/app/src/main/res/layout/header_cart.xml)
             - [header_date_history.xml](RecycleMe/app/src/main/res/layout/header_date_history.xml)
 
-- **Others**: (only if significant and significantly different from an "average contribution")
+- **Others**: 
     * Report Writing
     * UML diagram preparation
     * Data generation
@@ -88,8 +91,8 @@ The key area(s) of responsibilities for each member
     - Cart feature (Singleton Design Pattern) - class Cart: [Cart.java](link_to_file),
     - Cart Layout - CartActivity class = [CartActivity.java](link_to_file), CartActivity layout: [CartActivity.xml](link_to_file)
     - Firebase based DAO - class RecycledItemDAO: [RecycledItemDAO.java](link_to_file), class RecycledItemDAOJsonImp: [FirebaseRecycledItemDAO.java](link_to_file)
-    - Maps implementation (should be done soon)
-    - Map layout (Should be done soon)
+    - Maps implementation 
+    - Map layout 
 
 - **Code and App Design**
     - Singleton design pattern, DAO design pattern
@@ -104,7 +107,7 @@ The key area(s) of responsibilities for each member
 - **Code and App Design**
     - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
 
-- **Others**: (only if significant and significantly different from an "average contribution")
+- **Others**: 
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
   
@@ -122,7 +125,7 @@ The key area(s) of responsibilities for each member
     - DAO design pattern, Observer design pattern, Singleton design pattern*
     - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
 
-- **Others**: (only if significant and significantly different from an "average contribution")
+- **Others**: 
     - [Report Writing?] [Slides preparation?]*
     - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
 
@@ -430,7 +433,12 @@ a. must make use of a tokeniser and parser with a formal grammar of your own cre
 
 **Greater Data Usage, Handling and Sophistication**
 
-3. [Data-Graphical] Create a Graphical report viewer to see a report of some useful data from your
+3. [Data-Profile] Create a Profile Page for Users or any Entities, which contains a media file (image,
+animation (e.g., gif), video). (easy)
+
+4. [Data-GPS] Use GPS information based on location data in your App. (easy)
+
+5. [Data-Graphical] Create a Graphical report viewer to see a report of some useful data from your
 app. No marks will be awarded if the report is non-graphical. (medium)
     * Code: [Class StatisticsActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/StatisticActivity.java)
     * Description of feature: This feature will show the statistics:
@@ -440,7 +448,7 @@ app. No marks will be awarded if the report is non-graphical. (medium)
         * This statistics activity is implemented by using MPAndroidChart library. The Activity reads data from the UserTree (which contains the user's history)
         * The Activity then will process the data and show it as a graphical chart.
 
-4. [Data-Deletion] Implement Deletion for your chosen tree data structure, and the deletion must serve
+6. [Data-Deletion] Implement Deletion for your chosen tree data structure, and the deletion must serve
 a purpose within your application. (medium)
     * Code: [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L242-270), 
     * Description of the feature: In the history tab, we can delete the history of the user. The history of the user is stored on an AVLTree.
@@ -451,7 +459,7 @@ a purpose within your application. (medium)
 
 **Peer to Peer Messaging**
 
-5. [P2P-DM] Provide users with the ability to message each other directly in private. (hard)
+7. [P2P-DM] Provide users with the ability to message each other directly in private. (hard)
     * Code: [DirectMessageActivity.java](/RecycleMe/app/src/main/java/com/example/recycleme/DirectMessageActivity.java), [ChatsMainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ChatsMainActivity.java)
     * Description of feature:
         * This allows a certain user to send direct message to other people.
@@ -467,7 +475,7 @@ a purpose within your application. (medium)
 
 **User Interactivity**
 
-6. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
+8. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
     * Code: [CartActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/CartActivity.java), [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
     * Description of feature: The user can add things to their cart, and when they switch to the Cart activity, they can see that the items are being ordered according to the materials.
     * Image: 
@@ -633,38 +641,99 @@ In our testing, we found out that we cannot tests most of the classes that inter
 * [Token.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Token.java)
 * [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java)
 * [AVLTree.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java)
-* [AVLTreeItem.java]()
+* [AVLTreeItem.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTreeItem.java)
+* [AVLTreeTime.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTreeTime.java)
 
 1. Tests for Search
     - Code: 
-        * [TokenizerTest Class](https://gitlab.cecs.anu.edu.au/comp2100/group-project/ga-23s2/-/blob/main/items/media/_examples/Dummy.java) 
-    - *Number of test cases: ...*
-    - *Code coverage: ...*
-    - *Types of tests created and descriptions: ...*
+        * [SearchSuite.java](RecycleMe/app/src/test/java/com/example/recycleme/SearchSuite.java) 
+            * [TokenizerTest.java](RecycleMe/app/src/test/java/com/example/recycleme/TokenizerTest.java)
+            * [SearchQueryParser.java](RecycleMe/app/src/test/java/com/example/recycleme/SearchQueryParserTest.java)
+    - Number of test cases:
+        * 7 in TokenizerTest.java
+        * 5 in SearchQueryParser
+    - Code coverage:
+    ![search_test_coverage.png](/items/media/_examples/screenshot/test/search_test_coverage.png)
+    - Types of tests created and descriptions:
+        * Tests Tokenizer with:
+            * Empty string
+            * Whitespace
+            * Invalid grammar
+            * Valid grammar
+        * Test Search Query Parser with: 
+            * valid queries
+            * invalid queries
+                * queries with hanging and (e.g. "item and")
+                * queries without and (e.g. "item and #brand1 #brand2)
 
 2. Tests for AVL tree
-    - Code:
-    - *Number of test cases: ...*
-    - *Code coverage: ...*
-    - *Types of tests created and descriptions: ...*
+    - Code: [AVLSuite.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLSuite.java)
+        * [AVLTreeTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeTest.java)
+        * [AVLTreeItemTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeItemTest.java)
+    - Number of test cases: 
+        * 11 for AVLTreeTest
+        * 5 for AVLTreeItemTest
+    - Code coverage:
+    ![avltreetest.png](/items/media/_examples/screenshot/test/avltreetest.png)
+    - Types of tests created and descriptions:
+        * For AVLTreeTest, testing edge cases such as:
+            * Inserting same elements
+            * Searching non existent node
+            * Traversing empty tree
+            * Deleting non existent node
+            * Deleting root node
+        * For AVLTreeItem, testing multiple conditions that might happen such as:
+            * finding items in empty tree
+            * finding single item
+            * finding multiple items in a tree
+            * finding items with partial matching
+            * finding items with case insensitive match.
 
-3. Tests for Login
+3. Tests for Cart
     - Code:
-    - *Number of test cases: ...*
-    - *Code coverage: ...*
-    - *Types of tests created and descriptions: ...*
-
-4. Tests for Cart
-    - Code:
-    - *Number of test cases: ...*
-    - *Code coverage: ...*
-    - *Types of tests created and descriptions: ...*
+        * [CartTest.java](RecycleMe/app/src/test/java/com/example/recycleme/CartTest.java)
+    - Number of test cases: 3
+    - Code coverage: ![cartesst.png](/items/media/_examples/screenshot/test/CartTest.png)
+    - Parameterized test for adding and removing items to the cart
 
 5. Tests for User Tree
-    - Code:
-    - *Number of test cases: ...*
-    - *Code coverage: ...*
-    - *Types of tests created and descriptions: ...*
+    - Code: [UserTreeTest.java]()
+    - Number of test cases: 6
+    - Code coverage: ![usertreetest.png](/items/media/_examples/screenshot/test/usertree_test.png)
+    - Types of tsets created and descriptions:
+        - Test for adding items
+        * Test searching item with non existent key
+        * Test for traversing
+        * Test for empty tree
+        * Test for adding item with same key
+        * Test for adding empty item
+
+6. Integration testing between AVLTreeItem and Search
+    * Code: [AVLTreeItemSearchIntegrationTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeItemSearchIntegrationTest.java)
+    * Number of test cases: 6 (Parameterized test)
+    * Code coverage: ![avlsearch.png](/items/media/_examples/screenshot/test/avltree_search_integration.png)
+    * Types of tests created and descriptions:
+        * valid query
+        * valid query with multiple results
+        * query that returns nothing
+
+7. Integration testing for Cart and UserTree
+    * Code: [CartUserTreeIntegrationTest.java](RecycleMe/app/src/test/java/com/example/recycleme/CartUserTreeIntegrationTest.java)
+    * Number of test cases: 3
+    * Code coverage: ![cart_usertree_test.png](/items/media/_examples/screenshot/test/cart_usertree_test.png)
+    * Types of test created and description:
+        * Adding items to Cart and then adding it to UserTree
+        * Adding duplicate items to Cart and UserTree
+        * Removing non existent items from Cart and UserTree
+    
+### Total Testing Coverage
+* The total testing coverage excludes the class that cannot be tested.
+* Testing coverage only includes the class that has been mentioned above
+* We cannot test the login, chat, and database related activities because it uses Firebase (and it's hard to mock it)
+* Testing coverage excluding UI, activities, and Firebase related class:
+![test_coverage.png](/items/media/_examples/screenshot/test/test_coverage_exclude.png)
+* Testing coverage including UI, activities, and Firebase related class:
+![test_coverage_full.png](/items/media/_examples/screenshot/test/test_coverage_all.png)
 
 ...
 
@@ -674,11 +743,6 @@ In our testing, we found out that we cannot tests most of the classes that inter
 ## Team Management
 
 ### Meetings Records
-* Link to the minutes of your meetings like above. There must be at least 4 team meetings.
-  (each committed within 2 days after the meeting)
-* Your meetings should also have a reasonable date spanning across Week 6 to 11.*
-
-
 - *[Team Meeting 1](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/items/meeting_1_report.md)*
 - *[Team Meeting 2](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/items/meeting_2_report.md)*
 - *[Team Meeting 3](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/items/meeting_3_report.md)*
