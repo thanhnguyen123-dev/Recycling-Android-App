@@ -24,6 +24,7 @@ This is a report made by the FlyingSpaghettiGod team. This report explains the a
     - Username: comp2100@anu.edu.au  Password: comp2100
     - Username: comp6442@anu.edu.au  Password: comp6442
 * Harrison has several github accounts in his computer so sometimes it gets weird and IntelliJ changes his accounts without him knowing. He committed by the name of Harrison and ExyroZ.
+* We compiled this app using SDK 34. We've already asked permission in this [Ed post](https://edstem.org/au/courses/15738/discussion/1839054?comment=4178955)
 
 ## Team Members and Roles
 The key area(s) of responsibilities for each member
