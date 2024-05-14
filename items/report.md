@@ -16,7 +16,7 @@ This is a report made by the FlyingSpaghettiGod team. This report explains the a
 10. [Conflict Resolution Protocol](#conflict-resolution-protocol)
 
 ## Administrative
-* APK Location: 
+* APK Location: [APK](apk/recycleme.apk)
 - Firebase Repository Link: 
     - Link: [repo](https://console.firebase.google.com/u/0/project/recyclingapp-login-firebase/overview)
     - Confirm: I have already added comp21006442@gmail.com as a Developer to the Firebase project prior to the due date.
