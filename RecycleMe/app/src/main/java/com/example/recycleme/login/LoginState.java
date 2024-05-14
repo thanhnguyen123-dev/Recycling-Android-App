@@ -1,7 +1,8 @@
 package com.example.recycleme.login;
 
 /**
- * @author Le Thanh Nguyen
+ * An abstract class for the current login state of user.
+ * @author Le Thanh Nguyen - u7594144
  */
 public abstract class LoginState {
     public interface LoginCallback {

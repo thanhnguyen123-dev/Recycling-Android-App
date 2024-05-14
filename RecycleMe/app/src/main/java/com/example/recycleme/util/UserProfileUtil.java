@@ -16,6 +16,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+/**
+ * An utility class to handle communication between the app and Firebase Storage
+ * to retrieve user profile image.
+ * @author Le Thanh Nguyen - u7594144
+ * */
 public class UserProfileUtil {
     private static StorageReference storageReference;
 

@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 /**
  * One of the state for State design pattern, the other one is LoggedOutState
  * @author Julius Liem - u7724204
- * @author Le Thanh Nguyen (for the Firebase part)
+ * @author Le Thanh Nguyen - u7594144 (for the Firebase part)
  */
 
 public class LoggedInState extends LoginState {

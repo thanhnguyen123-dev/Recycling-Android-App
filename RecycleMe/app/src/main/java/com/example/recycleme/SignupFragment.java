@@ -18,7 +18,8 @@ import com.example.recycleme.login.LoginState;
 import com.example.recycleme.util.LogUtil;
 
 /**
- * @author Le Thanh Nguyen
+ * A fragment for new user to create new account with user information.
+ * @author Le Thanh Nguyen - u7594144
  */
 public class SignupFragment extends DialogFragment {
     private EditText emailAddressEditText;

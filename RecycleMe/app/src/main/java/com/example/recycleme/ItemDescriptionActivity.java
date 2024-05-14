@@ -14,8 +14,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author Le Thanh Nguyen
- */
+ * An activity to view the items description from MainActivity
+ * @author Le Thanh Nguyen - u7594144
+ * */
 public class ItemDescriptionActivity extends BaseActivity {
     private TextView productNameTextView;
     private TextView descriptionView;

@@ -35,8 +35,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Le Thanh Nguyen
- */
+ * An activity to chat with other user
+ * @author Le Thanh Nguyen - u7594144
+ * */
 public class DirectMessageActivity extends BaseActivity {
     private ImageView receiverProfilePic;
     private CardView sendButton;

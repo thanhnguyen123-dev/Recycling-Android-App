@@ -21,7 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 /**
- * @author Le Thanh Nguyen
+ * LoggedOutState denotes the current state of LoginState.
+ * It has login method to allow logged out users to login.
+ * I used Claude AI to give me hints on how to deal with the delay for logging in,
+ * which was done by introducing a LoginCallback argument. However, all of the codes are written by me.
+ * @author Le Thanh Nguyen - u7594144
  */
 public class LoggedOutState extends LoginState {
     @Override

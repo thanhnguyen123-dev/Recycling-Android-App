@@ -19,9 +19,14 @@ import com.google.firebase.auth.FirebaseUser;
 import java.util.List;
 
 /**
+ * A RecyclerView adapter for displaying a list of messages in private chat.
+ * This adapter binds the data from a list of Message objects to the corresponding
+ * views in RecyclerView. It handles event like sending message using a send button.
+ * I read the following links to understand the general structure of a custom Adapter,
+ * however all the codes are written by me.
  * https://developer.android.com/develop/ui/views/layout/recyclerview
  * https://dev.to/theplebdev/implementing-a-recyclerview-in-android-with-java-1jf5
- * @author Le Thanh Nguyen
+ * @author Le Thanh Nguyen - u7594144
  * */
 public class MessageAdapter extends RecyclerView.Adapter {
     Context context;

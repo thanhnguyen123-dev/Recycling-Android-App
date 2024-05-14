@@ -4,7 +4,8 @@ import android.content.Context;
 import android.widget.Toast;
 
 /**
- * @author Le Thanh Nguyen
+ * An utility class to check account information when a user login or signup.
+ * @author Le Thanh Nguyen - u7594144
  */
 public class LogUtil {
     private static String emailPattern = "[a-zA-Z0-9._]+@[a-zA-Z]+(\\.[a-zA-Z]+)+";

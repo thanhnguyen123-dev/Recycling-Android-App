@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.recycleme.util.UserProfileUtil;
 
+/**
+ * An activity to view other user profiles from ChatsMainActivity
+ * @author Le Thanh Nguyen - u7594144
+ * */
 public class ChatProfileViewActivity extends AppCompatActivity {
     private ImageView otherUserProfilePicImageView;
     private TextView otherUsernameTextView;

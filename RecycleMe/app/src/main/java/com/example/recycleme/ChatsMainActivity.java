@@ -22,8 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Le Thanh Nguyen
- */
+ * An activity to view other users in the app which we can select to message directly.
+ * @author Le Thanh Nguyen - u7594144
+ * */
 public class ChatsMainActivity extends BaseActivity {
 
     private FirebaseDatabase firebaseDatabase;

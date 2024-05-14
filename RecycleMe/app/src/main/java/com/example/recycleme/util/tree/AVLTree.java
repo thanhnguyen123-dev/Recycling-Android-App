@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Le Thanh Nguyen
+ * A generic data structure which is later used for basic operations for items.
+ * @author Le Thanh Nguyen - u7594144
  * @author Julius Liem (for ceiling(), floor(), and findBetween())
  */
 public class AVLTree<T extends Comparable<T>> {

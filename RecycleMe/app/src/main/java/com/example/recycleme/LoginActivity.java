@@ -14,7 +14,7 @@ import com.example.recycleme.util.LogUtil;
 /**
  * This is a class for the Login Activity. The class shows a login page as well as a signup fragment.
  *
- * @author Le Thanh Nguyen
+ * @author Le Thanh Nguyen - u7594144
  * @author Julius Liem
  */
 public class LoginActivity extends AppCompatActivity {
@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
      * This class was written by Julius and Thanh, Julius wrote the Activity first, and then
      * Thanh edited the Activity to accommodate the use of Firebase Auth
      *
-     * @author Le Thanh Nguyen
+     * @author Le Thanh Nguyen - u7594144
      * @author Julius Liem
      */
     @Override

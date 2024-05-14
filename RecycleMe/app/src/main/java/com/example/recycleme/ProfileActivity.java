@@ -33,7 +33,8 @@ import kotlin.jvm.functions.Function1;
 
 
 /**
- * @author Le Thanh Nguyen
+ * An activity to view the user profile with buttons to select and upload user profile image.
+ * @author Le Thanh Nguyen - u7594144
  */
 public class ProfileActivity extends BaseActivity {
     private LoginContext loginContext;

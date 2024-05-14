@@ -1,7 +1,12 @@
 package com.example.recycleme.model;
 
 /**
- * @author Le Thanh Nguyen
+ * An entity class for a Message object
+ * A Message has the following attributes:
+ * - String senderId: the user ID who sends the message
+ * - long sendTime: the time when the message is sent
+ * - String sendMessage: the content of the message
+ * @author Le Thanh Nguyen - u7594144
  */
 public class Message {
     private String senderId;

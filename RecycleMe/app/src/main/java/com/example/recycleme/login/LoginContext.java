@@ -11,7 +11,7 @@ import java.io.Serializable;
  * If the user is logged out, then state = LoggedOutState, else state = LoggedInState
  *
  * @author Julius Liem - u7724204
- * @author Le Thanh Nguyen
+ * @author Le Thanh Nguyen - u7594144
  */
 public class LoginContext {
     private LoginState state;

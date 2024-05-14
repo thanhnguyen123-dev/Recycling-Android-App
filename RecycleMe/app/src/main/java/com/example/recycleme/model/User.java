@@ -1,7 +1,12 @@
 package com.example.recycleme.model;
 
 /**
- * @author Le Thanh Nguyen
+ * An entity class for a User object
+ * A User has the following attributes:
+ * - String id: the user ID
+ * - String email: the user Email address
+ * - String password: the user password
+ * @author Le Thanh Nguyen - u7594144
  */
 public class User {
     private String id;
