@@ -48,6 +48,9 @@ code:
   - comment: We used ImagePicker library to let users pick their own image as profile picture
     url: https://github.com/Dhaval2404/ImagePicker
     license: Apache 2.0
+  - comment: This is a code for Tokenizer and Parser which was referred from the code we wrote for Lab 6 which was on Tokenizers and Parsers.
+    url: https://gitlab.cecs.anu.edu.au/u7761531/comp2100-lab-06
+    license: None specified in the repository
 
 
 # add as many "url+licence+comment" entries as necessary
