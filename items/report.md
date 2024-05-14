@@ -198,10 +198,13 @@ Steve wants to recycle some stuff.
 
 <hr> 
 
-### Application UML
+### Application UML Diagram
 
-![ClassDiagramExample](media/_examples/ClassDiagramExample.png) <br>
+<div style="text-align: center;">
+    <img src="media/_examples/UMLDiagram/RecycleMe_UML_diagram.png" alt="RecycleMe App UML Diagram">
+</div>
 
+In case the above UML diagram isn't clearly visible, please check out this link to view the online version on draw.io: [RecycleMe UML](https://drive.google.com/file/d/1R9BmTHUoWhKgGoRLjrAQ_Wua_rYmLm9Z/view?usp=sharing)
 <hr>
 
 ## Code Design and Decisions
