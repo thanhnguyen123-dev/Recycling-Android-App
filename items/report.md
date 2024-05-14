@@ -121,27 +121,26 @@ The key area(s) of responsibilities for each member
 4. **u7594144,Thanh** I have 20% contribution, as follows: <br>
 - **Code Contribution in the final App**
     - Login Feature (Firebase Authentication): 
-        - [LoginState.java](link_to_file)
-        - [LoggedInState.java](link_to_file)
-        - [LoggedOutState.java](link_to_file)
-        - [LoginActivity.java](link_to_file)
-        - [LogUtil.java](link_to_file)
-        - [AccountAction.java](link_to_file)
-    - Signup Feature (Firebase Authentication, Firebase Realtime Database): [SignupFragment.java](link_to_file)
+        - [LoginState.java](RecycleMe\app\src\main\java\com\example\recycleme\login\LoginState.java)
+        - [LoggedInState.java](RecycleMe\app\src\main\java\com\example\recycleme\login\LoggedInState.java)
+        - [LoggedOutState.java](RecycleMe\app\src\main\java\com\example\recycleme\login\LoggedOutState.java)
+        - [LoginActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
+        - [LogUtil.java](RecycleMe/app/src/main/java/com/example/recycleme/util/LogUtil.java)
+        - [AccountAction.java](RecycleMe\app\src\main\java\com\example\recycleme\login\AccountAction.java)
+        - [SignupFragment.java](RecycleMe\app\src\main\java\com\example\recycleme\SignupFragment.java)
     - Private Chat Feature (Firebase Realtime Database): 
-        - [Message.java](link_to_class)
-        - [MessageAdapter.java](link_to_class) 
-        - [User.java](link_to_file) 
-        - [UserAdapter.java](link_to_class)
-        - [ChatsMainActivity.java](link_to_class)
-        - [DirectMessageActivity.java](link_to_file)
+        - [Message.java](RecycleMe\app\src\main\java\com\example\recycleme\model\Message.java)
+        - [MessageAdapter.java](RecycleMe\app\src\main\java\com\example\recycleme\adapter\MessageAdapter.java) 
+        - [User.java](RecycleMe\app\src\main\java\com\example\recycleme\model\User.java) 
+        - [UserAdapter.java](RecycleMe\app\src\main\java\com\example\recycleme\adapter\UserAdapter.java)
+        - [ChatsMainActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ChatsMainActivity.java)
+        - [DirectMessageActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\DirectMessageActivity.java)
     - Data-Profile Feature: 
-        - [ProfileActivity.java](link_to_file)
-        - [ItemDescriptionActivity.java](link_to_file)
-        - [ChatProfileViewActivity.java]()
-    - Data Structure: [AVLTree.java](link_to_file)
-
-
+        - [ProfileActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ProfileActivity.java)
+        - [ItemDescriptionActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ItemDescriptionActivity.java)
+        - [ChatProfileViewActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ChatProfileViewActivity.java)
+        - [UserProfileUtil.java](RecycleMe\app\src\main\java\com\example\recycleme\util\UserProfileUtil.java)
+    - Data Structure: [AVLTree.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java)
 
 - **Code and App Design**
     - UI Design:
