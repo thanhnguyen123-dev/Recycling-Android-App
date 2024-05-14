@@ -533,11 +533,10 @@ a purpose within your application. (medium)
         * In DirectMessageActivity, we use FirebaseReference to create a reference node for "chats" storing in Realtime Database
         * When we click on the send button, a Message entity will be instantiated and pushed to a "messages" node under "chats"
     * Image: 
-    
-    <div style="text-align: center;">
-        <img src="media/_examples/screenshot/screenshot_chat.png" alt="Description of the image" width="20%">
-    </div>
-
+        <div style="text-align: center;">
+            <img src="media/_examples/screenshot/screenshot_chat.png" alt="Description of the image" width="20%">
+        </div>
+        
 **User Interactivity**
 
 8. [Interact-Follow] The ability to ‘follow’ items. There must be a section that presents all the items followed by a user, grouped, and ordered. [stored in-memory] (medium)
