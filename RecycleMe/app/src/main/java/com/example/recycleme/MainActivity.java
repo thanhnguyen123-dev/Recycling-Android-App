@@ -26,7 +26,7 @@ import java.util.List;
  * This is a class for Main Activity. The class shows a list of recycled items that can be added
  * to the cart.
  *
- * @author Devansu Yadav (initSwipeRefresh() and startStream())
+ * @author Devansu Yadav (initElements(), initSearchView(), initSwipeRefresh(), startStream())
  * @author Julius Liem
  */
 public class MainActivity extends BaseActivity implements Observer {
@@ -74,6 +74,11 @@ public class MainActivity extends BaseActivity implements Observer {
         });
     }
 
+    /**
+     * Method that initializes UI elements in the Main Activity
+     * @author Devansu Yadav
+     * @author Julius Liem
+     */
     private void initElements() {
         this.searchView = findViewById(R.id.search_view);
         this.noResultsImage = findViewById(R.id.no_results_image);
@@ -132,6 +137,10 @@ public class MainActivity extends BaseActivity implements Observer {
         });
     }
 
+    /**
+     * Method that refreshes the UI on swipe down interaction
+     * @author Devansu Yadav
+     */
     private void initSwipeRefresh() {
         this.swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
         this.swipeRefreshLayout.setOnRefreshListener(() -> {

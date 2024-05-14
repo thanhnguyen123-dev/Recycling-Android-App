@@ -85,6 +85,7 @@ public class RecycledItemDb implements Subject {
     }
 
     /**
+     * Method that starts adding items to the data stream every 10 seconds
      * @author Devansu Yadav
      */
     public void startStream() {
@@ -110,6 +111,7 @@ public class RecycledItemDb implements Subject {
     }
 
     /**
+     * Method that stops the currently running stream
      * @author Devansu Yadav
      */
     public void stopStream() {
