@@ -29,59 +29,91 @@ public class AVLTreeItemTest {
                 new RecycledItem(2, "Glass Jar", "Beans", "B", 0.4),
                 new RecycledItem(3, "Glass Jar", "Beans", "C", 0.4),
                 new RecycledItem(4, "Glass Jar", "Beans", "D", 0.4),
-                new RecycledItem(5, "Glass Jar", "Beans", "E", 0.4)
+                new RecycledItem(5, "Glass Jar", "Beans", "E", 0.4),
+                new RecycledItem(1, "Glass Jar", "Beans", "E", 0.4),
+                new RecycledItem(5, "Kendrick", "Lamar", "Fire", 0.4),
+                new RecycledItem(1, "Aqua", "Apple", "Water", 0.4)
         );
     }
 
     @Test
-    public void testFindItemsEmptyTree() {
-        List<RecycledItem> recycledItems = this.avlTreeItem.findItems("","","");
-        assertEquals(recycledItems.size(), 0);
+    public void testEmpty() {
+        List<RecycledItem> items = this.avlTreeItem.findItems("", "", ""); //get everything
+        assertTrue(items.isEmpty());
     }
 
     @Test
-    public void testFindItemsSingleItem() {
-        this.avlTreeItem.insert(recycledItemList.get(0));
+    public void testSameID() {
+        // adding same ID to the avl tree
+        // should be fine because the key is item, brand name, and material
 
-        List<RecycledItem> result = avlTreeItem.findItems("", "", "");
-        assertEquals(1, result.size());
-        assertEquals(recycledItemList.get(0), result.get(0));
+        this.avlTreeItem.insert(this.recycledItemList.get(0));
+        this.avlTreeItem.insert(this.recycledItemList.get(5));
+
+        assertEquals(2, this.avlTreeItem.size());
     }
 
     @Test
-    public void testFindItemsMultipleItems() {
+    public void testSearchSameNameDifferentMaterial() {
         for (RecycledItem item: this.recycledItemList) {
             this.avlTreeItem.insert(item);
         }
 
-        List<RecycledItem> result = avlTreeItem.findItems("Glass Jar", "", "");
-        assertEquals(5, result.size());
+        List<RecycledItem> items = this.avlTreeItem.findItems("Glass Jar", "Beans", "A");
 
-        for (RecycledItem item: recycledItemList) {
-            assertTrue(result.contains(item));
-        }
+        assertEquals(this.recycledItemList.get(0), items.get(0));
     }
 
     @Test
-    public void testFindItemsPartialMatch() {
+    public void testPartialMatch() {
         for (RecycledItem item: this.recycledItemList) {
             this.avlTreeItem.insert(item);
         }
 
-        List<RecycledItem> result = avlTreeItem.findItems("glass", "", "");
-        assertEquals(5, result.size());
+        List<RecycledItem> items = this.avlTreeItem.findItems("Glass", "Beans", "A");
+        assertEquals(this.recycledItemList.get(0), items.get(0));
+
     }
 
     @Test
-    public void testFindItemsCaseInsensitive() {
+    public void testPartialCaseInsensitive() {
         for (RecycledItem item: this.recycledItemList) {
             this.avlTreeItem.insert(item);
         }
 
-        List<RecycledItem> result = avlTreeItem.findItems("", "", "a");
-
-        assertEquals(1,result.size());
-        assertEquals(this.recycledItemList.get(0), result.get(0));
+        List<RecycledItem> items = this.avlTreeItem.findItems("aq", "", "");
+        assertEquals(this.recycledItemList.get(this.recycledItemList.size() - 1), items.get(0));
     }
 
+    @Test
+    public void testMatchManyItems() {
+        for (RecycledItem item: this.recycledItemList) {
+            this.avlTreeItem.insert(item);
+        }
+
+        List<RecycledItem> items = this.avlTreeItem.findItems("Glass", "", "");
+
+        assertEquals(5, items.size()); // 5, excluding 1 double
+    }
+
+    @Test
+    public void testSearchCaseSensitive() {
+        // should be case insensitive
+        for (RecycledItem item: this.recycledItemList) {
+            this.avlTreeItem.insert(item);
+        }
+
+        List<RecycledItem> items = this.avlTreeItem.findItems("glass jar", "beans", "a");
+        assertEquals(this.recycledItemList.get(0), items.get(0));
+    }
+
+    @Test
+    public void testForeignChar() {
+        for (RecycledItem item: this.recycledItemList) {
+            this.avlTreeItem.insert(item);
+        }
+
+        List<RecycledItem> items = this.avlTreeItem.findItems("汉字", "", "");
+        assertTrue(items.isEmpty());
+    }
 }
