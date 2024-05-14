@@ -120,22 +120,44 @@ The key area(s) of responsibilities for each member
 
 4. **u7594144,Thanh** I have 20% contribution, as follows: <br>
 - **Code Contribution in the final App**
-    - Login Feature (Firebase Authentication): [LoginState.java](link_to_file), [LoggedInState.java](link_to_file), [LoggedOutState.java](link_to_file), [LoginActivity.java](link_to_file), [LogUtil.java](link_to_file), [AccountAction.java](link_to_file)
-    - Signup Feature (Firebase Authentication): [SignupFragment.java](link_to_file)
-    - Private Chat Feature (Firebase Realtime Database): [Message.java](link_to_class),[MessageAdapter.java](link_to_class), [User.java](link_to_file), [UserAdapter.java](link_to_class), [ChatsMainActivity.java](link_to_class), class DirectMessageActivity: [DirectMessageActivity.java](link_to_file)
-    - Data-Profile Feature: [ProfileActivity.java](link_to_file), [ItemDescriptionActivity.java](link_to_file), [ChatProfileViewActivity.java]
+    - Login Feature (Firebase Authentication): 
+        - [LoginState.java](link_to_file)
+        - [LoggedInState.java](link_to_file)
+        - [LoggedOutState.java](link_to_file)
+        - [LoginActivity.java](link_to_file)
+        - [LogUtil.java](link_to_file)
+        - [AccountAction.java](link_to_file)
+    - Signup Feature (Firebase Authentication, Firebase Realtime Database): [SignupFragment.java](link_to_file)
+    - Private Chat Feature (Firebase Realtime Database): 
+        - [Message.java](link_to_class)
+        - [MessageAdapter.java](link_to_class) 
+        - [User.java](link_to_file) 
+        - [UserAdapter.java](link_to_class)
+        - [ChatsMainActivity.java](link_to_class)
+        - [DirectMessageActivity.java](link_to_file)
+    - Data-Profile Feature: 
+        - [ProfileActivity.java](link_to_file)
+        - [ItemDescriptionActivity.java](link_to_file)
+        - [ChatProfileViewActivity.java]()
     - Data Structure: [AVLTree.java](link_to_file)
 
 
 
 - **Code and App Design**
-    - DAO design pattern, Observer design pattern, Singleton design pattern*
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+    - UI Design:
+        - [activity_chat_profile_view.xml]()
+        - [activity_chat_mains.xml]()
+        - [activity_direct_message.xml]()
+        - [activity_item_description.xml]()
+        - [activity_profile.xml]()
+        - [fragment_signup.xml]()
+        - [message_view_row.xml]()
+        - [receiving_view_row.xml]()
+        - [sending_view_row.xml]()
 
 - **Others**: 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
-
+    - Firebase setup: Firebase Authentication, Firebase Realtime Database, Firebase Cloud Storage
+    - UML Diagram
 ## Application Description
 
 * This is a recycling logging application. 
