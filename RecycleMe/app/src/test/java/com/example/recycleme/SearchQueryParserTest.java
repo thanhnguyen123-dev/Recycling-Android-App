@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 
 /**
+ * JUnit test for testing how the parser parses valid and invalid search queries.
  * @author Devansu Yadav
  */
 public class SearchQueryParserTest {
@@ -79,7 +80,7 @@ public class SearchQueryParserTest {
                 parser.parseSearchQuery();
                 fail("InvalidQueryException should have been thrown");
             } catch(SearchQueryParser.InvalidQueryException e) {
-                // Expected exception
+                // Exception should be thrown
             }
         }
     }

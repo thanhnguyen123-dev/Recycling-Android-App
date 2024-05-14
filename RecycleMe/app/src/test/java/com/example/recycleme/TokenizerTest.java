@@ -6,6 +6,7 @@ import com.example.recycleme.search.Token;
 import com.example.recycleme.search.Tokenizer;
 
 /**
+ * JUnit tests for testing the Tokenizer implementation.
  * @author Devansu Yadav
  */
 public class TokenizerTest {
