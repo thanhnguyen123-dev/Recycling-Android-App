@@ -33,7 +33,7 @@ import com.google.firebase.auth.FirebaseUser;
  * <p>
  *
  * @author Julius Liem - u7724204
- * @author Devansu Yadav
+ * @author Devansu Yadav - u7761531
  */
 
 public class BaseActivity extends AppCompatActivity {
@@ -45,6 +45,8 @@ public class BaseActivity extends AppCompatActivity {
 
 
     /**
+     * Enum to classify the different types of menu items to be displayed in the UI
+     * based on user interaction with the Nav menu.
      * @author Devansu Yadav
      */
     private enum MenuItemId {
@@ -118,6 +120,9 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * This method handles the navigation to different activities when user clicks on any
+     * of the Nav menu items. This method was refactored as part of the Surprise feature to
+     * remove one of the code smells documented in the report.
      * @author Devansu Yadav
      */
     private void setupNavListener() {
