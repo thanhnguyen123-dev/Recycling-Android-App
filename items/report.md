@@ -247,14 +247,6 @@ In case the above UML diagram isn't clearly visible, please check out this link 
 
 ## Code Design and Decisions
 
-This is an important section of your report and should include all technical decisions made. Well-written justifications will increase your marks for both the report as well as for the relevant parts (e.g., data structure). This includes, for example,
-
-- Details about the parser (describe the formal grammar and language used)
-
-- Decisions made (e.g., explain why you chose one or another data structure, why you used a specific data model, etc.)
-
-- Details about the design patterns used (where in the code, justification of the choice, etc)
-
 ### <u>Grammar(s)</u>
 
 We designed the grammar by first identifying what relevant information the user will want to search on the search bar. We ended up on item name, item brand and item material. We also thought there should be an "and" token to allow complex search queries.
@@ -530,9 +522,7 @@ a purpose within your application. (medium)
     * Code: [AVLTree.java](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java?ref_type=heads#L242-270), 
     * Description of the feature: In the history tab, we can delete the history of the user. The history of the user is stored on an AVLTree.
     * Image: 
-        <div style="text-align: center;">
         <img src="media/_examples/screenshot/screenshot_history.jpeg" alt="Description of the image" width="20%">
-    </div>
     * Description of implementation: 
         * Data deletion is implemented by recursive method.
         * If the method finds the exact value, then the data will be deleted (and the value will be replaced by the predecessor).
