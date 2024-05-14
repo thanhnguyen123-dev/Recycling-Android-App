@@ -2,8 +2,12 @@ package com.example.recycleme.search;
 
 
 /**
+ * This is a class that tokenizes the search query read from the searchbar in the Main activity
+ * It extracts valid tokens sequentially based on the grammar and
+ * flags invalid characters in the search query
+ * This class was implemented by referring to some of the code I wrote for Lab 6
+ * which was on Tokenizers and Parsers (https://gitlab.cecs.anu.edu.au/u7761531/comp2100-lab-06)
  * @author Devansu Yadav
- * @author Adam Basheer
  */
 public class Tokenizer {
 
