@@ -61,14 +61,6 @@ public class RecycledItemDb implements Subject {
     }
 
 
-    public void addRecycledItemPersistent(RecycledItem recycledItem) {
-        recycledItemDAO.addRecycledItem(recycledItem);
-    }
-
-    public void updateRecycledItem(RecycledItem recycledItem) {
-        recycledItemDAO.updateRecycledItem(recycledItem);
-    }
-
     /**
      * Method that searches for items in the AVL tree by first tokenizing the input search query
      * and then parsing and evaluating it.

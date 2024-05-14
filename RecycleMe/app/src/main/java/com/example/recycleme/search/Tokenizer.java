@@ -38,7 +38,7 @@ public class Tokenizer {
         } else if (checkAnd()) {
             currentToken = new Token(Token.TokenType.AND, "and");
         } else if (Character.isLetterOrDigit(currentChar)) {
-            currentToken = scanString();
+            currentToken = scanItem();
         } else {
             throw new Token.IllegalTokenException("Invalid character in search query!");
         }
@@ -57,7 +57,7 @@ public class Tokenizer {
         return searchQuery.substring(startIndex, startIndex + 3).equalsIgnoreCase("and");
     }
 
-    private Token scanString() {
+    private Token scanItem() {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (int idx = 0; idx < searchQuery.length(); idx++) {
