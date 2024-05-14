@@ -120,10 +120,11 @@ The key area(s) of responsibilities for each member
 
 4. **u7594144,Thanh** I have 20% contribution, as follows: <br>
 - **Code Contribution in the final App**
-    - Login Feature (Firebase Authentication) - class LoginState: [LoginState.java](link_to_file), class LoginContext, class LoggedInState, class LoggedOutState, class LoginActivity, class LogUtil
-    - Signup Feature (Firebase Authentication) - class SignupFragment: [SignupFragment.java](link_to_file)
-    - Private Chat Feature (Firebase Realtime Databases) - class Message: [Message.java](link_to_class), class MessageAdapter: [MessageAdapter.java](link_to_class), class UserAdapter: [UserAdapter.java](link_to_class), class ChatsMainActivity: [ChatsMainActivity.java](link_to_class), class DirectMessageActivity: [DirectMessageActivity.java]
-    - Data-Profile Feature - class ProfileActivity: [ProfileActivity.java]
+    - Login Feature (Firebase Authentication): [LoginState.java](link_to_file), [LoggedInState.java](link_to_file), [LoggedOutState.java](link_to_file), [LoginActivity.java](link_to_file), [LogUtil.java](link_to_file), [AccountAction.java](link_to_file)
+    - Signup Feature (Firebase Authentication): [SignupFragment.java](link_to_file)
+    - Private Chat Feature (Firebase Realtime Database): [Message.java](link_to_class),[MessageAdapter.java](link_to_class), [User.java](link_to_file), [UserAdapter.java](link_to_class), [ChatsMainActivity.java](link_to_class), class DirectMessageActivity: [DirectMessageActivity.java](link_to_file)
+    - Data-Profile Feature: [ProfileActivity.java](link_to_file), [ItemDescriptionActivity.java](link_to_file), [ChatProfileViewActivity.java]
+    - Data Structure: [AVLTree.java](link_to_file)
 
 
 
