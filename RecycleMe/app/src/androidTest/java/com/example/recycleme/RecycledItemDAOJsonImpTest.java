@@ -6,7 +6,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import com.example.recycleme.dao.FirebaseRecycledItemDAO;
-import com.example.recycleme.dao.RecycledItemDAOJsonImp;
 import com.example.recycleme.model.RecycledItem;
 
 import org.junit.Before;
