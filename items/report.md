@@ -105,18 +105,33 @@ The key area(s) of responsibilities for each member
 
 3. **u7761531, Devansu**  I have 20% contribution as follows: <br>
     - **Code Contribution in the final App**
-        - Data Stream - `startStream()` and `stopStream()` methods in [RecycledItemDb.java](link_to_file), `onCreate()`, `update()` and `onDestroy()` methods in [MainActivity.java](link_to_file)
-        - Search functionality (Tokenizer, Search Query Parser, Search Query evaluation) - class [Token.java](link_to_file), class [Tokenizer.java](link_to_file), class [SearchQueryParser.java](link_to_file), class [`SearchExp.java`](link_to_file), `onCreate()` method in [`MainActivity.java`](link_to_file), `search()` method in [`RecycledItemDB.java`](link_to_file)
-        - Main app layout - MainActivity class: [MainActivity.java](link_to_file), MainActivity layout: [MainActivity.xml](link_to_file)
-        - Unit Tests - class [TokenizerTest.java](link_to_file), class [SearchQueryParserTest.java](link_to_file)
+        - Data Stream - `startStream()` and `stopStream()` methods in [RecycledItemDb.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java), `onCreate()`, `update()` and `onDestroy()` methods in [MainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java)
+        - Search functionality (Tokenizer, Search Query Parser, Search Query evaluation) - class [Token.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Token.java), class [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java), class [SearchQueryParser.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchQueryParser.java), class [SearchExp.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchExp.java), `onCreate()` method in [MainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java), `search()` method in [RecycledItemDB.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java)
+        - Surprise feature: Fixed the **Complex if-else** code smell in [BaseActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/BaseActivity.java)
+        - Refactored code in the following files: 
+           * [RecycledItemDb.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java) 
+           * [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java)
+        - Documented code in the following files:
+           * [RecycledItemDb.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java)
+           * [MainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java)
+           * [Token.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Token.java)
+           * [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java)
+           * [SearchQueryParser.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchQueryParser.java)
+           * [SearchExp.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchExp.java)
+           * [BaseActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/BaseActivity.java)
+        - Main app layout - MainActivity class: [MainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java), MainActivity layout: [activity_main.xml](RecycleMe/app/src/main/res/layout/activity_main.xml)
+        - Unit Tests:
+           * class [TokenizerTest.java](RecycleMe/app/src/test/java/com/example/recycleme/TokenizerTest.java)
+           * class [SearchQueryParserTest.java](RecycleMe/app/src/test/java/com/example/recycleme/SearchQueryParserTest.java)
 
 - **Code and App Design**
-    - [UI Design. Specify what design did the involved member propose? What tools were used for the design?]* <br><br>
+    - MainActivity layout: [activity_main.xml](/RecycleMe/app/src/main/res/layout/activity_main.xml)
+    - BaseActivity layout: [activity_base.xml](/RecycleMe/app/src/main/res/layout/activity_base.xml)
 
 - **Others**: 
-    - [Report Writing?] [Slides preparation?]*
-    - [You are welcome to provide anything that you consider as a contribution to the project or team.] e.g., APK, setups, firebase* <br><br>
-  
+    * Report Writing
+    * UML diagram preparation
+    * Generate app's APK
 
 4. **u7594144,Thanh** I have 20% contribution, as follows: <br>
 - **Code Contribution in the final App**
