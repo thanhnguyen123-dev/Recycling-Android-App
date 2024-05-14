@@ -102,7 +102,11 @@ public class MainActivity extends BaseActivity implements Observer {
         recycledItemDb.startStream();
     }
 
-
+    /**
+     * Method that initializes the search view and responds to user interactions when
+     * a user types a search query in the searchbar and submits the query.
+     * @author Devansu Yadav
+     */
     private void initSearchView() {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

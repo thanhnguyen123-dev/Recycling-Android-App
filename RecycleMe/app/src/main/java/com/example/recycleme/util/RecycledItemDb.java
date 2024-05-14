@@ -70,6 +70,8 @@ public class RecycledItemDb implements Subject {
     }
 
     /**
+     * Method that searches for items in the AVL tree by first tokenizing the input search query
+     * and then parsing and evaluating it.
      * @author Devansu Yadav
      */
     public List<RecycledItem> search(String searchQuery) throws SearchQueryParser.InvalidQueryException {

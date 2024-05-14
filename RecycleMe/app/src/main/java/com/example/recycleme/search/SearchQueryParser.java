@@ -3,6 +3,20 @@ package com.example.recycleme.search;
 import java.util.HashSet;
 
 /**
+ * This class implements the Recursive Descent Parser for parsing the input search query
+ * based on the extracted tokens from the Tokenizer. The parser also flags any grammar violations
+ * due to invalid search queries.
+ *
+ * This parser can parse the following grammar -
+ * <SearchQuery>  ::=  <Item><Conjuction><Tag> | <Item> | <Tag>
+ * <Item>         ::=  "<String>"
+ * <String>       ::=  <Char> | <Char><String>
+ * <Char>         ::=  a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z
+ * <Conjunction>  ::=  "and"
+ * <Tag>          ::=  "#" <Item> | "@" <Item> | <Tag><Conjunction><Tag>
+ *
+ * This parser was implemented by referring to some of the code I wrote for Lab 6
+ * which was on Tokenizers and Parsers (<a href="https://gitlab.cecs.anu.edu.au/u7761531/comp2100-lab-06/-/blob/main/src/Task2/Parser.java">Recursive Descent Parser</a>)
  * @author Devansu Yadav
  */
 public class SearchQueryParser {
