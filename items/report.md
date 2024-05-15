@@ -204,6 +204,10 @@ The key area(s) of responsibilities for each member
     * log their own personal recycled items 
     * see their recycling statistics. 
     * They can also see the nearest location of recycling points.
+    * Users can also message each other once logged in.
+    * Users can also find local recycling areas in their area.
+    * They can also upload their own images to use as a profile picture.
+* Users can also create an account if they do not already have one.
 
 ### Application Use Cases and or Examples
 
@@ -392,8 +396,7 @@ a lot of flexibility to users.
     * Reasons:
         * We used HashSet in order to filter double strings that might enter the search query. 
 
-
-<hr>
+    
 
 ### Design Patterns
 
@@ -716,6 +719,9 @@ a purpose within your application. (medium)
 
 1.  Initial Loading time
     - Opening the Main Page for the first time causes a delay of around 5 seconds as firebase downloads the required data.
+
+2. Issues with "Back"
+   - Pressing the "back" button once you're logged out will bring you back to the profile page. Once there, attempting to interact with the app will cause it to kick you back to the login page, where you cannot log back in.
 
 <br> <hr>
 
