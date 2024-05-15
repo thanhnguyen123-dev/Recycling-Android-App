@@ -23,13 +23,6 @@ declaration: >-
   own work, with the following exceptions:
   
 
-# add as many "name+comment" entries as necessary
-# (or remove it altogether if you haven't collaborated with anyone outside your group)
-collaboration:
-  - name:
-    comment: >-
-  
-
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external code)
 code:
@@ -42,7 +35,7 @@ code:
   - comment: We used a library called MPAndroidChart to show the statistics
     url: https://github.com/PhilJay/MPAndroidChart
     licence: Apache 2.0
-  - comment: We used Glide to 
+  - comment: We used Glide to provide cropping image functionality when choosing an image to upload user profile image in our app
     url: https://github.com/bumptech/glide
     licence: custom license, check https://github.com/bumptech/glide?tab=License-1-ov-file#readme
   - comment: We used ImagePicker library to let users pick their own image as profile picture
@@ -92,5 +85,5 @@ members:
     uid: u7761531
   - name: Harrison Black
     uid: u7650334
-  - name:
-    uid:
+  - name: Le Thanh Nguyen
+    uid: u7594144
