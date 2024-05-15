@@ -7,7 +7,7 @@ package com.example.recycleme.search;
  * flags invalid characters in the search query
  * This class was implemented by referring to some of the code I wrote for Lab 6
  * which was on Tokenizers and Parsers (<a href="https://gitlab.cecs.anu.edu.au/u7761531/comp2100-lab-06/-/blob/main/src/Task1/Tokenizer.java">Tokenizer</a>)
- * @author Devansu Yadav
+ * @author Devansu Yadav and Adam Ahammed Basheer
  */
 public class Tokenizer {
 
