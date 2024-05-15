@@ -51,12 +51,18 @@ code:
   - comment: This is a code for Tokenizer and Parser which was referred from the code we wrote for Lab 6 which was on Tokenizers and Parsers.
     url: https://gitlab.cecs.anu.edu.au/u7761531/comp2100-lab-06
     license: None specified in the repository
+  - comment: Some of the code for the GPS was adapted from this tutorial, however the final implementation was changed significantly.
+    url: https://www.youtube.com/watch?v=XimcwP-OzFg&ab_channel=CodingZest
+    license: None provided in the video
+  - comment: Google Maps API (used for GPS)
+    url: https://developers.google.com/maps
+    license: Apache 2.0
 
 
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external assets)
 assets:
-  - comment: 
+  - comment:
     url:
     licence: 
 
@@ -84,7 +90,7 @@ members:
     uid: u7724204
   - name: Devansu Mahendra Yadav
     uid: u7761531
-  - name:
-    uid:
+  - name: Harrison Black
+    uid: u7650334
   - name:
     uid:
