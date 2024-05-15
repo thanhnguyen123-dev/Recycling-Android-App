@@ -24,24 +24,24 @@ This is a report made by the FlyingSpaghettiGod team. This report explains the a
 - Two user accounts for markers' access are usable on the app's APK 
     - Username: comp2100@anu.edu.au  Password: comp2100
     - Username: comp6442@anu.edu.au  Password: comp6442
-* Harrison has several github accounts in his computer so sometimes it gets weird and IntelliJ changes his accounts without him knowing. He committed by the name of Harrison and ExyroZ.
+* Harrison has several github accounts in his computer so sometimes it gets weird and IntelliJ changes his accounts without him knowing. He committed by the name of Harrison and ExrosZ.
 * We compiled this app using SDK 34. We've already asked permission in this [Ed post](https://edstem.org/au/courses/15738/discussion/1839054?comment=4178955)
+* The features video can be found here: [features.mp4](items/features.mp4)
 
-
-## Team Members and Roles
+## ## Team Members and Roles
 The key area(s) of responsibilities for each member
 
-| UID   |  Name  |   Role |
-|:------|:------:|-------:|
-| u7724204 | Julius Liem | Programmer |
-| u7650334 | Harrison Black | Programmer |
-| u7761531 | Devansu Yadav | Programmer |
+| UID      |      Name       |   Role |
+|:---------|:---------------:|-------:|
+| u7724204 |   Julius Liem   | Programmer |
+| u7650334 | Harrison Black  | Programmer |
+| u7761531 |  Devansu Yadav  | Programmer |
 | u7594144 | Le Thanh Nguyen | Programmer |
-
+| u7628910 |  Adam Basheer   | Programmer |
 
 ## Summary of Individual Contributions
 
-1. **u7724204, Julius**  I have 20% contribution, as follows: <br>
+1. **u7724204, Julius**  I have 22.5% contribution, as follows: <br>
 
 * **Code Contribution in the final App**
     - Login Feature (State Design Pattern, Singleton Design Pattern) - class LoginState: [LoginState.java](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginState.java), [LoginContext.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [LoggedInState.class](/RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java), [LoginActivity.class](/RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
@@ -119,7 +119,7 @@ The key area(s) of responsibilities for each member
       <br><br>
 
 
-3. **u7761531, Devansu**  I have 20% contribution as follows: <br>
+3. **u7761531, Devansu**  I have 22.5% contribution as follows: <br>
     - **Code Contribution in the final App**
         - Data Stream - `startStream()` and `stopStream()` methods in [RecycledItemDb.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java), `onCreate()`, `update()` and `onDestroy()` methods in [MainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java)
         - Search functionality (Tokenizer, Search Query Parser, Search Query evaluation) - class [Token.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Token.java), class [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java), class [SearchQueryParser.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchQueryParser.java), class [SearchExp.java](RecycleMe/app/src/main/java/com/example/recycleme/search/SearchExp.java), `onCreate()` method in [MainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MainActivity.java), `search()` method in [RecycledItemDB.java](RecycleMe/app/src/main/java/com/example/recycleme/util/RecycledItemDb.java)
@@ -149,7 +149,7 @@ The key area(s) of responsibilities for each member
     * UML diagram preparation
     * Generate app's APK
 
-4. **u7594144,Thanh** I have 20% contribution, as follows: <br>
+4. **u7594144,Thanh** I have 22.5% contribution, as follows: <br>
 - **Code Contribution in the final App**
     - Login Feature (Firebase Authentication): 
         - [LoginState.java](RecycleMe\app\src\main\java\com\example\recycleme\login\LoginState.java)
@@ -188,6 +188,13 @@ The key area(s) of responsibilities for each member
 - **Others**: 
     - Firebase setup: Firebase Authentication, Firebase Realtime Database, Firebase Cloud Storage
     - UML Diagram
+  <br><br>
+
+5. **u7628910, Adam**  I have 10% contribution, as follows: <br>
+   - **Code Contribution in the final App**
+   - **Code and App Design**
+   - **Others**
+
 ## Application Description
 
 * This is a recycling logging application. 
