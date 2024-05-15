@@ -1,6 +1,7 @@
 package com.example.recycleme;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -8,6 +9,7 @@ import com.example.recycleme.model.RecycledItem;
 import com.example.recycleme.util.tree.AVLTree;
 import com.example.recycleme.cart.NodeData;
 
+import org.checkerframework.checker.units.qual.N;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,113 +27,112 @@ public class AVLTreeTest {
     private LocalDateTime time1;
     private LocalDateTime time2;
     private LocalDateTime time3;
+    private NodeData<Integer> firstNode;
+    private NodeData<Integer> secondNode;
+    private NodeData<Integer> thirdNode;
 
    @Before
     public void setUp() {
        avlTree = new AVLTree<>();
-       time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-       time2 = LocalDateTime.of(2023, 5, 2, 12, 0);
-       time3 = LocalDateTime.of(2023, 5, 3, 14, 0);
+       time1 = LocalDateTime.of(2024, 5, 1, 10, 0);
+       time2 = LocalDateTime.of(2024, 5, 2, 12, 0);
+       time3 = LocalDateTime.of(2024, 5, 3, 14, 0);
 
-       NodeData<Integer> first = new NodeData<>(time1, 10);
-       NodeData<Integer> second = new NodeData<>(time2, 12);
-       NodeData<Integer> third = new NodeData<>(time3, 14);
+       firstNode = new NodeData<>(time1, 10);
+       secondNode = new NodeData<>(time2, 12);
+       thirdNode = new NodeData<>(time3, 14);
 
-       avlTree.insert(first);
-       avlTree.insert(second);
-       avlTree.insert(third);
+       avlTree.insert(firstNode);
+       avlTree.insert(secondNode);
+       avlTree.insert(thirdNode);
    }
 
     @Test
-    public void testSize() {
+    public void testEmptyTreeSize() {
+       AVLTree<Integer> integerAVLTree = new AVLTree<>();
+       assertEquals(0, integerAVLTree.size());
+    }
+
+    @Test
+    public void testAddDuplicateItem() {
+       avlTree.insert(firstNode);
+
+       // should not increase the size
         assertEquals(3, avlTree.size());
     }
 
     @Test
-    public void testSearch() {
-        int value1 = avlTree.search(new NodeData<>(time1, 0)).getValue();
-        int value2 = avlTree.search(new NodeData<>(time2, 0)).getValue();
-        int value3 = avlTree.search(new NodeData<>(time3, 0)).getValue();
+    public void testFindBetween() {
+       List<NodeData<Integer>> findBetween2024 = avlTree.findBetween(new NodeData<>(time1.plusHours(1), 0), new NodeData<>(time3.minusHours(1), 0) );
 
-        assertEquals(10, value1);
-        assertEquals(12, value2);
-        assertEquals(14, value3);
-    }
-
-    @Test
-    public void testTraverseAndReturnDataWithTime() {
-        List<NodeData<Integer>> nodeDataList = avlTree.traverse();
-
-        assertEquals(3, nodeDataList.size());
-        assertEquals(time1, nodeDataList.get(0).getDateTime());
-        assertEquals(Integer.valueOf(10), nodeDataList.get(0).getValue());
-        assertEquals(time2, nodeDataList.get(1).getDateTime());
-        assertEquals(Integer.valueOf(12), nodeDataList.get(1).getValue());
-        assertEquals(time3, nodeDataList.get(2).getDateTime());
-        assertEquals(Integer.valueOf(14), nodeDataList.get(2).getValue());
-    }
-
-    @Test
-    public void testInsertWithSameDateTime() {
-        AVLTree<NodeData<Integer>> avlTree = new AVLTree<NodeData<Integer>>();
-        LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 1, 10, 0);
-
-        NodeData<Integer> first = new NodeData<>(time1, 10);
-        NodeData<Integer> second = new NodeData<>(time2, 12);
-        avlTree.insert(first);
-        avlTree.insert(second);
-
-        assertEquals(1, avlTree.size());
-        assertEquals(Integer.valueOf(10), avlTree.search(new NodeData<>(time1, 0)).getValue());
-    }
-
-    @Test
-    public void testSearchNonExistentNode() {
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 15, 0);
-
-        assertNull(avlTree.search(new NodeData<>(time2, 0)));
-    }
-
-    @Test
-    public void testTraverseEmptyTree() {
-       AVLTree<NodeData<Integer>> avlTree = new AVLTree<>();
-       List<NodeData<Integer>> nodeDataList = avlTree.traverse();
-
-       assertTrue(nodeDataList.isEmpty());
-    }
-
-    @Test
-    public void testDelete() {
-        avlTree.delete(new NodeData<>(time2, 0));
-
-        assertEquals(2, avlTree.size());
-        assertNull(avlTree.search(new NodeData<>(time2, 0)));
-    }
-
-    @Test
-    public void testDeleteNonExistentNode() {
-        LocalDateTime time2 = LocalDateTime.of(2023, 5, 2, 15, 0);
-        NodeData<Integer> second = new NodeData<>(time2, 12);
-
-        avlTree.delete(second);
-
-        assertEquals(3, avlTree.size());
-        assertEquals(Integer.valueOf(10), avlTree.search(new NodeData<>(time1, 10)).getValue());
+       // should return the second one only
+        assertEquals(findBetween2024.get(0), secondNode);
     }
 
     @Test
     public void testDeleteRootNode() {
-       AVLTree<NodeData<Integer>> avlTree = new AVLTree<>();
-       LocalDateTime time1 = LocalDateTime.of(2023, 5, 1, 10, 0);
+       avlTree.delete(firstNode);
+       assertEquals(avlTree.size(), 2);
 
-       NodeData<Integer> first = new NodeData<>(time1, 10);
-       avlTree.insert(first);
+       assertNull(avlTree.search(firstNode));
+       assertNotNull(avlTree.search(secondNode));
+       assertNotNull(avlTree.search(thirdNode));
+    }
 
-       avlTree.delete(first);
+    @Test
+    public void testDeleteNonExistentNode() {
+        NodeData<Integer> currentTime = new NodeData<>(LocalDateTime.now(), 0);
+        avlTree.delete(currentTime);
 
-       assertEquals(0, avlTree.size());
-       assertNull(avlTree.search(first));
+        assertEquals(3, avlTree.size());
+        assertNotNull(avlTree.search(firstNode));
+        assertNotNull(avlTree.search(secondNode));
+        assertNotNull(avlTree.search(thirdNode));
+    }
+
+    @Test
+    public void testFloor() {
+        LocalDateTime time1minus1 = time1.minusHours(1);
+        NodeData<Integer> time1Node = new NodeData<>(time1minus1, 0);
+
+        assertEquals(avlTree.floor(time1Node), firstNode);
+    }
+
+    @Test
+    public void testFloorEmptyTree() {
+        AVLTree<Integer> newAVLTree = new AVLTree<>();
+
+        assertNull(newAVLTree.floor(2));
+    }
+
+    @Test
+    public void testCeilingEmptyTree() {
+        AVLTree<Integer> newAVLTree = new AVLTree<>();
+
+        assertNull(newAVLTree.ceiling(2));
+    }
+
+    @Test
+    public void testFindBetweenEmptyTree() {
+        AVLTree<Integer> newAVLTree = new AVLTree<>();
+
+        assertTrue(newAVLTree.findBetween(2, 4).isEmpty());
+    }
+
+    @Test
+    public void testFloorSingleItem() {
+        this.avlTree.delete(firstNode);
+        this.avlTree.delete(secondNode);
+
+        assertEquals(this.avlTree.floor(secondNode), thirdNode);
+    }
+
+    @Test
+    public void testCeilingSingleItem() {
+        this.avlTree.delete(firstNode);
+        this.avlTree.delete(secondNode);
+
+        assertEquals(this.avlTree.ceiling(secondNode), thirdNode);
     }
 
     @Test
