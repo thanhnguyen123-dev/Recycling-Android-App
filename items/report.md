@@ -839,7 +839,6 @@ In our testing, we found out that we cannot tests most of the classes that inter
 * Testing coverage including UI, activities, and Firebase related class:
 ![test_coverage_full.png](/items/media/_examples/screenshot/test/test_coverage_all.png)
 
-...
 
 <br> <hr>
 
