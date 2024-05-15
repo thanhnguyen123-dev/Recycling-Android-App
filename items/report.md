@@ -141,9 +141,8 @@ The key area(s) of responsibilities for each member
            * class [SearchQueryParserTest.java](RecycleMe/app/src/test/java/com/example/recycleme/SearchQueryParserTest.java)
 
 - **Code and App Design**
-    - UI Design:
-        - MainActivity layout: [activity_main.xml](/RecycleMe/app/src/main/res/layout/activity_main.xml)
-        - BaseActivity layout: [activity_base.xml](/RecycleMe/app/src/main/res/layout/activity_base.xml)
+    - MainActivity layout: [activity_main.xml](/RecycleMe/app/src/main/res/layout/activity_main.xml)
+    - BaseActivity layout: [activity_base.xml](/RecycleMe/app/src/main/res/layout/activity_base.xml)
 
 - **Others**: 
     * Report Writing
@@ -193,8 +192,13 @@ The key area(s) of responsibilities for each member
 
 5. **u7628910, Adam**  I have 10% contribution, as follows: <br>
    - **Code Contribution in the final App**
+    -  Search functionality (Tokenizer) - class [Token.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Token.java), class [Tokenizer.java](RecycleMe/app/src/main/java/com/example/recycleme/search/Tokenizer.java)
+    - Unit tests - [CartTest](RecycleMe/app/src/test/java/com/example/recycleme/CartTest.java), [AVLTreeItemSearchIntegrationTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeItemSearchIntegrationTest.java), [SearchSuite.java](RecycleMe/app/src/test/java/com/example/recycleme/SearchSuite.java), [AVLSuite.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLSuite.java),LoginTest(deleted), DAOTest(deleted)
    - **Code and App Design**
    - **Others**
+    - UML Diagram
+    - Report Writing
+    - 
 
 ## Application Description
 
@@ -205,10 +209,6 @@ The key area(s) of responsibilities for each member
     * log their own personal recycled items 
     * see their recycling statistics. 
     * They can also see the nearest location of recycling points.
-    * Users can also message each other once logged in.
-    * Users can also find local recycling areas in their area.
-    * They can also upload their own images to use as a profile picture.
-* Users can also create an account if they do not already have one.
 
 ### Application Use Cases and or Examples
 
@@ -397,7 +397,8 @@ a lot of flexibility to users.
     * Reasons:
         * We used HashSet in order to filter double strings that might enter the search query. 
 
-    
+
+<hr>
 
 ### Design Patterns
 
@@ -720,9 +721,6 @@ a purpose within your application. (medium)
 
 1.  Initial Loading time
     - Opening the Main Page for the first time causes a delay of around 5 seconds as firebase downloads the required data.
-
-2. Issues with "Back"
-   - Pressing the "back" button once you're logged out will bring you back to the profile page. Once there, attempting to interact with the app will cause it to kick you back to the login page, where you cannot log back in.
 
 <br> <hr>
 
