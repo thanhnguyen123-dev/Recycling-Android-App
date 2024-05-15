@@ -396,8 +396,7 @@ a lot of flexibility to users.
     * Reasons:
         * We used HashSet in order to filter double strings that might enter the search query. 
 
-
-<hr>
+    
 
 ### Design Patterns
 
@@ -720,6 +719,9 @@ a purpose within your application. (medium)
 
 1.  Initial Loading time
     - Opening the Main Page for the first time causes a delay of around 5 seconds as firebase downloads the required data.
+
+2. Issues with "Back"
+   - Pressing the "back" button once you're logged out will bring you back to the profile page. Once there, attempting to interact with the app will cause it to kick you back to the login page, where you cannot log back in.
 
 <br> <hr>
 
