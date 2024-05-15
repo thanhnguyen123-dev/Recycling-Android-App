@@ -7,8 +7,8 @@ This is a report made by the FlyingSpaghettiGod team. This report explains the a
 1. [Team Members and Roles](#team-members-and-roles)
 2. [Summary of Individual Contributions](#summary-of-individual-contributions)
 3. [Application Description](#application-description)
-4. [Application UML](#application-uml)
-5. [Application Design and Decisions](#application-design-and-decisions)
+4. [Application UML](#application-uml-diagram)
+5. [Application Design and Decisions](#code-design-and-decisions)
 6. [Summary of Known Errors and Bugs](#summary-of-known-errors-and-bugs)
 7. [Testing Summary](#testing-summary)
 8. [Implemented Features](#implemented-features)
@@ -115,7 +115,9 @@ The key area(s) of responsibilities for each member
     * UML diagram
     * Firebase Storage
     * Features video [features.mp4](items/features.mp4)
+    * I used my pc for a lot of the programming, and accidentally committed under the wrong account several times. (username: ExrosZ, Email: 167173157+ExrosZ@users.noreply.github.com)
       <br><br>
+
 
 3. **u7761531, Devansu**  I have 20% contribution as follows: <br>
     - **Code Contribution in the final App**
@@ -824,7 +826,7 @@ In our testing, we found out that we cannot tests most of the classes that inter
 <br> <hr>
 
 
-## Team Management
+## Team Meetings
 
 ### Meetings Records
 - *[Team Meeting 1](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/items/meeting_1_report.md)*
