@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * Integration test class which tests the integration between AVLTreeItem and SearchQueryParser
  * @author Julius Liem
+ * @author Adam Ahammed Basheer - u7628910
  */
 @RunWith(Parameterized.class)
 public class AVLTreeItemSearchIntegrationTest {
