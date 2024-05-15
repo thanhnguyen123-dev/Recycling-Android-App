@@ -141,8 +141,9 @@ The key area(s) of responsibilities for each member
            * class [SearchQueryParserTest.java](RecycleMe/app/src/test/java/com/example/recycleme/SearchQueryParserTest.java)
 
 - **Code and App Design**
-    - MainActivity layout: [activity_main.xml](/RecycleMe/app/src/main/res/layout/activity_main.xml)
-    - BaseActivity layout: [activity_base.xml](/RecycleMe/app/src/main/res/layout/activity_base.xml)
+    - UI Design:
+        - MainActivity layout: [activity_main.xml](/RecycleMe/app/src/main/res/layout/activity_main.xml)
+        - BaseActivity layout: [activity_base.xml](/RecycleMe/app/src/main/res/layout/activity_base.xml)
 
 - **Others**: 
     * Report Writing
