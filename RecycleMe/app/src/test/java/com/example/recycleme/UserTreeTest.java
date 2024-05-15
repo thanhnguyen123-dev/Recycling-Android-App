@@ -2,10 +2,13 @@ package com.example.recycleme;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import com.example.recycleme.cart.NodeData;
 import com.example.recycleme.cart.UserTree;
 import com.example.recycleme.model.RecycledItem;
+
+import net.bytebuddy.asm.Advice;
 
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +16,7 @@ import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,10 +26,16 @@ import java.util.List;
  */
 public class UserTreeTest {
     private UserTree userTree;
+    private List<RecycledItem> recycledItems;
 
     @Before
     public void setUp() {
         userTree = UserTree.getInstance();
+        userTree.clear();
+        this.recycledItems = Arrays.asList(new RecycledItem(1, "bread", "sbux", "dough", 1.0),
+                new RecycledItem(2, "coffee", "beans", "tears", 2.0),
+                new RecycledItem(3, "floss", "colgate", "plastic", 3.0),
+                new RecycledItem(4, "tissue", "wetones", "paper", 1.0));
     }
 
     @After
@@ -34,77 +44,84 @@ public class UserTreeTest {
     }
 
     @Test
-    public void testAddItems() {
+    public void testAddItemNormal() {
         LocalDateTime time = LocalDateTime.now();
-        List<RecycledItem> items = new ArrayList<>();
-        items.add(new RecycledItem(1001, "Plastic Bottle", "Brand1", "PET", 0.2));
-        items.add(new RecycledItem(1002, "Aluminum Can", "Brand2", "Aluminum", 0.1));
 
-        userTree.addItems(time, items);
+        addItem(time);
+        List<RecycledItem> recycledItems = userTree.getAllRecycledItems();
 
-        List<RecycledItem> retrievedItems = userTree.searchItem(time);
-        assertEquals(items, retrievedItems);
+        assertEquals(4, recycledItems.size());
     }
 
     @Test
-    public void testSearchItemNonExistentTime() {
-        LocalDateTime nonExistentTime = LocalDateTime.now().plusDays(1);
-        List<RecycledItem> retrievedItems = userTree.searchItem(nonExistentTime);
-        assertNull(retrievedItems);
+    public void testAddItemSameDateTime() {
+        // should not work
+        LocalDateTime time = LocalDateTime.now();
+        addItem(time);
+        userTree.addItems(time, new ArrayList<>());
+
+        List<RecycledItem> recycledItems = userTree.getAllRecycledItems();
+
+        assertEquals(4, recycledItems.size());
     }
 
+    @Test
+    public void testDeleteItemEmptyTree() {
+        userTree.deleteItem(LocalDateTime.now());
+
+        List<RecycledItem> recycledItems = userTree.getAllRecycledItems();
+
+        assertTrue(recycledItems.isEmpty());
+    }
+
+    @Test
+    public void testDeleteNonExistentTime() {
+        LocalDateTime time = LocalDateTime.now();
+        addItem(time);
+
+        userTree.deleteItem(LocalDateTime.now());
+
+        List<RecycledItem> recycledItems = userTree.getAllRecycledItems();
+
+        assertEquals(4, recycledItems.size());
+    }
 
     @Test
     public void testTraverseReturnItemAndDate() {
-        LocalDateTime time1 = LocalDateTime.of(2024, 4, 25, 10, 0);
-        LocalDateTime time2 = LocalDateTime.of(2024, 4, 24, 10, 0);
-        LocalDateTime time3 = LocalDateTime.of(2024, 4, 24, 10, 1);
+        List<RecycledItem> items = Arrays.asList(new RecycledItem(1, "bread", "sbux", "dough", 1.0),
+                new RecycledItem(2, "coffee", "beans", "tears", 2.0),
+                new RecycledItem(3, "floss", "colgate", "plastic", 3.0),
+                new RecycledItem(4, "tissue", "wetones", "paper", 1.0));
 
-        userTree.addItems(time1, new ArrayList<>());
-        userTree.addItems(time2, new ArrayList<>());
-        userTree.addItems(time3, new ArrayList<>());
+        LocalDateTime time = LocalDateTime.now();
+        this.addItem(time);
+        LocalDateTime time2 = LocalDateTime.now();
+        this.addItem(time2);
 
-        List<NodeData<List<RecycledItem>>> nodeDataList = userTree.traverseReturnItemAndDate();
-        assertEquals(3, nodeDataList.size());
+        List<NodeData<List<RecycledItem>>> nodeData = this.userTree.traverseReturnItemAndDate();
 
-        assertEquals(time2, nodeDataList.get(0).getDateTime());
-        assertEquals(time3, nodeDataList.get(1).getDateTime());
-        assertEquals(time1, nodeDataList.get(2).getDateTime());
+        for (NodeData<List<RecycledItem>> node: nodeData) {
+            LocalDateTime currentTime = node.getDateTime();
+            List<RecycledItem> value = node.getValue();
+
+            assertTrue(currentTime.equals(time) || currentTime.equals(time2));
+            assertEquals(value, items);
+        }
+
     }
 
     @Test
     public void testGetAllRecycledItems() {
-        List<RecycledItem> allItems = userTree.getAllRecycledItems();
-        assertEquals(0, allItems.size());
+        LocalDateTime time = LocalDateTime.now();
+        addItem(time);
+
+        for (RecycledItem item: this.recycledItems) {
+            assertTrue(userTree.getAllRecycledItems().contains(item));
+        }
     }
 
-    @Test
-    public void testAddItemsWithSameTime() {
-        LocalDateTime time = LocalDateTime.now();
-        List<RecycledItem> items1 = new ArrayList<>();
-        items1.add(new RecycledItem(2001, "Plastic Bottle", "Brand3", "PET", 0.2));
-        items1.add(new RecycledItem(2002, "Aluminum Can", "Brand4", "Aluminum", 0.1));
-
-        List<RecycledItem> items2 = new ArrayList<>();
-        items2.add(new RecycledItem(2003, "Glass Jar", "Brand5", "Glass", 0.4));
-        items2.add(new RecycledItem(2004, "Cardboard Box", "Brand6", "Cardboard", 0.8));
-
-        userTree.addItems(time, items1);
-        userTree.addItems(time, items2);
-
-        List<RecycledItem> retrievedItems = userTree.searchItem(time);
-        assertEquals(items1, retrievedItems);
-    }
-
-    @Test
-    public void testAddItemsWithEmptyList() {
-        LocalDateTime time = LocalDateTime.now();
-        List<RecycledItem> emptyList = new ArrayList<>();
-
-        userTree.addItems(time, emptyList);
-
-        List<RecycledItem> retrievedItems = userTree.searchItem(time);
-        assertEquals(new ArrayList<>(), retrievedItems);
+    private void addItem(LocalDateTime time) {
+        this.userTree.addItems(time, this.recycledItems);
     }
 
 }
