@@ -217,7 +217,7 @@ public class AVLTree<T extends Comparable<T>> {
     public T floor(T data) {
         Node node = floor(root, data);
         if (node == null) {
-            return getSmallestValue(root);
+            return getSmallestValue();
         }
 
         return node.getValue();
@@ -304,6 +304,11 @@ public class AVLTree<T extends Comparable<T>> {
             return getLargestValue(tree.right);
         }
         return tree.getValue();
+    }
+
+    private T getSmallestValue() {
+        if (root == null) return null;
+        return this.getSmallestValue(root);
     }
 
     private T getSmallestValue(Node tree) {
