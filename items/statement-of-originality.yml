@@ -55,9 +55,9 @@ code:
 # add as many "url+licence+comment" entries as necessary
 # (or remove it altogether if you haven't used any external assets)
 assets:
-  - comment:
-    url:
-    licence: 
+  - comment: cart icons PNG Designed By 588ku
+    url: https://pngtree.com/freepng/shopping-cart-confirmation-item-icon_4436033.html?sol=downref&id=bef
+    licence: Free License
 
 
 ### Questions (answer before final submission):
