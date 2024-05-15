@@ -66,7 +66,7 @@ public class UserTree {
         return recycledItems;
     }
 
-    private void simulatePreviousAddition() {
+    public void simulatePreviousAddition() {
         List<RecycledItem> recycledItems = Arrays.asList(
                 new RecycledItem(3001, "Plastic Bottle", "Coca-Cola", "PET", 0.2),
                 new RecycledItem(4001, "Aluminum Can", "Pepsi", "Aluminum", 0.1),

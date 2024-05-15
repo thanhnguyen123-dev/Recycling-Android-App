@@ -30,6 +30,7 @@ public class LoggedInState extends LoginState {
 
         // written by Julius Liem
         UserTree.getInstance().clear();
+        UserTree.getInstance().simulatePreviousAddition();
         Cart.getInstance().clear();
         context.setState(new LoggedOutState());
     }
