@@ -95,14 +95,24 @@ The key area(s) of responsibilities for each member
 
 2. **u7650334, Harrison**  I have 20% contribution, as follows: <br>
 - **Code Contribution in the final App**
-    - Cart feature (Singleton Design Pattern) - class Cart: [Cart.java](link_to_file),
-    - Cart Layout - CartActivity class = [CartActivity.java](link_to_file), CartActivity layout: [CartActivity.xml](link_to_file)
-    - Firebase based DAO - class RecycledItemDAO: [RecycledItemDAO.java](link_to_file), class RecycledItemDAOJsonImp: [FirebaseRecycledItemDAO.java](link_to_file)
-    - Maps implementation 
-    - Map layout 
-
+    - Cart feature
+        - [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
+        - [CartActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/CartActivity.java)
+    - Firebase based DAO
+        - [FirebaseRecycledItemDAO.java](RecycleMe/app/src/main/java/com/example/recycleme/dao/FirebaseRecycledItemDAO.java)
+    - Maps implementation
+        - [gpsMap.java](RecycleMe/app/src/main/java/com/example/recycleme/map/gpsMap.java)
+        - [MapActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/MapActivity.java)
 - **Code and App Design**
-    - Singleton design pattern, DAO design pattern
+    - DAO design pattern, Singleton design pattern
+        - UI Design:
+            - CartActivity layout: [activity_cart.xml](RecycleMe/app/src/main/res/layout/activity_cart.xml)
+            - MapActivity layout: [activity_map.xml](RecycleMe/app/src/main/res/layout/activity_map.xml)
+- **Others**:
+    * Report writing
+    * UML diagram
+    * Firebase Storage
+      <br><br>
 
 3. **u7761531, Devansu**  I have 20% contribution as follows: <br>
     - **Code Contribution in the final App**
