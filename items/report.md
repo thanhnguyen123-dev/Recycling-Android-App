@@ -204,6 +204,10 @@ The key area(s) of responsibilities for each member
     * log their own personal recycled items 
     * see their recycling statistics. 
     * They can also see the nearest location of recycling points.
+    * Users can also message each other once logged in.
+    * Users can also find local recycling areas in their area.
+    * They can also upload their own images to use as a profile picture.
+* Users can also create an account if they do not already have one.
 
 ### Application Use Cases and or Examples
 
