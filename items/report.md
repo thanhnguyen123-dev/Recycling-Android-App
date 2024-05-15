@@ -19,12 +19,14 @@ This is a report made by the FlyingSpaghettiGod team. This report explains the a
 * APK Location: [APK](apk/recycleme.apk)
 - Firebase Repository Link: 
     - Link: [repo](https://console.firebase.google.com/u/0/project/recyclingapp-login-firebase/overview)
+    * Link to the data file: [mock_data_updated.json](https://firebasestorage.googleapis.com/v0/b/recyclingapp-login-firebase.appspot.com/o/mock_data_updated.json?alt=media&token=0c0f46ad-1358-4949-9b9e-d1230e2b9ace)
     - Confirm: I have already added comp21006442@gmail.com as a Developer to the Firebase project prior to the due date.
-- Two user accounts for markers' access are usable on the app's APK (do not change the username and password unless there are exceptional circumstances. Note that they are not real e-mail addresses in use):
+- Two user accounts for markers' access are usable on the app's APK 
     - Username: comp2100@anu.edu.au  Password: comp2100
     - Username: comp6442@anu.edu.au  Password: comp6442
 * Harrison has several github accounts in his computer so sometimes it gets weird and IntelliJ changes his accounts without him knowing. He committed by the name of Harrison and ExyroZ.
 * We compiled this app using SDK 34. We've already asked permission in this [Ed post](https://edstem.org/au/courses/15738/discussion/1839054?comment=4178955)
+
 
 ## Team Members and Roles
 The key area(s) of responsibilities for each member
@@ -428,7 +430,7 @@ a lot of flexibility to users.
 
 
 ### Others
-
+* We use JSON to store our data because it's supported by the GSON library and it immensely helped us in creating objects in just few lines of code.
 
 <br>
 <hr>
@@ -442,7 +444,7 @@ a lot of flexibility to users.
     * Description of your implementation: We implement this by using a LoginActivity alongside with LoginContext. The LoginContext, LoggedInState, and LoggedOutState class acts as a State design pattern.
 
 2. [DataFiles]. Create a dataset with at least 2,500 valid data instances, each representing a meaningful piece of information in your app. The data should be represented and stored in a structured format taught in the course. (easy)
-    * Code to the Data File [mock_data_updated.json](https://firebasestorage.googleapis.com/v0/b/recyclingapp-login-firebase.appspot.com/o/mock_data_updated.json?alt=media&token=0c0f46ad-1358-4949-9b9e-d1230e2b9ace)
+    * Link to the Data File [mock_data_updated.json](https://firebasestorage.googleapis.com/v0/b/recyclingapp-login-firebase.appspot.com/o/mock_data_updated.json?alt=media&token=0c0f46ad-1358-4949-9b9e-d1230e2b9ace)
     * Link to the Firebase repo: [repo](https://console.firebase.google.com/u/0/project/recyclingapp-login-firebase/overview)
     * Description of feature: 
         * We have a dataset of 2500 recycled items, each with its own ID, brand name, material, and value.
@@ -833,14 +835,11 @@ In our testing, we found out that we cannot tests most of the classes that inter
 <hr>
 
 ### Conflict Resolution Protocol
-*[Write a well defined protocol your team can use to handle conflicts. That is, if your group has problems, what is the procedure for reaching consensus or solving a problem?
-(If you choose to make this an external document, link to it here)]*
+- Disagreement on project direction: schedule meeting, discuss perspective, vote on best approach.
 
--Disagreement on project direction: schedule meeting, discuss perspective, vote on best approach.
+- If someone slows down: reach out to them, empathise with their situation.  If unresponsive, give a deadline.
 
--If someone slows down: reach out to them, empathise with their situation.  If unresponsive, give a deadline.
-
--If there is a fight/personality disagreement: Uninvolved team members calm things down and help find solutions.
+- If there is a fight/personality disagreement: Uninvolved team members calm things down and help find solutions.
 
 
 
