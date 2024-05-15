@@ -95,7 +95,7 @@ The key area(s) of responsibilities for each member
     * Data generation
      <br><br>
 
-2. **u7650334, Harrison**  I have 20% contribution, as follows: <br>
+2. **u7650334, Harrison (ExrosZ: 167173157+ExrosZ@users.noreply.github.com)**  I have 22.5% contribution, as follows: <br>
 - **Code Contribution in the final App**
     - Cart feature
         - [Cart.java](RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java)
@@ -114,6 +114,7 @@ The key area(s) of responsibilities for each member
     * Report writing
     * UML diagram
     * Firebase Storage
+    * Features video [features.mp4](items/features.mp4)
       <br><br>
 
 3. **u7761531, Devansu**  I have 20% contribution as follows: <br>
