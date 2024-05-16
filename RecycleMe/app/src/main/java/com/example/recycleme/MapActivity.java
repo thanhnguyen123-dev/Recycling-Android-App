@@ -14,6 +14,9 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 
 /**
+ * This activity displays a GoogleMap in the "Map" tab, with the user's location and nearby recycling plants.
+ * Currently, it is using mock data for the recycling plants, but will return proper location information on real devices.
+ * This class uses the google maps API.
  * @author Harrison Black
  */
 public class MapActivity extends BaseActivity implements OnMapReadyCallback {

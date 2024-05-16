@@ -20,6 +20,8 @@ import java.util.Random;
 
 
 /**
+ * This class is used in MapActivity to get the current map, location, and to create mock markers to the map.
+ * This class also uses the google maps API.
  * @author Harrison Black
  */
 public class gpsMap {

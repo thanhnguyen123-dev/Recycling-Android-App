@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 /**
+ * Tests the Cart for correct functionality.
  * @author Adam Basheer
  */
 @RunWith(Parameterized.class)

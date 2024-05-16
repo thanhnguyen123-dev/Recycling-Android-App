@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * This class displays items in the "Cart" tab, grouped by material.
+ * It also passes items to an AVL tree when the "Checkout" button is pushed.
  * @author Julius Liem
  * @author Harrison Black
  * (Harrison was the person who created the Activity, but it is revamped wholly by Julius)

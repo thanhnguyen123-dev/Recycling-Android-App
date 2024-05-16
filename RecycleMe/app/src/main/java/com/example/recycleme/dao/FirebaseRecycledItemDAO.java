@@ -26,6 +26,7 @@ import java.util.concurrent.Future;
 
 /**
  * One of the state for State design pattern, the other one is LoggedOutState
+ *  This class is used to grab recyclable items from either a firebase or local json file.
  * @author Harrison Black
  * @author Julius Liem - u7724204 (saveRecycledItem() method and read from offline data)
  */
