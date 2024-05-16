@@ -19,6 +19,7 @@ import com.google.firebase.storage.StorageReference;
 /**
  * An utility class to handle communication between the app and Firebase Storage
  * to retrieve user profile image.
+ * I use Glide - an open source frame work for media management: https://bumptech.github.io/glide/
  * @author Le Thanh Nguyen - u7594144
  * */
 public class UserProfileUtil {
