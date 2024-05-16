@@ -36,6 +36,8 @@ import java.util.List;
 
 /**
  * An activity to chat with other user
+ * I got an overview idea of how to implement private chat using the below link
+ * Source: <a href="https://medium.com/@rajsalunkhe8055/building-a-firebase-chat-app-in-android-in-depth-guide-31a52b2681a8">...</a>
  * @author Le Thanh Nguyen - u7594144
  * */
 public class DirectMessageActivity extends BaseActivity {
