@@ -315,10 +315,15 @@ Our tokenizer is encapsulated within the [Tokenizer](https://gitlab.cecs.anu.edu
 
 When we instantiate the Tokenizer class with a search query, and extract the first token using the `extractNextToken()` method.
 
-In the `extractNextToken()` method, we follow a sequence of steps to identify and extract different types of tokens based on the above described grammar. We check the first character to determine the type of token (brand tag, material tag, conjunction, or item name). 
-Based on the type of token, we invoke specific helper methods (`scanTag()`, `scanString()`, `checkAnd()`) to extract the token. After extracting the token, we update the `currentToken` variable and process the remaining portion of the search query.
+In the `extractNextToken()` method, we follow a sequence of steps to identify and extract different types of tokens based on the above described grammar. 
+* We check the first character to determine the type of token (brand tag, material tag, conjunction, or item name). 
+* Based on the type of token, we invoke specific helper methods (`scanTag()`, `scanString()`, `checkAnd()`) to extract the token. 
+* After extracting the token, we update the `currentToken` variable and process the remaining portion of the search query.
 
-Our tokenizer includes helper methods like `scanTag()` to scan for brand or material tags, `scanString()` to scan for item names, and `checkAnd()` to check for conjunctions.
+Our tokenizer includes helper methods like:
+* `scanTag()` to scan for brand or material tags, 
+* `scanString()` to scan for item names, and 
+* `checkAnd()` to check for conjunctions.
 
 We have also implemented error handling in our tokenizer. If we encounter an invalid character in the search query, we throw an exception to ensure robust error handling.
 
@@ -355,7 +360,7 @@ a lot of flexibility to users.
     * Code Locations: defined in [Class CartActivity, methods CartActivity(), addItem(), removeItem()](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/cart/Cart.java) processed using [setChartMaterials() and setChartRecycledItemOverTime() in class StatisticActivity](https://gitlab.cecs.anu.edu.au/u7724204/gp-24s1/-/blob/main/RecycleMe/app/src/main/java/com/example/recycleme/StatisticActivity.java)
     * *Reasons:*
         * We use HashMap because we need to categorize the RecycleItem based on their material. In order to do that, we need to have some sort of a Key-Value Pair
-        * We don't need to access the item by index for the [Data-Graphical] feature because all of the data will be traversed
+        * We don't need to access the item by index for the [Data-Graphical] feature because all of the data will be traversed.
 
 2. *AVLTree*
     * Objective: used for storing previously recycled items.
@@ -371,12 +376,17 @@ a lot of flexibility to users.
                 * We inherit AVLTree because this class has an extension that allows searching for item
                 * The extra method is used to search for recycled items based on their name, brand, and materials
                 * This is also why the keys used are name, brand, and materials
+            * How does this class work?
+                * It has its own method for searching Recycled Item
+                * Say that you want to search for an item. Because we compare RecycledItem based on their name, brand, and material, first it will compare the name. If the name is same, then it will compare the brand, and then the material.
+                * If the item name is present, then the search time complexity is theta log n (time complexity for finding values between two data in AVL Tree). However, if the item name is not present, we would have to do linear search.
         2. AVLTreeTime
             * Objective: This class is used to save the user history
             * Structure: ![AVLTreeTime](media/_examples/DataStructureMedia/AVLTreeTime.png)
             * Reasons:
                 * To make it easier using AVLTree directly with LocalDateTime
                 * This class saves the item the user logged using a key pair because it will be further used in the statistic activity (to see the user's most common recycled items material)
+                * This class is first meant to be searchable (e.g. users can find their history between two dates. However, we don't have time to extend it.) - This is why we chose AVLTree as the data structure to store our history.
         
 3. ArrayList
     * Objective:
@@ -433,7 +443,9 @@ a lot of flexibility to users.
     * Objective: User have different states for when the user is logged in or logged out, which facilitates the management of user authentication in the application. By utilizing different states, the system can behave differently based on the user's authentication status.
     * Code Locations: [LoginContext.java](RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java)
     * Reason: 
-        * There are different actions that can be done depending on whether the user is logged in or logged out (e.g. when the user is logged out then the user can't add item to his cart history)
+        * We use this design pattern for our app to prevent users from logging in when they are already logged in or log out when they are already logged out.
+        * We wanted to extend this pattern by only allowing logged in users from adding items to cart, however because of the chat features, we decided that all users should be logged in before they can even access the app functionalities.
+        * This is an extendable class, and would be beneficial if the app is upgraded to allow users with no account from accessing the app.
 4. The DAO design pattern is used in reading the data instances. 
     * Objective: To read data instances from different locations
     * Code Locations: 
@@ -463,6 +475,7 @@ a lot of flexibility to users.
     * Code: [Class LoggedOutState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java), [Class LoginContext](RecycleMe/app/src/main/java/com/example/recycleme/login/LoginContext.java), [class LoginState](RecycleMe/app/src/main/java/com/example/recycleme/login/LoginState.java), [class LoginActivity](RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
     * Description of feature: Users can login through LoginActivity and then it would be authenticated by Firebase
     * Description of your implementation: We implement this by using a LoginActivity alongside with LoginContext. The LoginContext, LoggedInState, and LoggedOutState class acts as a State design pattern.
+    * When a user is already logged in, they cannot log in again, and when a user is already logged out, they cannot log out again. The state design pattern helps to prevent this error from happening.
 
 2. [DataFiles]. Create a dataset with at least 2,500 valid data instances, each representing a meaningful piece of information in your app. The data should be represented and stored in a structured format taught in the course. (easy)
     * Link to the Data File [mock_data_updated.json](https://firebasestorage.googleapis.com/v0/b/recyclingapp-login-firebase.appspot.com/o/mock_data_updated.json?alt=media&token=0c0f46ad-1358-4949-9b9e-d1230e2b9ace)
@@ -523,6 +536,7 @@ animation (e.g., gif), video). (easy)
     * Description of implementation:
         * We store the profile picture on the FirebaseStorage, using each user ID.
         * When the ChatsMainActivity is loaded, the profile picture will be put on top of each user ImageView using the UserProfileUtil.
+        * Each row in the ChatsMainActivity has an onClick method which will bring the user to the profile page of another user.
         * This applies the same to every UI part that contains some sort of user profile image.
 
 4. [Data-GPS] Use GPS information based on location data in your App. (easy)
@@ -545,6 +559,9 @@ app. No marks will be awarded if the report is non-graphical. (medium)
     * Description of implementation: 
         * This statistics activity is implemented by using MPAndroidChart library. The Activity reads data from the UserTree (which contains the user's history)
         * The Activity then will process the data and show it as a graphical chart.
+        * The Activity processes data by:
+            * The data is already separated into dates, so for the number of items the Activity only has to flatten it and get the number of items for each date.
+            * For the number of materials, we used a HashMap to separate the items. For each material, we have a key for the material, and the value is the count of the items.
     * Image:
     <div style="text-align: center;">
         <img src="media/_examples/screenshot/screenshot_statistic.png" alt="Description of the image" width="20%">
