@@ -34,6 +34,8 @@ import kotlin.jvm.functions.Function1;
 
 /**
  * An activity to view the user profile with buttons to select and upload user profile image.
+ * I use Image Picker - a library to select an image from phone using camera or gallery
+ * Source: <a href="https://github.com/Dhaval2404/ImagePicker">Image Picker</a>
  * @author Le Thanh Nguyen - u7594144
  */
 public class ProfileActivity extends BaseActivity {
