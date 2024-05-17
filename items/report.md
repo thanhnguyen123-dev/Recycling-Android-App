@@ -831,17 +831,22 @@ In our testing, we found out that we cannot tests most of the classes that inter
         * Test for adding item with same key
         * Test for adding empty item
     * Note that one of the testcase might fail in Windows machine. This is due to the implementation of the LocalDateTime class. We expect that when we call the LocalDateTime.now() twice in a class, it will return a different time. However, in Windows, it turns out that it does not. We tested it on Mac machine previously and did not realize that. 
-    `    @Test
+    ```    
+    @Test
     public void testDeleteNonExistentTime() {
         LocalDateTime time = LocalDateTime.now();
         addItem(time);
 
+        // should be different time with the time above, but turns out not in Windows machine 
         userTree.deleteItem(LocalDateTime.now());
 
         List<RecycledItem> recycledItems = userTree.getAllRecycledItems();
 
         assertEquals(4, recycledItems.size());
-    }`
+    }
+    ```
+
+    
 
 6. Integration testing between AVLTreeItem and Search
     * Code: [AVLTreeItemSearchIntegrationTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeItemSearchIntegrationTest.java)
