@@ -152,25 +152,25 @@ The key area(s) of responsibilities for each member
 4. **u7594144,Thanh** I have 22.5% contribution, as follows: <br>
 - **Code Contribution in the final App**
     - Login Feature (Firebase Authentication): 
-        - [LoginState.java](RecycleMe\app\src\main\java\com\example\recycleme\login\LoginState.java)
-        - [LoggedInState.java](RecycleMe\app\src\main\java\com\example\recycleme\login\LoggedInState.java)
-        - [LoggedOutState.java](RecycleMe\app\src\main\java\com\example\recycleme\login\LoggedOutState.java)
+        - [LoginState.java](RecycleMe/app/src/main/java/com/example/recycleme/login/LoginState.java)
+        - [LoggedInState.java](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedInState.java)
+        - [LoggedOutState.java](RecycleMe/app/src/main/java/com/example/recycleme/login/LoggedOutState.java)
         - [LoginActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/LoginActivity.java)
         - [LogUtil.java](RecycleMe/app/src/main/java/com/example/recycleme/util/LogUtil.java)
-        - [AccountAction.java](RecycleMe\app\src\main\java\com\example\recycleme\login\AccountAction.java)
-        - [SignupFragment.java](RecycleMe\app\src\main\java\com\example\recycleme\SignupFragment.java)
+        - [AccountAction.java](RecycleMe/app/src/main/java/com/example/recycleme/login/AccountAction.java)
+        - [SignupFragment.java](RecycleMe/app/src/main/java/com/example/recycleme/SignupFragment.java)
     - Private Chat Feature (Firebase Realtime Database): 
-        - [Message.java](RecycleMe\app\src\main\java\com\example\recycleme\model\Message.java)
-        - [MessageAdapter.java](RecycleMe\app\src\main\java\com\example\recycleme\adapter\MessageAdapter.java) 
-        - [User.java](RecycleMe\app\src\main\java\com\example\recycleme\model\User.java) 
-        - [UserAdapter.java](RecycleMe\app\src\main\java\com\example\recycleme\adapter\UserAdapter.java)
-        - [ChatsMainActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ChatsMainActivity.java)
-        - [DirectMessageActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\DirectMessageActivity.java)
+        - [Message.java](RecycleMe/app/src/main/java/com/example/recycleme/model/Message.java)
+        - [MessageAdapter.java](RecycleMe/app/src/main/java/com/example/recycleme/adapter/MessageAdapter.java) 
+        - [User.java](RecycleMe/app/src/main/java/com/example/recycleme/model/User.java) 
+        - [UserAdapter.java](RecycleMe/app/src/main/java/com/example/recycleme/adapter/UserAdapter.java)
+        - [ChatsMainActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ChatsMainActivity.java)
+        - [DirectMessageActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/DirectMessageActivity.java)
     - Data-Profile Feature: 
-        - [ProfileActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ProfileActivity.java)
-        - [ItemDescriptionActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ItemDescriptionActivity.java)
-        - [ChatProfileViewActivity.java](RecycleMe\app\src\main\java\com\example\recycleme\ChatProfileViewActivity.java)
-        - [UserProfileUtil.java](RecycleMe\app\src\main\java\com\example\recycleme\util\UserProfileUtil.java)
+        - [ProfileActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ProfileActivity.java)
+        - [ItemDescriptionActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ItemDescriptionActivity.java)
+        - [ChatProfileViewActivity.java](RecycleMe/app/src/main/java/com/example/recycleme/ChatProfileViewActivity.java)
+        - [UserProfileUtil.java](RecycleMe/app/src/main/java/com/example/recycleme/util/UserProfileUtil.java)
     - Data Structure: [AVLTree.java](RecycleMe/app/src/main/java/com/example/recycleme/util/tree/AVLTree.java)
 
 - **Code and App Design**
