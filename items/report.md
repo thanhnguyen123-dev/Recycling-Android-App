@@ -744,6 +744,8 @@ a purpose within your application. (medium)
 
 1.  Initial Loading time
     - Opening the Main Page for the first time causes a delay of around 5 seconds as firebase downloads the required data.
+2. Testcase bug
+    * one of the testcase might fail in Windows machine. This is due to the implementation of the LocalDateTime class. We expect that when we    call the LocalDateTime.now() twice in a class, it will return a different time. However, in Windows, it turns out that it does not. We tested it on Mac machine previously and did not realize that. 
 
 <br> <hr>
 
@@ -828,6 +830,18 @@ In our testing, we found out that we cannot tests most of the classes that inter
         * Test for empty tree
         * Test for adding item with same key
         * Test for adding empty item
+    * Note that one of the testcase might fail in Windows machine. This is due to the implementation of the LocalDateTime class. We expect that when we call the LocalDateTime.now() twice in a class, it will return a different time. However, in Windows, it turns out that it does not. We tested it on Mac machine previously and did not realize that. 
+    `    @Test
+    public void testDeleteNonExistentTime() {
+        LocalDateTime time = LocalDateTime.now();
+        addItem(time);
+
+        userTree.deleteItem(LocalDateTime.now());
+
+        List<RecycledItem> recycledItems = userTree.getAllRecycledItems();
+
+        assertEquals(4, recycledItems.size());
+    }`
 
 6. Integration testing between AVLTreeItem and Search
     * Code: [AVLTreeItemSearchIntegrationTest.java](RecycleMe/app/src/test/java/com/example/recycleme/AVLTreeItemSearchIntegrationTest.java)
