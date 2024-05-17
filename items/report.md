@@ -175,15 +175,15 @@ The key area(s) of responsibilities for each member
 
 - **Code and App Design**
     - UI Design:
-        - [activity_chat_profile_view.xml](RecycleMe\app\src\main\res\layout\activity_chat_profile_view.xml)
-        - [activity_chat_mains.xml](RecycleMe\app\src\main\res\layout\activity_chats_main.xml)
-        - [activity_direct_message.xml](RecycleMe\app\src\main\res\layout\activity_direct_message.xml)
-        - [activity_item_description.xml](RecycleMe\app\src\main\res\layout\activity_item_description.xml)
-        - [activity_profile.xml](RecycleMe\app\src\main\res\layout\activity_profile.xml)
-        - [fragment_signup.xml](RecycleMe\app\src\main\res\layout\fragment_signup.xml)
-        - [message_view_row.xml](RecycleMe\app\src\main\res\layout\message_view_row.xml)
-        - [receiving_view_row.xml](RecycleMe\app\src\main\res\layout\receiving_view_row.xml)
-        - [sending_view_row.xml](RecycleMe\app\src\main\res\layout\sending_view_row.xml)
+        - [activity_chat_profile_view.xml](RecycleMe/app/src/main/res/layout/activity_chat_profile_view.xml)
+        - [activity_chat_mains.xml](RecycleMe/app/src/main/res/layout/activity_chats_main.xml)
+        - [activity_direct_message.xml](RecycleMe/app/src/main/res/layout/activity_direct_message.xml)
+        - [activity_item_description.xml](RecycleMe/app/src/main/res/layout/activity_item_description.xml)
+        - [activity_profile.xml](RecycleMe/app/src/main/res/layout/activity_profile.xml)
+        - [fragment_signup.xml](RecycleMe/app/src/main/res/layout/fragment_signup.xml)
+        - [message_view_row.xml](RecycleMe/app/src/main/res/layout/message_view_row.xml)
+        - [receiving_view_row.xml](RecycleMe/app/src/main/res/layout/receiving_view_row.xml)
+        - [sending_view_row.xml](RecycleMe/app/src/main/res/layout/sending_view_row.xml)
 
 - **Others**: 
     - Firebase setup: Firebase Authentication, Firebase Realtime Database, Firebase Cloud Storage
